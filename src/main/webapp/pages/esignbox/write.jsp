@@ -2,6 +2,19 @@
          pageEncoding="UTF-8"%>
 <head>
     <%@include file="/include/common/bootstrap_common.jsp"%>
+    <style>
+        table {
+            margin: 0 auto; /* 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정합니다. */
+            width: 80%; /* 표의 너비를 조절할 수 있습니다. */
+            border-collapse: collapse; /* 셀의 테두리를 합쳐서 보이도록 설정합니다. */
+        }
+        th, td {
+            border: 1px solid black; /* 각 셀의 테두리를 설정합니다. */
+            padding: 8px; /* 셀의 안쪽 여백을 설정합니다. */
+            text-align: center; /* 셀 내의 텍스트를 가운데 정렬합니다. */
+        }
+    </style>
+
 </head>
 <body>
 <div id="contentwrite">

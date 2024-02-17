@@ -8,8 +8,8 @@
     <title>전자결재</title>
     <%@ include file="/include/bootCommon.jsp"%>
     <%@include file="/include/common/quill_common.jsp"%>
-<%--    <%@include file="/include/common/bootstrap_common.jsp"%>--%>
-<%--    <link rel="stylesheet" href="/css/style.css">--%>
+    <%--<%@include file="/include/common/bootstrap_common.jsp"%>--%>
+    <%--<link rel="stylesheet" href="/css/style.css">--%>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -78,6 +78,7 @@
                 </table>
                 <div class="after" style="display: flex; align-items: center;">
                     <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 | </h4>
+
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">결재선</button>
                 </div>
 
@@ -93,19 +94,18 @@
                     .centered-text {
                         text-align: center;
                     }
-
                     .table-bordered th,
                     .table-bordered td {
-                        padding: 10px;
+                        padding: 5px;
                     }
-
-                    .stamp-step-num {
+                    .stamp {
+                        width: 120px;
                         height: 120px;
-                        line-height: 120px;
-                        display: inline-block;
                     }
-                    .sign div {
-                        padding-bottom: 100px; /* 결재 텍스트를 위로 올리기 위한 여백 추가 */
+                    .team.name,
+                    .team.position {
+                        max-height: 50px;
+                        overflow: hidden;
                     }
                 </style>
 
@@ -167,64 +167,66 @@
                 </table>
 
 
-            <div id="drag_wrap">
-                <div id="drag" class="ui-draggable ui-draggable-handle" style="left:0px;"></div>
-            </div>
-            <div id="contents">
-                <form autocomplete="off" onsubmit="return false;">
-                    <input type="submit" style="display:none;" onclick="return false;">
+                <div id="drag_wrap">
+                    <div id="drag" class="ui-draggable ui-draggable-handle" style="left:0px;"></div>
+                </div>
+                <div id="contents">
+                    <form autocomplete="off" onsubmit="return false;">
+                        <input type="submit" style="display:none;" onclick="return false;">
 
-                    <div class="content_inbox">
-                        <div class="cont_box write">
-                            <div class="approval-wrap write">
-                                <div id="approvalDocumentLine">
-                                    <%-- 이게 무슨용으로 만든 테이블인지 몰라서 일단 남겨놔요 --%>
-                                    <table class="cal_table1 approve-write js-approval-line">
-                                        <colgroup>
-                                            <col style="width:12.09%;">
-                                            <col style="width:37.62%;">
-                                            <col style="width:9.02%;">
-                                            <col style="width:41.27%;">
-                                        </colgroup>
-                                    </table>
-                                </div>
-                                <div id="textarea" style="height: 80px; width: 65%;">
-                                    <div class="form-group">
-                                        <label>제목</label>
-                                        <input type="text" class="form-control" placeholder="제목을 입력하세요">
+                        <div class="content_inbox">
+                            <div class="cont_box write">
+                                <div class="approval-wrap write">
+                                    <div id="approvalDocumentLine">
+                                        <%-- 이게 무슨용으로 만든 테이블인지 몰라서 일단 남겨놔요 --%>
+                                        <table class="cal_table1 approve-write js-approval-line">
+                                            <colgroup>
+                                                <col style="width:12.09%;">
+                                                <col style="width:37.62%;">
+                                                <col style="width:9.02%;">
+                                                <col style="width:41.27%;">
+                                            </colgroup>
+                                        </table>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="card card-outline card-info">
-                                            <div class="card-header">
-                                                <h3 class="card-title">
-                                                    Summernote
-                                                </h3>
-                                            </div>
-                                            <!-- /.card-header -->
-                                            <div class="card-body">
-              <textarea id="summernote">
-                Place <em>some</em> <u>text</u> <strong>here</strong>
-              </textarea>
-                                            </div>
-                                            <div class="card-footer">
-                                                Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
+                                    <div id="textarea" style="width: 100%;">
+                                        <div class="form-group">
+                                            <label>제목</label>
+                                            <input type="text" class="form-control" placeholder="제목을 입력하세요">
+                                        </div>
+                                        <div class="col-md-12" style="width: 100%">
+                                            <div class="card card-outline card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">
+                                                        Summernote
+                                                    </h3>
+                                                </div>
+                                                <!-- /.card-header -->
+                                                <div class="card-body">
+                                                  <textarea id="summernote">
+                                                    Place <em>some</em> <u>text</u> <strong>here</strong>
+                                                  </textarea>
+                                                </div>
+                                                <div class="card-footer">
+                                                    Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- /.col-->
-                                    <div id="writein">
-                                        <%--<%@include file="write.jsp"%>--%>
+                                        <!-- /.col-->
+                                        <div id="writein">
+                                            <%@include file="write.jsp"%>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <!-- Summernote -->
+    <script src="/plugins/summernote/summernote-bs4.min.js"></script>
     <!--footer-->
     <%@ include file="/include/footer.jsp"%>
 </div>
@@ -260,8 +262,6 @@
         </div>
     </div>
 </div>
-<!-- Summernote -->
-<script src="/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- CodeMirror -->
 <script src="/plugins/codemirror/codemirror.js"></script>
 <script src="/plugins/codemirror/mode/css/css.js"></script>
@@ -271,6 +271,9 @@
     $(function () {
         // Summernote
         $('#summernote').summernote()
+        {
+            height: 300;
+        }
 
         // CodeMirror
         CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
@@ -281,4 +284,3 @@
 </script>
 </body>
 </html>
-
