@@ -67,7 +67,7 @@
                     상태
                 </button>
                 <ul class="dropdown-statement">
-                    <li><a class="dropdown-statement1" href="#">공고중</a></li>
+                    <li><a class="dropdown-statement1" href="#">공고중 123456</a></li>
                     <li><a class="dropdown-statement2" href="#">보호중</a></li>
                 </ul>
             </div>
