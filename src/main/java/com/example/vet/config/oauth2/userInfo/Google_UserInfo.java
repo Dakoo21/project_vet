@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.Map;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Google_UserInfo implements Oauth2_Interface {
 
     private Map<String, Object> attributes;

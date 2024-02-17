@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.Map;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Kakao_UserInfo implements Oauth2_Interface {
 
     private Map<String, Object> attributes;
