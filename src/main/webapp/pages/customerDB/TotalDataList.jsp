@@ -79,7 +79,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>서견주<a href="TotalDataDetail.jsp?고객명=<%="서견주"%>"></a></td>
+                            <td>서견주<a href="totalDataDetail.jsp?고객명=<%="></a></td>
                             <td>뭉치</td>
                             <td>개</td>
                             <td>불독</td>

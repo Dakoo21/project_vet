@@ -297,7 +297,7 @@
                 <!-- 하위메뉴 시작 -->
 
                     <li class="nav-item">
-                        <a href="/pages/adopt/AdoptList.jsp" class="nav-link">
+                        <a href="/pages/adopt/adoptList.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>유기동물 조회</p>
                         </a>
@@ -315,7 +315,7 @@
                 <!-- 하위메뉴 시작 -->
 
                     <li class="nav-item">
-                        <a href="/pages/adopt/AdoptRegister.jsp" class="nav-link">
+                        <a href="/pages/adopt/adoptRegister.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>상세글 조회</p>
                         </a>
@@ -476,7 +476,7 @@
                 <!-- 하위메뉴 시작 -->
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/pages/customerDB/TotalDataList.jsp" class="nav-link">
+                        <a href="/pages/customerDB/totalDataList.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>고객-동물 전체 데이터 조회</p>
                         </a>
@@ -485,7 +485,7 @@
                 <!-- 하위메뉴 시작 -->
 
                     <li class="nav-item">
-                        <a href="/pages/customerDB/TotalDataRegister.jsp" class="nav-link">
+                        <a href="/pages/customerDB/totalDataRegister.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>고객-동물 DB등록</p>
                         </a>
@@ -494,28 +494,28 @@
                 <!-- 하위메뉴 시작 -->
 
                     <li class="nav-item">
-                        <a href="/pages/customerDB/TotalDataDetail.jsp" class="nav-link">
+                        <a href="/pages/customerDB/totalDataDetail.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>고객-동물 상세페이지</p>
                         </a>
                     </li>
                     <!-- 하위메뉴 시작 -->
                     <li class="nav-item">
-                        <a href="/pages/customerDB/TotalCustomerList.jsp" class="nav-link">
+                        <a href="/pages/customerDB/totalCustomerList.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>고객 데이터</p>
                         </a>
                     </li>
                     <!-- 하위메뉴 시작 -->
                     <li class="nav-item">
-                        <a href="/pages/customerDB/MedicalChart.jsp" class="nav-link">
+                        <a href="/pages/customerDB/medicalChart.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>진료기록 등록</p>
                         </a>
                     </li>
                 <!-- 하위메뉴 시작 -->
                     <li class="nav-item">
-                        <a href="/pages/customerDB/MedicalLog.jsp" class="nav-link">
+                        <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>진료기록 조회</p>
                         </a>
