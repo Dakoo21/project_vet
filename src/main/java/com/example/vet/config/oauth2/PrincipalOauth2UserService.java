@@ -2,6 +2,7 @@ package com.example.vet.config.oauth2;
 
 
 import com.example.vet.common_Interface.Oauth2_Interface;
+import com.example.vet.config.auth.PrincipalDetails;
 import com.example.vet.config.oauth2.userInfo.Google_UserInfo;
 import com.example.vet.config.oauth2.userInfo.Kakao_UserInfo;
 import com.example.vet.config.oauth2.userInfo.Naver_UserInfo;
@@ -40,69 +41,59 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         Oauth2_Interface oauth2_interface = null;
         log.info("getAtrributes : {}" , oAuth2User.getAttributes());
 
-        String provider = userRequest.getClientRegistration().getRegistrationId();
+        String USER_PROVIDER = userRequest.getClientRegistration().getRegistrationId();
 
-        if(provider.equals("google")) {
+        if(USER_PROVIDER.equals("google")) {
             log.info("구글 로그인 요청");
             oauth2_interface = new Google_UserInfo( oAuth2User.getAttributes() );
-        } else if(provider.equals("kakao")) {
+        } else if(USER_PROVIDER.equals("kakao")) {
             log.info("카카오 로그인 요청");
             oauth2_interface = new Kakao_UserInfo((Map)oAuth2User.getAttributes());
-        }else if(provider.equals("naver")) {
+        }else if(USER_PROVIDER.equals("naver")) {
             log.info("네이버 로그인 요청");
             oauth2_interface = new Naver_UserInfo( (Map)oAuth2User.getAttributes());
         }
 
-        String USER_NM = oauth2_interface.USER_PROVIDER() + "-" + ;
-
-        String providerId = oauth2_interface.getProviderId();
-        String id = oAuth2UserInfo.getProvider() + "_" + providerId;
-        log.info(id);
-        String password = "123";
-        String username =  oAuth2UserInfo.getName();
-        log.info(username);
-        String email = oAuth2UserInfo.getEmail();
-        log.info(email);
-        String role = "ROLE_USER";
+        String USER_PROVIDERID = oauth2_interface.USER_PROVIDERID();
+        String USER_NM = oauth2_interface.USER_PROVIDER() + "-" + USER_PROVIDERID;
+        String USER_PW = bCryptPasswordEncoder.encode("패스워드");
+        String USER_USERNAME =  oauth2_interface.USER_USERNAME();
+        String USER_EMAIL = oauth2_interface.USER_EMAIL();
 
         User userEmtity = null;
 
         try {
-            memberEntity = joinDao.login(id);
-            log.info("mEntity" + memberEntity);
+            userEmtity = singUPIn.login(USER_NM);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        if (memberEntity == null) { // 반환 받은 값이 없다 = username이 없으니까 강제 회원가입 처리
+        if (userEmtity == null) { // 반환 받은 값이 없다 = username이 없으니까 강제 회원가입 처리
             try {
-                log.info(providerId);
-                log.info(id);
-                log.info(username);
-                log.info(email);
-                memberEntity = Member.builder()
-                        .username(username)
-                        .password(password)
-                        .email(email)
-                        .role(role)
-                        .provider(provider)
-                        .providerid(providerId)
+                userEmtity = User.builder()
+                        .USER_NM(USER_NM)
+                        .USER_USERNAME(USER_USERNAME)
+                        .USER_EMAIL(USER_EMAIL)
+                        .USER_PW(USER_PW)
+                        .COMMON_CODE_PK(4) // 또는 다른 적절한 COMMON_CODE_PK 값
+                        .USER_PROVIDER(USER_PROVIDER)
+                        .USER_PROVIDERID(USER_PROVIDERID)
                         .build();
 
-                joinDao.memberInsert(memberEntity);
+                singUPIn.userInsert(userEmtity);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
-            if(provider.equals("google")) {
+            if(USER_PROVIDER.equals("google")) {
                 log.info("구글 로그인 한 적 있음");
-            } else if(provider.equals("kakao")) {
+            } else if(USER_PROVIDER.equals("kakao")) {
                 log.info("카카오 로그인 한 적 있음");
-            }else if(provider.equals("naver")) {
+            }else if(USER_PROVIDER.equals("naver")) {
                 log.info("네이버 로그인 한 적 있음");
             }
         }
 
-        return new PrincipalDetails(memberEntity, oAuth2User.getAttributes());
+        return new PrincipalDetails(userEmtity, oAuth2User.getAttributes());
     }
 }

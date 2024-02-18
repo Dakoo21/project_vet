@@ -20,7 +20,7 @@ public class PrincipalDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String user_nm) throws UsernameNotFoundException {
         User user = null;
         try {
-            user = singUPIn.lgoin(user_nm);
+            user = singUPIn.login(user_nm);
             if (user != null) {
                 return new PrincipalDetails(user);
             }
