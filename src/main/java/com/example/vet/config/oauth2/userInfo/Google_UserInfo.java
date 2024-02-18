@@ -5,27 +5,28 @@ import lombok.AllArgsConstructor;
 
 import java.util.Map;
 
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Google_UserInfo implements Oauth2_Interface {
 
     private Map<String, Object> attributes;
+
     @Override
-    public String getProviderId() {
-        return (String) attributes.get("sub");
+    public String USER_USERNAME() {
+        return (String) attributes.get("name");
     }
 
     @Override
-    public String getProvider() {
-        return "google";
-    }
-
-    @Override
-    public String getEmail() {
+    public String USER_EMAIL() {
         return (String) attributes.get("email");
     }
 
     @Override
-    public String getName() {
-        return (String) attributes.get("name");
+    public String USER_PROVIDER() {
+        return "Google";
+    }
+
+    @Override
+    public String USER_PROVIDERID() {
+        return (String) attributes.get("sub");
     }
 }

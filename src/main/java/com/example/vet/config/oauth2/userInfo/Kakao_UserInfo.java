@@ -5,31 +5,28 @@ import lombok.AllArgsConstructor;
 
 import java.util.Map;
 
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Kakao_UserInfo implements Oauth2_Interface {
 
     private Map<String, Object> attributes;
 
     @Override
-    public String getProviderId() {
-        // Long 타입이기 때문에 toString으로 변호나
-        return attributes.get("id").toString();
+    public String USER_USERNAME() {
+        return (String) ((Map) attributes.get("properties")).get("nickname");
     }
 
     @Override
-    public String getProvider() {
-        return "kakao";
-    }
-
-    @Override
-    public String getEmail() {
-        // kakao_account라는 Map에서 추출
+    public String USER_EMAIL() {
         return (String) ((Map) attributes.get("kakao_account")).get("email");
     }
 
     @Override
-    public String getName() {
-        // kakao_account라는 Map에서 추출
-        return (String) ((Map) attributes.get("properties")).get("nickname");
+    public String USER_PROVIDER() {
+        return "Kakao";
+    }
+
+    @Override
+    public String USER_PROVIDERID() {
+        return attributes.get("id").toString();
     }
 }
