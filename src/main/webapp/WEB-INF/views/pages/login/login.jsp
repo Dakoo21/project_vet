@@ -15,6 +15,24 @@
     <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <script>
+        const login = (event) => {
+            document.querySelector("#test-login").submit();
+        };
+
+        const loginG = (event) => {
+            console.log("로그인 호출");
+            location.href = "/oauth2/authorization/google";
+        };
+
+        const loginK = (event) => {
+            location.href = "/oauth2/authorization/kakao";
+        };
+
+        const loginN = (event) => {
+            location.href = "/oauth2/authorization/naver"
+        };
+    </script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -25,16 +43,14 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-            <form action="../../index3.html" method="post">
+            <form id="test-login" action="/loginProcess" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="이름">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        </div>
-                    </div>
+                    <label for="USER_NM" class="sr-only">ID</label>
+                    <input type="text" class="form-control" id="USER_NM" name="USER_NM" placeholder="ID" required>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <label for="USER_PW">Password</label>
+                    <input type="password" class="form-control" id="USER_PW" name="USER_PW" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -46,13 +62,13 @@
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
                             <label for="remember">
-                                기억하기
+                                Remember me
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">로그인</button>
+                        <button type="submit" class="btn btn-primary btn-block" onclick="login();">로그인</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -60,19 +76,22 @@
 
             <div class="social-auth-links text-center mb-3">
                 <p>- OR -</p>
-                <button type="button" class="btn btn-block btn-success" onclick=""> Naver Login</button>
-                <button type="button" class="btn btn-block btn-warning" onclick="">Kakao Login</button>
-                <button type="button" class="btn btn-block bg-light.bg-gradient" onclick="">
+                <button type="button" class="btn btn-block btn-success" onclick="loginN()"> Naver Login</button>
+                <button type="button" class="btn btn-block btn-warning" onclick="loginK">Kakao Login</button>
+                <button type="button" class="btn btn-block btn-light bg-gradient" onclick="loginG()">
                     <i class="fab fa-google-plus mr-2"></i> Google
                 </button>
             </div>
-            <!-- /.social-auth-links -->
+        </div>
+    </div>
+
+    <!-- /.social-auth-links -->
 
             <p class="mb-1">
                 <a href="forgot-password.html">비밀번호 찾기</a>
             </p>
             <p class="mb-0">
-                <a href="register.html" class="text-center">회원가입</a>
+                <a href="/pages/login/register" class="text-center">회원가입</a>
             </p>
         </div>
         <!-- /.login-card-body -->

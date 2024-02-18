@@ -25,6 +25,7 @@ public class SecurityConfig {
 
     private final PrincipalOauth2UserService principalOauth2UserService;
 
+    @Autowired
     public SecurityConfig(PrincipalOauth2UserService principalOauth2UserService) {
         this.principalOauth2UserService = principalOauth2UserService;
     }
@@ -59,7 +60,7 @@ public class SecurityConfig {
                         .requestMatchers("/info/**").hasRole("INFO")
                         .requestMatchers("/nurse/**").hasRole("NURSE")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")
