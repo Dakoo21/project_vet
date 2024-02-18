@@ -47,37 +47,48 @@
                     <th>고객명</th>
                     <th><input type="text" class="form-control" id="exampleFormControlInput1" placeholder=></th>
                     <th>연락처</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput2" placeholder="- 포함"></th>
+                    <th><input type="tel" class="form-control" id="exampleFormControlInput2" placeholder="- 포함"></th>
                 </tr>
                 <tr>
                     <th>주소</th>
                     <th><input type="text" class="form-control" id="exampleFormControlInput3" placeholder=></th>
                     <th>email</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput4" placeholder=></th>
+                    <th><input type="email" class="form-control" id="exampleFormControlInput4" placeholder=></th>
                 </tr>
                 <tr>
                     <th>동물이름</th>
                     <th><input type="text" class="form-control" id="exampleFormControlInput5" placeholder=></th>
-                    <th>종류</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput6" placeholder=></th>
+                    <th>축종</th>
+                    <th><input type="text" class="form-control" id="exampleFormControlInput6" placeholder="개, 고양이, 토끼..."></th>
                 </tr>
                 <tr>
                     <th>품종</th>
                     <th><input type="text" class="form-control" id="exampleFormControlInput7" placeholder=></th>
                     <th>성별</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput8" placeholder=></th>
+                    <th><select class="form-select" aria-label="default select example">
+                        <option selected>성별</option>
+                        <option value="1">남자</option>
+                        <option value="2">여자</option>
+                    </select></th>
                 </tr>
                 <tr>
                     <th>생년월일</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput9" placeholder="8자리"></th>
+                    <th><input type="date" class="form-control" id="exampleFormControlInput9" placeholder="8자리"></th>
                     <th>중성화</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput10" placeholder="O/X"></th>
+                    <th><select class="form-select" aria-label="default select example">
+                        <option selected>중성화 여부</option>
+                        <option value="1">O</option>
+                        <option value="2">X</option>
+                    </select></th>
                 </tr>
                 <tr>
                     <th>진료예약</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput11" placeholder="YYYY.MM.DD - 24H:MM"></th>
+                    <th><input type="date" class="form-control" id="exampleFormControlInput11" ></th>
+                    <th><input type="time" class="form-control" id="exampleFormControlInput12"></th>
+                </tr>
+                <tr>
                     <th>몸무게</th>
-                    <th><input type="text" class="form-control" id="exampleFormControlInput12" placeholder="kg"></th>
+                    <th><input type="text" class="form-control" id="exampleFormControlInput13" placeholder="kg"></th>
                 </tr>
             </table>
             <div class="mb-3">

@@ -1,4 +1,4 @@
-default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료기록 등록페이지</h1>
+                        <h1>진료기록 등록 페이지</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -142,46 +142,138 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                     <label class="form-check-label" for="inlineCheckbox4">일반수술</label>
                 </div>
             </div>
-        </section>
+            <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
+
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">증상 기록</label>
+            <p>
+            <label for="exampleFormControlTextarea1" class="form-label">증상 기록</label></p>
             <div>
-                <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
                 <textarea class="form-control" id="exampleFormControlTextarea1" style="width: 100%" rows="3"></textarea>
             </div>
         </div>
+
         <div class="mb-3">
+            <div class="row">
+                <div id="content write">
             <label for="exampleFormControlTextarea1" class="form-label">처방 기록</label>
-            <div id="content write">
+            </div>
                 <div id="modal">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm" onclick="medicalmodal()">약 처방하기</button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm" >약 처방하기</button>
                 </div>
+                </div>
+            </div>
                 <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
                 <textarea class="form-control" id="exampleFormControlTextarea2" style="width: 100%" rows="3"></textarea>
-            </div>
             <div class="text-center">
                 <button type="button" class="btn btn-primary">진료등록</button>
             </div>
-        </div>
-    </div>
+        </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-
-
+        <!--footer-->
+        <%@ include file="/include/footer.jsp"%>
+</div>
 <!-- ./wrapper -->
 
 <!--footer-->
-<%@ include file="/include/footer.jsp"%>
+
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 
+
+<!--약 처방하기 modal-->
+<div class="modal" id="selectForm">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+                <script src="   https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+                <h4 class="modal-title">약 처방하기</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
+                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
+                  <div class ="row">
+                    <div class="col-6">
+                        <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
+                               aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
+                    </div>
+                    <div class="col-3">
+                        <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
+                    </div>
+                  </div>
+                    <div>
+                        <form>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td>제품명</td>
+                                    <td>제품영문명</td>
+                                    <td>업체명</td>
+                                    <td>품목코드</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="text" value="지디 콴텔"></td>
+                                    <td><input type="text" value="GD-Quantel"></td>
+                                    <td><input type="text" value="(주)우성양행"></td>
+                                    <td><input type="text" value="A00200N0098"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" value="팜팜-1000"></td>
+                                    <td><input type="text" value="Farmfarm-1000"></td>
+                                    <td><input type="text" value="(주)우성양행"></td>
+                                    <td><input type="text" value="B00200N0104"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" value="밀베마이신A정"></td>
+                                    <td><input type="text" value="Milbemycin"></td>
+                                    <td><input type="text" value="한국엘랑코동물약품(주)"></td>
+                                    <td><input type="text" value="A11110N0036"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                    <td><input type="text" value=""></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
+                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+
 <style typeof="text/css">
     .form-control{
         width: 90%;

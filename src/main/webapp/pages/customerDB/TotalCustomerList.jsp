@@ -34,25 +34,28 @@
             <!--여기 -->
             <div class = "container">
                 <div class="row">
-                    <div class="search-top-area">
+                    <div class="search-top-area" style="right: auto">
                         <div class="search-box">
-                            <div class = "col-lg-5">
-                                <input type="text" class="form-control" placeholder ="고객명, 동물이름"
-                                       aria-label="고객명, 동물이름" aria-describedby="btn_search" onkeyup="searchEnter()"/>
-                            </div>
-                            <div class="search-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="add-btn">
-                            <button type="button" class="btn btn-primary">등록</button>
+                          <form action="simple-results.html">
+                              <div class="input-group">
+                                  <input type="search" class="form-control form-control-lg" placeholder="고객명, 동물이름">
+                                  <div class="input-group-append">
+                                      <button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                      </button>
+                                  </div>
+                                   <div class="text-right">
+                                 <div id="padding-right50" class="position-absolute top-0 end-20">
+                                <button type="button" class="btn btn-primary" style="margin-left: 70px">등록</button>
+                                 </div>
+                                   </div>
+                              </div>
+                          </form>
                         </div>
                     </div>
                 </div>
                 <!-- /.content -->
-                <div class ="">
+                <div class ="table">
                     <table class="table table-striped table-bordered table-hover dt-responsive">
                         <thead>
                         <tr>
@@ -180,36 +183,31 @@
     <%@ include file="/include/footer.jsp"%>
 </div>
 <!-- ./wrapper -->
-<!--footer-->
-<%@ include file="/include/bootCommonFoot.jsp"%>
-<!-- 결재 모달 -->
-<div class="modal" id="boardForm">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">게시판</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
-                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
-                    <input type="hidden" id="b_content" name="b_content">
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="radio" value="master1" checked>승인
-                        <input type="radio" value="master2">반려
-                    </div>
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
-                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
-            </div>
-        </div>
-    </div>
-</div>
+<!--footer-->
+
+<%@ include file="/include/bootCommonFoot.jsp"%>
+
 </body>
 </html>
 
+<style typeof="text/css">
+    .search-top-area{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 40px;
+    }
+
+    #padding-right50{
+        padding-right: 50px;
+    }
+
+    .search-box{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+</style>

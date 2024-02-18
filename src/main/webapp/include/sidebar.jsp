@@ -173,6 +173,13 @@
                                 <p>고객 마이페이지</p>
                             </a>
                         </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/pages/mypage/employeeInsert.jsp" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>직원등록</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- 메뉴 끝-->
@@ -188,7 +195,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/guide/introMap.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>병원 위치안내</p>
                             </a>
@@ -232,6 +239,13 @@
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>상세글 등록</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/pages/adopt/adoptAnimals.jsp" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>adoptAnimals</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
@@ -290,21 +304,21 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/qna/qnaList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Q&A전체조회</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/qna/qnaDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Q&A상세페이지</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/qna/qnaInsert.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Q작성</p>
                             </a>
@@ -523,7 +537,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/stock/default.jsp" class="nav-link">
+                            <a href="/pages/stock/stockList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>재고조회 리스트</p>
                             </a>

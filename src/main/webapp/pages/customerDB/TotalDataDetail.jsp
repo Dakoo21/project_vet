@@ -1,4 +1,4 @@
-default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,14 +30,13 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
-        <section class="content">
-            <!--여기 -->
-            <div class="text-right">
-                <div id="padding-right50" class="position-absolute top-0 end-70">
-                    <button id="margin-right20" type="button" class="btn btn-warning">정보수정</button>
-                    <button type="button" class="btn btn-danger">삭제</button>
-                </div>
+        <div class="text-right">
+            <div id="padding-right50" class="position-absolute top-0 end-70">
+                <button id="margin-right20" type="button" class="btn btn-warning">정보수정</button>
+                <button type="button" class="btn btn-danger">삭제</button>
             </div>
+        </div>
+        <section class="content">
             <div id="contents_box">
                 <div id="img_area">
                     <img src="../img/bulldog.svg" class="img-fluid img-thumbnail" alt="...">
@@ -48,13 +47,13 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                             <th>고객명</th>
                             <td><input class="form-control" type="text" value="서견주" aria-label="readonly input example" readonly></td>
                             <th>연락처</th>
-                            <td><input class="form-control" type="text" value="010-7575-5757" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="tel" value="010-7575-5757" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>주소</th>
                             <td><input class="form-control" type="text" value="금천구 가산동 123-12" aria-label="readonly input example" readonly></td>
                             <th>email</th>
-                            <td><input class="form-control" type="text" value="seoul17@hot.com" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="email" value="seoul17@hot.com" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>동물이름</th>
@@ -70,7 +69,7 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                         </tr>
                         <tr>
                             <th>생년월일</th>
-                            <td><input class="form-control" type="text" value="2012.02" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="date" value="2012.02" aria-label="readonly input example" readonly></td>
                             <th>중성화</th>
                             <td><input class="form-control"  type="text" value="O" aria-label="readonly input example" readonly></td>
                         </tr>
@@ -85,7 +84,7 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">최근 진료내역</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" style="width: 100%" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1"  aria-label="readonly input example" readonly style="width: 100%" rows="3"></textarea>
             </div>
         </section>
         <!-- /.content -->
@@ -93,7 +92,6 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
             <button type="button" class="btn btn-primary" style="margin-right: 10px;">뒤로가기</button>
             <button type="button" class="btn btn-success">진료등록</button>
         </div>
-
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->
@@ -139,7 +137,7 @@ default.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
         width: 50%;
         height: 50%;
     }
-    #contents_box > #img_area > img{
+    #contents_box > #img_area > .img-fluid img-thumbnail{
         width: 95%;
         padding-top: 50%;
     }

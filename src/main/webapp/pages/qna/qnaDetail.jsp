@@ -1,8 +1,3 @@
-
-
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%--    <%--%>
@@ -19,51 +14,51 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Q&A 상세페이지</title>
     <%@ include file="/include/bootCommon.jsp"%>
     <%@include file="/include/common/bootstrap_common.jsp"%>
-<%--    <script type="text/javascript">--%>
-<%--        const noticeList = () => {--%>
-<%--            //HandlerMapping - url키값 - 메소드 이름--%>
-<%--            location.href="./noticeList";--%>
-<%--        }--%>
-<%--        function noticeDelete(noticePK) {--%>
-<%--            // 확인을 받은 후에 폼을 서버로 제출--%>
-<%--            if (confirm("정말로 삭제하시겠습니까?")) {--%>
-<%--                // 삭제를 확인하면 폼을 서버로 제출--%>
-<%--                var form = document.createElement("form");--%>
-<%--                form.setAttribute("method", "post");--%>
-<%--                form.setAttribute("action", "./noticeDelete?noticePK="+<%=rmap.get("NOTICE_PK")%>);--%>
+    <%--    <script type="text/javascript">--%>
+    <%--        const noticeList = () => {--%>
+    <%--            //HandlerMapping - url키값 - 메소드 이름--%>
+    <%--            location.href="./noticeList";--%>
+    <%--        }--%>
+    <%--        function noticeDelete(noticePK) {--%>
+    <%--            // 확인을 받은 후에 폼을 서버로 제출--%>
+    <%--            if (confirm("정말로 삭제하시겠습니까?")) {--%>
+    <%--                // 삭제를 확인하면 폼을 서버로 제출--%>
+    <%--                var form = document.createElement("form");--%>
+    <%--                form.setAttribute("method", "post");--%>
+    <%--                form.setAttribute("action", "./noticeDelete?noticePK="+<%=rmap.get("NOTICE_PK")%>);--%>
 
-<%--                var input = document.createElement("input");--%>
-<%--                input.setAttribute("type", "hidden");--%>
-<%--                input.setAttribute("name", "noticePK");--%>
-<%--                input.setAttribute("value", noticePK);--%>
-<%--                form.appendChild(input);--%>
+    <%--                var input = document.createElement("input");--%>
+    <%--                input.setAttribute("type", "hidden");--%>
+    <%--                input.setAttribute("name", "noticePK");--%>
+    <%--                input.setAttribute("value", noticePK);--%>
+    <%--                form.appendChild(input);--%>
 
-<%--                document.body.appendChild(form);--%>
-<%--                form.submit();--%>
-<%--            }--%>
+    <%--                document.body.appendChild(form);--%>
+    <%--                form.submit();--%>
+    <%--            }--%>
 
-<%--        }--%>
-<%--        function openUpdateModal() {--%>
-<%--            $('#boardUpdateForm').modal('show');--%>
-<%--        }--%>
-<%--        function noticeUpdate() {--%>
-<%--            // 폼 가져오기--%>
-<%--            var form = document.getElementById("f_board");--%>
-<%--            var formData = new FormData(form);--%>
+    <%--        }--%>
+    <%--        function openUpdateModal() {--%>
+    <%--            $('#boardUpdateForm').modal('show');--%>
+    <%--        }--%>
+    <%--        function noticeUpdate() {--%>
+    <%--            // 폼 가져오기--%>
+    <%--            var form = document.getElementById("f_board");--%>
+    <%--            var formData = new FormData(form);--%>
 
-<%--            // 폼 데이터 콘솔에 출력--%>
-<%--            for (var pair of formData.entries()) {--%>
-<%--                console.log(pair[0] + ': ' + pair[1]);--%>
-<%--            }--%>
+    <%--            // 폼 데이터 콘솔에 출력--%>
+    <%--            for (var pair of formData.entries()) {--%>
+    <%--                console.log(pair[0] + ': ' + pair[1]);--%>
+    <%--            }--%>
 
-<%--            // 폼 서버로 제출--%>
-<%--            form.submit();--%>
-<%--        }--%>
+    <%--            // 폼 서버로 제출--%>
+    <%--            form.submit();--%>
+    <%--        }--%>
 
-<%--    </script>--%>
+    <%--    </script>--%>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -73,15 +68,15 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                공지사항
-<%--                <small><%=rmap.get("COMMON_CODE_PK")%></small>--%>
+                Q&A
+                <%--                <small><%=rmap.get("COMMON_CODE_PK")%></small>--%>
             </h1>
         </section>
         <!-- Main content -->
         <section class="content">
             <div class="container">
                 <div class="page-header">
-                    <h2>게시판 <small>글상세보기</small></h2>
+                    <h2>Q&A<small>질문 제목</small></h2>
                     <hr />
                 </div>
                 <!-- 공지목록 시작 -->
@@ -160,80 +155,80 @@
                 <!-- 댓글목록  끝  -->
             </div>
 
-<%--            <div style="width:58rem;">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class='book-detail'>--%>
-<%--                        <div class='book-header'>--%>
+            <%--            <div style="width:58rem;">--%>
+            <%--                <div class="card-body">--%>
+            <%--                    <div class='book-detail'>--%>
+            <%--                        <div class='book-header'>--%>
 
-<%--                            <table>--%>
-<%--                                <tr>--%>
-<%--                                    <td>제목</td>--%>
-<%--                                    <td>--%>
-<%--                                        <div style="width: 500px;">--%>
-<%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_TITLE")%>&ndash;%&gt;--%>
-<%--                                        </div>--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <td>작성자:</td>--%>
-<%--                                    <td>--%>
-<%--                                        <div class="col-xs-3" style="width: 100px;">--%>
-<%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_WRITER")%>&ndash;%&gt;--%>
-<%--                                        </div>--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <td>조회수</td>--%>
-<%--                                    <td>--%>
-<%--                                        <div class="col-xs-3" style="width: 100px;">--%>
-<%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_HITS")%>&ndash;%&gt;--%>
-<%--                                        </div>--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <td>작성시각</td>--%>
-<%--                                    <td>--%>
-<%--                                        <div class="col-xs-3" style="width: 100px;">--%>
-<%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_TIME")%>&ndash;%&gt;--%>
-<%--                                        </div>--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <td>첨부파일</td>--%>
-<%--                                    <td>--%>
-<%--                                        <div class="col-xs-3" style="width: 100px;">--%>
-<%--&lt;%&ndash;                                            <%=rmap.get("ATTACHED_PK")%>&ndash;%&gt;--%>
-<%--                                        </div>--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                            </table>--%>
+            <%--                            <table>--%>
+            <%--                                <tr>--%>
+            <%--                                    <td>제목</td>--%>
+            <%--                                    <td>--%>
+            <%--                                        <div style="width: 500px;">--%>
+            <%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_TITLE")%>&ndash;%&gt;--%>
+            <%--                                        </div>--%>
+            <%--                                    </td>--%>
+            <%--                                </tr>--%>
+            <%--                                <tr>--%>
+            <%--                                    <td>작성자:</td>--%>
+            <%--                                    <td>--%>
+            <%--                                        <div class="col-xs-3" style="width: 100px;">--%>
+            <%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_WRITER")%>&ndash;%&gt;--%>
+            <%--                                        </div>--%>
+            <%--                                    </td>--%>
+            <%--                                </tr>--%>
+            <%--                                <tr>--%>
+            <%--                                    <td>조회수</td>--%>
+            <%--                                    <td>--%>
+            <%--                                        <div class="col-xs-3" style="width: 100px;">--%>
+            <%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_HITS")%>&ndash;%&gt;--%>
+            <%--                                        </div>--%>
+            <%--                                    </td>--%>
+            <%--                                </tr>--%>
+            <%--                                <tr>--%>
+            <%--                                    <td>작성시각</td>--%>
+            <%--                                    <td>--%>
+            <%--                                        <div class="col-xs-3" style="width: 100px;">--%>
+            <%--&lt;%&ndash;                                            <%=rmap.get("NOTICE_TIME")%>&ndash;%&gt;--%>
+            <%--                                        </div>--%>
+            <%--                                    </td>--%>
+            <%--                                </tr>--%>
+            <%--                                <tr>--%>
+            <%--                                    <td>첨부파일</td>--%>
+            <%--                                    <td>--%>
+            <%--                                        <div class="col-xs-3" style="width: 100px;">--%>
+            <%--&lt;%&ndash;                                            <%=rmap.get("ATTACHED_PK")%>&ndash;%&gt;--%>
+            <%--                                        </div>--%>
+            <%--                                    </td>--%>
+            <%--                                </tr>--%>
+            <%--                            </table>--%>
 
 
-<%--                            <hr/>--%>
-<%--                            <div class="input-group mb-3" style="width: 200px">--%>
-<%--                                <div class="col-xs-8">--%>
-<%--&lt;%&ndash;                                    <%=rmap.get("NOTICE_CONTENT")%>&ndash;%&gt;--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
+            <%--                            <hr/>--%>
+            <%--                            <div class="input-group mb-3" style="width: 200px">--%>
+            <%--                                <div class="col-xs-8">--%>
+            <%--&lt;%&ndash;                                    <%=rmap.get("NOTICE_CONTENT")%>&ndash;%&gt;--%>
+            <%--                                </div>--%>
+            <%--                            </div>--%>
 
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <hr/>--%>
-<%--                <div class='detail-link'>--%>
-<%--                    <button class="btn btn-info" onclick="openUpdateModal()">--%>
-<%--                        수정--%>
-<%--                    </button>--%>
-<%--                    &nbsp;--%>
-<%--                    <button class="btn btn-warning" onclick="noticeDelete()">--%>
-<%--                        삭제--%>
-<%--                    </button>--%>
-<%--                    &nbsp;--%>
-<%--                    <button class="btn btn-success" onclick="noticeList()">--%>
-<%--                        공지목록--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <%--                        </div>--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--                <hr/>--%>
+            <%--                <div class='detail-link'>--%>
+            <%--                    <button class="btn btn-info" onclick="openUpdateModal()">--%>
+            <%--                        수정--%>
+            <%--                    </button>--%>
+            <%--                    &nbsp;--%>
+            <%--                    <button class="btn btn-warning" onclick="noticeDelete()">--%>
+            <%--                        삭제--%>
+            <%--                    </button>--%>
+            <%--                    &nbsp;--%>
+            <%--                    <button class="btn btn-success" onclick="noticeList()">--%>
+            <%--                        공지목록--%>
+            <%--                    </button>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
 
         </section>
         <!-- /.content -->
