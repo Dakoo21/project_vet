@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>진행중인 문서</title>
+    <title>AdminLTE 3 | Dashboard</title>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진행중인 문서</h1>
+                        <h1>게시판 <small>게시글목록</small></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -84,7 +84,7 @@
                         <div class="chart tab-pane" id="sales-processing" style="position: relative; height: 300px;">
                             <%@ include file="include/boardList.jsp"%>
                         </div>
-                        <div class="chart tab-pane" id="sales-cheduled" style="position: relative; height: 300px;">
+                        <div class="chart tab-pane" id="scheduled" style="position: relative; height: 300px;">
                             <%@ include file="include/boardList.jsp"%>
                         </div>
                     </div>

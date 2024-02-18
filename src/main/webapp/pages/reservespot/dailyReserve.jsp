@@ -6,6 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
+    <%--달력선택기--%>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.10/index.global.min.js'></script>
     <%--월간달력--%>
@@ -30,9 +35,8 @@
                     myCustomButton: {
                         text: '예약',
                         click: function() {
-                            var modal = document.getElementById('ReserveModal');
-                            modal.style.display = "block";
-                        }
+                            $('#modal-lg').modal('show');
+                        }//부트 스트랩 사용으로 수정
                     }
                 }
 
@@ -100,6 +104,14 @@
                 }*///바탕화면 누르면 사라지는
         // 선택바 요소 가져오기
         var selectBox = document.getElementById("selectBox");
+
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        })
+
+        $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
     </script>
     <style>
         /* CSS 코드를 여기에 작성합니다 */
@@ -153,20 +165,17 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .reserveModal-header,
-        .reserveModal-footer,
-        .reserveModal-body ,
-        .body{
-            padding: 15px;
+        .rightSide{
+            float: left;
+            font-size: 20px;
 
         }
-
-        .reserveModal-body {
+        .leftSide{
+            float:left;
+            position: relative;
+            width: 25%;
             font-size: 20px;
-            heigt:100%;
-            width:100%;
-            line-height: 2.5; /* 기본 높이의 1.5배 */
-
+            margin-right: 5px;
         }
 
         /* 선택바 스타일 */
@@ -174,11 +183,7 @@
             width: 130px;
             font-size: 25px;
         }
-        .reserveModal-footer {
-            position: absolute;
-            bottom: 0;
-            right: 0; /* 오른쪽에 위치하도록 설정 */
-        }
+
         .select-box{
             width:100px;
         }
@@ -190,31 +195,59 @@
         }
 
         .reservePicture img {
-            margin-right: 5%;/* 이미지 사이의 우측 간격을 10px로 설정합니다. */
-            max-width: 100%; /* 이미지의 최대 가로 너비를 부모 요소인 reservePicture의 너비에 맞게 조정합니다. */
-            height: auto; /* 이미지의 비율을 유지하면서 자동으로 높이를 조정합니다. */
-            float: right;
+            max-width: 250px;
+            margin-right: 5%;
+            height: auto;
         }
+        /*.reservePicture img {*/
+        /*    margin-right: 5%;!* 이미지 사이의 우측 간격을 10px로 설정합니다. *!*/
+        /*    max-width: 100%; !* 이미지의 최대 가로 너비를 부모 요소인 reservePicture의 너비에 맞게 조정합니다. *!*/
+        /*    height: auto; !* 이미지의 비율을 유지하면서 자동으로 높이를 조정합니다. *!*/
+        /*    float: right;*/
+        /*}*/
 
         #r_content{
             width: 100%;
             padding: 0;
             font-size: 14px;
+            resize: none
         }
-        .reserveContent,
+
         .reservePicture {
             display: flex;
             align-items: center; /* 텍스트 수직 중앙 정렬 */
 
         }
+        /* CSS를 사용하여 입력 상자 스타일 지정 */
+        .text-input {
+            width: 100px; /* 상자의 너비 조정 */
 
-        .textareaWrapper {
-            margin-left: 10px; /* 내용과 텍스트 영역 사이의 간격 설정 */
+            font-size: 20px; /* 텍스트 크기 조정 */
+            border: 1px solid #ccc; /* 테두리 추가 */
+            border-radius: 5px; /* 테두리를 둥글게 만듦 */
+            box-sizing: border-box; /* 테두리와 안쪽 여백을 상자 크기에 포함 */
+        }
+        /* styles.css */
+
+        .leftSide, .rightSide {
+            flex: 1;
         }
 
-        .fixedtable{
-            max-width: 100%;
+        .leftSide {
+            margin-right: 10px;
         }
+
+        .rightSide {
+            margin-left: 10px;
+        }
+
+        .leftSide > div, .rightSide > div {
+            margin-bottom: 20px;
+        }
+        .bigColumn{
+            margin-bottom: 125px !important;
+        }
+
     </style>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
@@ -228,7 +261,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Icons</h1>
+                        <h1>시설예약현황</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -244,33 +277,41 @@
             <!--여기 -->
             <div id='calendar'></div>
             <div id='calendarTimeline'></div>
-            <!-- ========================== [[ 게시판 Modal ]] ========================== -->
-            <div id="ReserveModal">
-                <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="reserveModal-header">
-                        <select id="selectRoomBox" class="selectRoom-box">
-                            <option value="">수술실</option>
-                            <option value="1">면회실</option>
-                            <option value="2">방사선실</option>
-                            <option value="3">미용실</option>
-                            <!-- 필요한 만큼 옵션을 추가하세요 -->
-                        </select>
-                    </div>
-                    <div class="body">
-                        <table class="reserveModal-body">
-                            <tr class="fixedtable">
-                                <td>시설이미지</td>
-                                <td class ="reservePicture">
-                                    <img src="./62562747.PNG" alt="시설사진1" width=30%>
-                                    <img src="./62562747.PNG" alt="시설사진2" width=30%>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>예약시간</td>
-                                <td>
-                                    <select id="selecStartTimetBox" class="select-box">
+<%--            시설 모달--%>
+            <div class="modal fade" id="modal-lg">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="modal-header">
+                            <select id="selectRoomBox" class="selectRoom-box">
+                                <option value="">수술실</option>
+                                <option value="1">면회실</option>
+                                <option value="2">방사선실</option>
+                                <option value="3">미용실</option>
+                                <!-- 필요한 만큼 옵션을 추가하세요 -->
+                            </select>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="flex: 1;">
+                            <div class="leftSide">
+
+                                    <div class="bigColumn">시설이미지</div>
+                                    <div>예약시간</div>
+
+                                <div>예약자</div>
+                                <div>보호자명</div>
+                                <div>내용</div>
+                            </div>
+                            <div class="rightSide">
+                                <div class="reservePicture">
+                                    <img src="./62562747.PNG" alt="시설사진1" >
+                                    <img src="./62562747.PNG" alt="시설사진2">
+                                </div>
+                                <div class="d-flex">
+                                        <input type="date" />
+                                    <select id="selecStartTimetBox" class="select-box mr-2">
                                         <option value="">10:00</option>
                                         <option value="1">10:30</option>
                                         <option value="2">11:00</option>
@@ -278,50 +319,107 @@
                                         <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                     </select>
                                     <span>~</span>
-                                    <select id="selectEndTimeBox" class="select-box">
-                                        <option value="">13:00</option>
-                                        <option value="1">13:30</option>
-                                        <option value="2">14:00</option>
-                                        <option value="3">15:00</option>
-                                        <!-- 선택 시작 시간 이후 시간 셀렉트 -->
+                                    <select id="selecEndTimeBox" class="select-box ml-2">
+                                        <option value="">10:00</option>
+                                        <option value="1">10:30</option>
+                                        <option value="2">11:00</option>
+                                        <option value="2">12:00</option>
+                                        <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                     </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>예약자</td>
-                                <td>내이름</td>
-                            </tr>
-                            <tr>
-                                <td>보호자명</td>
-                                <td>
-                                    <button type="button" class="reserveSearchButton" onclick="모달열리게">#️⃣</button>
-                                    <select id="customer" class="select-box">
-                                        <option value="">꽁지</option>
-                                        <option value="1">꽁꽁지</option>
-                                        <!-- 선택 시작 시간 이후 시간 셀렉트 -->
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>내용</td>
-                                <td>
-                                    <div class="reserveContent">
-                                        <div class="textareaWrapper">
-                                            <textarea rows="5" aria-label="With textarea" id="r_content" name="r_content"></textarea>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                                <div>내이름</div>
+                                    <div>
+                                <input type="text" class="text-input">
+                                <button class="btn btn btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <span>고객</span>
+                                <select id="customer" class="select-box">
+
+                                    <option value="">꽁지</option>
+                                    <option value="1">꽁꽁지</option>
+                                    <!-- 선택 시작 시간 이후 시간 셀렉트 -->
+                                </select>
+                                </div>
+                                <textarea rows="5" aria-label="With textarea" id="r_content" name="r_content"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="text-align: right;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">예약수정</button>
+                            <button type="button" class="btn btn-primary">예약취소</button>
+                            <button type="button" class="btn btn-primary">목록으로 돌아가기</button>
+                        </div>
                     </div>
-                    <div class="reserveModal-footer">
-                        <button class="reservation-button">예약수정</button>
-                        <button class="reservation-button">예약취소</button>
-                        <button class="reservation-button" onclick="window.location.href='http://localhost:8000/pages/reservespot/dailyReserve.jsp'">목록으로 돌아가기</button>
-                    </div>
+
+                    <!-- /.modal-content -->
                 </div>
+                <!-- /.modal-dialog -->
             </div>
-            <!-- footer end    -->
+            <!-- /.modal -->
+<%--            <!-- ========================== [[ 게시판 Modal ]] ========================== -->--%>
+<%--
+
+<%--
+<%--                    <div class="body">--%>
+<%--                        <table class="reserveModal-body">--%>
+<%--                            <tr class="fixedtable">--%>
+<%--                                <td>시설이미지</td>--%>
+<%--                                <td class ="reservePicture">--%>
+<%--                                    <img src="./62562747.PNG" alt="시설사진1" width=30%>--%>
+<%--                                    <img src="./62562747.PNG" alt="시설사진2" width=30%>--%>
+<%--                                </td>--%>
+<%--                            </tr>--%>
+<%--                            <tr>--%>
+<%--                                <td>예약시간</td>--%>
+<%--                                <td>--%>
+<%--                                    <select id="selecStartTimetBox" class="select-box">--%>
+<%--                                        <option value="">10:00</option>--%>
+<%--                                        <option value="1">10:30</option>--%>
+<%--                                        <option value="2">11:00</option>--%>
+<%--                                        <option value="2">12:00</option>--%>
+<%--                                        <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->--%>
+<%--                                    </select>--%>
+<%--                                    <span>~</span>--%>
+<%--                                    <select id="selectEndTimeBox" class="select-box">--%>
+<%--                                        <option value="">13:00</option>--%>
+<%--                                        <option value="1">13:30</option>--%>
+<%--                                        <option value="2">14:00</option>--%>
+<%--                                        <option value="3">15:00</option>--%>
+<%--                                        <!-- 선택 시작 시간 이후 시간 셀렉트 -->--%>
+<%--                                    </select>--%>
+<%--                                </td>--%>
+<%--                            </tr>--%>
+<%--                            <tr>--%>
+<%--                                <td>예약자</td>--%>
+<%--                                <td>내이름</td>--%>
+<%--                            </tr>--%>
+<%--                            <tr>--%>
+<%--                                <td>보호자명</td>--%>
+<%--                                <td>--%>
+<%--                                    <button type="button" class="reserveSearchButton" onclick="모달열리게">#️⃣</button>--%>
+<%--                                    <select id="customer" class="select-box">--%>
+<%--                                        <option value="">꽁지</option>--%>
+<%--                                        <option value="1">꽁꽁지</option>--%>
+<%--                                        <!-- 선택 시작 시간 이후 시간 셀렉트 -->--%>
+<%--                                    </select>--%>
+<%--                                </td>--%>
+<%--                            </tr>--%>
+<%--                            <tr>--%>
+<%--                                <td>내용</td>--%>
+<%--                                <td>--%>
+<%--                                    <div class="reserveContent">--%>
+<%--                                        <div class="textareaWrapper">--%>
+<%--                                            <textarea rows="5" aria-label="With textarea" id="r_content" name="r_content"></textarea>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </td>--%>
+<%--                            </tr>--%>
+<%--                        </table>--%>
+<%--                    </div>--%>
+<%--
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <!-- footer end    -->--%>
             <!-- ========================== [[ 검색창 Modal ]] ========================== -->
             <div class="modal" id="SerchForm"></div>
         </section>

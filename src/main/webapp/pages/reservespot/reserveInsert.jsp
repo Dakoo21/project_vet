@@ -38,7 +38,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="../../css/reserveInsert.css">
+    <link rel="stylesheet" href="../../dist/css/reserveInsert.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <%@ include file="/include/header.jsp"%>
@@ -62,12 +62,12 @@
                         </div>
                         <div class="card-body">
                             <!-- 보호자명 -->
-                            <div class="form-group">
+                            <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label for="guardianName" style="display: inline-block; width: 70px;">보호자명</label>
                                 <input type="text" id="guardianName" class="form-control" placeholder="입력해 주세요" style="display: inline-block; width: 150px;">
                             </div>
                             <!-- 동물선택 -->
-                            <div class="form-group">
+                            <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label style="display: inline-block; width: 70px;">환축명</label>
                                 <select class="form-control select2" style="display: inline-block; width: 150px;">
                                     <option selected="selected">선택</option>
@@ -77,19 +77,12 @@
                                 </select>
                             </div>
                             <!-- 예약일 -->
-                            <!-- Date -->
-                            <div class="form-group">
-                                <label>예약일</label>
-                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
+                            <div class="form-group" style="display: inline-block; width: 240px;">
+                                <label for="reservationdate" style="display: inline-block; width: 70px;">예약일</label>
+                                <input type="date" id="reservationdate" class="form-control" style="display: inline-block; width: 150px;">
                             </div>
-
                             <!-- 예약시간 -->
-                            <div class="form-group">
+                            <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label style="display: inline-block; width: 70px;">예약시간</label>
                                 <select class="form-control select2" style="display: inline-block; width: 150px;">
                                     <option selected="selected">선택</option>
@@ -116,7 +109,7 @@
                                 </select>
                             </div>
                             <!-- 예약구분 -->
-                            <div class="form-group">
+                            <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label style="display: inline-block; width: 70px;">예약구분</label>
                                 <select class="form-control select2" style="display: inline-block; width: 150px;">
                                     <option selected="selected">선택</option>
@@ -125,7 +118,7 @@
                                 </select>
                             </div>
                             <!-- 담당의 -->
-                                <div class="form-group">
+                                <div class="form-group" style="display: inline-block; width: 240px;">
                                     <label style="display: inline-block; width: 70px;">담당의</label>
                                     <select class="form-control select2" style="display: inline-block; width: 150px;">
                                         <option selected="selected">선택</option>

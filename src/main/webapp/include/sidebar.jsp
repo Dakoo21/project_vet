@@ -166,9 +166,7 @@
                                 <p>관리자 마이페이지</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/mypage/customer.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -195,9 +193,7 @@
                                 <p>병원 위치안내</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -224,27 +220,21 @@
                                 <p>입양 신청서 작성</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/adopt/adoptList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>유기동물 조회</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>상세글 등록</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/adopt/adoptRegister.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -271,18 +261,14 @@
                                 <p>전체 조회</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/notice/noticeDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>상세페이지</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -309,27 +295,21 @@
                                 <p>Q&A전체조회</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Q&A상세페이지</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Q작성</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -351,45 +331,16 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/docbook/bookingMainCustomer.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료 예약 조회 게시판(사원)</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 상세조회(사원)</p>
-                            </a>
-                        </li>
-
-                        <!-- 하위메뉴 시작 -->
-
-                        <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 작성(사원)</p>
-                            </a>
-                        </li>
-
-                        <!-- 하위메뉴 시작 -->
-
-                        <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/docbook/bookingMainAdmin.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료 예약 조회 게시판(고객)</p>
-                            </a>
-                        </li>
-
-                        <!-- 하위메뉴 시작 -->
-
-                        <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 신청(고객)</p>
                             </a>
                         </li>
                     </ul>
@@ -412,18 +363,14 @@
                                 <p>고객-동물 전체 데이터 조회</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/customerDB/totalDataRegister.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객-동물 DB등록</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/customerDB/totalDataDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -458,9 +405,7 @@
                                 <p>진료기록 조회2</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/medlog/medlogDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -521,56 +466,44 @@
                                 <p>기안서 작성</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/esignbox/esignDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>기안서 조회</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/esignbox/docsBox.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>문서보관함</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/esignbox/tempBox.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>임시보관함</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/esignbox/cancelledDocs.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>취소보관함</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>지출결의서</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/esignbox/progressDocs.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진행중인 문서</p>
                             </a>
@@ -629,9 +562,7 @@
                                 <p>일일 에약 현황</p>
                             </a>
                         </li>
-
                         <!-- 하위메뉴 시작 -->
-
                         <li class="nav-item">
                             <a href="/pages/reservespot/allReserve.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
