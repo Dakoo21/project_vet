@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.vet.VetApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-18T12:36:13" hostname="DESKTOP-J01T0ST" time="0.757">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.example.vet.VetApplicationTests" time="0.757"/>
+  <system-out><![CDATA[21:36:10.957 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.vet.VetApplicationTests]: VetApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:36:11.043 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.vet.VetApplication for test class com.example.vet.VetApplicationTests
+21:36:10,878 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.14
+21:36:10,879 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Here is a list of configurators discovered as a service, by rank: 
+21:36:10,879 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
+21:36:10,879 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
+21:36:10,879 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
+21:36:10,886 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 2 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+21:36:10,886 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
+21:36:10,886 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
+21:36:10,888 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
+21:36:10,888 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
+21:36:10,888 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 2 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+21:36:10,888 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
+21:36:10,888 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
+21:36:10,888 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+21:36:10,889 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.xml]
+21:36:10,889 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 1 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+21:36:10,889 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Trying to configure with ch.qos.logback.classic.BasicConfigurator
+21:36:10,889 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - Constructed configurator of type class ch.qos.logback.classic.BasicConfigurator
+21:36:10,889 |-INFO in ch.qos.logback.classic.BasicConfigurator@442f92e6 - Setting up default configuration.
+21:36:10,897 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1ffcf674 - ch.qos.logback.classic.BasicConfigurator.configure() call lasted 8 milliseconds. ExecutionStatus=NEUTRAL
+21:36:11,361 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word clr with class [org.springframework.boot.logging.logback.ColorConverter]
+21:36:11,361 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wex with class [org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter]
+21:36:11,361 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wEx with class [org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter]
+21:36:11,364 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@7d070ef5 - Adding [jar:file:/C:/Users/gwangho/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/3.1.8/7a4a127cabca554a024dc821e30530e9c3f64790/spring-boot-3.1.8.jar!/org/springframework/boot/logging/logback/file-appender.xml] to configuration watch list.
+21:36:11,364 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@7a55f148 - URL [jar:file:/C:/Users/gwangho/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/3.1.8/7a4a127cabca554a024dc821e30530e9c3f64790/spring-boot-3.1.8.jar!/org/springframework/boot/logging/logback/file-appender.xml] is not of type file
+21:36:11,392 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Registering a new ReconfigureOnChangeTask ReconfigureOnChangeTask(born:1708259771391)
+21:36:11,392 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Will scan for changes in [file:/E:/TeamprojectWorkspace/work_0218/project_vet/build/resources/main/logback-spring.xml] 
+21:36:11,392 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Setting ReconfigureOnChangeTask scanning period to 30 seconds
+21:36:11,394 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
+21:36:11,394 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+21:36:11,397 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+21:36:11,409 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [FILE] not referenced. Skipping further processing.
+21:36:11,409 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.catalina.startup.DigesterFactory] to ERROR
+21:36:11,409 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating ERROR level on Logger[org.apache.catalina.startup.DigesterFactory] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.catalina.util.LifecycleBase] to ERROR
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating ERROR level on Logger[org.apache.catalina.util.LifecycleBase] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.coyote.http11.Http11NioProtocol] to WARN
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating WARN level on Logger[org.apache.coyote.http11.Http11NioProtocol] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.sshd.common.util.SecurityUtils] to WARN
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating WARN level on Logger[org.apache.sshd.common.util.SecurityUtils] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.tomcat.util.net.NioSelectorPool] to WARN
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating WARN level on Logger[org.apache.tomcat.util.net.NioSelectorPool] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.eclipse.jetty.util.component.AbstractLifeCycle] to ERROR
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating ERROR level on Logger[org.eclipse.jetty.util.component.AbstractLifeCycle] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.hibernate.validator.internal.util.Version] to WARN
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating WARN level on Logger[org.hibernate.validator.internal.util.Version] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.springframework.boot.actuate.endpoint.jmx] to WARN
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating WARN level on Logger[org.springframework.boot.actuate.endpoint.jmx] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+21:36:11,410 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2e2f720 - Propagating INFO level on Logger[ROOT] onto the JUL framework
+21:36:11,410 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
+21:36:11,410 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@3ae2ed38 - End of configuration.
+21:36:11,410 |-INFO in org.springframework.boot.logging.logback.SpringBootJoranConfigurator@7f572c37 - Registering current configuration as safe fallback point
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+?[32m :: Spring Boot :: ?[39m              ?[2m (v3.1.8)?[0;39m
+
+?[33m2024-02-18 21:36:11.451?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[StartupInfoLogger.java : 51]?[0;39m ?[32m{Starting VetApplicationTests using Java 17.0.9 with PID 21736 (started by gwangho in E:\TeamprojectWorkspace\work_0218\project_vet)}?[0;39m
+?[33m2024-02-18 21:36:11.452?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[SpringApplication.java : 638]?[0;39m ?[32m{No active profile set, falling back to 1 default profile: "default"}?[0;39m
+?[33m2024-02-18 21:36:12.011?[0;39m ?[31m[WARN]?[0;39m ?[35m21736?[0;39m ?[36m[Logger.java : 44]?[0;39m ?[32m{No MyBatis mapper was found in '[com.example.vet]' package. Please check your configuration.}?[0;39m
+?[33m2024-02-18 21:36:12.312?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[HikariDataSource.java : 79]?[0;39m ?[32m{oraPool - Starting...}?[0;39m
+?[33m2024-02-18 21:36:12.898?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[HikariPool.java : 554]?[0;39m ?[32m{oraPool - Added connection oracle.jdbc.driver.T4CConnection@4fea840f}?[0;39m
+?[33m2024-02-18 21:36:12.900?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[HikariDataSource.java : 81]?[0;39m ?[32m{oraPool - Start completed.}?[0;39m
+?[33m2024-02-18 21:36:12.903?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[DatabaseConfiguration.java : 43]?[0;39m ?[32m{datasource : HikariDataSource (oraPool)}?[0;39m
+?[33m2024-02-18 21:36:13.471?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[DefaultSecurityFilterChain.java : 54]?[0;39m ?[32m{Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2444c3df, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1eb6037d, org.springframework.security.web.context.SecurityContextHolderFilter@49bb808f, org.springframework.security.web.header.HeaderWriterFilter@46d148bd, org.springframework.security.web.authentication.logout.LogoutFilter@28b5d5dc, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@77a9ac36, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@3c743d40, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@720c8f80, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@12548f9a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@c5a2d5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@335b3d6, org.springframework.security.web.access.ExceptionTranslationFilter@432a6a69, org.springframework.security.web.access.intercept.AuthorizationFilter@e6e5da4]}?[0;39m
+?[33m2024-02-18 21:36:13.478?[0;39m ?[31m[WARN]?[0;39m ?[35m21736?[0;39m ?[36m[WebSecurity.java : 292]?[0;39m ?[32m{You are asking Spring Security to ignore org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@d0a2c82. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.}?[0;39m
+?[33m2024-02-18 21:36:13.478?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[DefaultSecurityFilterChain.java : 51]?[0;39m ?[32m{Will not secure org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@d0a2c82}?[0;39m
+?[33m2024-02-18 21:36:13.776?[0;39m ?[31m[INFO]?[0;39m ?[35m21736?[0;39m ?[36m[StartupInfoLogger.java : 57]?[0;39m ?[32m{Started VetApplicationTests in 2.609 seconds (process running for 3.56)}?[0;39m
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
