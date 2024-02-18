@@ -2,9 +2,8 @@ package com.example.vet.common_Interface;
 
 public interface Oauth2_Interface {
 
-    //컬럼 추가 필요한듯
-    String getProviderId();
-    String getProvider();
-    String getEmail();
-    String getName();
+    String USER_USERNAME(); //유저이름
+    String USER_EMAIL();
+    String USER_PROVIDER();
+    String USER_PROVIDERID();
 }
