@@ -180,11 +180,36 @@
     <%@ include file="/include/footer.jsp"%>
 </div>
 <!-- ./wrapper -->
-
 <!--footer-->
-
 <%@ include file="/include/bootCommonFoot.jsp"%>
+<!-- 결재 모달 -->
+<div class="modal" id="boardForm">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">게시판</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
+                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
+                    <input type="hidden" id="b_content" name="b_content">
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="radio" value="master1" checked>승인
+                        <input type="radio" value="master2">반려
+                    </div>
 
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
+                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

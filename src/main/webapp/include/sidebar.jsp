@@ -525,7 +525,7 @@
                         <!-- 하위메뉴 시작 -->
 
                         <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
+                            <a href="/pages/esignbox/esignDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>기안서 조회</p>
                             </a>

@@ -221,7 +221,7 @@
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="card-title">월별 캘린더</h3>
-                                    <a href="javascript:void(0);">>더보기</a>
+                                    <a href="javascript:void(0);">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -251,7 +251,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">전자결재</h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0);">>더보기</a>
+                                    <a href="javascript:void(0);">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
@@ -338,7 +338,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">월별매출차트</h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0);">>더보기</a>
+                                    <a href="javascript:void(0);">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -353,7 +353,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">공지사항</h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0);">>더보기</a>
+                                    <a href="javascript:void(0);">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">

@@ -10,6 +10,32 @@
     <%@include file="/include/common/quill_common.jsp"%>
     <%--<%@include file="/include/common/bootstrap_common.jsp"%>--%>
     <%--<link rel="stylesheet" href="/css/style.css">--%>
+    <style>
+        .gray-background {
+            background-color: #f0f0f0;
+        }
+
+        .white-background {
+            background-color: #ffffff;
+        }
+
+        .centered-text {
+            text-align: center;
+        }
+        .table-bordered th,
+        .table-bordered td {
+            padding: 5px;
+        }
+        .stamp {
+            width: 120px;
+            height: 120px;
+        }
+        .team.name,
+        .team.position {
+            max-height: 50px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -33,7 +59,6 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
-
         <section class="content">
             <div class="card-body">
                 <div class="content_title">
@@ -81,34 +106,6 @@
 
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">결재선</button>
                 </div>
-
-                <style>
-                    .gray-background {
-                        background-color: #f0f0f0;
-                    }
-
-                    .white-background {
-                        background-color: #ffffff;
-                    }
-
-                    .centered-text {
-                        text-align: center;
-                    }
-                    .table-bordered th,
-                    .table-bordered td {
-                        padding: 5px;
-                    }
-                    .stamp {
-                        width: 120px;
-                        height: 120px;
-                    }
-                    .team.name,
-                    .team.position {
-                        max-height: 50px;
-                        overflow: hidden;
-                    }
-                </style>
-
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -165,8 +162,6 @@
                     </tr>
                     </thead>
                 </table>
-
-
                 <div id="drag_wrap">
                     <div id="drag" class="ui-draggable ui-draggable-handle" style="left:0px;"></div>
                 </div>
@@ -194,22 +189,12 @@
                                             <input type="text" class="form-control" placeholder="제목을 입력하세요">
                                         </div>
                                         <div class="col-md-12" style="width: 100%">
-                                            <div class="card card-outline card-info">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">
-                                                        Summernote
-                                                    </h3>
-                                                </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
                                                   <textarea id="summernote">
                                                     Place <em>some</em> <u>text</u> <strong>here</strong>
                                                   </textarea>
                                                 </div>
-                                                <div class="card-footer">
-                                                    Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
-                                                </div>
-                                            </div>
                                         </div>
                                         <!-- /.col-->
                                         <div id="writein">
@@ -221,6 +206,7 @@
                         </div>
                     </form>
                 </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -236,7 +222,6 @@
 <div class="modal" id="boardForm">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">게시판</h4>
@@ -251,14 +236,12 @@
                         <input type="checkbox" value="master1" checked>관리자
                         <input type="checkbox" value="master2">부관리자
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
                 <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
             </div>
-
         </div>
     </div>
 </div>
@@ -268,12 +251,17 @@
 <script src="/plugins/codemirror/mode/xml/xml.js"></script>
 <script src="/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 <script>
-    $(function () {
+    $(document).ready(function() {
         // Summernote
-        $('#summernote').summernote()
+        $('#summernote').summernote(
         {
-            height: 300;
-        }
+            height: 300,
+            minHeight: null,
+            maxHeight: null,
+            focus: true,
+            lang: "ko-KR",
+            placeholder: '최대 2048자까지 쓸 수 있습니다'
+        });
 
         // CodeMirror
         CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {

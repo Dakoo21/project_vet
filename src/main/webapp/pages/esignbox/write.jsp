@@ -13,6 +13,12 @@
             padding: 8px; /* 셀의 안쪽 여백을 설정합니다. */
             text-align: center; /* 셀 내의 텍스트를 가운데 정렬합니다. */
         }
+        input {
+            width: 96%;
+        }
+        .modal {
+
+        }
     </style>
 
 </head>
@@ -73,12 +79,10 @@
             </table>
         </form>
     </div>
-
 </div>
 <div class="modal" id="selectForm">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">게시판</h4>
@@ -96,6 +100,45 @@
                         <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
                     </div>
                 </form>
+                <div class="stockList">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
+                                <tr>
+                                    <th>재고명</th>
+                                    <th>입고가</th>
+                                    <th>수량</th>
+                                    <th>기타</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>모래</td>
+                                    <td>5,000</td>
+                                    <td>199</td>
+                                    <td>x</td>
+                                </tr>
+                                <tr>
+                                    <td>사료</td>
+                                    <td>38,000</td>
+                                    <td>20</td>
+                                    <td>x</td>
+                                </tr>
+                                <tr>
+                                    <td>참치맛츄르</td>
+                                    <td>2,200</td>
+                                    <td>100</td>
+                                    <td>x</td>
+                                </tr>
+                                <tr>
+                                    <td>습식캔</td>
+                                    <td>5,600</td>
+                                    <td>133</td>
+                                    <td>x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
