@@ -1,6 +1,6 @@
 package com.example.vet.service.board;
 
-import com.example.vet.model.qnaVO;
+import com.example.vet.model.QnaVO;
 import com.example.vet.repository.board.QA_Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class QA_Service {
         this.qaRepository = qaRepository;
     }
 
-    public List<Map<String,Object>> Select(qnaVO qnaVO) {
+    public List<Map<String,Object>> Select(QnaVO qnaVO) {
 
         List<Map<String,Object>> nList = new ArrayList<>();
         nList = qaRepository.Select(qnaVO);
@@ -30,12 +30,12 @@ public class QA_Service {
     }
 
 
-    public int Insert(qnaVO qnaVO) {
+    public int Insert(QnaVO qnaVO) {
 
         return qaRepository.Insert(qnaVO);
     }
 
-    public int Update(qnaVO qnaVO) {
+    public int Update(QnaVO qnaVO) {
 
         return qaRepository.Update(qnaVO);
     }

@@ -1,6 +1,6 @@
 package com.example.vet.controller.board;
 
-import com.example.vet.model.qnaVO;
+import com.example.vet.model.QnaVO;
 import com.example.vet.service.board.QA_Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class QA_Controller {
 
     @GetMapping("noticeList")
     public String list(Model model){
-        qnaVO qnaVO = null;
+        QnaVO qnaVO = null;
         List<Map<String,Object>> nList = qaService.Select(qnaVO);
         logger.info(nList.toString());
         model.addAttribute("nList", nList);
@@ -36,7 +36,7 @@ public class QA_Controller {
     @GetMapping("noticeDetail")
     public String listDetail(@RequestParam int qnaPK, Model model) {
 
-        qnaVO qnaVO = new qnaVO();
+        QnaVO qnaVO = new QnaVO();
         qnaVO.setQaPk(qnaPK);
         logger.info(qnaVO.toString());
         List<Map<String,Object>> nList = qaService.Select(qnaVO);
@@ -47,7 +47,7 @@ public class QA_Controller {
 
     @PostMapping("qnaUpdate")
     public String update(@RequestParam Map<String, Object> rmap) {
-        qnaVO qnaVO = new qnaVO();
+        QnaVO qnaVO = new QnaVO();
         Integer qaPk = Integer.parseInt(rmap.get("QA_PK").toString());
         qnaVO.setQaPk(qaPk);
 
@@ -90,7 +90,7 @@ public class QA_Controller {
         }
     }
     public String insert(@RequestParam Map<String, Object> rmap) {
-        qnaVO qnaVO = new qnaVO();
+        QnaVO qnaVO = new QnaVO();
         Integer qaPk = Integer.parseInt(rmap.get("QA_PK").toString());
         qnaVO.setQaPk(qaPk);
 

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class qnaVO {
+public class QnaVO {
     private int qaPk;
     private String qaWriter;
     private String qaTitle;
@@ -17,7 +17,7 @@ public class qnaVO {
     private Integer attachedPk2;
 
     @Builder
-    public qnaVO(int qaPk, String qaWriter, String qaTitle, String qaContent, Integer attachedPk, int qaHits, String qaTime, Integer attachedPk2) {
+    public QnaVO(int qaPk, String qaWriter, String qaTitle, String qaContent, Integer attachedPk, int qaHits, String qaTime, Integer attachedPk2) {
         this.qaPk = qaPk;
         this.qaWriter = qaWriter;
         this.qaTitle = qaTitle;
