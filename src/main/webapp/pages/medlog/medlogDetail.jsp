@@ -1,286 +1,225 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>진료기록조회</title>
-    <style>
-        .form-group {
-            display: inline-block;
-            vertical-align: top; /* Align form groups at the top */
-            margin-right: 20px; /* Optional: Add some spacing between form groups */
-        }
-        .form-group button{
-            width: 100px;
-            margin-left: 10px;
-        }
-        .form-group label {
-            display: block; /* Make label a block element */
-            margin-bottom: 5px; /* Optional: Add some spacing between label and input */
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%; /* Make inputs fill the entire width of the form group */
-        }
-        .form-group hr {
-            border: none;
-            border-top: 1px solid #ccc; /* Set the border style */
-            margin-top: 10px; /* Adjust margin as needed */
-            margin-bottom: 10px; /* Adjust margin as needed */
-        }
-        .form-group {
-            display: flex;
-            flex-wrap: wrap;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<%@ include file="/include/sidebar.jsp"%>
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
+    <%@ include file="/include/sidebar.jsp"%>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>진료기록 상세조회</h1>
-                        </div>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>진료기록 상세페이지</h1>
                     </div>
-                </div><!-- /.container-fluid -->
-            </section>
-            <!-- Main content -->
-            <section class="content">
-                <!-- Default box -->
-                <div class="card card-solid">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-sm-6">
-                                <div class="col-12">
-                                    <img src="/dist/img/user1-128x128.jpg" class="product-image" alt="Product Image">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="mt-4">
-                                    <div class="btn btn-primary btn-lg btn-flat">
-                                        파일첨부
-                                    </div>
-
-                                    <div class="btn btn-primary btn-lg btn-flat">
-                                        수정
-                                    </div>
-
-                                    <div class="btn btn-default btn-lg btn-flat">
-                                        삭제
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                <div class="form-group">
-                                    <label for="inputUSER_NM">보호자명</label>
-                                    <input type="text" id="inputUSER_NM" class="form-control" value="서견주">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputCOMMON_CODE_SEX">성별</label>
-                                    <select id="inputCOMMON_CODE_SEX" class="form-control custom-select">
-                                        <option selected>선택</option>
-                                        <option>남</option>
-                                        <option>여</option>
-                                    </select>
-                                </div>
-                                </div>
-                                    <div class="form-group">
-                                        <label for="inputUSER_PNUMBER">연락처</label>
-                                        <input type="text" id="inputUSER_PNUMBER" class="form-control" value="010-1234-5678">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSTOCK_BUYPRICE">주소</label>
-                                        <input type="text" id="inputSTOCK_BUYPRICE" class="form-control" value="서울특별시 금천구 가산동 123-12">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUSER_EMAIL">이메일</label>
-                                        <input type="text" id="inputUSER_EMAIL" class="form-control" value="seoul17@hot.com">
-                                    </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="inputANIMAL_NM">동물명</label>
-                                        <input type="text" id="inputANIMAL_NM" class="form-control" value="뭉치">
-                                    </div>
-                                <div class="form-group">
-                                    <label for="inputANIMAL_SPECIES">축종</label>
-                                    <select id="inputANIMAL_SPECIES" class="form-control custom-select">
-                                        <option selected>강아지</option>
-                                        <option>고양이</option>
-                                        <option>파충류</option>
-                                        <option>기타</option>
-                                    </select>
-                                </div>
-                                </div>
-                                <div class="form-row">
-                                <div class="form-group">
-                                    <label for="inputANIMAL_BREED">품종</label>
-                                    <input type="text" id="inputANIMAL_BREED" class="form-control" value="불독">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputCOMMON_CODE_SEX2">성별</label>
-                                    <select id="inputCOMMON_CODE_SEX2" class="form-control custom-select">
-                                        <option selected>선택</option>
-                                        <option>남</option>
-                                        <option>여</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStatus">중성화</label>
-                                    <select id="inputStatus" class="form-control custom-select">
-                                        <option selected>선택</option>
-                                        <option>Y</option>
-                                        <option>N</option>
-                                    </select>
-                                </div>
-                                </div>
-                                <div class="form-row">
-                                <div class="form-group">
-                                    <label for="inputANIMAL_BDATE">생년월일</label>
-                                    <input type="text" id="inputANIMAL_BDATE" class="form-control" value="2012.02">
-                                </div>
-                                    <div class="form-group">
-                                        <label for="inputANIMAL_WEIGHT">몸무게</label>
-                                        <div class="input-group">
-                                            <input type="text" id="inputANIMAL_WEIGHT" class="form-control" value="5.4">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">kg</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputBOOKING_PK">진료예약</label>
-                                    <input type="text" id="inputBOOKING_PK" class="form-control" value="2024.02.18 - 15:00">
-                                </div>
-                            </div>
-                                <div class="col-12 col-sm-12">
-                                    <div class="form-group">
-                                        <h4 class="my-3">
-                                            <label>진료기록 등록</label>
-                                        </h4>
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>내과</h4>
-                                        <p style="border-bottom: 1px solid #000; width: 100%;"></p>
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="digestive_system">소화기</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="circulatory_system">순환기</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="respiratory_system">호흡기</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="nervous_system">신경</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="endocrinology">내분비</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="ophthalmology">안과</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="dermatology">피부과</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="vaccination">예방접종</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="blood_test">혈액검사</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="internal_medicine[]" value="health_checkup">건강검진</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        <div class="form-group">
-                                        <h4>외과</h4>
-                                        <p style="border-bottom: 1px solid #000; width: 100%;"></p>
-                                        <div class="form-group">
-                                            <!-- First line -->
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="checkbox1" name="surgery[]" value="orthopedics">
-                                                <label for="checkbox1">정형외과</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="thoracic_surgery">흉부외과</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="neurosurgery">신경외과</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="abdominal_surgery">복강외과</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="dentistry">치과</label>
-                                            </div>
-                                            <!-- Second line -->
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="x_ray">X-Ray</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="neutering">중성화</label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" name="surgery[]" value="general_surgery">수술</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription1">증상기록</label>
-                                    <p style="border-bottom: 1px solid #000; width: 100%;"></p>
-                                    <textarea id="inputDescription1" class="form-control" rows="4">24/02/05
-                                        -피부 가려움, 긁음, 계속 핥음
-                                        -환부 붉은 반점
-                                        -털 빠짐
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription2">처방기록</label>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-block btn-primary">약 처방내역</button>
-                                    </td>
-                                    <p style="border-bottom: 1px solid #000; width: 100%;"></p>
-                                    <textarea id="inputDescription2" class="form-control" rows="4">24/02/05
-                                        -아토피
-                                        -면역매개성 질환
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Icons</li>
+                        </ol>
                     </div>
-                    <!-- /.card-body -->
-                <!-- /.card -->
-            </section>
-            <!-- /.content -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!--여기 -->
+            <div id="contents_box">
+                <div id="img_area">
+                    <img alt="Avatar" class="table-avatar" src="../../img/dog1.jpeg">
+                </div>
+                <div id="table_area">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>고객명</th>
+                            <td><input class="form-control" type="text" value="서견주" aria-label="readonly input example" readonly></td>
+                            <th>연락처</th>
+                            <td><input class="form-control" type="text" value="010-7575-5757" aria-label="readonly input example" readonly></td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td><input class="form-control" type="text" value="금천구 가산동 123-12" aria-label="readonly input example" readonly></td>
+                            <th>email</th>
+                            <td><input class="form-control" type="text" value="seoul17@hot.com" aria-label="readonly input example" readonly></td>
+                        </tr>
+                        <tr>
+                            <th>동물이름</th>
+                            <td><input class="form-control" type="text" value="뭉치" aria-label="readonly input example" readonly></td>
+                            <th>종류</th>
+                            <td><input class="form-control" type="text" value="개" aria-label="readonly input example" readonly></td>
+                        </tr>
+                        <tr>
+                            <th>품종</th>
+                            <td><input class="form-control" type="text" value="불독" aria-label="readonly input example" readonly></td>
+                            <th>성별</th>
+                            <td><input class="form-control" type="text" value="여" aria-label="readonly input example" readonly></td>
+                        </tr>
+                        <tr>
+                            <th>생년월일</th>
+                            <td><input class="form-control" type="text" value="2012.02" aria-label="readonly input example" readonly></td>
+                            <th>중성화</th>
+                            <td><input class="form-control"  type="text" value="O" aria-label="readonly input example" readonly></td>
+                        </tr>
+                        <tr>
+                            <th>진료예약</th>
+                            <td><input class="form-control" type="text" value="2024.02.8 - 15:00" aria-label="readonly input example" readonly></td>
+                            <th>몸무게</th>
+                            <td><input class="form-control" type="text" value="5.4kg" aria-label="readonly input example" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <label for="exampleFormControlTextarea1" class="form-label">진료기록</label>
+            <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
+                </svg>내과
+            </p>
+            <div class="medical-checkbox-area">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+                    <label class="form-check-label" for="inlineCheckbox1">소화기</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">순환기</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox" value="option3" checked>
+                    <label class="form-check-label" for="inlineCheckbox">호흡기</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox3">신경</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox4">내분비</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox4">안과</label>
+                </div>
+            </div>
+            <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
+                </svg>외과
+            </p>
+            <div class="medical-checkbox-area">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">정형외과</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">흉부외과</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox">치과</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="option3" checked>
+                    <label class="form-check-label" for="inlineCheckbox3">X-ray</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox4">중성화</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox11" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox4">일반수술</label>
+                </div>
+            </div>
+        </section>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">증상 기록</label>
+            <div>
+                <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
+                <textarea class="form-control" id="exampleFormControlTextarea1" style="width: 100%; text-align: left;" rows="3">
+            음식을 먹으면 구토 증세가 일어나고 수시로 호흡이 가빠짐.
+        </textarea>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div style="display: flex; align-items: center;">
+                <label for="exampleFormControlTextarea1" class="form-label">처방 기록</label>
+                <div id="modal">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm" onclick="medicalmodal()">약 처방내역</button>
+                </div>
+            </div>
+            <div id="content write">
+                <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
+                <textarea class="form-control" id="exampleFormControlTextarea2" style="width: 100%; text-align: left;" rows="3">
+                    약물처방. x-ray 촬영 후 상태 추적관찰
+                </textarea>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary">수정</button>
+            </div>
+        </div>
     </div>
-    <!-- /.content-wrapper -->
-    <%@ include file="/include/footer.jsp"%>
+    <!-- /.content -->
 </div>
-<!-- ./wrapper -->
-    <script>
-        $(document).ready(function() {
-            $('.product-image-thumb').on('click', function () {
-                var $image_element = $(this).find('img')
-                $('.product-image').prop('src', $image_element.attr('src'))
-                $('.product-image-thumb.active').removeClass('active')
-                $(this).addClass('active')
-            })
-        })
-    </script>
+<!-- /.content-wrapper -->
 
+
+
+<!-- ./wrapper -->
+
+<!--footer-->
+<%@ include file="/include/footer.jsp"%>
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
 <%@ include file="/include/bootCommonFoot.jsp"%>
+<%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
+
 </body>
 </html>
+<style typeof="text/css">
+    .form-control{
+        width: 90%;
+        text-align: center;
+        line-height: 2.5;
+    }
+
+    #contents_box{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    #contents_box > #img_area{
+        width: 50%;
+        height: 50%;
+    }
+    #contents_box > #table_area{
+        width: 50%;
+        height: 50%;
+    }
+    #contents_box > #img_area > img{
+        width: 400px;
+    }
+
+    .medical-checkbox-area{
+        display: flex;
+        gap: 20px;
+    }
+
+    .btn btn-primary{
+        display: inline-block;
+        margin-top: 30px;
+    }
+</style>

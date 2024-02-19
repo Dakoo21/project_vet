@@ -14,56 +14,56 @@
 <div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1>재고목록</h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Projects</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                    <!-- 검색기 시작 -->
-                    <div class="row">
-                        <div class="col-3">
-                            <select id="gubun" class="form-select" aria-label="분류선택">
-                                <option value="none">분류선택</option>
-                                <option value="b_title">상품명</option>
-                                <option value="b_writer">상품코드</option>
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
-                                   aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
-                        </div>
-                        <div class="col-3">
-                            <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
-                        </div>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>재고목록</h1>
                     </div>
-                    <!--카테고리 버튼-->
-                    <div class="card-tools">
-                        <ul class="nav nav-pills ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#select-all" data-toggle="tab">전체조회</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#select-products" data-toggle="tab">용품</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#select-food" data-toggle="tab">식품</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#select-drugs" data-toggle="tab">약품</a>
-                            </li>
-                        </ul>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Projects</li>
+                        </ol>
                     </div>
-                </section>
+                </div>
+            </div><!-- /.container-fluid -->
+            <!-- 검색기 시작 -->
+            <div class="row">
+                <div class="col-3">
+                    <select id="gubun" class="form-select" aria-label="분류선택">
+                        <option value="none">분류선택</option>
+                        <option value="b_title">상품명</option>
+                        <option value="b_writer">상품코드</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
+                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
+                </div>
+                <div class="col-3">
+                    <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
+                </div>
+            </div>
+            <!--카테고리 버튼-->
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#select-all" data-toggle="tab">전체조회</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#select-products" data-toggle="tab">용품</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#select-food" data-toggle="tab">식품</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#select-drugs" data-toggle="tab">약품</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
@@ -104,119 +104,119 @@
                                 <tr>
                                     <td><input type="checkbox" value="value1"></td>
                                     <td>ABC_0001</td>
-                                    <td>전체조회</td>
-                                    <td><li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                                    </li></td>
-                                    <td>상품명</td>
-                                    <td>10,000</td>
-                                    <td>20,000</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
-                                    <td>용품</td>
-                                    <td><li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                                    </li></td>
-                                    <td>상품명</td>
-                                    <td>10,000</td>
-                                    <td>20,000</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
-                                    <td>용품</td>
-                                    <td><li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                                    </li></td>
-                                    <td>상품명</td>
-                                    <td>10,000</td>
-                                    <td>20,000</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
-                                    <td>용품</td>
-                                    <td><li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                                    </li></td>
-                                    <td>상품명</td>
-                                    <td>10,000</td>
-                                    <td>20,000</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
-                                    <td>용품</td>
-                                    <td><li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
-                                    </li></td>
-                                    <td>상품명</td>
-                                    <td>10,000</td>
-                                    <td>20,000</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
                                     <td>용품</td>
                                     <td><li class="list-inline-item">
                                         <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
                                     </li></td>
-                                    <td>상품명</td>
+                                    <td>상품명1</td>
                                     <td>10,000</td>
                                     <td>20,000</td>
                                     <td>50</td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
-                                    <td>용품</td>
+                                    <td>ABC_0002</td>
+                                    <td>식품</td>
                                     <td><li class="list-inline-item">
                                         <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
                                     </li></td>
-                                    <td>상품명</td>
+                                    <td>상품명2</td>
                                     <td>10,000</td>
                                     <td>20,000</td>
                                     <td>50</td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
-                                    <td>용품</td>
+                                    <td>ABC_0003</td>
+                                    <td>약품</td>
                                     <td><li class="list-inline-item">
                                         <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
                                     </li></td>
-                                    <td>상품명</td>
+                                    <td>상품명3</td>
                                     <td>10,000</td>
                                     <td>20,000</td>
                                     <td>50</td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
+                                    <td>ABC_0004</td>
                                     <td>용품</td>
                                     <td><li class="list-inline-item">
                                         <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
                                     </li></td>
-                                    <td>상품명</td>
+                                    <td>상품명4</td>
                                     <td>10,000</td>
                                     <td>20,000</td>
                                     <td>50</td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" value="value1"></td>
-                                    <td>ABC_0001</td>
+                                    <td>ABC_0005</td>
+                                    <td>식품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명5</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0006</td>
+                                    <td>약품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명6</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0007</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명7</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0008</td>
+                                    <td>식품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명8</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0009</td>
+                                    <td>약품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명9</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0010</td>
                                     <td>용품</td>
                                     <td><li class="list-inline-item">
                                         <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
                                     </li></td>
-                                    <td>상품명</td>
+                                    <td>상품명10</td>
                                     <td>10,000</td>
                                     <td>20,000</td>
                                     <td>50</td>
@@ -685,11 +685,20 @@
                             </table>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-10"></div> <!-- 빈 공간 생성 -->
+                        <div class="col-md-2 text-right"> <!-- 오른쪽 정렬 -->
+                            <button type="button" class="btn btn-default" onclick="redirectToStockInsert()">재고 등록</button>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-body -->
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-default">등록</button>
-                </div>
+
+                <script>
+                    function redirectToStockInsert() {
+                        window.location.href = "/pages/stock/stockInsert.jsp";
+                    }
+                </script>
             </div>
         </section>
         <!-- /.content -->

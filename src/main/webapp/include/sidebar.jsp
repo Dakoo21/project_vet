@@ -441,20 +441,6 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/payment/payment.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>결제페이지</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/payment/payment2.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>결제페이지2</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
                             <a href="/pages/payment/paymentList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>결제리스트</p>

@@ -49,127 +49,127 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>재고 상세조회</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">E-commerce</li>
-                            </ol>
-                        </div>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>재고 상세조회</h1>
                     </div>
-                </div><!-- /.container-fluid -->
-            </section>
-            <!-- Main content -->
-            <section class="content">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">E-commerce</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
 
-                <!-- Default box -->
-                <div class="card card-solid">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                    <img src="../../dist/img/prod-1.jpg" class="product-image" alt="Product Image">
-                            </div>
+            <!-- Default box -->
+            <div class="card card-solid">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="../../dist/img/prod-1.jpg" class="product-image" alt="Product Image">
+                        </div>
 
-                            <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <label for="inputSTOCK_COMMON_CODE">상품명</label>
-                                        <input type="text" id="inputSTOCK_COMMON_NM" class="form-control" value="상품명입니다">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSTOCK_COMMON_CODE">상품 상세설명</label>
-                                        <input type="text" id="inputSTOCK_COMMON_DETAIL" class="form-control" value="상품 상세설명입니다">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="inputStatus">구분</label>
-                                                <select id="inputStatus" class="form-control custom-select">
-                                                    <option selected>일반</option>
-                                                    <option>식품</option>
-                                                    <option>약품</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="inputSTOCK_COMMON_CODE">상품코드</label>
-                                                <input type="text" id="inputSTOCK_COMMON_CODE" class="form-control" value="ABC123456">
-                                            </div>
+                                    <label for="inputSTOCK_COMMON_CODE">상품명</label>
+                                    <input type="text" id="inputSTOCK_COMMON_NM" class="form-control" value="상품명입니다">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputSTOCK_COMMON_CODE">상품 상세설명</label>
+                                    <input type="text" id="inputSTOCK_COMMON_DETAIL" class="form-control" value="상품 상세설명입니다">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputStatus">구분</label>
+                                            <select id="inputStatus" class="form-control custom-select">
+                                                <option selected>일반</option>
+                                                <option>식품</option>
+                                                <option>약품</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="inputSTOCK_BUYPRICE">입고가</label>
-                                                <input type="text" id="inputSTOCK_BUYPRICE" class="form-control" value="10,000">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="inputSTOCK_COMMON_SELLPRICE">판매가</label>
-                                                <input type="text" id="inputSTOCK_COMMON_SELLPRICE" class="form-control" value="20,000">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-5"> <!-- 재고량 라벨 공간을 늘리기 위해 컬럼의 크기 조정 -->
-                                            <div class="form-group d-flex align-items-center"> <!-- d-flex 클래스와 align-items-center 클래스를 추가하여 세로 중앙 정렬 -->
-                                                <label for="inputSTOCK_CHANGED_PK" class="mr-3">재고량</label> <!-- mr-3 클래스를 추가하여 라벨과 입력 폼 사이에 간격 추가 -->
-                                                <input type="text" id="inputSTOCK_CHANGED_PK" class="form-control" value="30" style="width: 70px;"> <!-- 입력 폼의 길이를 직접 지정 -->
-                                                <span class="ml-2">개</span>
-                                            </div>
-                                        </div>
-                                        <!-- 다른 입력란들 추가 -->
-                                    </div>
-
-                                    <div class="mt-4">
-                                        <div class="btn btn-primary btn-flat">
-                                            수정
-                                        </div>
-                                        <div class="btn btn-default btn-flat">
-                                            삭제
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputSTOCK_COMMON_CODE">상품코드</label>
+                                            <input type="text" id="inputSTOCK_COMMON_CODE" class="form-control" value="ABC123456">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputSTOCK_BUYPRICE">입고가</label>
+                                            <input type="text" id="inputSTOCK_BUYPRICE" class="form-control" value="10,000">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputSTOCK_COMMON_SELLPRICE">판매가</label>
+                                            <input type="text" id="inputSTOCK_COMMON_SELLPRICE" class="form-control" value="20,000">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5"> <!-- 재고량 라벨 공간을 늘리기 위해 컬럼의 크기 조정 -->
+                                        <div class="form-group d-flex align-items-center"> <!-- d-flex 클래스와 align-items-center 클래스를 추가하여 세로 중앙 정렬 -->
+                                            <label for="inputSTOCK_CHANGED_PK" class="mr-3">재고량</label> <!-- mr-3 클래스를 추가하여 라벨과 입력 폼 사이에 간격 추가 -->
+                                            <input type="text" id="inputSTOCK_CHANGED_PK" class="form-control" value="30" style="width: 70px;"> <!-- 입력 폼의 길이를 직접 지정 -->
+                                            <span class="ml-2">개</span>
+                                        </div>
+                                    </div>
+                                    <!-- 다른 입력란들 추가 -->
+                                </div>
+
+                                <div class="mt-4">
+                                    <div class="btn btn-primary btn-flat">
+                                        수정
+                                    </div>
+                                    <div class="btn btn-default btn-flat">
+                                        삭제
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-            </section>
-            <!-- /.content -->
+        </section>
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
 </div>
 <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.product-image-thumb').on('click', function () {
-                var $image_element = $(this).find('img')
-                $('.product-image').prop('src', $image_element.attr('src'))
-                $('.product-image-thumb.active').removeClass('active')
-                $(this).addClass('active')
-            })
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.product-image-thumb').on('click', function () {
+            var $image_element = $(this).find('img')
+            $('.product-image').prop('src', $image_element.attr('src'))
+            $('.product-image-thumb.active').removeClass('active')
+            $(this).addClass('active')
         })
-    </script>
+    })
+</script>
 
 <%@ include file="/include/footer.jsp"%>
 </body>
