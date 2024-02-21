@@ -28,7 +28,7 @@ public class Booking_Controller {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("qnaList")
+    @GetMapping("bookingList")
     public String list(Model model){
         BookingVO bookingVO = null;
         List<Map<String,Object>> bList = bookingService.Select(bookingVO);
@@ -36,7 +36,7 @@ public class Booking_Controller {
         model.addAttribute("bList", bList);
         return "pages/docbook/bookingMainCustomer";
     }
-    @GetMapping("qnaDetail")
+    @GetMapping("bookingDetail")
     public String listDetail(@RequestParam int bookingPK, Model model) {
 
         BookingVO bookingVO = null;
@@ -48,7 +48,7 @@ public class Booking_Controller {
         return "pages/docbook/bookingMainCustomer";
     }
 
-    @PostMapping("qnaUpdate")
+    @PostMapping("bookingUpdate")
     public String update(@RequestParam Map<String, Object> rmap) {
         BookingVO bookingVO = new BookingVO();
         Integer bookingPK = Integer.parseInt(rmap.get("BOOKING_PK").toString());
@@ -82,7 +82,7 @@ public class Booking_Controller {
         }
     }
 
-    @PostMapping("qnaInsert")
+    @PostMapping("bookingInsert")
     public String insert(@RequestParam Map<String, Object> rmap) {
         BookingVO bookingVO = new BookingVO();
 
@@ -115,7 +115,7 @@ public class Booking_Controller {
     }
 
 
-    @PostMapping("qnaDelete")
+    @PostMapping("bookingDelete")
     public String Delete(int bookingPK) {
 
         int deleted = bookingService.Delete(bookingPK);

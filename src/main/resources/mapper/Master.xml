@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.MasterMapper">
+    <resultMap id="mastereMap" type="java.util.Map"/>
+    <select id="masterSelect" parameterType="com.example.vet.model.MasterVO" resultType="com.example.vet.model.MasterVO">
+        SELECT MASTER_PK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE
+        FROM MASTER_TEST
+    </select>
+    <insert id="masterInsert" parameterType="com.example.vet.model.MasterVO">
+        INSERT INTO master_test(MASTER_PK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE)
+        VALUES(master_pk_seq.nextval, #{master_nm}, #{master_username}, #{master_pw}, #{master_email}, #{master_pnumber}, #{master_address}, #{master_bdate})
+    </insert>
+    <update id="masterUpdate" parameterType="com.example.vet.model.MasterVO">
+        UPDATE MASTER_TEST
+        SET
+            MASTER_NM = #{master_nm},
+            MASTER_USERNAME = #{master_username},
+            MASTER_PW = #{master_pw},
+            MASTER_EMAIL = #{master_email},
+            MASTER_PNUMBER = #{master_pnumber},
+            MASTER_ADDRESS = #{master_address},
+            MASTER_BDATE = #{master_bdate}
+        WHERE
+            MASTER_PK = #{master_pk}
+
+    </update>
+    <delete id="masterDelete" parameterType="com.example.vet.model.MasterVO">
+        DELETE FROM MASTER_TEST
+        WHERE MASTER_PK=#{master_pk}
+    </delete>
+</mapper>

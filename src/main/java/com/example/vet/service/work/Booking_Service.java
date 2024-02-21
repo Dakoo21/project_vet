@@ -7,11 +7,13 @@ import com.example.vet.repository.work.Booking_Repository;
 import com.example.vet.service.board.QA_Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class Booking_Service {
     Logger logger = LoggerFactory.getLogger(Booking_Service.class);
     private final Booking_Repository bookingRepository;
