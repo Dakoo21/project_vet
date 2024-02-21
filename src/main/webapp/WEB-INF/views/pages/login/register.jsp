@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +21,10 @@
     $(document).ready(function(){
       $("#datepicker").datepicker();
     });
+
+    const singUP = (event) => {
+      document.querySelector("#memberJoin").submit();
+    };
   </script>
 </head>
 <body class="hold-transition register-page">
@@ -34,9 +37,9 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="../../index.html" method="post">
+      <form id="memberJoin" action="joinMember" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name" name = "user_Nm">
+          <input type="text" class="form-control" placeholder="ID" id="MEMBER_ID" name = "MEMBER_ID">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -44,7 +47,23 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="ID" name = "user_userName">
+          <input type="password" class="form-control" placeholder="Password" id="MEMBER_PW" name = "MEMBER_PW">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+<%--        <div class="input-group mb-3">--%>
+<%--          <input type="password" class="form-control" placeholder="Retype password">--%>
+<%--          <div class="input-group-append">--%>
+<%--            <div class="input-group-text">--%>
+<%--              <span class="fas fa-lock"></span>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Full name" id="MEMBER_MEMBERNAME" name = "MEMBER_MEMBERNAME">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -52,37 +71,21 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="user_Email">
+          <input type="email" class="form-control" placeholder="Email" id="MEMBER_EMAIL" name="MEMBER_EMAIL">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name = "user_PW">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Address" name = "user_Address">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
+<%--        <div class="input-group mb-3">--%>
+<%--          <input type="text" class="form-control" placeholder="Address" id="member_address" name = "member_address">--%>
+<%--          <div class="input-group-append">--%>
+<%--            <div class="input-group-text">--%>
+<%--              <span class="fas fa-user"></span>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--        </div>--%>
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="datepicker" name="user_Bdate">
           <div class="input-group-append">
@@ -96,13 +99,13 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
+                I agree to the <a href="#">terms</a>
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block" onclick="singUP()">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -120,7 +123,7 @@
         </a>
       </div>
 
-      <a href="login.html" class="text-center">I already have a membership</a>
+      <a href="/login" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

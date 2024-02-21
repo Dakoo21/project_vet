@@ -1,9 +1,9 @@
 package com.example.vet.config.auth;
 
-import com.example.vet.model.User;
+import com.example.vet.model.Member;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -12,103 +12,57 @@ import java.util.Collection;
 import java.util.Map;
 
 @Data
+@Slf4j
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
-    private final User user;
-    private final Map<String, Object> attribute;
+    private Member member;
+    private Map<String, Object> attribute;
 
-    public PrincipalDetails(User user) {
-        this.user = user;
-        this.attribute = null;
+    public PrincipalDetails(Member member) {
+        this.member = member;
     }
 
-    public PrincipalDetails(User user, Map<String, Object> attribute) {
-        this.user = user;
+    public PrincipalDetails(Member member, Map<String, Object> attribute) {
+        this.member = member;
         this.attribute = attribute;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-
-        // 사용자의 권한을 설정하기 위해 공통 코드 테이블을 조회하여 해당 사용자의 권한을 가져옴
-        Integer commonCodePk = user.getCOMMON_CODE_PK();
-        if (commonCodePk != null) {
-            // 공통 코드 테이블에서 해당 COMMON_CODE_PK를 가진 권한을 조회하여 권한을 부여
-            // 여기서는 예시로 각 COMMON_CODE_PK에 대한 권한을 부여하는 코드를 작성
-            switch (commonCodePk) {
-                case 1:
-                    authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                    break;
-                case 2:
-                    authorities.add(new SimpleGrantedAuthority("ROLE_NURSE"));
-                    break;
-                case 3:
-                    authorities.add(new SimpleGrantedAuthority("ROLE_INFO"));
-                    break;
-                case 4:
-                    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    break;
-                default:
-                    break;
+        Collection<GrantedAuthority> collect = new ArrayList<>();
+        collect.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return member.getMEMBER_ROLE();
             }
-        }
+        });
+        return collect;
+    }
 
-        // 만약 COMMON_CODE_PK에 해당하는 권한이 없을 경우, 기본적으로 ROLE_USER를 추가하여 권한을 설정
-        if (authorities.isEmpty()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
+    //세션에 담아둘 값
 
-        return authorities;
+    //사용자 성명
+    public String getName() {
+        return member.getMEMBER_MEMBERNAME();
+    }
+    //사용자 이메일
+    public String getEmail() {
+        return member.getMEMBER_EMAIL();
+    }
+    //사용자 권한
+    public String getRole() {
+        return member.getMEMBER_ROLE();
     }
 
 
-    // 세션에 담을 다른 컬럼 정보도 추가 가능하다.
-    //id 걊을 담는 메소드
-    public int getId(){
-        return user.getUSER_PK();
-    }
-
-    //Email 값을 담는 메소드
-    public String getEmail(){
-        return user.getUSER_EMAIL();
-    }
-
-    //Role 값을 담는 메소드
-    public String getRole(){
-        return user.getCOMMON_CODE_PK().toString();
-    }
-
-    public String getPnumber() {
-        return user.getUSER_PNUMBER();
-    }
-
-    public String getAddress() {
-        return user.getUSER_ADDRESS();
-    }
-
-    public String getBdate() {
-        return user.getUSER_BDATE();
-    }
-
-    public String getProvider(){
-        return user.getUSER_PROVIDER();
-    }
-
-    public  String getProviderId() {
-        return user.getUSER_PROVIDERID();
-    }
-
-    //계정의 비밀번호를 반환하는 메서드
     @Override
     public String getPassword() {
-        return user.getUSER_PW();
+        return member.getMEMBER_PW();
     }
 
-    //계정의 사용자 이름을 반환하는 메서드
     @Override
     public String getUsername() {
-        return user.getUSER_USERNAME();
+        return member.getMEMBER_ID();
     }
 
     //계정이 만료되지 않았는지 여부를 나타내는 메서드.
@@ -140,10 +94,5 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     @Override
     public Map<String, Object> getAttributes() {
         return attribute;
-    }
-
-    @Override
-    public String getName() {
-        return null;
     }
 }

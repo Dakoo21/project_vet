@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,40 +9,51 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <script>
+        const login = (event) => {
+            document.querySelector("#f_login").submit();
+        };
+
+        const loginG = (event) => {
+            console.log("google 로그인 호출");
+            location.href = "/oauth2/authorization/google";
+        };
+
+        const loginK = (event) => {
+            console.log("kakao 로그인 호출")
+            location.href = "/oauth2/authorization/kakao";
+        };
+
+        const loginN = (event) => {
+            console.log("naver 로그인 호출")
+            location.href = "/oauth2/authorization/naver"
+        };
+    </script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a href="/login"><b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-
-            <form action="../../index3.html" method="post">
+            <form id="f_login" action="/loginProcess" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="이름">
+                    <input type="text" class="form-control" id="MEMBER_ID" name="MEMBER_ID" placeholder="ID" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                         </div>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="Password" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -61,7 +71,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">로그인</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="login()">로그인</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -69,9 +79,9 @@
 
             <div class="social-auth-links text-center mb-3">
                 <p>- OR -</p>
-                <button type="button" class="btn btn-block btn-success" onclick=""> Naver Login</button>
-                <button type="button" class="btn btn-block btn-warning" onclick="">Kakao Login</button>
-                <button type="button" class="btn btn-block bg-light.bg-gradient" onclick="">
+                <button type="button" class="btn btn-block btn-success" onclick="loginN()"> Naver Login</button>
+                <button type="button" class="btn btn-block btn-warning" onclick="loginK()">Kakao Login</button>
+                <button type="button" class="btn btn-block bg-light.bg-gradient" onclick="loginG()">
                     <i class="fab fa-google-plus mr-2"></i> Google
                 </button>
             </div>
@@ -81,7 +91,7 @@
                 <a href="forgot-password.html">비밀번호 찾기</a>
             </p>
             <p class="mb-0">
-                <a href="/pages/login/register.jsp" class="text-center">회원가입</a>
+                <a href="/join" class="text-center">회원가입</a>
             </p>
         </div>
         <!-- /.login-card-body -->
@@ -89,17 +99,16 @@
 </div>
 <!-- /.login-box -->
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script type="text/javascript">
 
 
 
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="/dist/js/adminlte.min.js"></script>
 </body>
 </html>
 
@@ -108,9 +117,9 @@
     .social-auth-links text-center mb-3 > .btn btn-block btn-success {
         background-color: #26E322;
     }
-.btn btn-block {
-    border-color: black;
-    border-style : solid;
-}
+    .btn btn-block {
+        border-color: black;
+        border-style : solid;
+    }
 
 </style>
