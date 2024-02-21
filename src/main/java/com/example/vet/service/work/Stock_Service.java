@@ -8,8 +8,8 @@ import java.util.Map;
 
 @Service
 public class Stock_Service {
-    public List<Map<String, Object>> Select(StockCommonVO stockCommonVO) {
-    }
-
+//    public List<Map<String, Object>> Select(StockCommonVO stockCommonVO) {
+//    }
+//
 
 }
