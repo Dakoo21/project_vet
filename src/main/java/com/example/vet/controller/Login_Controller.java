@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @Slf4j
@@ -30,6 +32,14 @@ public class Login_Controller {
     @GetMapping("/join")
     public String joinPage(){
         return "pages/login/register";
+    }
+
+    @PostMapping("/checkId")
+    @ResponseBody
+    public int checkId(@RequestParam("id") String id ) throws Exception {
+        log.info(id);
+        int cnt = login_service.checkId(id);
+        return cnt;
     }
 
     @PostMapping("/joinMember")
