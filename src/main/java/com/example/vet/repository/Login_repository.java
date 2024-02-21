@@ -35,4 +35,10 @@ public class Login_repository {
         log.info("login_repository memberInsert 끝");
         return result;
     }
+
+    public int checkId(String id) {
+        int result;
+        result = sqlSessionTemplate.selectOne("checkId", id);
+        return result;
+    }
 }

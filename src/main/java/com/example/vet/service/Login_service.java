@@ -22,4 +22,10 @@ public class Login_service {
         log.info("login_service 끝");
         return result;
     }
+
+    public int checkId(String id) {
+        int result;
+        result = login_repository.checkId(id);
+        return result;
+    }
 }
