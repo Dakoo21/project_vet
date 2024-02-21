@@ -20,7 +20,7 @@ spring:
       suffix: .jsp
   datasource:
     hikari:
-      jdbc-url: jdbc:oracle:thin:@
+      jdbc-url: jdbc:oracle:thin:@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.ap-chuncheon-1.oraclecloud.com))(connect_data=(service_name=g2638201e47f439_w2v5xl0glt6tkk82_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
       username: admin
       password: Rneldkzkepal73
       driver-class-name: oracle.jdbc.OracleDriver
@@ -41,8 +41,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 679842079719-tiiflmk4pas2sciprchi6j9u082b4m4l.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 418980080301-18fso1be1dfoaic55uc2cnv4qtp4de9p.apps.googleusercontent.com
+            client-secret: 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
             scope:
               - email
               - profile
@@ -53,7 +53,7 @@ spring:
               - account_email
               - profile_nickname
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8001/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8000/login/oauth2/code/kakao
             client-name: Kakao
             client-authentication-method: client_secret_post
           naver:
@@ -64,7 +64,7 @@ spring:
               - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8001/login/oauth2/code/naver
+            redirect-uri: http://localhost:8000/login/oauth2/code/naver
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize

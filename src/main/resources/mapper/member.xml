@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vet.memberMapper">
+    <resultMap id="memberMap" type="java.util.Map"/>
+    <insert id="memberInsert" parameterType="com.example.vet.model.Member">
+        INSERT INTO user_test5 ("MEMBER_PK", "MEMBER_ID", "MEMBER_PW", "MEMBER_MEMBERNAME", "MEMBER_EMAIL", "MEMBER_ROLE", "MEMBER_CREATEDATE", "MEMBER_POSTCODE", "MEMBER_ADDRESS", "MEMBER_PHONE", "PROVIDER", "PROVIDERID")
+        VALUES (USER_TEST4_PK_SEQ.nextval, #{MEMBER_ID}, #{MEMBER_PW}, #{MEMBER_MEMBERNAME}, #{MEMBER_EMAIL}, #{MEMBER_ROLE}, to_char(sysdate,'YYYY-MM-DD'), #{MEMBER_POSTCODE, jdbcType=VARCHAR}, #{MEMBER_ADDRESS, jdbcType=VARCHAR}, #{MEMBER_PHONE, jdbcType=VARCHAR}, #{PROVIDER, jdbcType=VARCHAR}, #{PROVIDERID, jdbcType=VARCHAR})
+    </insert>
+    <select id="login" parameterType="string" resultType="com.example.vet.model.Member">
+        SELECT * FROM user_test5
+        WHERE MEMBER_ID = #{value}
+    </select>
+</mapper>

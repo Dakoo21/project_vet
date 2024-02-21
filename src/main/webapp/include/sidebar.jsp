@@ -87,7 +87,7 @@
                     <i class="fas fa-users mr-2"></i> 내정보 수정
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">로그아웃</a>
+                <a href="/logout" class="dropdown-item dropdown-footer">로그아웃</a>
             </div>
         </li>
     </ul>
