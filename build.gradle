@@ -40,6 +40,8 @@ dependencies {
 	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 	implementation 'com.zaxxer:HikariCP:5.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.16.0'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('bootBuildImage') {

@@ -1,6 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    Integer userPK = (Integer) request.getAttribute("userPK");
+    String username = (String) request.getAttribute("username");
+    String role = (String) request.getAttribute("role");
+    boolean isAdmin = request.isUserInRole("ROLE_ADMIN");
+    boolean isMaster = request.isUserInRole("ROLE_MASTER");
+    boolean isNurse = request.isUserInRole("ROLE_NURSE");
+    boolean isInfo = request.isUserInRole("ROLE_INFO");
+    boolean isUser = request.isUserInRole("ROLE_USER");
+    boolean isOk = false;
+    if(isAdmin){
+        isOk = true;
+    }
+    else if(isMaster){
+        isOk = true;
+    }
+    else if(isNurse){
+        isOk = true;
+    }
+    else if(isInfo){
+        isOk = true;
+    }
+    else if(isUser){
+        isOk = true;
+    }
 
+%>
 
 <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
@@ -13,7 +38,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -78,7 +103,7 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <span>김엘모님</span>
+                <span><%=username%> 님</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">메뉴</span>
@@ -87,7 +112,7 @@
                     <i class="fas fa-users mr-2"></i> 내정보 수정
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">로그아웃</a>
+                <a href="/logout" class="dropdown-item dropdown-footer">로그아웃</a>
             </div>
         </li>
     </ul>
@@ -110,7 +135,7 @@
                 <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">김엘모</a>
+                <a href="#" class="d-block"><%=username%></a>
             </div>
         </div>
         <!-- Sidebar Menu -->

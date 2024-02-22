@@ -1,13 +1,12 @@
 package com.example.vet.config.oauth2;
 
-
 import com.example.vet.common_Interface.Oauth2_Interface;
 import com.example.vet.config.auth.PrincipalDetails;
 import com.example.vet.config.oauth2.userInfo.Google_UserInfo;
 import com.example.vet.config.oauth2.userInfo.Kakao_UserInfo;
 import com.example.vet.config.oauth2.userInfo.Naver_UserInfo;
-import com.example.vet.model.User;
-import com.example.vet.repository.SingUP_IN;
+import com.example.vet.model.Member;
+import com.example.vet.repository.Login_repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,81 +18,82 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-
 @Service
 @Slf4j
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
+    private final Login_repository login_repository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final SingUP_IN singUPIn;
 
     @Autowired
-    public PrincipalOauth2UserService(BCryptPasswordEncoder bCryptPasswordEncoder, SingUP_IN singUPIn) {
+    public PrincipalOauth2UserService(Login_repository login_repository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.login_repository = login_repository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.singUPIn = singUPIn;
     }
-
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        Oauth2_Interface oauth2_interface = null;
-        log.info("getAtrributes : {}" , oAuth2User.getAttributes());
+        Oauth2_Interface oauth2_interface =null;
 
-        String USER_PROVIDER = userRequest.getClientRegistration().getRegistrationId();
+        String provider = userRequest.getClientRegistration().getRegistrationId();
 
-        if(USER_PROVIDER.equals("google")) {
+        if(provider.equals("google")) {
             log.info("구글 로그인 요청");
             oauth2_interface = new Google_UserInfo( oAuth2User.getAttributes() );
-        } else if(USER_PROVIDER.equals("kakao")) {
+        } else if(provider.equals("kakao")) {
             log.info("카카오 로그인 요청");
             oauth2_interface = new Kakao_UserInfo((Map)oAuth2User.getAttributes());
-        }else if(USER_PROVIDER.equals("naver")) {
+        }else if(provider.equals("naver")) {
             log.info("네이버 로그인 요청");
             oauth2_interface = new Naver_UserInfo( (Map)oAuth2User.getAttributes());
+            log.info(oauth2_interface.USER_EMAIL());
+            log.info(oauth2_interface.USER_USERNAME());
+            log.info(oauth2_interface.USER_PROVIDER());
+            log.info(oauth2_interface.USER_PROVIDERID());
         }
 
-        String USER_PROVIDERID = oauth2_interface.USER_PROVIDERID();
-        String USER_NM = oauth2_interface.USER_PROVIDER() + "-" + USER_PROVIDERID;
-        String USER_PW = bCryptPasswordEncoder.encode("패스워드");
-        String USER_USERNAME =  oauth2_interface.USER_USERNAME();
-        String USER_EMAIL = oauth2_interface.USER_EMAIL();
+        String PROVIDERID = oauth2_interface.USER_PROVIDERID();
+        String MEMBER_ID = oauth2_interface.USER_PROVIDER() + "_" + PROVIDERID;
+        String MEMBER_PW = bCryptPasswordEncoder.encode("비밀번호가 필요해");
+        String MEMBER_MEMBERNAME = oauth2_interface.USER_USERNAME();
+        String MEMBER_EMAIL = oauth2_interface.USER_EMAIL();
+        String MEMBER_ROLE = "ROLE_USER";
 
-        User userEmtity = null;
+        Member memberEntity = null;
 
         try {
-            userEmtity = singUPIn.login(USER_NM);
+            memberEntity = login_repository.login(MEMBER_ID);
+            log.info("mEntity" + memberEntity);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        if (userEmtity == null) { // 반환 받은 값이 없다 = username이 없으니까 강제 회원가입 처리
+        if (memberEntity == null) {
             try {
-                userEmtity = User.builder()
-                        .USER_NM(USER_NM)
-                        .USER_USERNAME(USER_USERNAME)
-                        .USER_EMAIL(USER_EMAIL)
-                        .USER_PW(USER_PW)
-                        .COMMON_CODE_PK(4) // 또는 다른 적절한 COMMON_CODE_PK 값
-                        .USER_PROVIDER(USER_PROVIDER)
-                        .USER_PROVIDERID(USER_PROVIDERID)
-                        .build();
-
-                singUPIn.userInsert(userEmtity);
+                memberEntity = Member.builder()
+                                .MEMBER_ID(MEMBER_ID)
+                                .MEMBER_PW(MEMBER_PW)
+                                .MEMBER_MEMBERNAME(MEMBER_MEMBERNAME)
+                                .MEMBER_EMAIL(MEMBER_EMAIL)
+                                .MEMBER_ROLE(MEMBER_ROLE)
+                                .PROVIDER(provider)
+                                .PROVIDERID(PROVIDERID)
+                                .build();
+                login_repository.memberInsert(memberEntity);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            if(USER_PROVIDER.equals("google")) {
+
+        }else {
+            if(provider.equals("google")) {
                 log.info("구글 로그인 한 적 있음");
-            } else if(USER_PROVIDER.equals("kakao")) {
+            } else if(provider.equals("kakao")) {
                 log.info("카카오 로그인 한 적 있음");
-            }else if(USER_PROVIDER.equals("naver")) {
+            }else if(provider.equals("naver")) {
                 log.info("네이버 로그인 한 적 있음");
             }
         }
-
-        return new PrincipalDetails(userEmtity, oAuth2User.getAttributes());
+        return new PrincipalDetails(memberEntity, oAuth2User.getAttributes());
     }
 }
