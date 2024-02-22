@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.vet.VetApplicationTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-02-19T02:54:51" hostname="Daeuns-MacBook-Pro.local" time="0.011">
+<testsuite name="com.example.vet.VetApplicationTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-02-21T08:54:40" hostname="GD" time="0.005">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.vet.VetApplicationTests" time="0.011">
-    <failure message="java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@6c835217 testClass = com.example.vet.VetApplicationTests, locations = [], classes = [com.example.vet.VetApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@7dda48d9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5e4bd84a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@53fd0d10, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@16fdec90, org.springframework.boot.test.context.SpringBootTestAnnotation@3a387497], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@6c835217 testClass = com.example.vet.VetApplicationTests, locations = [], classes = [com.example.vet.VetApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@7dda48d9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5e4bd84a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@53fd0d10, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@16fdec90, org.springframework.boot.test.context.SpringBootTestAnnotation@3a387497], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+  <testcase name="contextLoads()" classname="com.example.vet.VetApplicationTests" time="0.005">
+    <failure message="java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@1e495414 testClass = com.example.vet.VetApplicationTests, locations = [], classes = [com.example.vet.VetApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@67c2e933, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1b765a2c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@72c28d64, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7216fb24, org.springframework.boot.test.context.SpringBootTestAnnotation@584297a3], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@1e495414 testClass = com.example.vet.VetApplicationTests, locations = [], classes = [com.example.vet.VetApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@67c2e933, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1b765a2c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@72c28d64, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7216fb24, org.springframework.boot.test.context.SpringBootTestAnnotation@584297a3], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:143)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:127)
 	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191)
@@ -90,7 +90,7 @@
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/SecurityConfig.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalDetailService' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\config\auth\PrincipalDetailService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
 	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
@@ -117,7 +117,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at app//org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:187)
 	at app//org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:119)
 	... 86 more
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
 	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
@@ -134,24 +134,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at app//org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
 	... 110 more
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
-	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
-	at app//org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
-	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
-	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
-	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:558)
-	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:518)
-	at app//org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at app//org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at app//org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at app//org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at app//org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
-	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
-	at app//org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
-	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 124 more
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541)
 	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1330)
@@ -169,8 +152,8 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 138 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 124 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:484)
 	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1330)
@@ -186,18 +169,18 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 154 more
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 140 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at app//org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
 	at app//org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:646)
-	... 168 more
-Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 154 more
+Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:584)
 	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
 	at com.zaxxer.hikari.pool.HikariPool.&lt;init&gt;(HikariPool.java:98)
 	at com.zaxxer.hikari.HikariDataSource.&lt;init&gt;(HikariDataSource.java:80)
 	at com.example.vet.DatabaseConfiguration.dataSource(DatabaseConfiguration.java:42)
-	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$0.CGLIB$dataSource$0(&lt;generated&gt;)
+	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$0.CGLIB$dataSource$3(&lt;generated&gt;)
 	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$FastClass$$1.invoke(&lt;generated&gt;)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
@@ -207,8 +190,8 @@ Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 169 more
-Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 155 more
+Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:902)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:707)
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1094)
@@ -220,8 +203,8 @@ Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was e
 	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
 	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
 	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	... 182 more
-Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 168 more
+Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at app//oracle.net.resolver.NameResolver.resolveName(NameResolver.java:132)
 	at app//oracle.net.resolver.AddrResolution.resolveTNSAddress(AddrResolution.java:692)
 	at app//oracle.net.resolver.AddrResolution.initConnStrategy(AddrResolution.java:540)
@@ -230,64 +213,64 @@ Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION
 	at app//oracle.net.ns.NSProtocol.connect(NSProtocol.java:350)
 	at app//oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2627)
 	at app//oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:666)
-	... 191 more
+	... 177 more
 </failure>
   </testcase>
-  <system-out><![CDATA[11:54:49.782 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.vet.VetApplicationTests]: VetApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-11:54:49.832 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.vet.VetApplication for test class com.example.vet.VetApplicationTests
-11:54:49,732 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.14
-11:54:49,733 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Here is a list of configurators discovered as a service, by rank: 
-11:54:49,733 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
-11:54:49,733 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
-11:54:49,733 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
-11:54:49,737 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 0 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
-11:54:49,737 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
-11:54:49,737 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
-11:54:49,738 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
-11:54:49,738 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
-11:54:49,738 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 1 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
-11:54:49,738 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
-11:54:49,738 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
-11:54:49,738 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-11:54:49,738 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.xml]
-11:54:49,738 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 0 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
-11:54:49,738 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Trying to configure with ch.qos.logback.classic.BasicConfigurator
-11:54:49,739 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - Constructed configurator of type class ch.qos.logback.classic.BasicConfigurator
-11:54:49,739 |-INFO in ch.qos.logback.classic.BasicConfigurator@7bbbb6a8 - Setting up default configuration.
-11:54:49,743 |-INFO in ch.qos.logback.classic.util.ContextInitializer@4d48bd85 - ch.qos.logback.classic.BasicConfigurator.configure() call lasted 4 milliseconds. ExecutionStatus=NEUTRAL
-11:54:50,000 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word clr with class [org.springframework.boot.logging.logback.ColorConverter]
-11:54:50,000 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wex with class [org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter]
-11:54:50,000 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wEx with class [org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter]
-11:54:50,002 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@58a120b0 - Adding [jar:file:/Users/dana/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/3.1.8/7a4a127cabca554a024dc821e30530e9c3f64790/spring-boot-3.1.8.jar!/org/springframework/boot/logging/logback/file-appender.xml] to configuration watch list.
-11:54:50,002 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@27d57a2c - URL [jar:file:/Users/dana/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/3.1.8/7a4a127cabca554a024dc821e30530e9c3f64790/spring-boot-3.1.8.jar!/org/springframework/boot/logging/logback/file-appender.xml] is not of type file
-11:54:50,016 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Registering a new ReconfigureOnChangeTask ReconfigureOnChangeTask(born:1708311290015)
-11:54:50,016 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Will scan for changes in [file:/Users/dana/workspace/group_project/project_vet/build/resources/main/logback-spring.xml] 
-11:54:50,016 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Setting ReconfigureOnChangeTask scanning period to 30 seconds
-11:54:50,017 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
-11:54:50,017 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-11:54:50,019 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-11:54:50,024 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [FILE] not referenced. Skipping further processing.
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.catalina.startup.DigesterFactory] to ERROR
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating ERROR level on Logger[org.apache.catalina.startup.DigesterFactory] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.catalina.util.LifecycleBase] to ERROR
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating ERROR level on Logger[org.apache.catalina.util.LifecycleBase] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.coyote.http11.Http11NioProtocol] to WARN
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating WARN level on Logger[org.apache.coyote.http11.Http11NioProtocol] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.sshd.common.util.SecurityUtils] to WARN
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating WARN level on Logger[org.apache.sshd.common.util.SecurityUtils] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.tomcat.util.net.NioSelectorPool] to WARN
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating WARN level on Logger[org.apache.tomcat.util.net.NioSelectorPool] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.eclipse.jetty.util.component.AbstractLifeCycle] to ERROR
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating ERROR level on Logger[org.eclipse.jetty.util.component.AbstractLifeCycle] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.hibernate.validator.internal.util.Version] to WARN
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating WARN level on Logger[org.hibernate.validator.internal.util.Version] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.springframework.boot.actuate.endpoint.jmx] to WARN
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating WARN level on Logger[org.springframework.boot.actuate.endpoint.jmx] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
-11:54:50,025 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2ff95fc6 - Propagating INFO level on Logger[ROOT] onto the JUL framework
-11:54:50,025 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
-11:54:50,025 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@9d1a267 - End of configuration.
-11:54:50,025 |-INFO in org.springframework.boot.logging.logback.SpringBootJoranConfigurator@58a4a74d - Registering current configuration as safe fallback point
+  <system-out><![CDATA[17:54:37.585 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.vet.VetApplicationTests]: VetApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:54:37.666 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.vet.VetApplication for test class com.example.vet.VetApplicationTests
+17:54:37,501 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.14
+17:54:37,503 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Here is a list of configurators discovered as a service, by rank: 
+17:54:37,503 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
+17:54:37,503 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
+17:54:37,503 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
+17:54:37,509 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 0 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+17:54:37,509 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
+17:54:37,510 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
+17:54:37,511 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
+17:54:37,512 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
+17:54:37,512 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 2 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+17:54:37,512 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
+17:54:37,512 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
+17:54:37,512 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+17:54:37,512 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.xml]
+17:54:37,512 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 0 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+17:54:37,512 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Trying to configure with ch.qos.logback.classic.BasicConfigurator
+17:54:37,513 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - Constructed configurator of type class ch.qos.logback.classic.BasicConfigurator
+17:54:37,513 |-INFO in ch.qos.logback.classic.BasicConfigurator@1ffcf674 - Setting up default configuration.
+17:54:37,522 |-INFO in ch.qos.logback.classic.util.ContextInitializer@40f8f5a8 - ch.qos.logback.classic.BasicConfigurator.configure() call lasted 9 milliseconds. ExecutionStatus=NEUTRAL
+17:54:37,959 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word clr with class [org.springframework.boot.logging.logback.ColorConverter]
+17:54:37,959 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wex with class [org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter]
+17:54:37,959 |-INFO in ch.qos.logback.core.joran.action.ConversionRuleAction - registering conversion word wEx with class [org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter]
+17:54:37,962 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@442f92e6 - Adding [jar:file:/C:/Users/GDJ/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/3.1.8/7a4a127cabca554a024dc821e30530e9c3f64790/spring-boot-3.1.8.jar!/org/springframework/boot/logging/logback/file-appender.xml] to configuration watch list.
+17:54:37,962 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@7d070ef5 - URL [jar:file:/C:/Users/GDJ/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/3.1.8/7a4a127cabca554a024dc821e30530e9c3f64790/spring-boot-3.1.8.jar!/org/springframework/boot/logging/logback/file-appender.xml] is not of type file
+17:54:37,985 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Registering a new ReconfigureOnChangeTask ReconfigureOnChangeTask(born:1708505677984)
+17:54:37,986 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Will scan for changes in [file:/C:/Users/GDJ/Downloads/project_vet/build/resources/main/logback-spring.xml] 
+17:54:37,986 |-INFO in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Setting ReconfigureOnChangeTask scanning period to 30 seconds
+17:54:37,988 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
+17:54:37,988 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+17:54:37,991 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+17:54:38,003 |-WARN in ch.qos.logback.core.model.processor.AppenderModelHandler - Appender named [FILE] not referenced. Skipping further processing.
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.catalina.startup.DigesterFactory] to ERROR
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating ERROR level on Logger[org.apache.catalina.startup.DigesterFactory] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.catalina.util.LifecycleBase] to ERROR
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating ERROR level on Logger[org.apache.catalina.util.LifecycleBase] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.coyote.http11.Http11NioProtocol] to WARN
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating WARN level on Logger[org.apache.coyote.http11.Http11NioProtocol] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.sshd.common.util.SecurityUtils] to WARN
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating WARN level on Logger[org.apache.sshd.common.util.SecurityUtils] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.apache.tomcat.util.net.NioSelectorPool] to WARN
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating WARN level on Logger[org.apache.tomcat.util.net.NioSelectorPool] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.eclipse.jetty.util.component.AbstractLifeCycle] to ERROR
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating ERROR level on Logger[org.eclipse.jetty.util.component.AbstractLifeCycle] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.hibernate.validator.internal.util.Version] to WARN
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating WARN level on Logger[org.hibernate.validator.internal.util.Version] onto the JUL framework
+17:54:38,004 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.springframework.boot.actuate.endpoint.jmx] to WARN
+17:54:38,004 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating WARN level on Logger[org.springframework.boot.actuate.endpoint.jmx] onto the JUL framework
+17:54:38,005 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+17:54:38,005 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@7a55f148 - Propagating INFO level on Logger[ROOT] onto the JUL framework
+17:54:38,005 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to Logger[ROOT]
+17:54:38,005 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@2e2f720 - End of configuration.
+17:54:38,005 |-INFO in org.springframework.boot.logging.logback.SpringBootJoranConfigurator@3ae2ed38 - Registering current configuration as safe fallback point
 
 
   .   ____          _            __ _ _
@@ -298,17 +281,17 @@ Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION
  =========|_|==============|___/=/_/_/_/
 ?[32m :: Spring Boot :: ?[39m              ?[2m (v3.1.8)?[0;39m
 
-?[33m2024-02-19 11:54:50.054?[0;39m ?[31m[INFO]?[0;39m ?[35m10107?[0;39m ?[36m[StartupInfoLogger.java : 51]?[0;39m ?[32m{Starting VetApplicationTests using Java 17.0.10 with PID 10107 (started by dana in /Users/dana/workspace/group_project/project_vet)}?[0;39m
-?[33m2024-02-19 11:54:50.055?[0;39m ?[31m[INFO]?[0;39m ?[35m10107?[0;39m ?[36m[SpringApplication.java : 638]?[0;39m ?[32m{No active profile set, falling back to 1 default profile: "default"}?[0;39m
-?[33m2024-02-19 11:54:50.397?[0;39m ?[31m[WARN]?[0;39m ?[35m10107?[0;39m ?[36m[Logger.java : 44]?[0;39m ?[32m{No MyBatis mapper was found in '[com.example.vet]' package. Please check your configuration.}?[0;39m
-?[33m2024-02-19 11:54:50.568?[0;39m ?[31m[INFO]?[0;39m ?[35m10107?[0;39m ?[36m[HikariDataSource.java : 79]?[0;39m ?[32m{oraPool - Starting...}?[0;39m
-?[33m2024-02-19 11:54:51.696?[0;39m ?[31m[WARN]?[0;39m ?[35m10107?[0;39m ?[36m[AbstractApplicationContext.java : 623]?[0;39m ?[32m{Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/SecurityConfig.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)}?[0;39m
-?[33m2024-02-19 11:54:51.707?[0;39m ?[31m[INFO]?[0;39m ?[35m10107?[0;39m ?[36m[ConditionEvaluationReportLogger.java : 82]?[0;39m ?[32m{
+?[33m2024-02-21 17:54:38.050?[0;39m ?[31m[INFO]?[0;39m ?[35m10464?[0;39m ?[36m[StartupInfoLogger.java : 51]?[0;39m ?[32m{Starting VetApplicationTests using Java 17.0.8.1 with PID 10464 (started by GDJ in C:\Users\GDJ\Downloads\project_vet)}?[0;39m
+?[33m2024-02-21 17:54:38.052?[0;39m ?[31m[INFO]?[0;39m ?[35m10464?[0;39m ?[36m[SpringApplication.java : 638]?[0;39m ?[32m{No active profile set, falling back to 1 default profile: "default"}?[0;39m
+?[33m2024-02-21 17:54:38.607?[0;39m ?[31m[WARN]?[0;39m ?[35m10464?[0;39m ?[36m[Logger.java : 44]?[0;39m ?[32m{No MyBatis mapper was found in '[com.example.vet]' package. Please check your configuration.}?[0;39m
+?[33m2024-02-21 17:54:38.861?[0;39m ?[31m[INFO]?[0;39m ?[35m10464?[0;39m ?[36m[HikariDataSource.java : 79]?[0;39m ?[32m{oraPool - Starting...}?[0;39m
+?[33m2024-02-21 17:54:39.965?[0;39m ?[31m[WARN]?[0;39m ?[35m10464?[0;39m ?[36m[AbstractApplicationContext.java : 623]?[0;39m ?[32m{Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalDetailService' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\config\auth\PrincipalDetailService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)}?[0;39m
+?[33m2024-02-21 17:54:39.972?[0;39m ?[31m[INFO]?[0;39m ?[35m10464?[0;39m ?[36m[ConditionEvaluationReportLogger.java : 82]?[0;39m ?[32m{
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.}?[0;39m
-?[33m2024-02-19 11:54:51.722?[0;39m ?[31m[ERROR]?[0;39m ?[35m10107?[0;39m ?[36m[SpringApplication.java : 835]?[0;39m ?[32m{Application run failed}?[0;39m
+?[33m2024-02-21 17:54:39.986?[0;39m ?[31m[ERROR]?[0;39m ?[35m10464?[0;39m ?[36m[SpringApplication.java : 835]?[0;39m ?[32m{Application run failed}?[0;39m
 
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/SecurityConfig.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalDetailService' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\config\auth\PrincipalDetailService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
@@ -420,7 +403,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
@@ -437,24 +420,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
 	... 110 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:558)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:518)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 124 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1330)
@@ -472,8 +438,8 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 138 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 124 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:484)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1330)
@@ -489,18 +455,18 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 154 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 140 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:646)
-	... 168 common frames omitted
-Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 154 common frames omitted
+Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:584)
 	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
 	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
 	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:80)
 	at com.example.vet.DatabaseConfiguration.dataSource(DatabaseConfiguration.java:42)
-	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$0.CGLIB$dataSource$0(<generated>)
+	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$0.CGLIB$dataSource$3(<generated>)
 	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$FastClass$$1.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
@@ -510,8 +476,8 @@ Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 169 common frames omitted
-Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 155 common frames omitted
+Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:902)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:707)
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1094)
@@ -523,8 +489,8 @@ Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was e
 	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
 	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
 	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	... 182 common frames omitted
-Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 168 common frames omitted
+Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at oracle.net.resolver.NameResolver.resolveName(NameResolver.java:132)
 	at oracle.net.resolver.AddrResolution.resolveTNSAddress(AddrResolution.java:692)
 	at oracle.net.resolver.AddrResolution.initConnStrategy(AddrResolution.java:540)
@@ -533,11 +499,11 @@ Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION
 	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:350)
 	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2627)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:666)
-	... 191 common frames omitted
+	... 177 common frames omitted
 
-?[33m2024-02-19 11:54:51.749?[0;39m ?[31m[ERROR]?[0;39m ?[35m10107?[0;39m ?[36m[TestContextManager.java : 245]?[0;39m ?[32m{Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.example.vet.VetApplicationTests@4584304]}?[0;39m
+?[33m2024-02-21 17:54:39.995?[0;39m ?[31m[ERROR]?[0;39m ?[35m10464?[0;39m ?[36m[TestContextManager.java : 245]?[0;39m ?[32m{Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.example.vet.VetApplicationTests@3711c71c]}?[0;39m
 
-java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@6c835217 testClass = com.example.vet.VetApplicationTests, locations = [], classes = [com.example.vet.VetApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@7dda48d9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5e4bd84a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@53fd0d10, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@16fdec90, org.springframework.boot.test.context.SpringBootTestAnnotation@3a387497], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@1e495414 testClass = com.example.vet.VetApplicationTests, locations = [], classes = [com.example.vet.VetApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@67c2e933, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1b765a2c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@72c28d64, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7216fb24, org.springframework.boot.test.context.SpringBootTestAnnotation@584297a3], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:143)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:127)
 	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191)
@@ -625,7 +591,7 @@ java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMerge
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/SecurityConfig.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalDetailService' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\config\auth\PrincipalDetailService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
@@ -652,7 +618,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:187)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:119)
 	... 86 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'principalOauth2UserService' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/config/oauth2/PrincipalOauth2UserService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'singUP_IN' defined in file [C:\Users\GDJ\Downloads\project_vet\build\classes\java\main\com\example\vet\repository\SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
@@ -669,24 +635,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
 	... 110 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'singUP_IN' defined in file [/Users/dana/workspace/group_project/project_vet/build/classes/java/main/com/example/vet/repository/SingUP_IN.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:236)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1350)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:558)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:518)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 124 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:797)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1330)
@@ -704,8 +653,8 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 138 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 124 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/example/vet/DatabaseConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:484)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1330)
@@ -721,18 +670,18 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:906)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:784)
-	... 154 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 140 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'dataSource' threw exception with message: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:646)
-	... 168 common frames omitted
-Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 154 common frames omitted
+Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:584)
 	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
 	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
 	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:80)
 	at com.example.vet.DatabaseConfiguration.dataSource(DatabaseConfiguration.java:42)
-	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$0.CGLIB$dataSource$0(<generated>)
+	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$0.CGLIB$dataSource$3(<generated>)
 	at com.example.vet.DatabaseConfiguration$$SpringCGLIB$$FastClass$$1.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
@@ -742,8 +691,8 @@ Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 169 common frames omitted
-Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 155 common frames omitted
+Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at oracle.jdbc.driver.T4CConnection.handleLogonNetException(T4CConnection.java:902)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:707)
 	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1094)
@@ -755,8 +704,8 @@ Caused by: java.sql.SQLRecoverableException: IO 오류: Connect identifier was e
 	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
 	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
 	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
-	... 182 common frames omitted
-Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION_ID=PQwWyQXPSZSvXbniWGjnnA==)
+	... 168 common frames omitted
+Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION_ID=wFDkR7TKTca4ihUQlmLcbA==)
 	at oracle.net.resolver.NameResolver.resolveName(NameResolver.java:132)
 	at oracle.net.resolver.AddrResolution.resolveTNSAddress(AddrResolution.java:692)
 	at oracle.net.resolver.AddrResolution.initConnStrategy(AddrResolution.java:540)
@@ -765,7 +714,7 @@ Caused by: oracle.net.ns.NetException: Connect identifier was empty. (CONNECTION
 	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:350)
 	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:2627)
 	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:666)
-	... 191 common frames omitted
+	... 177 common frames omitted
 
 ]]></system-out>
   <system-err><![CDATA[

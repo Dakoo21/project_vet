@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.bookingMapper">
+
+
+    <select id="bookingSelect" parameterType="com.example.vet.model.BookingVO" resultType="java.util.Map">
+        SELECT BOOKING.BOOKING_TYPE as "bookingType", BOOKING.BOOKING_START as "bookingStart", BOOKING.BOOKING_END "bookingEnd",
+               BOOKING.BOOKING_DATE AS "bookingDate", BOOKING.BOOKING_PK AS "bookingPk",
+        ANIMAL.ANIMAL_BREED as "animalBreed", ANIMAL.ANIMAL_NEUT as "animalNeut", ANIMAL.ANIMAL_NM as "animalName",
+        ANIMAL.ANIMAL_BDATE as "animalBirthDate" , ANIMAL.ANIMAL_SEX as "animalSex", ANIMAL.ANIMAL_WEIGHT as "animalWeight",
+        ANIMAL.ANIMAL_SPECIES as "animalSpecies", CODE.COMMON_CODE_NM as "commonCodeName", U.USER_NM as "userNm"
+        FROM BOOKING_TEST BOOKING
+        LEFT OUTER JOIN ANIMAL_TEST ANIMAL ON BOOKING.ANIMAL_PK = ANIMAL.ANIMAL_PK
+        LEFT OUTER JOIN COMMON_CODE_TEST CODE ON BOOKING.COMMON_CODE_PK = CODE.COMMON_CODE_PK
+        LEFT OUTER JOIN USER_TEST U ON BOOKING.USER_PK = U.USER_PK
+        <if test="bookingPk != null">
+            <where>
+                #{bookingPk} = BOOKING.BOOKING_PK
+            </where>
+
+        </if>
+    </select>
+
+</mapper>
