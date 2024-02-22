@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+    Integer userPK = (Integer) request.getAttribute("userPK");
     String username = (String) request.getAttribute("username");
     String role = (String) request.getAttribute("role");
     boolean isAdmin = request.isUserInRole("ROLE_ADMIN");

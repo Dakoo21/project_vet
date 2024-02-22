@@ -5,6 +5,8 @@ import com.example.vet.repository.Login_repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 @Slf4j
 public class Login_service {
@@ -27,5 +29,11 @@ public class Login_service {
         int result;
         result = login_repository.checkId(id);
         return result;
+    }
+
+    public String findID(Map<String, Object> fId) {
+        String id = login_repository.findID(fId);
+        log.info(id);
+        return id;
     }
 }

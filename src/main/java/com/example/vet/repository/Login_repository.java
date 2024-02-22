@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 @Repository
 @Slf4j
 public class Login_repository {
@@ -40,5 +42,11 @@ public class Login_repository {
         int result;
         result = sqlSessionTemplate.selectOne("checkId", id);
         return result;
+    }
+
+    public String findID(Map<String, Object> fId) {
+        String id;
+        id = sqlSessionTemplate.selectOne("findID", fId);
+        return id;
     }
 }
