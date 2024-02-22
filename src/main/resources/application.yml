@@ -20,7 +20,7 @@ spring:
       suffix: .jsp
   datasource:
     hikari:
-      jdbc-url: jdbc:oracle:thin:@
+      jdbc-url: jdbc:oracle:thin:@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.ap-chuncheon-1.oraclecloud.com))(connect_data=(service_name=g2638201e47f439_w2v5xl0glt6tkk82_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
       username: admin
       password: Rneldkzkepal73
       driver-class-name: oracle.jdbc.OracleDriver
