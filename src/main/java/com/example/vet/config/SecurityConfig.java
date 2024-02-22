@@ -71,7 +71,7 @@ public class SecurityConfig {
                         // "/admin/**" 패턴에 해당하는 URL은 "ADMIN" 역할을 가진 사용자에게만 허용한다는 규칙
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         // "/login" 경로는 모든 사용자에게 허용된다는 규칙 ( 로그인 페이지에 대한 접근을 모든 사용자가 할 수 있도록 허용한 것 )
-                        .requestMatchers("/login", "/join", "/joinMember", "/findID", "/findPassword").permitAll()
+                        .requestMatchers("/login", "/join", "/joinMember").permitAll()
                         // 위에서 지정한 URL 패턴 이외의 모든 요청은 인증된 사용자만 접근할 수 있도록 설정한 부분 (위에서 정의한 규칙("/login") 이외의 모든 요청은 로그인이 필요한 것으로 간주됨)
                         .anyRequest().authenticated())
                 // 로그인에 대한 설정을 하는 부분

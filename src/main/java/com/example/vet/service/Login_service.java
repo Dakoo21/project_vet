@@ -30,10 +30,4 @@ public class Login_service {
         result = login_repository.checkId(id);
         return result;
     }
-
-    public String findID(Map<String, Object> fId) {
-        String id = login_repository.findID(fId);
-        log.info(id);
-        return id;
-    }
 }

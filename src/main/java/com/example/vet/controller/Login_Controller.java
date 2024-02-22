@@ -45,15 +45,6 @@ public class Login_Controller {
         return cnt;
     }
 
-    @PostMapping("/findid")
-    public String findID(@RequestParam Map<String, Object> fId, Model model) {
-        String id = login_service.findID(fId);
-        if (id != null) {
-            model.addAttribute("id", id);
-        }
-        return "redirect:pages/login/findID";
-    }
-
     @PostMapping("/joinMember")
     public String joinMember (Member member) {
         log.info("회원가입 Controller 탐");

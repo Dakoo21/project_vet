@@ -16,9 +16,4 @@
         FROM user_test5
         WHERE member_id = #{value}
     </select>
-    <select id="findID" parameterType="Map" resultType="String">
-        SELECT MEMBER_ID
-        FROM user_test5
-        WHERE  MEMBER_MEMBERNAME = #{MEMBER_MEMBERNAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}
-    </select>
 </mapper>

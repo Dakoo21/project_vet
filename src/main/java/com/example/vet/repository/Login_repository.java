@@ -43,10 +43,4 @@ public class Login_repository {
         result = sqlSessionTemplate.selectOne("checkId", id);
         return result;
     }
-
-    public String findID(Map<String, Object> fId) {
-        String id;
-        id = sqlSessionTemplate.selectOne("findID", fId);
-        return id;
-    }
 }
