@@ -1,14 +1,15 @@
 package com.example.vet.repository.work;
 
 import com.example.vet.model.BookingVO;
-import com.example.vet.repository.board.QA_Repository;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class Booking_Repository {
     Logger logger = LoggerFactory.getLogger(Booking_Repository.class);
     private final SqlSessionTemplate sqlSessionTemplate;
@@ -28,13 +29,13 @@ public class Booking_Repository {
         return rowsInserted> 0 ? 1 : 0;
     }
 
-    public int Update(int bookingVO) {
+    public int Update(BookingVO bookingVO) {
         int rowsAffected = sqlSessionTemplate.update("bookingUpdate", bookingVO);
         return rowsAffected > 0 ? 1 : 0;
     }
 
-    public int Delete(BookingVO bookingVO) {
-        int rowDeleted = sqlSessionTemplate.delete("bookingDelete", bookingVO);
+    public int Delete(int bookingPK) {
+        int rowDeleted = sqlSessionTemplate.delete("bookingDelete", bookingPK);
         return rowDeleted>0 ? 1 : 0;
     }
 }

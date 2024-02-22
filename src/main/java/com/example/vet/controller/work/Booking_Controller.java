@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("qna")
+@RequestMapping("booking")
 
 public class Booking_Controller {
 
@@ -28,47 +31,61 @@ public class Booking_Controller {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("qnaList")
+    @GetMapping("bookingList")
     public String list(Model model){
         BookingVO bookingVO = null;
         List<Map<String,Object>> bList = bookingService.Select(bookingVO);
         logger.info(bList.toString());
         model.addAttribute("bList", bList);
-        return "pages/docbook/bookingMainCustomer";
+        return "pages/docbook/bookingMainAdmin";
     }
-    @GetMapping("qnaDetail")
+    @GetMapping("bookingDetail")
     public String listDetail(@RequestParam int bookingPK, Model model) {
 
-        BookingVO bookingVO = null;
+        BookingVO bookingVO = new BookingVO();
         bookingVO.setBookingPk(bookingPK);
-        logger.info(bookingVO.toString());
+
         List<Map<String,Object>> nList = bookingService.Select(bookingVO);
-
+        logger.info(nList.toString());
         model.addAttribute("nList", nList);
-        return "pages/docbook/bookingMainCustomer";
+        return "pages/docbook/bookingDetail";
     }
 
-    @PostMapping("qnaUpdate")
-    public String update(@RequestParam Map<String, Object> rmap) {
+    @PostMapping("bookingUpdate")
+    public String update(@RequestParam Map<String, Object> rmap) throws ParseException {
         BookingVO bookingVO = new BookingVO();
-        Integer bookingPK = Integer.parseInt(rmap.get("BOOKING_PK").toString());
-        bookingVO.setBookingPk(bookingPK);
 
+        //pk
+        Integer bookingPk = Integer.parseInt(rmap.get("bookingPk").toString());
+        bookingVO.setBookingPk(bookingPk);
         // 시작시간
-        String bookingstart = (String) rmap.get("BOOKING_START");
+        String bookingstart = (String) rmap.get("bookingStart");
         bookingVO.setBookingStart(bookingstart);
 
         // 종료시간
-        String bookingEnd = (String) rmap.get("BOOKING_END");
+        String bookingEnd = (String) rmap.get("bookingEnd");
         bookingVO.setBookingEnd(bookingEnd);
 
         //서비스종류
-        String bookingtype = (String) rmap.get("BOOKING_TYPE");
+        String bookingtype = (String) rmap.get("bookingType");
         bookingVO.setBookingType(bookingtype);
 
+        String bookingDate = (String) rmap.get("bookingDate");
+
+        bookingVO.setBookingDate(bookingDate);
+
         //동물 pk
-        Integer animalPK = Integer.parseInt(rmap.get("ANIMAL_PK").toString());
+        Integer animalPK = Integer.parseInt(rmap.get("animalPk").toString());
         bookingVO.setAnimalPk(animalPK);
+
+        //직원, 서비스 담당자
+        Integer userPK = Integer.parseInt(rmap.get("userPk").toString());
+        bookingVO.setAnimalPk(userPK);
+
+        //상태 - 무조건 '예약됨' 으로
+        Integer commonCodePk = 123;
+        bookingVO.setCommonCodePk(commonCodePk);
+
 
 
         logger.info(bookingVO.toString());
@@ -76,56 +93,76 @@ public class Booking_Controller {
         int updated = bookingService.Update(bookingVO);
 
         if (updated == 1) {
-            return "redirect:bookingMainCustomer";
+            return "redirect:bookingList";
         } else {
             return "error";
         }
     }
 
-    @PostMapping("qnaInsert")
-    public String insert(@RequestParam Map<String, Object> rmap) {
+    @PostMapping("bookingInsert")
+    public String insert(@RequestParam Map<String, Object> rmap) throws ParseException {
         BookingVO bookingVO = new BookingVO();
 
         // 시작시간
-        String bookingstart = (String) rmap.get("BOOKING_START");
-        bookingVO.setBookingStart(bookingstart);
+        String bookingStart = (String) rmap.get("bookingStart");
+        bookingVO.setBookingStart(bookingStart);
 
         // 종료시간
-        String bookingEnd = (String) rmap.get("BOOKING_END");
+        String bookingEnd = (String) rmap.get("bookingEnd");
         bookingVO.setBookingEnd(bookingEnd);
 
         //서비스종류
-        String bookingtype = (String) rmap.get("BOOKING_TYPE");
-        bookingVO.setBookingType(bookingtype);
+        String bookingType = (String) rmap.get("bookingType");
+        bookingVO.setBookingType(bookingType);
+
+
+        String bookingDate = (String) rmap.get("bookingDate");
+        logger.info(bookingDate);
+        // 기존 형식의 날짜 포맷 지정
+
+        bookingVO.setBookingDate(bookingDate);
 
         //동물 pk
-        Integer animalPK = Integer.parseInt(rmap.get("ANIMAL_PK").toString());
+        Integer animalPK = Integer.parseInt(rmap.get("animalPk").toString());
         bookingVO.setAnimalPk(animalPK);
+
+        //직원, 서비스 담당자
+        Integer userPK = Integer.parseInt(rmap.get("userPk").toString());
+        bookingVO.setUserPk(userPK);
+
+        //상태 - 무조건 '예약됨' 으로
+        Integer commonCodePk = 123;
+        bookingVO.setCommonCodePk(commonCodePk);
+
 
 
         logger.info(bookingVO.toString());
 
-        int updated = bookingService.Update(bookingVO);
+        int inserted = bookingService.Insert(bookingVO);
 
-        if (updated == 1) {
-            return "redirect:bookingMainCustomer";
+        if (inserted == 1) {
+            return "redirect:bookingList";
         } else {
             return "error";
         }
     }
 
 
-    @PostMapping("qnaDelete")
+    @PostMapping("bookingDelete")
     public String Delete(int bookingPK) {
 
         int deleted = bookingService.Delete(bookingPK);
 
         if(deleted == 1) {
-            return "redirect:bookingMainCustomer";
+            return "redirect:bookingList";
         }
         else{
             return "error";
         }
+    }
+    @GetMapping("bookingRegister")
+    public String Reg(){
+        return "pages/docbook/bookingRegister";
     }
 
 }

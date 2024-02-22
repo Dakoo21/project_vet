@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.bookingMapper">
+    <resultMap id = "selectResultMap" type="java.util.HashMap">
+        <result property="bookingType" column="bookingType"/>
+        <result property="bookingStart" column="bookingStart"/>
+        <result property="bookingEnd" column="bookingEnd"/>
+        <result property="bookingDate" column="bookingDate"/>
+        <result property="bookingPk" column="bookingPk"/>
+        <result property="animalBreed" column="animalBreed"/>
+        <result property="animalNeut" column="animalNeut"/>
+        <result property="animalName" column="animalName"/>
+        <result property="animalBirthDate" column="animalBirthDate"/>
+        <result property="animalSex" column="animalSex"/>
+        <result property="animalWeight" column="animalWeight"/>
+        <result property="animalSpecies" column="animalSpecies"/>
+        <result property="commonCodeName" column="commonCodeName"/>
+        <result property="userNm" column="userNm"/>
+        <result property="masterNm" column="masterNm"/>
+        <result property="masterAddress" column="masterAddress"/>
+        <result property="masterEmail" column="masterEmail"/>
+        <result property="masterPnumber" column="masterPnumber"/>
+    </resultMap>
 
 
-    <select id="bookingSelect" parameterType="com.example.vet.model.BookingVO" resultType="java.util.Map">
+    <select id="bookingSelect" parameterType="com.example.vet.model.BookingVO" resultMap="selectResultMap">
         SELECT BOOKING.BOOKING_TYPE as "bookingType", BOOKING.BOOKING_START as "bookingStart", BOOKING.BOOKING_END "bookingEnd",
                BOOKING.BOOKING_DATE AS "bookingDate", BOOKING.BOOKING_PK AS "bookingPk",
         ANIMAL.ANIMAL_BREED as "animalBreed", ANIMAL.ANIMAL_NEUT as "animalNeut", ANIMAL.ANIMAL_NM as "animalName",
         ANIMAL.ANIMAL_BDATE as "animalBirthDate" , ANIMAL.ANIMAL_SEX as "animalSex", ANIMAL.ANIMAL_WEIGHT as "animalWeight",
-        ANIMAL.ANIMAL_SPECIES as "animalSpecies", CODE.COMMON_CODE_NM as "commonCodeName", U.USER_NM as "userNm"
+        ANIMAL.ANIMAL_SPECIES as "animalSpecies", CODE.COMMON_CODE_NM as "commonCodeName", U.USER_NM as "userNm", M.MASTER_NM AS "masterNm", M.MASTER_EMAIL AS "masterEmail", M.MASTER_ADDRESS AS "masterAddress", M.MASTER_PNUMBER AS "masterPnumber"
         FROM BOOKING_TEST BOOKING
         LEFT OUTER JOIN ANIMAL_TEST ANIMAL ON BOOKING.ANIMAL_PK = ANIMAL.ANIMAL_PK
         LEFT OUTER JOIN COMMON_CODE_TEST CODE ON BOOKING.COMMON_CODE_PK = CODE.COMMON_CODE_PK
         LEFT OUTER JOIN USER_TEST U ON BOOKING.USER_PK = U.USER_PK
+        LEFT OUTER JOIN MASTER_TEST M ON ANIMAL.MASTER_PK = M.MASTER_PK
         <if test="bookingPk != null">
             <where>
                 #{bookingPk} = BOOKING.BOOKING_PK
@@ -20,5 +41,24 @@
 
         </if>
     </select>
+    <insert id="bookingInsert" parameterType="com.example.vet.model.BookingVO">
+        INSERT INTO BOOKING_TEST(BOOKING_PK, BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_DATE, ANIMAL_PK, USER_PK, COMMON_CODE_PK)
+        VALUES (BOOKING_PK_SEQ.nextval, #{bookingType}, #{bookingStart}, #{bookingEnd}, #{bookingDate},#{animalPk}, #{userPk}, #{commonCodePk})
+    </insert>
+    <delete id="bookingDelete" parameterType="int">
+        DELETE FROM BOOKING_TEST
+        WHERE BOOKING_PK=#{bookingPk}
+    </delete>
+    <update id="bookingUpdate" parameterType="com.example.vet.model.BookingVO">
+        UPDATE BOOKING_TEST
+        SET
+        <if test="bookingType != null">BOOKING_TYPE = #{bookingType},</if>
+        <if test="bookingDate != null">BOOKING_DATE = #{bookingDate},</if>
+        <if test="bookingEnd != null">BOOKING_END = #{bookingEnd},</if>
+        <if test="bookingStart != null">BOOKING_START = #{bookingStart}</if>
+        <where>
+        BOOKING_PK = #{bookingPk}
+        </where>
+    </update>
 
 </mapper>

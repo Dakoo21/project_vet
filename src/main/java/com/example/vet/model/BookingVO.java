@@ -11,14 +11,23 @@ public class BookingVO {
     private String bookingType;
     private String bookingStart;
     private String bookingEnd;
+    private String bookingDate;
     private int animalPk;
+    private int commonCodePk;
+    private int userPk;
+
 
     @Builder
-    public BookingVO(int bookingPk, String bookingType, String bookingStart, String bookingEnd, int animalPk) {
+    public BookingVO(int bookingPk, String bookingType, String bookingStart, String bookingEnd, String bookingDate,
+                     int animalPk, int commonCodePk, int userPk) {
         this.bookingPk = bookingPk;
         this.bookingType = bookingType;
         this.bookingStart = bookingStart;
         this.bookingEnd = bookingEnd;
+        this.bookingDate = bookingDate;
         this.animalPk = animalPk;
+        this.commonCodePk = commonCodePk;
+        this.userPk = userPk;
+
     }
 }

@@ -7,11 +7,13 @@ import com.example.vet.repository.work.Booking_Repository;
 import com.example.vet.service.board.QA_Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class Booking_Service {
     Logger logger = LoggerFactory.getLogger(Booking_Service.class);
     private final Booking_Repository bookingRepository;
@@ -31,11 +33,11 @@ public class Booking_Service {
         return bookingRepository.Insert(bookingVO);
     }
 
-    public int Delete(int bookingVO) {
-        return bookingRepository.Update(bookingVO);
+    public int Delete(int bookingPK) {
+        return bookingRepository.Delete(bookingPK);
     }
 
     public int Update(BookingVO bookingVO) {
-        return bookingRepository.Delete(bookingVO);
+        return bookingRepository.Update(bookingVO);
     }
 }

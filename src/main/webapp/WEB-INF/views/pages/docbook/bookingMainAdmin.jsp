@@ -70,7 +70,8 @@
                         title: '<%= rmap.get("bookingType") %> 예약',
                         start: '<%= dateFormat.format(startDate) %>',
                         end: '<%= dateFormat.format(endDate) %>',
-                        url: 'bookingDetail?bookingPK=<%=Integer.parseInt(rmap.get("bookingPk").toString())%>'
+                        url: 'bookingDetail?bookingPK=<%=Integer.parseInt(rmap.get("bookingPk").toString())%>',
+                        background: '000000',
                     }
                     <% if (i < bList.size() - 1) { %>,<% } %>
                 <% } %>
@@ -179,13 +180,20 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
-
-    </div>
+        <div style="text-align: center;">
+        <a id="reservationButton" href="http://localhost:8000/booking/bookingRegister"><button style="right: 150px">예약</button></a>
+        </div>
+        </div>
     <!-- /.content-wrapper -->
     <!--footer-->
-    <%@ include file="/include/footer.jsp"%>
+
 </div>
+
+
+
+
 <!-- ./wrapper -->
+<%@ include file="/include/footer.jsp"%>
 <%@ include file="/include/bootCommonFoot.jsp"%>
 </body>
 </html>
