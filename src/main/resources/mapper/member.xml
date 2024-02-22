@@ -6,13 +6,19 @@
         INSERT INTO user_test5 ("MEMBER_PK", "MEMBER_ID", "MEMBER_PW", "MEMBER_MEMBERNAME", "MEMBER_EMAIL", "MEMBER_ROLE", "MEMBER_CREATEDATE", "MEMBER_POSTCODE", "MEMBER_ADDRESS", "MEMBER_PHONE", "PROVIDER", "PROVIDERID")
         VALUES (USER_TEST4_PK_SEQ.nextval, #{MEMBER_ID}, #{MEMBER_PW}, #{MEMBER_MEMBERNAME}, #{MEMBER_EMAIL}, #{MEMBER_ROLE}, to_char(sysdate,'YYYY-MM-DD'), #{MEMBER_POSTCODE, jdbcType=VARCHAR}, #{MEMBER_ADDRESS, jdbcType=VARCHAR}, #{MEMBER_PHONE, jdbcType=VARCHAR}, #{PROVIDER, jdbcType=VARCHAR}, #{PROVIDERID, jdbcType=VARCHAR})
     </insert>
-    <select id="login" parameterType="string" resultType="com.example.vet.model.Member">
-        SELECT * FROM user_test5
+    <select id="login" parameterType="String" resultType="com.example.vet.model.Member">
+        SELECT "MEMBER_PK", "MEMBER_ID", "MEMBER_PW", "MEMBER_MEMBERNAME", "MEMBER_EMAIL", "MEMBER_ROLE", "MEMBER_CREATEDATE", "MEMBER_POSTCODE", "MEMBER_ADDRESS", "MEMBER_PHONE", "PROVIDER", "PROVIDERID"
+        FROM user_test5
         WHERE MEMBER_ID = #{value}
     </select>
     <select id="checkId" parameterType="String" resultType="int">
         SELECT COUNT(member_id)
         FROM user_test5
         WHERE member_id = #{value}
+    </select>
+    <select id="findID" parameterType="Map" resultType="String">
+        SELECT MEMBER_ID
+        FROM user_test5
+        WHERE  MEMBER_MEMBERNAME = #{MEMBER_MEMBERNAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
 </mapper>

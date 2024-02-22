@@ -41,6 +41,10 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     //세션에 담아둘 값
 
+    public Integer getID() {
+        return member.getMEMBER_PK();
+    }
+
     //사용자 성명
     public String getName() {
         return member.getMEMBER_MEMBERNAME();

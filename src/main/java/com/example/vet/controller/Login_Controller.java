@@ -6,10 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -40,6 +43,15 @@ public class Login_Controller {
         log.info(id);
         int cnt = login_service.checkId(id);
         return cnt;
+    }
+
+    @PostMapping("/findid")
+    public String findID(@RequestParam Map<String, Object> fId, Model model) {
+        String id = login_service.findID(fId);
+        if (id != null) {
+            model.addAttribute("id", id);
+        }
+        return "redirect:pages/login/findID";
     }
 
     @PostMapping("/joinMember")

@@ -32,9 +32,22 @@ public class Main_Controller {
         if (authentication != null) {
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             String username = principalDetails.getUsername();
+            Integer userPK = principalDetails.getID();
             model.addAttribute("username",username);
+            model.addAttribute("userPK", userPK);
         }
         return "pages/main/index2";
+    }
+
+    @GetMapping("/findID")
+    public String foundIdPage () {
+        log.info("아이디 찾기 페이지 접속 시도");
+        return "pages/login/findID";
+    }
+
+    @GetMapping("/findPassword")
+    public String foundPasswordPage () {
+        return "pages/login/findPassword";
     }
 }
 

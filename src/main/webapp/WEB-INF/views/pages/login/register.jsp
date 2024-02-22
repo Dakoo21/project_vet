@@ -213,7 +213,7 @@
       id2.style.display = 'none';
       $.ajax({
         type: 'POST',
-        url: '/checkId', // 아이디 검사 로직 짜야됨!!!!!!!!!!!!!!!!!!!!!!!!!!
+        url: '/checkId',
         data: {id : id },
         success: function(cnt) {
           // 서버로부터의 응답 처리
