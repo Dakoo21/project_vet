@@ -35,3 +35,40 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignore Gradle binary files
+.gradle/
+
+# Ignore build output
+build/
+
+# Ignore temporary files
+*.lock
+
+# Ignore compiled Java classes
+*.class
+
+# Ignore compiled Java resources
+*.xml
+*.bin
+
+# Ignore compilation data
+build/tmp/
+
+# Ignore generated mapper files
+build/resources/main/mapper/
+
+# Ignore execution history
+.gradle/*/executionHistory/
+
+# Ignore file hashes
+.gradle/*/fileHashes/
+
+# Ignore checksums
+.gradle/*/checksums/
+
+# Ignore build output cleanup
+.gradle/buildOutputCleanup/
+
+# Ignore file system probe
+.gradle/file-system.probe
