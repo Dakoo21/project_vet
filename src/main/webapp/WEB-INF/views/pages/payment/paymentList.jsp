@@ -433,7 +433,7 @@
     // IMP 객체를 전역 변수로 선언하고, 상점에서 발급받은 식별키로 초기화
     // IMP 변수가 이미 선언되었는지 확인하여 선언하지 않음
     if (typeof IMP === "undefined") {
-        const IMP = window.IMP;
+        var IMP = window.IMP;
     }
     IMP.init("imp80707007");
 
@@ -445,11 +445,12 @@
         IMP.request_pay({
             pg: 'kakaopay.TC0ONETIME',  // 결제 수단 지정
             // kakaopay.TC0ONETIME / tosspay.tosstest / payco.AUTOPAY / html5_inicis
-            /*pg_tid: ,*/         //pg사 승인번호
+            pg_tid: "pg_tid",         //pg사 승인번호
             pay_method: "card",
             merchant_uid: "order" + new Date().getTime(),  // 주문번호
             name: 'test_order',   // 주문명
-            amount: 100,   // 결제 금액
+            amount: 1000,   // 결제 금액
+            paid_amount: 1000,   // 결제 금액
             buyer_name: "구매자 이름",     // 구매자 이름
             buyer_tel: "연락처",        // 구매자 전화번호
             m_redirect_url: "/"
@@ -463,11 +464,17 @@
 
                 // 결제 성공 시 서버로 결제 정보 전송
                 jQuery.ajax({
-                    url: "/work/process_payment",
+                    url: "/payment/process-payment",
                     method: "POST",
                     data: {
                         imp_uid: rsp.imp_uid,            // 결제 고유번호
-                        merchant_uid: rsp.merchant_uid   // 주문번호
+                        merchant_uid: rsp.merchant_uid,   // 주문번호
+                        pg_tid: rsp.pg_tid,
+                        name: rsp.name,   // 주문명
+                        amount: rsp.amount,   // 결제 금액
+                        paid_amount: rsp.paid_amount,   // 결제 금액
+                        buyer_name: rsp.buyer_name,     // 구매자 이름
+                        buyer_tel: rsp.buyer_tel        // 구매자 전화번호
                     },
                     error: function(xhr, status, error) { // 요청이 실패했을 때의 처리
                         console.error("서버 요청 실패:", error);
