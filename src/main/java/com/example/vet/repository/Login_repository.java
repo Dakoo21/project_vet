@@ -43,4 +43,11 @@ public class Login_repository {
         result = sqlSessionTemplate.selectOne("checkId", id);
         return result;
     }
+
+    public String findID(Member member) {
+        log.info("아이디 찾기 레포");
+        String userID;
+        userID = sqlSessionTemplate.selectOne("findID", member);
+        return userID;
+    }
 }

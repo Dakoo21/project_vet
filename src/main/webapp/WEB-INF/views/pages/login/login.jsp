@@ -15,8 +15,8 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/adminlte.min.css">
     <script>
-        function requestYJ() {
-            if (window.event.keycode == 13) {
+        const requestYJ = (event) => {
+            if (window.event.keyCode == 13) {
                 login();
             }
         }
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="Password" required>
+                    <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="Password" required onkeyup="requestYJ()">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -77,7 +77,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="button" class="btn btn-primary btn-block" onclick="login()" onkeyup="requestYJ()">로그인</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="login()">로그인</button>
                     </div>
                     <!-- /.col -->
                 </div>
