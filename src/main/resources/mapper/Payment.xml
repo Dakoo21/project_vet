@@ -24,8 +24,8 @@
     </select>
 
     <insert id="insertPayment" parameterType="com.example.vet.model.PaymentVO">
-        INSERT INTO payment_test (payment_pk, imp_uid, merchant_uid)
-        VALUES (payment_pk_seq.nextval, #{impUid}, #{merchantUid})
+        INSERT INTO payment_test (payment_pk, imp_uid, merchant_uid,pg_tid,name,paid_amount,buyer_name,buyer_tel, amount)
+        VALUES (payment_pk_seq.nextval, #{impUid}, #{merchantUid}, #{pg_tid}, #{name}, #{paid_amount}, #{buyer_name}, #{buyer_tel}, #{amount})
     </insert>
 
 </mapper>

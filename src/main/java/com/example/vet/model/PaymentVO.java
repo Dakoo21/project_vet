@@ -7,42 +7,41 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PaymentVO {
-    private int paymentPK;
+
+    private Integer paymentPK;
     private String paymentOauthnum;
-    private int paidAmount;
-    private int applyNum;
+    private Integer paid_amount;
+    private Integer amount;
+    private Integer applyNum;
     private String merchantUid;
     private String impUid;
+    private String pg_tid;
     private String paymentType;
     private String paymentMethod;
     private String paymentNm;
     private String buyerEmail;
-    private String buyerName;
-    private String buyerTel;
+    private String buyer_name;
+    private String buyer_tel;
     private String buyerAddress;
     private String name;
-    private String amount;
 
     @Builder
-    public PaymentVO(int paymentPK, String paymentOauthnum, int paidAmount,
-                     String paymentType, String paymentMethod, String merchantUid,
-                     int applyNum, String impUid, String paymentNm, String buyerEmail,
-                     String buyerName, String buyerTel, String buyerAddress,
-                     String name, String amount) {
+    public PaymentVO(int paymentPK, String paymentOauthnum, int paid_amount, int amount, int applyNum, String merchantUid, String impUid, String pg_tid, String paymentType, String paymentMethod, String paymentNm, String buyerEmail, String buyer_name, String buyer_tel, String buyerAddress, String name) {
         this.paymentPK = paymentPK;
         this.paymentOauthnum = paymentOauthnum;
-        this.paidAmount = paidAmount;
+        this.paid_amount = paid_amount;
+        this.amount = amount;
+        this.applyNum = applyNum;
+        this.merchantUid = merchantUid;
+        this.impUid = impUid;
+        this.pg_tid = pg_tid;
         this.paymentType = paymentType;
         this.paymentMethod = paymentMethod;
-        this.merchantUid = merchantUid;
-        this.applyNum = applyNum;
-        this.impUid = impUid;
         this.paymentNm = paymentNm;
         this.buyerEmail = buyerEmail;
-        this.buyerName = buyerName;
-        this.buyerTel = buyerTel;
+        this.buyer_name = buyer_name;
+        this.buyer_tel = buyer_tel;
         this.buyerAddress = buyerAddress;
         this.name = name;
-        this.amount = amount;
     }
 }

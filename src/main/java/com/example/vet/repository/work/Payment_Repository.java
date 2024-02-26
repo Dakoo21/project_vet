@@ -23,9 +23,8 @@ public class Payment_Repository {
     public void savePayment(PaymentVO paymentVO) {
         log.info("레포지토리1");
         // 결제 정보를 데이터베이스에 저장하는 쿼리 실행
-        String sql = "INSERT INTO payment_table (imp_uid, merchant_uid) VALUES (?, ?)";
+        String sql = "INSERT INTO payment_table (imp_uid, merchant_uid,pg_tid,name,paid_amount,buyer_name,buyer_tel,amount) VALUES (?,?,?,?,?,?,?,?)";
         log.info("레포지토리2");
         sqlSessionTemplate.insert("insertPayment", paymentVO);
     }
 }
-
