@@ -1,13 +1,13 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.vet.model.eSign" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.vet.model.SignDocument" %>
+<%@ page import="java.util.HashMap" %>
 <%
     int size = 0;
-    List<eSign> docList = null;
-    docList = (List<eSign>)request.getAttribute("docList");
+    List<SignDocument> docList = null;
+    docList = (List<SignDocument>)request.getAttribute("docList");
 
 
 %>
@@ -64,7 +64,6 @@
                             </div>
                         </div>
                     </h3>
-
                     <div class="card-tools">
                         <ul class="nav nav-pills ml-auto">
                             <li class="nav-item">
@@ -102,7 +101,7 @@
                                     <tbody>
 
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (SignDocument doc : docList) {
                                             if ("Rejected".equals(doc.getSign_state()) ||
                                                     "Drafted".equals(doc.getSign_state()) ||
                                                     "Approval".equals(doc.getSign_state())){
@@ -133,7 +132,11 @@
                                 <div style="display:flex; justify-content:center;">
                                     <ul class="pagination"></ul>
                                 </div>
+                                <div class="col-md-8">
+                                    <button id="btn_search1" class="btn btn-danger" onclick="location.href='/eSignDraft/draftInsertPage'">등록</button>
+                                </div>
                             </div>
+
                         </div>
                         <div class="chart tab-pane" id="select-reject" style="position: relative; height: 300px;">
                             <div class ="table">
@@ -150,7 +153,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (SignDocument doc : docList) {
                                             if ("Rejected".equals(doc.getSign_state())) {
                                             String docNo = doc.getSign_no();
                                             String docTitle = doc.getSign_title();
@@ -195,7 +198,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (SignDocument doc : docList) {
                                             if ("Drafted".equals(doc.getSign_state())) {
                                                 String docNo = doc.getSign_no();
                                                 String docTitle = doc.getSign_title();
@@ -242,7 +245,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (SignDocument doc : docList) {
                                             if ("Approval".equals(doc.getSign_state())) {
                                                 String docNo = doc.getSign_no();
                                                 String docTitle = doc.getSign_title();

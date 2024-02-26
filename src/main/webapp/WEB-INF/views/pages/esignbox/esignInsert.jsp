@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%--<%@ include file="/include/session.jsp"%>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전자결재</title>
     <%@ include file="/include/bootCommon.jsp"%>
-    <%@include file="/include/common/quill_common.jsp"%>
+    <%@ include file="/include/common/quill_common.jsp"%>
     <%--<%@include file="/include/common/bootstrap_common.jsp"%>--%>
     <%--<link rel="stylesheet" href="/css/style.css">--%>
     <style>
@@ -47,7 +48,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>임시보관함</h1>
+                        <h1>기안서 작성</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -77,14 +78,14 @@
                         <td>
                             <input type="hidden" id="prevApprovalCategoryNo" value="6747">
                             <select name="approval_form_no" class="write-select" autocomplete="off">
-                                <option value="">선택</option><option value="42768">지출 결의서</option><option value="42769">품의서</option>
+                                <option value="">선택</option><option value="42768">지출 결의서</option><option value="42769">품의서</option><option value="42770">입양신청서</option>
                                 <button class="weakblue" onclick="ApprovalDocument.getSelectApprovalForm();">문서보기</button>
                                 <input type="hidden" id="prevApprovalFormNo" value="42771">
                                 <input type="hidden" id="prevApprovalFormTitle" value="">
                             </select>
                         </td>
                         <th>작성자</th>
-                        <td>작성자 이름</td>
+                        <td><%=username%></td>
                     </tr>
                     <tr>
                         <th scope="row">보존 연한</th>
@@ -103,7 +104,6 @@
                 </table>
                 <div class="after" style="display: flex; align-items: center;">
                     <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 | </h4>
-
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">결재선</button>
                 </div>
                 <table class="table table-bordered">
@@ -134,24 +134,36 @@
                                 <tbody>
                                 <tr>
                                     <td class="stamp">
-                                        <span class="stamp-step-num">도장</span>
+<%--                                        <div class="after" style="display: flex; align-items: center;">--%>
+<%--                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">도장</button>--%>
+<%--                                        </div>--%>
                                     </td>
                                     <td class="stamp">
-                                        <span class="stamp-step-num">도장</span>
+<%--                                        <div class="after" style="display: flex; align-items: center;">--%>
+<%--                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">선택</button>--%>
+<%--                                        </div>--%>
                                     </td>
                                     <td class="stamp">
-                                        <span class="stamp-step-num">도장</span>
+<%--                                        <div class="after" style="display: flex; align-items: center;">--%>
+<%--                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">도장</button>--%>
+<%--                                        </div>--%>
                                     </td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
                                     <td class="name gt-position-relative">
-                                        <span class="stamp-step-num">1</span>대표이사
+                                        <span class="stamp-step-num"><%=username%></span>
                                     </td>
                                     <td class="name gt-position-relative">
-                                        <span class="stamp-step-num">1</span>대표이사
+                                        <div class="after" style="display: flex; align-items: center;">
+                                            <button id="lineselect" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">선택</button>
+                                        </div>
+                                    </td>
+                                    <td class="name gt-position-relative">
+                                        <div class="after" style="display: flex; align-items: center;">
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">선택</button>
+                                        </div>
                                     </td>
                                     <td></td>
                                     <td></td>
@@ -168,7 +180,6 @@
                 <div id="contents">
                     <form autocomplete="off" onsubmit="return false;">
                         <input type="submit" style="display:none;" onclick="return false;">
-
                         <div class="content_inbox">
                             <div class="cont_box write">
                                 <div class="approval-wrap write">
@@ -224,7 +235,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">게시판</h4>
+                <h4 class="modal-title">결재선 선택</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -232,6 +243,33 @@
                 <!-- <form id="f_board" method="get" action="./boardInsert"> -->
                 <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
                     <input type="hidden" id="b_content" name="b_content">
+                    <div class="form-floating mb-3 mt-3">
+                        <input type="checkbox" value="master1" checked>관리자
+                        <input type="checkbox" value="master2">부관리자
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
+                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 결재선 선택 모달 -->
+<div class="modal" id="selectAdmin">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">결재선 선택</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
+                <form id="lv1_board" method="post" enctype="multipart/form-data" action="./boardInsert">
+                    <input type="hidden" id="lv1_content" name="b_content">
                     <div class="form-floating mb-3 mt-3">
                         <input type="checkbox" value="master1" checked>관리자
                         <input type="checkbox" value="master2">부관리자

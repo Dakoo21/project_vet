@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.MasterMapper">
-    <resultMap id="eSignResultMap" type="com.example.vet.model.eSign">
+<mapper namespace="com.example.demo.SignDocumentMapper">
+    <resultMap id="eSignResultMap" type="com.example.vet.model.SignDocument">
     </resultMap>
     <select id="selectDocs" parameterType="Integer" resultMap="eSignResultMap">
-        SELECT SIGN_PK, SIGN_NO, SIGN_TITLE, SIGN_CONTENT, SIGN_DATE, ADOPT_PK, SIGN_STATE, WRITER_PK, SIGN_RESERV_YEAR, SIGN_TYPE, SIGNER_PK
+        SELECT SIGN_PK, SIGN_NO, SIGN_TITLE, SIGN_CONTENT, SIGN_DATE, ADOPT_PK, SIGN_STATE, WRITER_PK, SIGN_RESERV_YEAR, SIGN_TYPE
         FROM SIGN_TEST
         WHERE WRITER_PK = ${userPK}
-
     </select>
 
 </mapper>
