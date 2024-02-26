@@ -119,4 +119,36 @@ public class Login_Controller {
         log.info(response.toString());
         return response;
     }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 26.02.25
+     기능 : 비밀번호 찾기 기능
+     **********************************************************************************/
+
+    @PostMapping("/findpasword") // 요청 URL을 정확하게 지정
+    @ResponseBody
+    public Map<String, Object> findPassword(@RequestParam("ID") String memberID, @RequestParam("email") String memberEmail) { // 파라미터 명을 JSP 파일에서 보낸 데이터와 일치시킴
+        log.info("비밀번호 찾기 로직 시작");
+        Member member = new Member();
+        member.setMEMBER_ID(memberID);
+        member.setMEMBER_EMAIL(memberEmail);
+        log.info(member.toString());
+        String userRowPassword = login_service.findPassword(member);
+        String userPassword = userRowPassword.substring(10,30);
+        String encPassword = bCryptPasswordEncoder.encode(userPassword);
+        member.setMEMBER_PW(encPassword);
+        login_service.userPasswordUpdate(member);
+        log.info(userPassword);
+
+        // JSON 형식으로 데이터 반환
+        Map<String, Object> response = new HashMap<>();
+        if (userPassword != null) {
+            response.put("userPass", userPassword);
+        } else {
+            response.put("userPass", null);
+        }
+        log.info(response.toString());
+        return response;
+    }
 }

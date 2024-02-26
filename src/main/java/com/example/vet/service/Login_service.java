@@ -37,4 +37,22 @@ public class Login_service {
         userID = login_repository.findID(member);
         return userID;
     }
+
+    public String findPassword(Member member) {
+        log.info("비밀번호 찾기 서비스");
+        String userPassword;
+        userPassword = login_repository.findPassword(member);
+        return userPassword;
+    }
+
+    public void userPasswordUpdate(Member member) {
+        int result;
+        boolean isOK;
+        result = login_repository.userPasswordUpdate(member);
+        if (result == 1) {
+            isOK = true;
+        } else {
+            isOK = false;
+        }
+    }
 }
