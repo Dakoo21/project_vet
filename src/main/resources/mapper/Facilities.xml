@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vet.FacilitiesMapper">
+    <!--메인 화면 lIST 예약 시설 예약자 환자명 예약날짜 예약시간  <where>동적  어쩌구 저쩌구</where>-->
+    <select id="reserveList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT FACILITY_RESERVE_ID
+             , FACILITY_NM
+             , USER_NM
+             , ANIMAL_NM
+             , FACILITY_RESERVE_DT
+             , TO_CHAR(START_TIME + 30/(24*60)*RESERVE_START_TIME  , 'hh24:mi') AS START_TIME
+             , TO_CHAR(START_TIME + 30/(24*60)*(RESERVE_END_TIME+1), 'hh24:mi') AS END_TIME
+        FROM (SELECT R.FACILITY_RESERVE_ID
+                   , MAX(FACILITY_NM) AS FACILITY_NM
+                   , MAX(MEMBER_MEMBERNAME) AS USER_NM
+                   , MAX(ANIMAL_NM) AS ANIMAL_NM
+                   , MAX(FACILITY_RESERVE_DT) AS FACILITY_RESERVE_DT
+                   , MIN(RESERVE_TIME_INTERVAL) AS RESERVE_START_TIME
+                   , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
+                   , TO_DATE('2019-08-21 10:00', 'yyyy-mm-dd hh24:mi') AS START_TIME
+              FROM FACILITY_RESERVE_TEST R
+                       INNER JOIN USER_TEST5 U
+                                  ON 1=1
+                                      AND R.MEMBER_PK = U.MEMBER_PK
+                       INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
+                                  ON 1=1
+                                      AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
+                       INNER JOIN ANIMAL_TEST A
+                                  ON 1=1
+                                      AND R.ANIMAL_PK = A.ANIMAL_PK
+              WHERE 1=1
+                AND D.FACILITY_RESERVE_DT <![CDATA[>=]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+              GROUP BY R.FACILITY_RESERVE_ID)
+        ORDER BY FACILITY_RESERVE_DT ASC
+               , START_TIME ASC
+    </select>
+
+    <!--예약불가 확인-->
+    <select id="checkImpossible" parameterType="com.example.vet.model.FacilitiesVO" resultType="java.util.Map">
+        SELECT FACILITY_RESERVE_ID
+        FROM FACILITY_RESERVE_DETAIL_TEST
+        WHERE 1=1
+          AND FACILITY_RESERVE_NM = #{facilityNm}
+          AND FACILITY_RESERVE_DT = #{facilityReserveDt}
+          AND RESERVE_TIME_INTERVAL BETWEEN #{startInterval} AND #{endInterval}
+    </select>
+    <!--예약등록-->
+    <select id="createReserveId" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT FACILITY_PK_SEQ.NEXTVAL AS FACILITY_RESERVE_ID
+        FROM DUAL
+    </select>
+    <insert id="Insertreserve" parameterType="com.example.vet.model.FacilitiesVO">
+
+        INSERT
+        INTO FACILITY_RESERVE_TEST(
+                                    FACILITY_RESERVE_ID
+                                  , FACILITY_REMARKS
+                                  , ANIMAL_PK
+                                  , MEMBER_PK)
+        VALUES(
+                #{facilityReserveId}
+              , #{facilityRemarks}
+              , #{animalId}
+              , #{userNm} )
+    </insert>
+    <insert id="InsertReserveDetail" parameterType="com.example.vet.model.FacilitiesVO">
+        INSERT
+        INTO FACILITY_RESERVE_DETAIL_TEST( FACILITY_RESERVE_ID
+                                         , FACILITY_RESERVE_DT
+                                         , FACILITY_NM
+                                         , RESERVE_TIME_INTERVAL)
+        VALUES(
+                #{facilityReserveId}
+              , #{facilityReserveDt}
+              , #{facilityNm}
+              , #{timeInterval}
+              )
+    </insert>
+
+    <!--동물 명으로 동물 id랑 보호자명 찾기 -->
+    <select id="selecteAnimalID" parameterType="com.example.vet.model.FacilitiesVO">
+        select ANIMAL_PK AS animalId
+             , ANIMAL_NM AS animalNm
+             , ANIMAL_BDATE AS animalBdate
+             , A.MASTER_PK
+             , MASTER_NM
+        FROM ANIMAL_TEST A
+                 INNER JOIN MASTER_TEST M
+                            ON 1=1
+                                AND A.MASTER_PK = M.MASTER_PK
+        WHERE ANIMAL_NM
+                  LIKE  '%' || #{keyword} || '%'
+        order by ANIMAL_BDATE desc
+
+    </select>
+
+
+
+
+    <!--삭제-->
+    <delete id="deleteReserve" parameterType="int">
+        DELETE FROM FACILITY_RESERVE_DETAIL_TEST
+        WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
+    </delete>
+    <delete id="DeleteReserveDetail" parameterType="int">
+        DELETE FROM FACILITY_RESERVE_TEST
+        WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
+    </delete>
+
+    <!--수정-->
+    <update id="reserveUpdate" >
+        UPDATE FACILITY_RESERVE_TEST
+        SET FACILITY_REMARKS = #{facilityRemarks}
+          , ANIMAL_PK = #{animalId}
+        WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
+    </update>
+
+
+
+
+
+
+
+</mapper>
+
+
+
