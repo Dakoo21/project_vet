@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vet.repository.work.Payment_Repository">
+    <resultMap id="selectResultMap" type="com.example.vet.model.PaymentVO">
+        <result property="paymentPK" column="payment_pk"/>
+        <result property="buyerName" column="buyer_name"/>
+        <result property="buyerTel" column="buyer_tel"/>
+        <result property="buyerAddress" column="buyer_address"/>
+        <result property="amount" column="amount"/>
+    </resultMap>
+
+    <select id="paymentSelect" parameterType="com.example.vet.model.PaymentVO" resultMap="selectResultMap">
+        SELECT PAYMENT.PAYMENT_PK AS payment_pk,
+        PAYMENT.BUYER_NAME AS buyer_name,
+        PAYMENT.BUYER_TEL AS buyer_tel,
+        PAYMENT.AMOUNT AS amount,
+        PAYMENT.BUYER_ADDRESS AS buyer_address
+        FROM PAYMENT_TEST PAYMENT
+        <if test="paymentPK != null">
+            <where>
+                PAYMENT.PAYMENT_PK = #{paymentPK}
+            </where>
+        </if>
+    </select>
+
+    <insert id="insertPayment" parameterType="com.example.vet.model.PaymentVO">
+        INSERT INTO payment_test (payment_pk, imp_uid, merchant_uid)
+        VALUES (payment_pk_seq.nextval, #{impUid}, #{merchantUid})
+    </insert>
+
+</mapper>
