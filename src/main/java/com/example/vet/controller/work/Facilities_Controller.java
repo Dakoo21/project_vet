@@ -7,81 +7,57 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Map;
 
 //나중에 페이지 이름 명확하게 dailyReserve-> facilities라고 수정!!
 //자 리스트랑 insert 부터 해봅시당
 //5개씩 리스트 뽑을거임
 
 @Controller
-@RequestMapping("/reservespot/*")
+@RequestMapping("/pages/reservespot/*")
 public class Facilities_Controller {
 
-    private static  Logger logger = LoggerFactory.getLogger(Facilities_Controller.class);
+    private static Logger logger = LoggerFactory.getLogger(Facilities_Controller.class);
     private Facilities_Service facilitiesService;
     public Facilities_Controller(Facilities_Service facilitiesService){
         this.facilitiesService =facilitiesService;
     }
-    //    현 시간 부 모든 사람의 예약 목록 Read 기능
-    //WEB INF로 바뀐데요
-    //사이드바수정
+//    현 시간 부 모든 사람의 예약 목록 Read 기능
+    //이거 뭔가 링크 잘못된듯. 매핑을 바꿔주던 파일이름 을 바꿔주던 해야함
+
+
     @GetMapping("dailyReserve")
-    public String reservelist(Model model, FacilitiesVO facilitiesVO){
+    public String reserveList(Model model, FacilitiesVO facilitiesVO) throws Exception {
+
         logger.info("예약목록조회컨트롤러시작");
         logger.info("예약목록 조회 파라미터(facilitiesVO): {}", facilitiesVO);
-        List<Map<String, Object>> rList = facilitiesService.reserveList(facilitiesVO);
+        List<FacilitiesVO> rList = facilitiesService.reserveList(facilitiesVO);
         logger.info("[예약목록 조회 결과(rList)]:{}", rList.toString());
         model.addAttribute("rList", rList);
-        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
+        return "forward:/pages/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
     }
     //예약 생성
-    @PostMapping("Insertreserve")
+    @GetMapping("reserveInsert")
     public String reserveInsert(FacilitiesVO facilitiesVO){
         logger.info("예약생성 컨트롤러 시작");
         int result =0;
-        result = facilitiesService.Insertreserve(facilitiesVO);
-        return "redirect:/page/reservespot/dailyReserve";
+        result = facilitiesService.reserveInsert(facilitiesVO);
+        return "redirect:/pages/reservespot/dailyReserve";
     }
+
+
     //예약 수정
-    @PostMapping("reserveUpdate")
-    public String reserveUpdate(FacilitiesVO facilitiesVO){
-        logger.info("예약수정시작");
-        int result = 0;
-        result = facilitiesService.reserveUpdate(facilitiesVO);
-        return "redirect:/page/reservespot/dailyReserve";
-    }
+
     //예약 삭제  파라미터 수정
+//    @GetMapping("reserveDelete")
+//    public String reserveDelete(@RequestParam int bc_no,int b_no){
+//        logger.info("reserveDelete");
+//        int result = 0;
+//        result = facilitiesService.reserveDelete(bc_no);
+//        return "redirect:/pages/reservespot/dailyReserve";
+//    }
 
-    @GetMapping("reserveDelete")
-    public String reserveDelete(int facilityReserveId){
-        logger.info("reserveDelete 컨트롤러 시작");
-        int result = 0;
-        result = facilitiesService.DeleteReserve(facilityReserveId);
-        return "redirect:/page/reservespot/dailyReserve";
-    }
-
-    //동물 조회
-    @GetMapping("AnimalList")
-    public String AnimalList(Model model, FacilitiesVO facilitiesVO){
-        logger.info("동물조회컨트롤러시작");
-        logger.info("동물 조회 파라미터(facilitiesVO): {}", facilitiesVO);
-        List<Map<String, Object>> aList = facilitiesService.animalList(facilitiesVO);
-        logger.info("[예약목록 조회 결과(rList)]:{}", aList.toString());
-        model.addAttribute("aList", aList);
-        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는//찾아서 모달에 줘야하는데
-    }
-    //예약 가능확인
-    @GetMapping("checkImpossible")
-    public String checkImpossible(Model model, FacilitiesVO facilitiesVO){
-        logger.info("예약목록조회컨트롤러시작");
-        logger.info("예약목록 조회 파라미터(facilitiesVO): {}", facilitiesVO);
-        List<Map<String, Object>> cList = facilitiesService.checkImpossible(facilitiesVO);
-        logger.info("[예약목록 조회 결과(cList)]:{}", cList.toString());
-        model.addAttribute("cList", cList);
-        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
-    }
 }

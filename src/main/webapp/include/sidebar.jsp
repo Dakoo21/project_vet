@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page import="com.example.vet.config.auth.PrincipalDetails" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
@@ -8,7 +8,6 @@
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
     String username = (String) principalDetails.getUsername();
-    Integer userpk = principalDetails.getID();
     // Integer userPK = (Integer) request.getAttribute("userPK");
     // String username = (String) request.getAttribute("username");
     String role = (String) request.getAttribute("role");
@@ -630,7 +629,6 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalCustomerList.jsp" class="nav-link">
                             <a href="/pages/customerDB/totalDataRegister.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객-동물 DB등록</p>
@@ -646,14 +644,14 @@
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
                             <a href="/pages/customerDB/totalCustomerList.jsp" class="nav-link">
-                            <a href="/page/customerDB/totalCustomerList.jsp" class="nav-link">
+
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객 데이터</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
+
                             <a href="/pages/customerDB/medicalChart.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록 등록</p>
@@ -662,7 +660,6 @@
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
                             <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
-                            <a href="/page/customerDB/medicalLog.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록 조회</p>
                             </a>
@@ -733,17 +730,16 @@
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
                             <a href="/pages/esignbox/cancelledDocs.jsp" class="nav-link">
-                            <a href="/page/esignbox/cancelledDocs.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>취소보관함</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/esignbox/progressDocs.jsp" class="nav-link">
                             <a href="/pages/default/default.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>지출결의서</p>
+                            </a>
                             <a href="/page/esignbox/progressDocs.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진행중인 문서</p>
@@ -1065,7 +1061,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/stock/" class="nav-link">
+                            <a href="/pages/stock/stockList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>재고조회 리스트</p>
                             </a>

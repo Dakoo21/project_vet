@@ -30,11 +30,4 @@ public class Login_service {
         result = login_repository.checkId(id);
         return result;
     }
-
-    public String findID(Member member) {
-        log.info("아이디 찾기 서비스");
-        String userID;
-        userID = login_repository.findID(member);
-        return userID;
-    }
 }

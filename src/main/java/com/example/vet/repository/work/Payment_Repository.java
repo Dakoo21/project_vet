@@ -1,31 +1,40 @@
-package com.example.vet.repository.work;
-
-import com.example.vet.model.PaymentVO;
-import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Map;
-
-@Repository
-@Slf4j
-public class Payment_Repository {
-
-    private final SqlSessionTemplate sqlSessionTemplate;
-
-    @Autowired
-    public Payment_Repository(SqlSessionTemplate sqlSessionTemplate) {
-        this.sqlSessionTemplate = sqlSessionTemplate;
-    }
-
-    public void savePayment(PaymentVO paymentVO) {
-        log.info("레포지토리1");
-        // 결제 정보를 데이터베이스에 저장하는 쿼리 실행
-        String sql = "INSERT INTO payment_table (imp_uid, merchant_uid) VALUES (?, ?)";
-        log.info("레포지토리2");
-        sqlSessionTemplate.insert("insertPayment", paymentVO);
-    }
-}
-
+// package com.example.vet.repository.work;
+//
+// import com.example.vet.model.PaymentVO;
+// import lombok.extern.slf4j.Slf4j;
+// import org.mybatis.spring.SqlSessionTemplate;
+// import org.springframework.stereotype.Repository;
+//
+// import java.util.List;
+// import java.util.Map;
+//
+// @Repository
+// @Slf4j
+// public class Payment_Repository {
+//
+//     private final SqlSessionTemplate sqlSessionTemplate;
+//
+//     public Payment_Repository(SqlSessionTemplate sqlSessionTemplate) {
+//         this.sqlSessionTemplate = sqlSessionTemplate;
+//     }
+//
+//     public List<Map<String, Object>> Select(PaymentVO paymentVO) {
+//         log.info("paymemt Select List Repository 조회 시작");
+//         List<Map<String, Object>> paymentList;
+//         paymentList = sqlSessionTemplate.selectList("paymentList", paymentVO);
+//         log.info("paymemt Select List Repository 조회 끝");
+//         return paymentList;
+//     }
+//
+//     public int Insert() {
+//         return 0;
+//     }
+//
+//     public int Update() {
+//         return 0;
+//     }
+//
+//     public int Delete() {
+//         return 0;
+//     }
+// }
