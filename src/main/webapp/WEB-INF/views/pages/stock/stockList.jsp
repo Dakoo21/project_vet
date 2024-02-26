@@ -1,21 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="com.util.BSPageBar" %>
-<%
-    List<Map<String, Object>> stockList = (List<Map<String, Object>>) request.getAttribute("stockList");
-    int size = 0;
-    if (stockList != null) {
-        size = stockList.size();
-    }
-
-
-    int numPerPage = 5;
-    int nowPage = 0;
-    if(request.getParameter("nowPage")!=null){
-        nowPage = Integer.parseInt(request.getParameter("nowPage"));
-    }
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,41 +100,590 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <%
-                                    for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
-                                        if(i == size) break;
-                                        Map<String,Object> rmap = stockList.get(i);
-                                %>
                                 <tbody>
                                 <tr>
                                     <td><input type="checkbox" value="value1"></td>
-                                    <td><%=rmap.get("stock_common_code")%></td>
-                                    <td><%=rmap.get("stock_common_type")%></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
                                     <td><li class="list-inline-item">
                                         <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
                                     </li></td>
-                                    <td><%=rmap.get("stock_common_nm")%></td>
-                                    <td>10,000(입고 가격)</td>
-                                    <td><%=rmap.get("stock_common_sellprice")%></td>
-                                    <td>50(재고 수량)</td>
+                                    <td>상품명1</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0002</td>
+                                    <td>식품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명2</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0003</td>
+                                    <td>약품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명3</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0004</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명4</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0005</td>
+                                    <td>식품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명5</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0006</td>
+                                    <td>약품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명6</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0007</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명7</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0008</td>
+                                    <td>식품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명8</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0009</td>
+                                    <td>약품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명9</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0010</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명10</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
                                 </tr>
                                 </tbody>
-                                <%
-                                    }
-                                %>
+
                             </table>
                         </div>
-                    </div>
-                    <div style="display:flex; justify-content:center;">
-                        <ul class="pagination">
+                        <div class="chart tab-pane" id="select-products" style="position: relative; height: 100%;">
+                            <table id="stocktableListProducts" class="table table-striped projects">
+                                <thead>
+                                <tr>
+                                    <th><input type="checkbox" value="value"></th>
+                                    <th style="width: 5%">
+                                        상품코드
+                                    </th>
+                                    <th style="width: 10%">
+                                        구분
+                                    </th>
+                                    <th style="width: 10%">
+                                        이미지
+                                    </th>
+                                    <th style="width: 45%" class="text-center">
+                                        상품명
+                                    </th>
+                                    <th style="width: 10%">
+                                        입고가
+                                    </th>
+                                    <th style="width: 10%">
+                                        판매가
+                                    </th>
+                                    <th style="width: 15%">
+                                        재고량
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품조회</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                </tbody>
 
-                            <%
-                                String pagePath = "stockList";
-                                BSPageBar bspb = new BSPageBar(numPerPage, size, nowPage, pagePath);
-                                out.print(bspb.getPageBar());
-                            %>
+                            </table>
+                        </div>
+                        <div class="chart tab-pane" id="select-food" style="position: relative; height: 100%;">
+                            <table id="stocktableListFood" class="table table-striped projects">
+                                <thead>
+                                <tr>
+                                    <th><input type="checkbox" value="value"></th>
+                                    <th style="width: 5%">
+                                        상품코드
+                                    </th>
+                                    <th style="width: 10%">
+                                        구분
+                                    </th>
+                                    <th style="width: 10%">
+                                        이미지
+                                    </th>
+                                    <th style="width: 45%" class="text-center">
+                                        상품명
+                                    </th>
+                                    <th style="width: 10%">
+                                        입고가
+                                    </th>
+                                    <th style="width: 10%">
+                                        판매가
+                                    </th>
+                                    <th style="width: 15%">
+                                        재고량
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>식품조회</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                </tbody>
 
-                        </ul>
+                            </table>
+                        </div>
+                        <div class="chart tab-pane" id="select-drugs" style="position: relative; height: 100%;">
+                            <table id="stocktableListDrugs" class="table table-striped projects">
+                                <thead>
+                                <tr>
+                                    <th><input type="checkbox" value="value"></th>
+                                    <th style="width: 5%">
+                                        상품코드
+                                    </th>
+                                    <th style="width: 10%">
+                                        구분
+                                    </th>
+                                    <th style="width: 10%">
+                                        이미지
+                                    </th>
+                                    <th style="width: 45%" class="text-center">
+                                        상품명
+                                    </th>
+                                    <th style="width: 10%">
+                                        입고가
+                                    </th>
+                                    <th style="width: 10%">
+                                        판매가
+                                    </th>
+                                    <th style="width: 15%">
+                                        재고량
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>약품조회</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" value="value1"></td>
+                                    <td>ABC_0001</td>
+                                    <td>용품</td>
+                                    <td><li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar5.png">
+                                    </li></td>
+                                    <td>상품명</td>
+                                    <td>10,000</td>
+                                    <td>20,000</td>
+                                    <td>50</td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10"></div> <!-- 빈 공간 생성 -->
@@ -163,7 +696,7 @@
 
                 <script>
                     function redirectToStockInsert() {
-                        window.location.href = "stockInsertPage";
+                        window.location.href = "/pages/stock/stockInsert.jsp";
                     }
                 </script>
             </div>
@@ -180,10 +713,16 @@
 </div>
 <!-- ./wrapper -->
 
-<%@include file="/include/bootCommonFoot.jsp"%>
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
     $(function () {

@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                <a id="deleteButton" href="#" onclick="deleteBooking(<%=rmap.get("bookingPk")%>)"><button>예약삭제</button></a>
+                <a id="deleteButton" onclick="deleteBooking(<%=rmap.get("bookingPk")%>)"><button>예약삭제</button></a>
                 <script>
                     function deleteBooking(bookingPk) {
                         if (confirm("예약을 삭제하시겠습니까?")) {
@@ -137,9 +137,28 @@
                             form.submit();
                         }
                     }
+                    function startDiag(bookingPk){
+                        if (confirm("진료를 시작하시겠습니까?")) {
+                            var form2 = document.createElement("form");
+                            form2.setAttribute("method", "POST");
+                            form2.setAttribute("action", "http://localhost:8000/diag/diagInsert");
+
+                            var hiddenField = document.createElement("input");
+                            hiddenField.setAttribute("type", "hidden");
+                            hiddenField.setAttribute("name", "bookingPk");
+                            hiddenField.setAttribute("value", bookingPk);
+
+                            form2.appendChild(hiddenField);
+
+                            document.body.appendChild(form2);
+                            form2.submit();
+                        }
+                    }
                 </script>
 
                 <a id="updateButton" onclick="openModal()"><button>수정</button></a>
+                <a id="diagStartButton" onclick="startDiag(<%=rmap.get("bookingPk")%>)"><button>진료 시작</button></a>
+
             </div>
         </section>
     </section>

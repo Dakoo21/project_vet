@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -12,10 +11,6 @@
 
 
 %>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
->>>>>>> test7
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +24,6 @@
     <%--월간달력--%>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-<<<<<<< HEAD
             let events;
             const calendarEl = document.getElementById('calendar')
             const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -43,30 +37,12 @@
                         number.classList.add("fc-daygrid-day-number");
                         number.innerHTML = info.dayNumberText.replace("일", '').replace("日", "");
                         return {html: number.outerHTML};
-=======
-            const calendarEl = document.getElementById('calendar')
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-                ,schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'
-                ,locale: 'ko'
-                ,fixedWeekCount: false
-                ,dayCellContent: function(info) {
-                    if (info.view.type === "dayGridMonth") {
-                        var number = document.createElement("a");
-                        number.classList.add("fc-daygrid-day-number");
-                        number.innerHTML = info.dayNumberText.replace("일", '').replace("日","");
-                        return { html: number.outerHTML };
->>>>>>> test7
                     }
                     return {};
                 }
 
 
-<<<<<<< HEAD
                 , headerToolbar: {
-=======
-                ,headerToolbar: {
->>>>>>> test7
                     left: 'prev',
                     center: 'title',
                     right: 'next today'
@@ -79,7 +55,6 @@
                     month = date.date.month + 1;
                     day = dayOfMonth;
 
-<<<<<<< HEAD
                     return year + "-" + month + "월" + "-" + day + "일";
                 },
 
@@ -99,7 +74,7 @@
                         background: '000000',
                     }
                     <% if (i < bList.size() - 1) { %>,<% } %>
-                <% } %>
+                    <% } %>
                 ]
             });
             calendar.render();
@@ -110,41 +85,6 @@
 
     </script>
 
-=======
-                    return year + "-" + month + "월"+"-"+day+"일";
-                },
-            })
-            calendar.render()
-        })
-    </script>
-    <%--이건 일일현황--%>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarTimelineEl = document.getElementById('calendarTimeline');
-            var calendarTimeline = new FullCalendar.Calendar(calendarTimelineEl, {
-                initialView: 'resourceTimelineOneDay'
-                ,schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'
-                ,views: {
-                    resourceTimelineOneDay: {
-                        type: 'resourceTimeline',
-                        duration: { days: 1 }
-                    }
-                }
-                ,locale: 'ko'
-                ,slotMinTime: '10:00:00', // 시작 시간을 오전 10시로 설정
-                slotMaxTime: '20:00:00' // 종료 시간을 오후 8시로 설정
-                ,headerToolbar: {
-                    left: '',
-                    center: '',
-                    right: ''
-
-                },
-            });
-            calendarTimeline.render();
-        });
-        var selectBox = document.getElementById("selectBox");
-    </script>
->>>>>>> test7
     <style>
         /* CSS 코드를 여기에 작성합니다 */
         #calendar {
@@ -235,20 +175,16 @@
                             <li class="breadcrumb-item active">Icons</li>
                         </ol>
                     </div>
-<<<<<<< HEAD
                     <div id='calendar'></div>
-=======
->>>>>>> test7
                 </div>
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
-<<<<<<< HEAD
         <div style="text-align: center;">
 
             <a id="reservationButton" href="http://localhost:8000/booking/bookingRegister"><button style="right: 150px">예약</button></a>
         </div>
-        </div>
+    </div>
     <!-- /.content-wrapper -->
     <!--footer-->
 
@@ -259,162 +195,6 @@
 
 <!-- ./wrapper -->
 <%@ include file="/include/footer.jsp"%>
-=======
-        <section class="content">
-            <!--여기 -->
-            <div id='calendar'></div>
-            <div id='calendarTimeline'>
-                <button id="reservationButton">예약</button>
-                <button id="reservationDetailButton">상세조회</button>
-                <div id="reservationModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <!-- 예약 양식 -->
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">고객진료예약등록</h3>
-                            </div>
-                            <div class="card-body">
-                                <!-- 보호자명 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="userName" style="display: inline-block; width: 70px;">보호자명</label>
-                                    <span id="userName">김엘모</span>
-                                </div>
-                                <!-- 동물선택 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label style="display: inline-block; width: 70px;">환축명</label>
-                                    <select class="form-control select2" style="display: inline-block; width: 150px;">
-                                        <option selected="selected">선택</option>
-                                        <option>동물1</option>
-                                        <option>동물2</option>
-                                        <option>동물3</option>
-                                    </select>
-                                </div>
-                                <!-- 예약일 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="reservationdate" style="display: inline-block; width: 70px;">예약일</label>
-                                    <input type="date" id="reservationdate" class="form-control" style="display: inline-block; width: 150px;">
-                                </div>
-                                <!-- 예약시간 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label style="display: inline-block; width: 70px;">예약시간</label>
-                                    <select class="form-control select2" style="display: inline-block; width: 150px;">
-                                        <option selected="selected">선택</option>
-                                        <option>오전 10:00</option>
-                                        <option>오전 10:30</option>
-                                        <option>오전 11:00</option>
-                                        <option>오전 11:30</option>
-                                        <option>오후 12:00</option>
-                                        <option>오후 12:30</option>
-                                        <option>오후 1:00</option>
-                                        <option>오후 1:30</option>
-                                        <option>오후 2:00</option>
-                                        <option>오후 2:30</option>
-                                        <option>오후 3:00</option>
-                                        <option>오후 3:30</option>
-                                        <option>오후 4:00</option>
-                                        <option>오후 4:30</option>
-                                        <option>오후 5:00</option>
-                                        <option>오후 5:30</option>
-                                        <option>오후 6:00</option>
-                                        <option>오후 6:30</option>
-                                        <option>오후 7:00</option>
-                                        <option>오후 7:30</option>
-                                    </select>
-                                </div>
-                                <!-- 예약구분 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label style="display: inline-block; width: 70px;">예약구분</label>
-                                    <select class="form-control select2" style="display: inline-block; width: 150px;">
-                                        <option selected="selected">선택</option>
-                                        <option>진료</option>
-                                        <option>미용</option>
-                                    </select>
-                                </div>
-                                <!-- 담당의 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label style="display: inline-block; width: 70px;">담당의</label>
-                                    <select class="form-control select2" style="display: inline-block; width: 150px;">
-                                        <option selected="selected">선택</option>
-                                        <option>원장</option>
-                                        <option>부원장</option>
-                                    </select>
-                                </div>
-                                <!-- 의심증상 -->
-                                <div class="form-group">
-                                    <label>의심증상</label>
-                                    <textarea class="form-control" rows="3" placeholder="환축의 현재 상태를 기재해 주세요"></textarea>
-                                </div>
-                                <button id="reservationUpdateButton">수정</button>
-                                <button id="reservationSaveButton">저장</button>
-                            </div>
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.modal-content -->
-                </div><!--예약 모달 end -->
-                <!-- 조회 모달 -->
-                <div id="reserveDetailModal" class="modal">
-                    <div class="modal-content">
-                        <span class="detailclose">&times;</span>
-                        <!-- 예약 양식 -->
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">예약조회</h3>
-                            </div>
-                            <div class="card-body">
-                                <!-- 보호자명 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="sel-userName" style="display: inline-block; width: 70px;">보호자명</label>
-                                    <span id="sel-userName">김엘모</span>
-                                </div>
-                                <!-- 동물선택 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="sel-petName" style="display: inline-block; width: 70px;">환축명</label>
-                                    <span id="sel-petName">나비</span>
-                                </div>
-                                <!-- 예약일 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="sel-reservationdate" style="display: inline-block; width: 70px;">예약일</label>
-                                    <input type="date" id="sel-reservationdate" class="form-control" style="display: inline-block; width: 150px;">
-                                </div>
-                                <!-- 예약시간 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="sel-time"style="display: inline-block; width: 70px;">예약시간</label>
-                                    <span id="sel-time">11:00</span>
-                                </div>
-                                <!-- 예약구분 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="sel-type" style="display: inline-block; width: 70px;">예약구분</label>
-                                    <span id="sel-type">진료</span>
-                                </div>
-                                <!-- 담당의 -->
-                                <div class="form-group" style="display: inline-block; width: 240px;">
-                                    <label for="sel-doc" style="display: inline-block; width: 70px;">담당의</label>
-                                    <span id="sel-doc">원장</span>
-                                </div>
-                                <!-- 의심증상 -->
-                                <div class="form-group">
-                                    <label>의심증상</label>
-                                    <textarea class="form-control" rows="3" placeholder="환축의 현재 상태를 기재해 주세요"></textarea>
-                                </div>
-                                <button id="detailcloseBtn">딛기</button>
-                            </div>
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.modal-content -->
-                </div><!-- 조회 모달 end -->
-            </div>
-        <!-- /.content -->
-        </section>
-    </div>
-    <!-- /.content-wrapper -->
-    <!--footer-->
-    <%@ include file="/include/footer.jsp"%>
-</div>
-<!-- ./wrapper -->
->>>>>>> test7
 <%@ include file="/include/bootCommonFoot.jsp"%>
 </body>
 </html>
