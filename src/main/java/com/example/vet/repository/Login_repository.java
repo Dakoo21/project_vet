@@ -50,4 +50,17 @@ public class Login_repository {
         userID = sqlSessionTemplate.selectOne("findID", member);
         return userID;
     }
+
+    public String findPassword(Member member) {
+        log.info("비밀번호 찾기 레포");
+        String userPasswoard;
+        userPasswoard = sqlSessionTemplate.selectOne("findPassword", member);
+        return userPasswoard;
+    }
+
+    public int userPasswordUpdate(Member member) {
+        int result;
+        result = sqlSessionTemplate.update("userPasswordUpdate", member);
+        return result;
+    }
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page import="com.example.vet.config.auth.PrincipalDetails" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
