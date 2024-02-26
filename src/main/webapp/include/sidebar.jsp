@@ -1064,7 +1064,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/stock/stockList.jsp" class="nav-link">
+                            <a href="/stock/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>재고조회 리스트</p>
                             </a>

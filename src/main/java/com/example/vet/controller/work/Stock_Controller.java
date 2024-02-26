@@ -1,131 +1,109 @@
 package com.example.vet.controller.work;
 
-
-import com.example.vet.model.BookingVO;
 import com.example.vet.model.StockCommonVO;
 import com.example.vet.service.work.Stock_Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("stock")
+@RequestMapping("stock/*")
+@Slf4j
 public class Stock_Controller {
-//    Logger logger = LoggerFactory.getLogger(Stock_Controller.class);
-//
-//    private final Stock_Service stockService;
-//
-//    public Stock_Controller(Stock_Service stockService) {
-//        this.stockService = stockService;
-//    }
-//
-//    @GetMapping("stockList")
-//    public String select(Model model){
-//        StockCommonVO stockCommonVO = null;
-//        List<Map<String,Object>> sList = stockService.Select(stockCommonVO);
-//        logger.info(sList.toString());
-//        model.addAttribute("sList", sList);
-//        return "pages/stock/stockList";
-//
-//    }
-//
-//    @GetMapping("stockDetail")
-//    public String listDetail(@RequestParam int stockPK, Model model) {
-//
-//        StockCommonVO stockCommonVO = null;
-//        stockCommonVO.setStockCommonPk(stockPK);
-//        logger.info(stockCommonVO.toString());
-//        List<Map<String,Object>> sList = stockService.Select(stockPK);
-//
-//        model.addAttribute("sList", sList);
-//        return "pages/docbook/bookingMainCustomer";
-//    }
-//
-//    @PostMapping("bookingUpdate")
-//    public String update(@RequestParam Map<String, Object> rmap) {
-//        BookingVO bookingVO = new BookingVO();
-//        Integer bookingPK = Integer.parseInt(rmap.get("BOOKING_PK").toString());
-//        bookingVO.setBookingPk(bookingPK);
-//
-//        // 시작시간
-//        String bookingstart = (String) rmap.get("BOOKING_START");
-//        bookingVO.setBookingStart(bookingstart);
-//
-//        // 종료시간
-//        String bookingEnd = (String) rmap.get("BOOKING_END");
-//        bookingVO.setBookingEnd(bookingEnd);
-//
-//        //서비스종류
-//        String bookingtype = (String) rmap.get("BOOKING_TYPE");
-//        bookingVO.setBookingType(bookingtype);
-//
-//        //동물 pk
-//        Integer animalPK = Integer.parseInt(rmap.get("ANIMAL_PK").toString());
-//        bookingVO.setAnimalPk(animalPK);
-//
-//
-//        logger.info(bookingVO.toString());
-//
-//        int updated = bookingService.Update(bookingVO);
-//
-//        if (updated == 1) {
-//            return "redirect:bookingMainCustomer";
-//        } else {
-//            return "error";
-//        }
-//    }
-//
-//    @PostMapping("bookingInsert")
-//    public String insert(@RequestParam Map<String, Object> rmap) {
-//        BookingVO bookingVO = new BookingVO();
-//
-//        // 시작시간
-//        String bookingstart = (String) rmap.get("BOOKING_START");
-//        bookingVO.setBookingStart(bookingstart);
-//
-//        // 종료시간
-//        String bookingEnd = (String) rmap.get("BOOKING_END");
-//        bookingVO.setBookingEnd(bookingEnd);
-//
-//        //서비스종류
-//        String bookingtype = (String) rmap.get("BOOKING_TYPE");
-//        bookingVO.setBookingType(bookingtype);
-//
-//        //동물 pk
-//        Integer animalPK = Integer.parseInt(rmap.get("ANIMAL_PK").toString());
-//        bookingVO.setAnimalPk(animalPK);
-//
-//
-//        logger.info(bookingVO.toString());
-//
-//        int updated = bookingService.Update(bookingVO);
-//
-//        if (updated == 1) {
-//            return "redirect:bookingMainCustomer";
-//        } else {
-//            return "error";
-//        }
-//    }
-//
-//
-//    @PostMapping("bookingDelete")
-//    public String Delete(int bookingPK) {
-//
-//        int deleted = bookingService.Delete(bookingPK);
-//
-//        if(deleted == 1) {
-//            return "redirect:bookingMainCustomer";
-//        }
-//        else{
-//            return "error";
-//        }
-//    }
+    private final Stock_Service stock_service;
+
+    public Stock_Controller(Stock_Service stock_service) {
+        this.stock_service = stock_service;
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 24.02.25
+     기능 : 재고 디테일 페이지 연결
+     **********************************************************************************/
+
+    @GetMapping("stockInsertPage")
+    public String StockInsertPage () {
+        return "pages/stock/stockInsert";
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 24.02.25
+     기능 : 재고 전체 조회
+     **********************************************************************************/
+
+    @GetMapping("")
+    public String StockList (Model model, StockCommonVO stockCommonVO) {
+        log.info("재고 전체 조회 controller 시작");
+        List<Map<String, Object>> stockList = null;
+        stockList = stock_service.stockList(stockCommonVO);
+        model.addAttribute("stockList", stockList);
+        return "pages/stock/stockList";
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 24.02.25
+     기능 : 재고 등록
+     **********************************************************************************/
+
+    @PostMapping("stockInsert")
+    public String StockInsert(StockCommonVO stockCommonVO) {
+        log.info("재고 등록 시작");
+        log.info(stockCommonVO.toString());
+        int result;
+        String path;
+        result = stock_service.stockInsert(stockCommonVO);
+        if (result == 1) {
+            path = "pages/stock/";
+        } else {
+            path = "stockInsertError.jsp";
+        }
+        return path;
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 24.02.25
+     기능 : 재고 삭제
+     **********************************************************************************/
+
+    @PostMapping("stockDelete")
+    public String StockDelete (int stock_common_pk) {
+        int result;
+        String path;
+        result = stock_service.StockDelete(stock_common_pk);
+        if (result == 1) {
+            path = "";
+        } else {
+            path = "";
+        }
+        return path;
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 24.02.25
+     기능 : 재고 디테일 조회
+     **********************************************************************************/
+
+    @PostMapping("stockUpdate")
+    public String StrockUpdate (StockCommonVO stockCommonVO) {
+        int result;
+        String path;
+        result = stock_service.stockUpdate(stockCommonVO);
+        if (result == 1) {
+            path = "";
+        } else {
+            path = "";
+        }
+        return path;
+    }
 }
