@@ -43,8 +43,14 @@ public class Facilities_Controller {
     public String reserveInsert(FacilitiesVO facilitiesVO){
         logger.info("예약생성 컨트롤러 시작");
         int result =0;
+        String path = "";
         result = facilitiesService.Insertreserve(facilitiesVO);
-        return "redirect:/page/reservespot/dailyReserve";
+        if (result == 1) {// 입력이 성공했을때
+            path = "redirect:/page/reservespot/dailyReserve";// forward안됨
+        } else {// 입력이 실패 했을때
+            path =  "error";
+        }
+        return path;
     }
     //예약 수정
     @PostMapping("reserveUpdate")
@@ -65,15 +71,7 @@ public class Facilities_Controller {
     }
 
     //동물 조회
-    @GetMapping("AnimalList")
-    public String AnimalList(Model model, FacilitiesVO facilitiesVO){
-        logger.info("동물조회컨트롤러시작");
-        logger.info("동물 조회 파라미터(facilitiesVO): {}", facilitiesVO);
-        List<Map<String, Object>> aList = facilitiesService.animalList(facilitiesVO);
-        logger.info("[예약목록 조회 결과(rList)]:{}", aList.toString());
-        model.addAttribute("aList", aList);
-        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는//찾아서 모달에 줘야하는데
-    }
+
     //예약 가능확인
     @GetMapping("checkImpossible")
     public String checkImpossible(Model model, FacilitiesVO facilitiesVO){

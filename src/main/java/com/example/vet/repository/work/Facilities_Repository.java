@@ -1,6 +1,8 @@
 package com.example.vet.repository.work;
 
 import com.example.vet.model.FacilitiesVO;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,11 +71,18 @@ public class Facilities_Repository {
         return result;
     }
     //동물 리스트
-    public List<Map<String, Object>> animaList(FacilitiesVO facilitiesVO) {
-
-        List<Map<String, Object>> aList= sqlSessionTemplate.selectList("selecteAnimalList",facilitiesVO);
-        logger.info(aList.toString());
-        return aList;
+//    public List<Map<String, Object>> animaList(FacilitiesVO facilitiesVO) {
+//
+//        List<Map<String, Object>> aList= sqlSessionTemplate.selectList("selecteAnimalList",facilitiesVO);
+//        logger.info(aList.toString());
+//        return aList;
+//    }
+    public List<Map<String, Object>> animalList(String animalNm) {// gubun:n_title, keyword:휴관
+        logger.info("animalList");
+        // JAVA -> MyBatis -> Oracle
+        List<Map<String, Object>> list = sqlSessionTemplate.selectList("selectAnimalID",animalNm);
+        logger.info(list.toString());
+        return list;
     }
     //예약가능확인
     public List<Map<String, Object>> checkImpossible(FacilitiesVO facilitiesVO) {

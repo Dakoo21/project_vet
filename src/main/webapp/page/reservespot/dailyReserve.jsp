@@ -11,6 +11,7 @@
     int size = 0;//전체 레코드 수
     //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
     List<Map<String, Object>> rList = (List)request.getAttribute("rList");
+
     if(rList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
         size = rList.size();
 //		rmap = bList.get(0);//상세보기 내용들 담김
@@ -41,7 +42,24 @@
         // Set the minimum value of the date input to today
         document.getElementById("date").min = todayDate;
         //달력 이전 날짜 막기
-
+        //삭제
+        function cancel(facilityReserveId){
+            window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
+        }
+        //넣기
+        const reserveInsert = () => {
+            //input type의 button은 submit이 아니다.  - 전송 -> 어디로 가니? -> action의 url로 이동한다.
+            //웹서비스에서의 URL요청은 NoticeController메소드 호출을 의미하는 것이다.
+            //@GetMapping, PostMapping Restful API - 컨트롤계층에만 국한됨
+            document.querySelector("#f_reserve").submit();
+            /* 클래스 선택자면 .
+        div가 여러개 면 array 돔트리 같은이름 여러개면? 아이디면 # ===>	<form id="f_notice"
+        input type 의 버튼은 submmit이 아니다 서브밋이 하는 일은 전송이다
+        어디로 가는가?
+        action의 url로 이동한다.
+        웹 서비스에서의 Url 요청은 notice controller메소드 호출을 의미한다
+        @getMapping, Postmapping Restful api 컨트롤 계층에만 국한된다. */
+        }
         function searchEnter(){
             console.log('searchEnter')
             console.log(window.event.keyCode);//13
@@ -49,20 +67,24 @@
                 animalIdSearch();
             }
         }//end of searchEnter
+        //삭제 버튼
 
         // 검색 및 결과 표시 함수
         function animalIdSearch(){
-            const keyword = document.getElementById("#keyword").value;
-            console.log(`${keyword}`);
-            if (keyword === "") {
+            const animalNm = document.getElementById("animalNm").value;
+            console.log(animalNm);
+            if (animalNm === "") {
                 return; // 검색어가 없으면 아무것도 하지 않음
             }
             // 서버에 검색을 수행하기 위해 AJAX 요청 보내기
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", `/search?keyword=${keyword}`);
+            console.log("아작스"+animalNm);
+            xhr.open("GET", `/reservespot/animalList?animalNm=`+animalNm);
+            console.log("겟하고난뒤"+animalNm);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
+                        console.log(xhr.responseText)
                         const response = JSON.parse(xhr.responseText);
                         // 검색 결과를 모달에 표시
                         displaySearchResults(response);
@@ -73,23 +95,31 @@
             };
             xhr.send();
             // // 검색어 입력창 초기화
-            // document.querySelector("#keyword").value = '';
+            document.getElementById("animalNm").value = '';
         }
         // 모달에 검색 결과 표시 함수
         function displaySearchResults(results) {
             const searchResultsList = document.getElementById('searchResults');
             // 이전에 표시된 결과를 모두 지우기
             searchResultsList.innerHTML = '';
-
             // 결과를 모달에 추가
             results.forEach(result => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${result.animalName} ${result.animalBdate}`; // 결과에서 동물 이름과 날짜를 가져와서 li 요소에 표시
+                console.log(result);
+                console.log(Object.keys(result));
+                listItem.textContent = "("+result.ANIMALBDATE+") " + result.ANIMALNM + " : " + result.MASTER_NM ; // 결과에서 동물 이름과 날짜를 가져와서 li 요소에 표시
                 // li 요소에 margin-bottom 스타일 추가
+                console.log("리스트아이템"+listItem);
                 listItem.style.marginBottom = '7px';
                 searchResultsList.appendChild(listItem);
+                // 클릭 이벤트 리스너 등록
+                listItem.addEventListener('click', function() {
+                    // 다른 모달에 Nm 내용 추가
+                document.getElementById('inputMasterNm').value = result.MASTER_NM;
+                    document.getElementById('animalId').value = result.ANIMALNM;
+                    document.getElementById('animalPk').value = result.ANIMALPK;
+                });
             });
-
         }
         function checkReservation() {
             // 여기서 예약이 이미 있는지 확인하는 로직을 작성합니다.
@@ -109,10 +139,7 @@
                 alert("잘못된 시간입력입니다.");
             }
         }
-        //삭제 버튼
-        function cancel(id){
 
-        }
     </script>
 
     <style>
@@ -136,7 +163,7 @@
             text-align: right;
             padding-right: 65px !important;
         }
-        #r_content{
+        #facilityRemarks{
             width: 100%;
             padding: 0;
             font-size: 14px;
@@ -474,14 +501,16 @@
                 <!-- /.container-fluid -->
                 <%--            시설 모달--%>
                 <div class="modal fade" id="modal-lg">
+                    <form id="f_reserve" method="post" action="./Insertreserve">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content" style="display: flex; flex-direction: column; height: 100%;">
+
                             <div class="modal-header">
-                                <select id="selectRoomBox" class="selectRoom-box">
-                                    <option value="">수술실</option>
-                                    <option value="1">면회실</option>
-                                    <option value="2">방사선실</option>
-                                    <option value="3">미용실</option>
+                                <select id="facilityNm" class="selectRoom-box" >
+                                    <option value="1">수술실</option>
+                                    <option value="2">면회실</option>
+                                    <option value="3">방사선실</option>
+                                    <option value="4">미용실</option>
                                     <!-- 필요한 만큼 옵션을 추가하세요 -->
                                 </select>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -500,12 +529,12 @@
                                 </div>
                                 <div class="rightSide">
                                     <div class="reservePicture">
-                                        <img src="./62562747.PNG" alt="시설사진1" >
-                                        <img src="./62562747.PNG" alt="시설사진2">
+                                        <img src="/img/1.jpg" alt="시설사진1" >
+                                        <img src="/img/2.jpg" alt="시설사진2">
                                     </div>
                                     <div class="d-flex">
 
-                                        <input type="date" />
+                                        <input type="date" id="facilityReserveDt" />
 
                                         <select id="selecStartTimetBox" class="select-box mr-2">
                                             <option value="0">10:00</option>
@@ -556,33 +585,44 @@
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                     </div>
-                                    <div>내이름</div>
+                                    <div><input type="text" id="memberNm" class="text-input" readonly value="<%=username%>">
+                                        <span>
+                                            <input type="text" id="memberPk" class="text-input" readonly value="<%=userpk%>" hidden>
+                                        </span>
+                                        <span>
+                                            <input type="text" id="animalPk" class="text-input" readonly hidden>
+                                        </span>
+                                    </div>
                                     <div>
-                                        <input type="text" class="text-input">
+                                        <input type="text" id="animalId" class="text-input" readonly>
                                         <button class="btn btn btn-default"  data-toggle="modal" data-target="#modal-sm">
                                             <%--                                            위 코드에서 data-toggle="modal" 및 data-target="#modal-lg" 속성은 해당 버튼이 모달을 트리거하도록 설정합니다.&ndash;%&gt;--%>
                                             <i class="fa fa-search"></i>
                                         </button>
                                         <span>보호자명</span>
-                                        <input type="text" class="text-input">
+                                        <input type="text" id="inputMasterNm" class="text-input" readonly>
                                     </div>
-                                    <textarea rows="5" aria-label="With textarea" id="r_content" name="r_content"></textarea>
+                                    <textarea rows="5" aria-label="With textarea" id="facilityRemarks"  name="facilityRemarks"></textarea>
                                 </div>
                             </div>
+
+
                             <div class="modal-footer" style="text-align: right;">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">목록으로 돌아가기</button>
                                 <button type="button" class="btn btn-primary">예약수정</button>
                                 <button type="button" class="btn btn-primary">예약취소</button>
-                                <button type="button" class="btn btn-primary" onclick="checkReservation()">예약등록</button>
+                                <button type="button" class="btn btn-primary" onclick="reserveInsert()">예약등록</button>
                             </div>
+
                         </div>
 
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
+                    </form>
                 </div>
                 <!-- /작은 모달 -->
-                <div class="modal fade" tabindex="-1"id="modal-sm">
+                <div class="modal fade" tabindex="-1" id="modal-sm">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -592,8 +632,9 @@
                                 </button>
                             </div>
                             <div class="row">
-                                <input type="search" id="keyword" class="form-control form-control-lg" placeholder="환자명 입력" value="환자명" onkeyup="searchEnter()">
+                                <input type="search" id="animalNm" class="form-control form-control-lg" placeholder="환자명 입력" value="환자명" onkeyup="searchEnter()">
                             </div>
+
 
                             <div class="modal-body">
 
@@ -617,6 +658,7 @@
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->
+
     <%@ include file="/include/footer.jsp" %>
 </div>
 <!-- ./wrapper -->

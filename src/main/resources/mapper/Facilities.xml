@@ -36,7 +36,7 @@
     </select>
 
     <!--예약불가 확인-->
-    <select id="checkImpossible" parameterType="com.example.vet.model.FacilitiesVO" resultType="java.util.Map">
+    <select id="checkImpossible"  resultType="java.util.Map">
         SELECT FACILITY_RESERVE_ID
         FROM FACILITY_RESERVE_DETAIL_TEST
         WHERE 1=1
@@ -56,19 +56,20 @@
                                     FACILITY_RESERVE_ID
                                   , FACILITY_REMARKS
                                   , ANIMAL_PK
-                                  , MEMBER_PK)
+                                  , MEMBER_PK )
         VALUES(
                 #{facilityReserveId}
               , #{facilityRemarks}
               , #{animalId}
-              , #{userNm} )
+              , #{memberPk}
+              )
     </insert>
     <insert id="InsertReserveDetail" parameterType="com.example.vet.model.FacilitiesVO">
         INSERT
         INTO FACILITY_RESERVE_DETAIL_TEST( FACILITY_RESERVE_ID
                                          , FACILITY_RESERVE_DT
                                          , FACILITY_NM
-                                         , RESERVE_TIME_INTERVAL)
+                                         , RESERVE_TIME_INTERVAL )
         VALUES(
                 #{facilityReserveId}
               , #{facilityReserveDt}
@@ -78,11 +79,11 @@
     </insert>
 
     <!--동물 명으로 동물 id랑 보호자명 찾기 -->
-    <select id="selecteAnimalID" parameterType="com.example.vet.model.FacilitiesVO">
+    <select id="selectAnimalID" resultType="java.util.Map" >
         select ANIMAL_PK AS animalId
              , ANIMAL_NM AS animalNm
              , ANIMAL_BDATE AS animalBdate
-             , A.MASTER_PK
+             , A.MASTER_PK as masterPk
              , MASTER_NM
         FROM ANIMAL_TEST A
                  INNER JOIN MASTER_TEST M
