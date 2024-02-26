@@ -464,7 +464,7 @@
 
                 // 결제 성공 시 서버로 결제 정보 전송
                 jQuery.ajax({
-                    url: "/payment/process-payment",
+                    url: "/payment/process_payment",
                     method: "POST",
                     data: {
                         imp_uid: rsp.imp_uid,            // 결제 고유번호

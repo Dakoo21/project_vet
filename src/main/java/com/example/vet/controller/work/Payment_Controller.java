@@ -24,7 +24,7 @@ public class Payment_Controller {
         this.payment_service = payment_service;
     }
 
-    @PostMapping("process-payment")
+    @PostMapping("process_payment")
     public String processPayment(Model model,
                                  @RequestParam("imp_uid") String impUid,
                                  @RequestParam("merchant_uid") String merchantUid,
@@ -54,6 +54,6 @@ public class Payment_Controller {
         model.addAttribute("paymentVO", paymentVO);
 
         // 결제 성공 시 뷰를 반환(jsp 페이지 따로 있음)
-        return "page/payment/paymentSuccess";
+        return "payment/process_payment";
     }
 }

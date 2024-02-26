@@ -688,7 +688,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/payment/paymentList.jsp" class="nav-link">
+                            <a href="payment/process_payment" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>결제리스트</p>
                             </a>
@@ -1002,7 +1002,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/payment/paymentList.jsp" class="nav-link">
+                            <a href="payment/process_payment" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>결제리스트</p>
                             </a>
