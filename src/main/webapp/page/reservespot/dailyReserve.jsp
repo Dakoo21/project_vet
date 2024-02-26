@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="com.example.vet.model.FacilitiesVO" %>
+<%@ page import="java.util.List, java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%
+    //스크립틀릿 - 지변, 메소드선언 불가함, 인스턴스화 가능함
+    //insert here
+    int size = 0;//전체 레코드 수
+    //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
+    List<Map<String, Object>> rList = (List)request.getAttribute("rList");
+    if(rList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
+        size = rList.size();
+//		rmap = bList.get(0);//상세보기 내용들 담김
+//		//{comments:[{}{}{}]}
+//		if(size==2){
+//			Map<String,Object> comlist
+//		}
+    }
+    int asize = 0;//전체 레코드 수
+    //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
+    List<Map<String, Object>> aList = (List)request.getAttribute("aList");
+    if(aList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
+        asize = aList.size();
+    }
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +37,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.10/index.global.min.js'></script>
     <script>
+        let todayDate = new Date().toISOString().split('T')[0];
+        // Set the minimum value of the date input to today
+        document.getElementById("date").min = todayDate;
+        //달력 이전 날짜 막기
+
+        function searchEnter(){
+            console.log('searchEnter')
+            console.log(window.event.keyCode);//13
+            if(window.event.keyCode == 13){
+                animalIdSearch();
+            }
+        }//end of searchEnter
+
+        // 검색 및 결과 표시 함수
+        function animalIdSearch(){
+            const keyword = document.getElementById("#keyword").value;
+            console.log(`${keyword}`);
+            if (keyword === "") {
+                return; // 검색어가 없으면 아무것도 하지 않음
+            }
+            // 서버에 검색을 수행하기 위해 AJAX 요청 보내기
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `/search?keyword=${keyword}`);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        // 검색 결과를 모달에 표시
+                        displaySearchResults(response);
+                    } else {
+                        console.error("오류:", xhr.statusText);
+                    }
+                }
+            };
+            xhr.send();
+            // // 검색어 입력창 초기화
+            // document.querySelector("#keyword").value = '';
+        }
+        // 모달에 검색 결과 표시 함수
+        function displaySearchResults(results) {
+            const searchResultsList = document.getElementById('searchResults');
+            // 이전에 표시된 결과를 모두 지우기
+            searchResultsList.innerHTML = '';
+
+            // 결과를 모달에 추가
+            results.forEach(result => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${result.animalName} ${result.animalBdate}`; // 결과에서 동물 이름과 날짜를 가져와서 li 요소에 표시
+                // li 요소에 margin-bottom 스타일 추가
+                listItem.style.marginBottom = '7px';
+                searchResultsList.appendChild(listItem);
+            });
+
+        }
         function checkReservation() {
             // 여기서 예약이 이미 있는지 확인하는 로직을 작성합니다.
+
+            //오늘 이전 선택 불가
             var alreadyReserved = false; // 예약이 이미 있으면 true로 설정
 
             if (alreadyReserved) {
@@ -22,9 +105,13 @@
                 //     // 여기에 예약 등록 로직을 추가하면 됩니다.
                 //     // 예약 등록 코드를 추가하세요.
                 //     alert("잘못된 시간입력입니다.");
-            } else{
+            } else {
                 alert("잘못된 시간입력입니다.");
             }
+        }
+        //삭제 버튼
+        function cancel(id){
+
         }
     </script>
 
@@ -199,7 +286,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <input type="date" class="date-header"/>
+                        <input type="date" class="date-header" min="" required >
                         <button type="button" class="btn btn-block btn-info"data-toggle="modal" data-target="#modal-lg">예약</button>
                         <%--                        위 코드에서 data-toggle="modal" 및 data-target="#modal-lg" 속성은 해당 버튼이 모달을 트리거하도록 설정합니다.--%>
                     </div>
@@ -221,7 +308,7 @@
                                     <th colspan='2'>오후 5시</th>
                                     <th colspan='2'>오후 6시</th>
                                     <th colspan='2'>오후 7시</th>
-                                    <th colspan='2'>오후 8시</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -247,15 +334,14 @@
                                     <td>18</td>
                                     <td>19</td>
                                     <td>20</td>
-                                    <td>21</td>
-                                    <td>22</td>
+
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <%--                하단 리스트 날짜 빠른 순--%>
+                <%--                하단 리스트 오늘 날짜 이후 날짜 빠른 순--%>
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
@@ -278,16 +364,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <%
+                                        for(int i=0;i<size;i++){
+                                            if(i==size) break;//NullPointerException방어
+                                            Map<String,Object> rmap = rList.get(i);
+                                            // {[조회 결과]:[{START_TIME=10:00, END_TIME=11:00, USER_NM=토마토, FACILITY_NM=수술실, FACILITY_RESERVE_ID=0, ANIMAL_NM=멍돌이, FACILITY_RESERVE_DT=2024-02-23}]}
+                                    %>
                                     <tr>
-                                        <td>예약시설</td>
-                                        <td>예약자</td>
-                                        <td>환자명</td>
-                                        <td>예약날짜</td>
-                                        <td>예약시간</td>
+                                        <td><%=rmap.get("FACILITY_NM")%></td>
+                                        <td><%=rmap.get("USER_NM")%></td>
+                                        <td><%=rmap.get("ANIMAL_NM")%></td>
+                                        <td><%=rmap.get("FACILITY_RESERVE_DT")%></td>
+                                        <td><%=rmap.get("START_TIME")%>~<%=rmap.get("END_TIME")%></td>
                                         <td class="cancel-button-cell">
-                                            <button onclick="cancel()" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
+
+                                            <button onclick='cancel(<%=rmap.get("FACILITY_RESERVE_ID")%>)' type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
                                         </td>
                                     </tr>
+                                    <%
+                                        }
+                                    %>
                                     <tr>
                                         <td>예약시설</td>
                                         <td>예약자</td>
@@ -399,7 +495,7 @@
                                     <div>예약시간</div>
 
                                     <div>예약자</div>
-                                    <div>보호자명</div>
+                                    <div>환자명</div>
                                     <div>내용</div>
                                 </div>
                                 <div class="rightSide">
@@ -412,18 +508,51 @@
                                         <input type="date" />
 
                                         <select id="selecStartTimetBox" class="select-box mr-2">
-                                            <option value="">10:00</option>
+                                            <option value="0">10:00</option>
                                             <option value="1">10:30</option>
                                             <option value="2">11:00</option>
-                                            <option value="2">12:00</option>
+                                            <option value="3">12:00</option>
+                                            <option value="5">12:30</option>
+                                            <option value="6">01:00</option>
+                                            <option value="7">01:30</option>
+                                            <option value="8">02:00</option>
+                                            <option value="9">02:30</option>
+                                            <option value="10">03:00</option>
+                                            <option value="11">03:30</option>
+                                            <option value="12">04:00</option>
+                                            <option value="13">04:30</option>
+                                            <option value="14">05:00</option>
+                                            <option value="15">05:30</option>
+                                            <option value="16">06:00</option>
+                                            <option value="17">06:30</option>
+                                            <option value="18">07:00</option>
+                                            <option value="19">07:30</option>
+                                            <option value="20">08:00</option>
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                         <span>~</span>
                                         <select id="selecEndTimeBox" class="select-box ml-2">
-                                            <option value="">10:00</option>
+                                            <option value="0">10:00</option>
                                             <option value="1">10:30</option>
                                             <option value="2">11:00</option>
-                                            <option value="2">12:00</option>
+                                            <option value="3">11:30</option>
+                                            <option value="4">12:00</option>
+                                            <option value="5">12:30</option>
+                                            <option value="6">01:00</option>
+                                            <option value="7">01:30</option>
+                                            <option value="8">02:00</option>
+                                            <option value="9">02:30</option>
+                                            <option value="10">03:00</option>
+                                            <option value="11">03:30</option>
+                                            <option value="12">04:00</option>
+                                            <option value="13">04:30</option>
+                                            <option value="14">05:00</option>
+                                            <option value="15">05:30</option>
+                                            <option value="16">06:00</option>
+                                            <option value="17">06:30</option>
+                                            <option value="18">07:00</option>
+                                            <option value="19">07:30</option>
+                                            <option value="20">08:00</option>
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                     </div>
@@ -434,13 +563,8 @@
                                             <%--                                            위 코드에서 data-toggle="modal" 및 data-target="#modal-lg" 속성은 해당 버튼이 모달을 트리거하도록 설정합니다.&ndash;%&gt;--%>
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <span>고객</span>
-                                        <select id="customer" class="select-box">
-
-                                            <option value="">꽁지</option>
-                                            <option value="1">꽁꽁지</option>
-                                            <!-- 선택 시작 시간 이후 시간 셀렉트 -->
-                                        </select>
+                                        <span>보호자명</span>
+                                        <input type="text" class="text-input">
                                     </div>
                                     <textarea rows="5" aria-label="With textarea" id="r_content" name="r_content"></textarea>
                                 </div>
@@ -462,29 +586,21 @@
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">보호자 추가</h4>
+                                <h4 class="modal-title">환자명 추가</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="row">
-                                <input type="search" class="form-control form-control-lg" placeholder="보호자명 입력" value="보호자명 입력">
+                                <input type="search" id="keyword" class="form-control form-control-lg" placeholder="환자명 입력" value="환자명" onkeyup="searchEnter()">
                             </div>
+
                             <div class="modal-body">
-                                <ul style="padding: 2px; list-style-type: '+';">
-                                    <li style="margin-bottom: 7px;">
-                                        <a href="#">최코테(abc****) 010-****-1234</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">최코테(abc****) 010-****-1234</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">최코테(abc****) 010-****-1234</a>
-                                    </li><li>
-                                    <a href="#">최코테(abc****) 010-****-1234</a>
-                                </li>
+
+                                <ul id="searchResults" style="padding: 2px; list-style-type: '+';">
 
                                 </ul>
+
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
