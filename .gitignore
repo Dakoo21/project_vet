@@ -49,7 +49,6 @@ build/
 *.class
 
 # Ignore compiled Java resources
-*.xml
 *.bin
 
 # Ignore compilation data

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vet.stockMapper">
+    <resultMap id="stockMap" type="java.util.Map"/>
+
+    <select id="stockList" parameterType="com.example.vet.model.StockCommonVO" resultType="com.example.vet.model.StockCommonVO">
+        SELECT stock_common_nm, stock_common_sellprice, stock_common_code, stock_common_type, attached_pk
+        FROM stock_common_test
+    </select>
+
+    <insert id="stockInsert" parameterType="com.example.vet.model.StockCommonVO">
+        INSERT INTO stock_common_test (stock_common_pk, stock_common_nm, stock_common_sellprice, stock_common_code, stock_common_type, attached_pk)
+        VALUES (stock_common_seq.nextval, #{stock_common_nm}, #{stock_common_sellprice}, #{stock_common_code}, #{stock_common_type}, 1)
+    </insert>
+
+    <delete id="stockDelete" parameterType="int">
+        delete from stock_common_test
+        where stock_common_pk = #{value}
+    </delete>
+
+    <update id="stockUpdate" parameterType="com.example.vet.model.StockCommonVO">
+        update stock_common_test
+        set stock_common_nm = #{stock_common_nm}
+          , stock_common_sellprice = #{stock_common_sellprice}
+          , stock_common_code = #{stock_common_code}
+          , stock_common_type = #{stock_common_type}
+        where stock_common_pk = #{stock_commom_pk}
+    </update>
+</mapper>
