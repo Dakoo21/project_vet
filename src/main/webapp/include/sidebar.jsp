@@ -8,6 +8,7 @@
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
     String username = (String) principalDetails.getUsername();
+    Integer userpk = principalDetails.getID();
     // Integer userPK = (Integer) request.getAttribute("userPK");
     // String username = (String) request.getAttribute("username");
     String role = (String) request.getAttribute("role");
