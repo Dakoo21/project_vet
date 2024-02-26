@@ -35,7 +35,51 @@
     <div>
         <form>
             <p>선택된 유기번호: <span id="selectedAnimalIdDisplay"></span></p>
-
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>입고가</td>
+                        <td>입고수량</td>
+                        <td>기타</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        selectedAnimalId
+                    </tr>
+                    <tr>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                        <td><input type="text" value=""></td>
+                    </tr>
+                </tbody>
+            </table>
         </form>
     </div>
 </div>

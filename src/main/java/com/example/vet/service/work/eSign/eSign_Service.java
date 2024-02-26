@@ -1,6 +1,6 @@
 package com.example.vet.service.work.eSign;
 
-import com.example.vet.model.eSign;
+import com.example.vet.model.SignDocument;
 import com.example.vet.repository.work.eSign.eSign_Repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ public class eSign_Service {
         this.esRepository = esRepository;
     }
 
-    public List<eSign> Select(int userPK) {
-        List<eSign> docList = new ArrayList<>();
+    public List<SignDocument> Select(int userPK) {
+        List<SignDocument> docList = new ArrayList<>();
         docList = esRepository.Select(userPK);
         return docList;
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.SignDocumentMapper">
+    <resultMap id="MissedAnimal" type="com.example.vet.model.adopt.MissedAnimal">
+    </resultMap>
+    <select id="selectAnimals" parameterType="String" resultMap="MissedAnimal">
+        SELECT KINDCD, COLORCD,AGE, WEIGHT FROM ABANDONED_ANIMAL_TEST
+    </select>
+
+</mapper>
