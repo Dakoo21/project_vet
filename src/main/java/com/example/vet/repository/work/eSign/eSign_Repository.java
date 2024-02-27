@@ -1,16 +1,14 @@
 package com.example.vet.repository.work.eSign;
 
-import com.example.vet.model.QnaVO;
 import com.example.vet.model.eSign;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
-@Service
+@Repository
+@Slf4j
 public class eSign_Repository {
     private final SqlSessionTemplate sqlSessionTemplate;
 
@@ -19,7 +17,7 @@ public class eSign_Repository {
     }
 
     public List<eSign> Select(int userPK) {
-        List<eSign> docList= sqlSessionTemplate.selectList("selectDocs", userPK);
+        List<eSign> docList = sqlSessionTemplate.selectList("selectDocs", userPK);
         return docList;
     }
 

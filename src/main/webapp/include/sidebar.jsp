@@ -8,6 +8,7 @@
     PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
     String username = (String) principalDetails.getUsername();
     Integer userpk = principalDetails.getID();
+    String name = principalDetails.getName();
     // Integer userPK = (Integer) request.getAttribute("userPK");
     // String username = (String) request.getAttribute("username");
     String role = (String) request.getAttribute("role");
@@ -114,7 +115,7 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">메뉴</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="/myDetail" class="dropdown-item">
                     <i class="fas fa-users mr-2"></i> 내정보 수정
                 </a>
                 <div class="dropdown-divider"></div>
@@ -644,7 +645,6 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalCustomerList.jsp" class="nav-link">
                             <a href="/page/customerDB/totalCustomerList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객 데이터</p>
@@ -660,7 +660,6 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
                             <a href="/page/customerDB/medicalLog.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록 조회</p>
@@ -688,7 +687,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="payment/process_payment" class="nav-link">
+                            <a href="/payment/process_payment" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>결제리스트</p>
                             </a>
@@ -1002,7 +1001,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="payment/process_payment" class="nav-link">
+                            <a href="/payment/process_payment" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>결제리스트</p>
                             </a>

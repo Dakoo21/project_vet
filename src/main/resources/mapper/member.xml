@@ -40,4 +40,5 @@
         WHERE MEMBER_ID = #{MEMBER_ID}
           And MEMBER_EMAIL = #{MEMBER_EMAIL}
     </update>
+
 </mapper>

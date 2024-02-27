@@ -1,9 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List, java.util.Map, java.util.ArrayList, java.util.HashMap" %>
-<%@ page import="com.example.vet.model.Member" %>
-<%
-    List<Map<String,Object>> myDetail = (List)request.getAttribute("myDetailList");
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,9 +79,9 @@
             <div class="tab-pane" id="settings">
                 <form id="" class="form-horizontal">
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">이름:</label>
+                        <label for="Emp_Nm" class="col-sm-2 col-form-label">이름:</label>
                         <div class="col-sm-10">
-                            <!-- 유저 아이디  -->
+                            <input type="text" class="form-control" id="Emp_Nm" name="Emp_Nm" placeholder="Name">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -97,19 +93,12 @@
                     <div class="form-group row">
                         <label for="inputExperience" class="col-sm-2 col-form-label">직위:</label>
                         <div class="col-sm-10">
-                            <!-- 역활 (if 문으로 역활에 맞춰서 나타내기) -->
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">아이디:</label>
-                        <div class="col-sm-10">
-                            <!-- 아이디 넣을 자리 -->
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="Emp_pw" class="col-sm-2 col-form-label">비밀번호:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Emp_pw" name="Emp_pw" placeholder="pw">
+                            <select id="select" class="form-control">
+                                <option value="">간호사</option>
+                                <option value="1">의사</option>
+                                <option value="2">관리자</option>
+                                <!-- 필요한 만큼 옵션을 추가하세요 -->
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -124,7 +113,25 @@
                             <input type="text" class="form-control" id="Emp_Pnumber" name="Emp_Pnumber" placeholder="010-1234-1234">
                         </div>
                     </div>
-                    <!-- 우편 검색 API 넣어야됨 -->
+                    <div class="form-group row">
+                        <label for="inputExperience" class="col-sm-2 col-form-label">입사일:</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="Emp_Bdate" name="Emp_Bdate" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Emp_username" class="col-sm-2 col-form-label">아이디:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Emp_username" name="Emp_username" placeholder="id">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Emp_pw" class="col-sm-2 col-form-label">비밀번호:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Emp_pw" name="Emp_pw" placeholder="pw">
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="EMP_Postcode" class="col-sm-2 col-form-label">자택주소</label>
                         <div class="col-sm-8"> <!-- col-sm-8 추가 -->
@@ -152,7 +159,9 @@
             </div>
             </div>
                     <div class="modal-footer" style="text-align: right;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">삭제</button>
                         <button type="button" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-primary">등록</button>
                     </div>
                 </div>
 

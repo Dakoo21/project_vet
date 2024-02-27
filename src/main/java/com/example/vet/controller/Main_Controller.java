@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @Slf4j
 public class Main_Controller {
@@ -54,7 +57,7 @@ public class Main_Controller {
     @GetMapping("/findID")
     public String foundIdPage () {
         log.info("아이디 찾기 페이지 접속 시도");
-        return "pages/login/findID";
+        return "pages/login/findId";
     }
 
     @GetMapping("/findPassword")
