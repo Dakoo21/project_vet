@@ -8,5 +8,4 @@
         FROM SIGN_TEST
         WHERE WRITER_PK = ${userPK}
     </select>
-
 </mapper>

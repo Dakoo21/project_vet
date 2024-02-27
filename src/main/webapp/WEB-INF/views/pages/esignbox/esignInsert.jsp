@@ -36,6 +36,42 @@
             max-height: 50px;
             overflow: hidden;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px; /* 모달 최대 너비 설정 */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -64,12 +100,12 @@
             <div class="card-body">
                 <div class="content_title">
                     <fieldset style="max-width:90%;">
-                            <span class="detail_select">
-			                    <a href="">기안하기</a>
-		                    </span>
                         <span class="detail_select">
-			                    <a href="">임시저장</a>
-		                    </span>
+                            <a href="">기안하기</a>
+                        </span>
+                        <span class="detail_select">
+                            <a href="">임시저장</a>
+                        </span>
                     </fieldset>
                 </div>
                 <table class="table table-bordered">
@@ -103,8 +139,7 @@
                     </tr>
                 </table>
                 <div class="after" style="display: flex; align-items: center;">
-                    <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 | </h4>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">결재선</button>
+                    <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 선택 </h4>
                 </div>
                 <table class="table table-bordered">
                     <thead>
@@ -157,12 +192,14 @@
                                     </td>
                                     <td class="name gt-position-relative">
                                         <div class="after" style="display: flex; align-items: center;">
-                                            <button id="lineselect" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">선택</button>
+                                            <div id="modal1">
+                                                <button id="lineselect_lv2" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectLine">선택</button>
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="name gt-position-relative">
                                         <div class="after" style="display: flex; align-items: center;">
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">선택</button>
+                                            <button id="lineselect_lv3" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">선택</button>
                                         </div>
                                     </td>
                                     <td></td>
@@ -200,12 +237,12 @@
                                             <input type="text" class="form-control" placeholder="제목을 입력하세요">
                                         </div>
                                         <div class="col-md-12" style="width: 100%">
-                                                <!-- /.card-header -->
-                                                <div class="card-body">
-                                                  <textarea id="summernote">
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+                                                <textarea id="summernote">
                                                     Place <em>some</em> <u>text</u> <strong>here</strong>
-                                                  </textarea>
-                                                </div>
+                                                </textarea>
+                                            </div>
                                         </div>
                                         <!-- /.col-->
                                         <div id="writein">
@@ -230,59 +267,60 @@
 <!-- ./wrapper -->
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <!-- ========================== [[ 게시판 Modal ]] ========================== -->
-<div class="modal" id="boardForm">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">결재선 선택</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
-                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
-                    <input type="hidden" id="b_content" name="b_content">
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="checkbox" value="master1" checked>관리자
-                        <input type="checkbox" value="master2">부관리자
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
-                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 결재선 선택 모달 -->
-<div class="modal" id="selectAdmin">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">결재선 선택</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
-                <form id="lv1_board" method="post" enctype="multipart/form-data" action="./boardInsert">
-                    <input type="hidden" id="lv1_content" name="b_content">
-                    <div class="form-floating mb-3 mt-3">
-                        <input type="checkbox" value="master1" checked>관리자
-                        <input type="checkbox" value="master2">부관리자
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
-                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="modal" id="boardForm">--%>
+<%--    <div class="modal-dialog modal-dialog-centered">--%>
+<%--        <div class="modal-content">--%>
+<%--            <!-- Modal Header -->--%>
+<%--            <div class="modal-header">--%>
+<%--                <h4 class="modal-title">결재선 선택</h4>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
+<%--            </div>--%>
+<%--            <!-- Modal body -->--%>
+<%--            <div class="modal-body">--%>
+<%--                <!-- <form id="f_board" method="get" action="./boardInsert"> -->--%>
+<%--                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">--%>
+<%--                    <input type="hidden" id="b_content" name="b_content">--%>
+<%--                    <div class="form-floating mb-3 mt-3">--%>
+<%--                        <input type="checkbox" value="master1" checked>관리자--%>
+<%--                        <input type="checkbox" value="master2">부관리자--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">--%>
+<%--                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<!-- 결재선 선택 모달 -->--%>
+<%--<div class="modal" id="selectAdmin">--%>
+<%--    <div class="modal-dialog modal-dialog-centered">--%>
+<%--        <div class="modal-content">--%>
+<%--            <!-- Modal Header -->--%>
+<%--            <div class="modal-header">--%>
+<%--                <h4 class="modal-title">결재선 선택</h4>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
+<%--            </div>--%>
+<%--            <!-- Modal body -->--%>
+<%--            <div class="modal-body">--%>
+<%--                <!-- <form id="f_board" method="get" action="./boardInsert"> -->--%>
+<%--                <form id="lv1_board" method="post" enctype="multipart/form-data" action="./boardInsert">--%>
+<%--                    <input type="hidden" id="lv1_content" name="b_content">--%>
+<%--                    <div class="form-floating mb-3 mt-3">--%>
+<%--                        <input type="checkbox" value="master1" checked>관리자--%>
+<%--                        <input type="checkbox" value="master2">부관리자--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">--%>
+<%--                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">--%>
+<%--            </div>--%>
+
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <!-- CodeMirror -->
 <script src="/plugins/codemirror/codemirror.js"></script>
 <script src="/plugins/codemirror/mode/css/css.js"></script>
@@ -300,7 +338,6 @@
             lang: "ko-KR",
             placeholder: '최대 2048자까지 쓸 수 있습니다'
         });
-
         // CodeMirror
         CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
             mode: "htmlmixed",
@@ -308,5 +345,125 @@
         });
     })
 </script>
+<script>
+    // 결재선 LV2 선택 모달
+    // 검색 버튼 클릭 시 모달창 열고 데이터 조회
+    $(document).ready(function () {
+        $("#lineselect_lv2").click(function() {
+            // Ajax를 사용하여 서버에 데이터 조회 요청
+            $.ajax({
+                type: "GET",
+                url: "/eSignDraft/selectLine",
+                dataType: "json",
+                success: function (members) {
+                    var form = $("#membersForm");
+                    form.empty();
+                    members.forEach(function (member) {
+                        form.append('<label><input type="radio" name="member" value="' + member.MEMBER_PK + '">' + member.MEMBER_MEMBERNAME + '</label><br>');
+                    });
+                    $("#myModal").css("display", "block");
+                }
+            });
+        });
+
+        $("#closeModalBtn").click(function () {
+            $("#myModal").css("display", "none");
+        });
+
+        $("#submitBtn").click(function () {
+            // 선택된 멤버 값 가져오기
+            var selectedMemberId = $('input[name=member]:checked').val();
+            var selectedMemberName = $('input[name=member]:checked').next().text();
+            // 선택된 멤버의 값을 사용하여 원하는 동작 수행
+            console.log("Selected Member ID: " + selectedMemberId);
+            console.log("Selected Member Name: " + selectedMemberName);
+            // 모달 창 닫기
+            $("#myModal").css("display", "none");
+        });
+    });
+</script>
+<script>
+    // 결재선 LV3 선택 모달
+    // 검색 버튼 클릭 시 모달창 열고 데이터 조회
+    $(document).ready(function () {
+        $("#lineselect_lv3").click(function() {
+            // Ajax를 사용하여 서버에 데이터 조회 요청
+            $.ajax({
+                type: "GET",
+                url: "/eSignDraft/selectLine",
+                data: { searchParam: "yourSearchParameter" },  // 필요한 검색 파라미터 전달
+                success: function(data) {
+                    // 모달창에 받아온 데이터를 표시하는 코드
+                    var form = $("#membersForm");
+                    form.empty();
+                    members.forEach(function (member) {
+                        form.append('<label><input type="radio" name="member" ' +
+                            '' + 'value="' + member.role + '">' + member.name + '</label><br>');
+                    });
+                    $("#myModal").css("display", "block");
+                }
+            });
+        });
+        $("#closeModalBtn").click(function () {
+            $("#myModal").css("display", "none");
+        });
+    });
+</script>
+<!-- 모달 창 -->
+<%--<div id="selectLine" class="modal">--%>
+<%--    <div class="modal-content">--%>
+<%--&lt;%&ndash;        <span class="close" id="closeModalBtn">&times;</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <form id="membersForm">&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <!-- 멤버 목록을 여기에 추가할 것입니다 -->&ndash;%&gt;--%>
+<%--&lt;%&ndash;        </form>&ndash;%&gt;--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<button id="openModalBtn">Open Modal</button>--%>
+<button id="openModalBtn">Open Modal</button>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <form id="membersForm">
+            <!-- 멤버 목록을 여기에 추가할 것입니다 -->
+<%--            <th:block th:each="member : ${members}">--%>
+<%--                <label><input type="radio" name="member" th:value="${member.MEMBER_MEMBERNAME}" th:text="${member.MEMBER_MEMBERNAME}"></label><br>--%>
+<%--            </th:block>--%>
+
+        </form>
+        <button id="submitBtn">Submit</button>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#openModalBtn").click(function () {
+            $.ajax({
+                url: "/eSignDraft/selectLine",
+                method: "GET",
+                success: function (members) {
+                    var form = $("#membersForm");
+                    form.empty();
+                    members.forEach(function (member) {
+                        form.append('<label><input type="radio" name="member" value="' + member.id + '">' + member.name + '</label><br>');
+                    });
+                    $("#myModal").css("display", "block");
+                }
+            });
+        });
+        $("#closeModalBtn").click(function () {
+            $("#myModal").css("display", "none");
+        });
+        $("#submitBtn").click(function () {
+            // 선택된 멤버 값 가져오기
+            var selectedMemberId = $('input[name=member]:checked').val();
+            var selectedMemberName = $('input[name=member]:checked').next().text();
+            // 선택된 멤버의 값을 사용하여 원하는 동작 수행
+            console.log("Selected Member ID: " + selectedMemberId);
+            console.log("Selected Member Name: " + selectedMemberName);
+            // 모달 창 닫기
+            $("#myModal").css("display", "none");
+        });
+    });
+</script>
+
 </body>
 </html>

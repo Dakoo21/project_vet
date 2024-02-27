@@ -99,7 +99,6 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     <%
                                         for (SignDocument doc : docList) {
                                             if ("Rejected".equals(doc.getSign_state()) ||
@@ -136,7 +135,6 @@
                                     <button id="btn_search1" class="btn btn-danger" onclick="location.href='/eSignDraft/draftInsertPage'">등록</button>
                                 </div>
                             </div>
-
                         </div>
                         <div class="chart tab-pane" id="select-reject" style="position: relative; height: 300px;">
                             <div class ="table">
