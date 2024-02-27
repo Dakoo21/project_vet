@@ -71,3 +71,6 @@ build/resources/main/mapper/
 
 # Ignore file system probe
 .gradle/file-system.probe
+
+### macOS ###
+.DS_Store
