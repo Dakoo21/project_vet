@@ -9,5 +9,4 @@
         WHERE WRITER_PK = ${userPK}
 
     </select>
-
 </mapper>

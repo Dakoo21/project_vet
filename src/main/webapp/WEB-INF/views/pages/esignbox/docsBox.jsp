@@ -100,7 +100,6 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     <%
                                         for (eSign doc : docList) {
                                             if ("Rejected".equals(doc.getSign_state()) ||
