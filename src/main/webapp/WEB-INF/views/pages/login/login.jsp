@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/dist/css/adminlte.min.css">
     <script>
         function requestYJ() {
-            if (window.event.keycode == 13) {
+            if (window.event.keyCode == 13) {
                 login();
             }
         }
@@ -52,14 +52,14 @@
             <p class="login-box-msg">Sign in to start your session</p>
             <form id="f_login" action="/loginProcess" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="MEMBER_ID" name="MEMBER_ID" placeholder="ID" required>
+                    <input type="text" class="form-control" id="MEMBER_ID" name="MEMBER_ID" placeholder="ID" required onkeyup="requestYJ()">
                     <div class="input-group-append">
                         <div class="input-group-text">
                         </div>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="Password" required>
+                    <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="Password" required onkeyup="requestYJ()">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -77,7 +77,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="button" class="btn btn-primary btn-block" onclick="login()" onkeyup="requestYJ()">로그인</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="login()">로그인</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -108,10 +108,6 @@
 </div>
 <!-- /.login-box -->
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-
-
-
-
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

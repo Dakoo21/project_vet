@@ -18,9 +18,6 @@ public class myDetail_Service {
     }
 
     public List<Member> myDetailList(int userPk) {
-        log.info("내 정보 서비스 시작");
-        List<Member> myDetailList;
-        myDetailList = myDetail_repository.myDetailList(userPk);
-        return myDetailList;
+        return null;
     }
 }

@@ -32,7 +32,7 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Find Your ID</p>
+            <p class="login-box-msg">Find Your Password</p>
             <form id="f_id">
                 <label for="MEMBER_ID">아이디</label>
                 <div class="input-group mb-3">

@@ -15,6 +15,12 @@ import java.util.Map;
 @Slf4j
 public class Main_Controller {
 
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 21.02.25
+     기능 : 로그인 후 메인페이지(마이페이지) 연결
+     **********************************************************************************/
+
     @GetMapping({"", "/"})
     public String mainPage (HttpServletRequest req, Model model, Authentication authentication) {
         log.info("main Page 접속 시작");
@@ -54,11 +60,23 @@ public class Main_Controller {
         return path;
     }
 
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 26.02.25
+     기능 : 아이디 찾기 페이지
+     **********************************************************************************/
+
     @GetMapping("/findID")
     public String foundIdPage () {
         log.info("아이디 찾기 페이지 접속 시도");
-        return "pages/login/findId";
+        return "pages/login/findID";
     }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 26.02.25
+     기능 : 비밀번호 찾기 페이지
+     **********************************************************************************/
 
     @GetMapping("/findPassword")
     public String foundPasswordPage () {

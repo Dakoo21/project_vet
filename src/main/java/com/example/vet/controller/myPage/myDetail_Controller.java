@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -32,9 +33,13 @@ public class myDetail_Controller {
     public String myDetailPage (Model model) {
         log.info("내 정보 페이지 입장!");
         log.info("내 정보 컨트롤러 시작");
+
+        /*정보 조회를 위해서 세션에서 userPk 가져옴*/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         int userPk = principalDetails.getID();
+        log.info(String.valueOf(userPk));
+
         List<Member> myDetail;
         myDetail = myDetail_service.myDetailList(userPk);
         log.info(myDetail.toString());
