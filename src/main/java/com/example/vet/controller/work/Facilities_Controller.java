@@ -38,28 +38,15 @@ public class Facilities_Controller {
         model.addAttribute("rList", rList);
         return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
     }
-    //예약 생성
-    @PostMapping("Insertreserve")
-    public String reserveInsert(FacilitiesVO facilitiesVO){
-        logger.info("예약생성 컨트롤러 시작");
-        int result =0;
-        String path = "";
-        result = facilitiesService.Insertreserve(facilitiesVO);
-        if (result == 1) {// 입력이 성공했을때
-            path = "redirect:/page/reservespot/dailyReserve";// forward안됨
-        } else {// 입력이 실패 했을때
-            path =  "error";
-        }
-        return path;
-    }
+
     //예약 수정
-    @PostMapping("reserveUpdate")
-    public String reserveUpdate(FacilitiesVO facilitiesVO){
-        logger.info("예약수정시작");
-        int result = 0;
-        result = facilitiesService.reserveUpdate(facilitiesVO);
-        return "redirect:/page/reservespot/dailyReserve";
-    }
+//    @PostMapping("reserveUpdate")
+//    public String reserveUpdate(FacilitiesVO facilitiesVO){
+//        logger.info("예약수정시작");
+//        int result = 0;
+//        result = facilitiesService.reserveUpdate(facilitiesVO);
+//        return "redirect:/page/reservespot/dailyReserve";
+//    }
     //예약 삭제  파라미터 수정
 
     @GetMapping("reserveDelete")

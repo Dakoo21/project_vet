@@ -5,22 +5,29 @@
 <%@ page import="java.util.List, java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.util.BSPageBar" %>
 <%
     //스크립틀릿 - 지변, 메소드선언 불가함, 인스턴스화 가능함
     //insert here
-    int size = 0;//전체 레코드 수
+    int rsize = 0;// 예약 전체 레코드 수
     //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
     List<Map<String, Object>> rList = (List)request.getAttribute("rList");
 
     if(rList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
-        size = rList.size();
+        rsize = rList.size();
 //		rmap = bList.get(0);//상세보기 내용들 담김
 //		//{comments:[{}{}{}]}
 //		if(size==2){
 //			Map<String,Object> comlist
 //		}
     }
-    int asize = 0;//전체 레코드 수
+//한 페이지에 몇개씩 뿌릴거야?
+    int numPerPage = 5;
+    int nowPage = 0;
+    if(request.getParameter("nowPage")!=null) {
+        nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    }
+    int asize = 0;//animal 검색 레코드 수
     //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
     List<Map<String, Object>> aList = (List)request.getAttribute("aList");
     if(aList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
@@ -46,19 +53,105 @@
         function cancel(facilityReserveId){
             window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
         }
-        //넣기
-        const reserveInsert = () => {
-            //input type의 button은 submit이 아니다.  - 전송 -> 어디로 가니? -> action의 url로 이동한다.
-            //웹서비스에서의 URL요청은 NoticeController메소드 호출을 의미하는 것이다.
-            //@GetMapping, PostMapping Restful API - 컨트롤계층에만 국한됨
-            document.querySelector("#f_reserve").submit();
-            /* 클래스 선택자면 .
-        div가 여러개 면 array 돔트리 같은이름 여러개면? 아이디면 # ===>	<form id="f_notice"
-        input type 의 버튼은 submmit이 아니다 서브밋이 하는 일은 전송이다
-        어디로 가는가?
-        action의 url로 이동한다.
-        웹 서비스에서의 Url 요청은 notice controller메소드 호출을 의미한다
-        @getMapping, Postmapping Restful api 컨트롤 계층에만 국한된다. */
+
+        // 현재 날짜를 가져오는 함수
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+
+            // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여 두 자리로 만듦
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' + day : day;
+            console.log("day:",day);
+            return year + '-' + month + '-' + day;
+            console.log("year"-"month"-"day");
+        }
+
+        // 오늘 이후의e 날짜만 선택할 수 있도록 설정하는 함수
+        function setMinDate() {
+            const facilityReserveDt = document.getElementById('facilityReserveDt');
+            const currentDate = getCurrentDate();
+            facilityReserveDt.min = currentDate;
+        }
+
+
+        //cchang pictur
+        function changeFacilityImage() {
+            const selectBox = document.getElementById('facilityNm');
+            const selectedValue = selectBox.value;
+            const imageContainer = document.getElementById('facilityImageContainer');
+
+            // 선택된 값에 따라 이미지 변경
+            if (selectedValue === '1') {
+                imageContainer.innerHTML = `
+                <img src="/img/1.jpg" alt="시설사진1">
+                <img src="/img/2.jpg" alt="시설사진2">
+            `;
+            } else if (selectedValue === '2') {
+                imageContainer.innerHTML = `
+                <img src="/img/3.jpg" alt="시설사진3">
+                <img src="/img/4.jpg" alt="시설사진4">
+            `;
+            } else if (selectedValue === '3') {
+                imageContainer.innerHTML = `
+                <img src="/img/5.jpg" alt="시설사진3">
+                <img src="/img/6.jpg" alt="시설사진4">
+`;
+            } else if (selectedValue === '4') {
+                imageContainer.innerHTML = `
+                    <img src="/img/7.jpg" alt="시설사진3">
+                    <img src="/img/8.jpg" alt="시설사진4">
+                    `;
+            }
+        }
+
+
+    //예약넣기
+        function reserveInsert() {
+            const animalPk = document.getElementById("animalPk").value;
+            console.log("1:" + animalPk);
+            const facilityReserveDt = document.getElementById("facilityReserveDt").value;
+            console.log("2:" + facilityReserveDt);
+            const memberPk = document.getElementById("memberPk").value;
+            console.log("3:" + memberPk);
+            const facilityNm = document.getElementById("facilityNm").value;
+            console.log("4:" + facilityNm);
+            const facilityRemarks = document.getElementById("facilityRemarks").value;
+            console.log("5:" + facilityRemarks);
+            const selecStartTimetBox = parseInt(document.getElementById("selecStartTimetBox").value);
+            console.log("7:" + selecStartTimetBox);
+            const selecEndTimeBox = parseInt(document.getElementById("selecEndTimeBox").value);
+            console.log("6:" + selecEndTimeBox);
+            for (let i = selecStartTimetBox; i <= selecEndTimeBox; i++) {
+
+
+                let data = JSON.stringify({
+                    facilityReserveDt: facilityReserveDt,
+                    facilityNm: facilityNm,
+                    animalId: animalPk,
+                    memberPk: memberPk,
+                    facilityRemarks: facilityRemarks,
+                    timeInterval: i
+                });
+                console.log("제이슨데이터:" + data);
+                const xhr = new XMLHttpRequest();
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+
+                        window.location.href = 'http://localhost:8000/reservespot/dailyReserve';
+                    } else {
+                        console.error("예약 생성 중 오류가 발생하였습니다.");
+                    }
+                };
+                xhr.open('POST', '/reservespot/insertReserve', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(data);
+
+
+            }
         }
         function searchEnter(){
             console.log('searchEnter')
@@ -71,16 +164,16 @@
 
         // 검색 및 결과 표시 함수
         function animalIdSearch(){
-            const animalNm = document.getElementById("animalNm").value;
-            console.log(animalNm);
-            if (animalNm === "") {
+            const searchAnimalNm = document.getElementById("searchAnimalNm").value;
+            console.log(searchAnimalNm);
+            if (searchAnimalNm === "") {
                 return; // 검색어가 없으면 아무것도 하지 않음
             }
             // 서버에 검색을 수행하기 위해 AJAX 요청 보내기
             const xhr = new XMLHttpRequest();
-            console.log("아작스"+animalNm);
-            xhr.open("GET", `/reservespot/animalList?animalNm=`+animalNm);
-            console.log("겟하고난뒤"+animalNm);
+            console.log("아작스"+searchAnimalNm);
+            xhr.open("GET", `/reservespot/animalList?animalNm=`+searchAnimalNm);
+            console.log("겟하고난뒤"+searchAnimalNm);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
@@ -95,7 +188,7 @@
             };
             xhr.send();
             // // 검색어 입력창 초기화
-            document.getElementById("animalNm").value = '';
+            document.getElementById("searchAnimalNm").value = '';
         }
         // 모달에 검색 결과 표시 함수
         function displaySearchResults(results) {
@@ -107,7 +200,7 @@
                 const listItem = document.createElement('li');
                 console.log(result);
                 console.log(Object.keys(result));
-                listItem.textContent = "("+result.ANIMALBDATE+") " + result.ANIMALNM + " : " + result.MASTER_NM ; // 결과에서 동물 이름과 날짜를 가져와서 li 요소에 표시
+                listItem.textContent = " ("+result.ANIMALBDATE+") " + result.ANIMALNM + " : " + result.MASTER_NM ; // 결과에서 동물 이름과 날짜를 가져와서 li 요소에 표시
                 // li 요소에 margin-bottom 스타일 추가
                 console.log("리스트아이템"+listItem);
                 listItem.style.marginBottom = '7px';
@@ -116,8 +209,8 @@
                 listItem.addEventListener('click', function() {
                     // 다른 모달에 Nm 내용 추가
                 document.getElementById('inputMasterNm').value = result.MASTER_NM;
-                    document.getElementById('animalId').value = result.ANIMALNM;
-                    document.getElementById('animalPk').value = result.ANIMALPK;
+                    document.getElementById('animalNm').value = result.ANIMALNM;
+                    document.getElementById('animalPk').value = result.ANIMALID;
                 });
             });
         }
@@ -313,7 +406,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <input type="date" class="date-header" min="" required >
+                        <input type="date" id="dailyDate" class="date-header" min="" required >
                         <button type="button" class="btn btn-block btn-info"data-toggle="modal" data-target="#modal-lg">예약</button>
                         <%--                        위 코드에서 data-toggle="modal" 및 data-target="#modal-lg" 속성은 해당 버튼이 모달을 트리거하도록 설정합니다.--%>
                     </div>
@@ -392,8 +485,8 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for(int i=0;i<size;i++){
-                                            if(i==size) break;//NullPointerException방어
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i==rsize) break;//NullPointerException방어
                                             Map<String,Object> rmap = rList.get(i);
                                             // {[조회 결과]:[{START_TIME=10:00, END_TIME=11:00, USER_NM=토마토, FACILITY_NM=수술실, FACILITY_RESERVE_ID=0, ANIMAL_NM=멍돌이, FACILITY_RESERVE_DT=2024-02-23}]}
                                     %>
@@ -411,37 +504,27 @@
                                     <%
                                         }
                                     %>
-                                    <tr>
-                                        <td>예약시설</td>
-                                        <td>예약자</td>
-                                        <td>환자명</td>
-                                        <td>2024-02-01</td>
-                                        <td>예약시간</td>
-                                        <td class="cancel-button-cell">
-                                            <button onclick="cancel()" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>예약시설</td>
-                                        <td>예약자</td>
-                                        <td>환자명</td>
-                                        <td>2024-02-01</td>
-                                        <td>15:30 ~ 16:30</td>
-                                        <td class="cancel-button-cell">
-                                            <button onclick="cancel()" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
-                                        </td>
-                                    </tr>
                                     </tbody>
                                 </table>
-                                <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                <!-- [[ 페이징 처리  구간  ]] -->
+
+<%--                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>--%>
+
+                                <!-- [[ 페이징 처리  구간  ]] -->
+                                <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 float-right">
+                                        <%
+                                            String pagePath = "dailyReserve";
+                                            BSPageBar bspb = new BSPageBar(numPerPage,  rsize, nowPage, pagePath);
+                                            out.print(bspb.getPageBar());
+                                        %>
                                     </ul>
                                 </div>
+                                <!-- [[ 페이징 처리  구간  ]] -->
                             </div>
 
                             <div class="tab-pane" id="timeline">
@@ -501,16 +584,16 @@
                 <!-- /.container-fluid -->
                 <%--            시설 모달--%>
                 <div class="modal fade" id="modal-lg">
-                    <form id="f_reserve" method="post" action="./Insertreserve">
+
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content" style="display: flex; flex-direction: column; height: 100%;">
 
                             <div class="modal-header">
-                                <select id="facilityNm" class="selectRoom-box" >
-                                    <option value="1">수술실</option>
-                                    <option value="2">면회실</option>
-                                    <option value="3">방사선실</option>
-                                    <option value="4">미용실</option>
+                                <select id="facilityNm" class="selectRoom-box"  onchange="changeFacilityImage()">
+                                    <option value="수술실">수술실</option>
+                                    <option value="면회실">면회실</option>
+                                    <option value="방사선실">방사선실</option>
+                                    <option value="미용실">미용실</option>
                                     <!-- 필요한 만큼 옵션을 추가하세요 -->
                                 </select>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -528,7 +611,7 @@
                                     <div>내용</div>
                                 </div>
                                 <div class="rightSide">
-                                    <div class="reservePicture">
+                                    <div class="reservePicture" id="facilityImageContainer">
                                         <img src="/img/1.jpg" alt="시설사진1" >
                                         <img src="/img/2.jpg" alt="시설사진2">
                                     </div>
@@ -556,45 +639,43 @@
                                             <option value="17">06:30</option>
                                             <option value="18">07:00</option>
                                             <option value="19">07:30</option>
-                                            <option value="20">08:00</option>
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                         <span>~</span>
                                         <select id="selecEndTimeBox" class="select-box ml-2">
-                                            <option value="0">10:00</option>
-                                            <option value="1">10:30</option>
-                                            <option value="2">11:00</option>
-                                            <option value="3">11:30</option>
-                                            <option value="4">12:00</option>
-                                            <option value="5">12:30</option>
-                                            <option value="6">01:00</option>
-                                            <option value="7">01:30</option>
-                                            <option value="8">02:00</option>
-                                            <option value="9">02:30</option>
-                                            <option value="10">03:00</option>
-                                            <option value="11">03:30</option>
-                                            <option value="12">04:00</option>
-                                            <option value="13">04:30</option>
-                                            <option value="14">05:00</option>
-                                            <option value="15">05:30</option>
-                                            <option value="16">06:00</option>
-                                            <option value="17">06:30</option>
-                                            <option value="18">07:00</option>
-                                            <option value="19">07:30</option>
-                                            <option value="20">08:00</option>
+                                            <option value="0">10:30</option>
+                                            <option value="1">11:00</option>
+                                            <option value="2">11:30</option>
+                                            <option value="3">12:00</option>
+                                            <option value="4">12:30</option>
+                                            <option value="5">01:00</option>
+                                            <option value="6">01:30</option>
+                                            <option value="7">02:00</option>
+                                            <option value="8">02:30</option>
+                                            <option value="9">03:00</option>
+                                            <option value="10">03:30</option>
+                                            <option value="11">04:00</option>
+                                            <option value="12">04:30</option>
+                                            <option value="13">05:00</option>
+                                            <option value="14">05:30</option>
+                                            <option value="15">06:00</option>
+                                            <option value="16">06:30</option>
+                                            <option value="17">07:00</option>
+                                            <option value="18">07:30</option>
+                                            <option value="19">08:00</option>
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                     </div>
-                                    <div><input type="text" id="memberNm" class="text-input" readonly value="<%=username%>">
+                                    <div><input type="text" id="memberNm" class="text-input" readonly value="<%=name%>">
                                         <span>
                                             <input type="text" id="memberPk" class="text-input" readonly value="<%=userpk%>" hidden>
                                         </span>
                                         <span>
-                                            <input type="text" id="animalPk" class="text-input" readonly hidden>
+                                            <input type="text" id="animalPk" class="text-input" readonly >
                                         </span>
                                     </div>
                                     <div>
-                                        <input type="text" id="animalId" class="text-input" readonly>
+                                        <input type="text" id="animalNm" class="text-input" readonly>
                                         <button class="btn btn btn-default"  data-toggle="modal" data-target="#modal-sm">
                                             <%--                                            위 코드에서 data-toggle="modal" 및 data-target="#modal-lg" 속성은 해당 버튼이 모달을 트리거하도록 설정합니다.&ndash;%&gt;--%>
                                             <i class="fa fa-search"></i>
@@ -619,7 +700,7 @@
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
-                    </form>
+
                 </div>
                 <!-- /작은 모달 -->
                 <div class="modal fade" tabindex="-1" id="modal-sm">
@@ -632,7 +713,7 @@
                                 </button>
                             </div>
                             <div class="row">
-                                <input type="search" id="animalNm" class="form-control form-control-lg" placeholder="환자명 입력" value="환자명" onkeyup="searchEnter()">
+                                <input type="search" id="searchAnimalNm" class="form-control form-control-lg" placeholder="환자명 입력" value="" onkeyup="searchEnter()">
                             </div>
 
 
@@ -644,8 +725,8 @@
 
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                                <button type="button" class="btn btn-primary">닫기</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" hidden>닫기</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" >닫기</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -663,7 +744,16 @@
 </div>
 <!-- ./wrapper -->
 <%@ include file="/include/bootCommonFoot.jsp" %>
-
+<script>
+    // 페이지 로드 시 setMinDate 함수 호출하여 설정
+    window.onload = function() {
+        console.log("오늘날 최소값 설정");
+        setMinDate();
+        const facilityReserveDt = document.getElementById('facilityReserveDt');
+        facilityReserveDt.value = getCurrentDate();
+        dailyDate.value=  getCurrentDate();
+    };
+</script>
 </body>
 </html>
 

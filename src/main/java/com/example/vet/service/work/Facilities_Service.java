@@ -35,31 +35,33 @@ public class Facilities_Service {
     }
 
     //예약 등록
-    public int Insertreserve(FacilitiesVO facilitiesVO) {
+    public int insertReserve(Map<String, Object> Imap) {
         Map<String, Object> resultMap = facilitiesRepository.SelectReserveId();
+        logger.info("resultMap: " + resultMap);
         BigDecimal facilityReserveIdBigDecimal = (BigDecimal) resultMap.get("FACILITY_RESERVE_ID");
         int facilityReserveId = facilityReserveIdBigDecimal.intValue(); // BigDecimal을 int로 변환
 //        int facilityReserveId = (int) resultMap.get("FACILITY_RESERVE_ID");
-        facilitiesVO.setFacilityReserveId(facilityReserveId);
+        logger.info("facilityReserveId:"+facilityReserveId);
+        Imap.put( "facilityReserveId"  ,facilityReserveId);
+        logger.info("imap id 전체:"+Imap);
 
 
-        logger.info("예약등록파라미터 (facilitiesVO): {}" + facilitiesVO);
         int result = 0;
-        logger.info("VO: {}", facilitiesVO);
-        facilitiesRepository.Insertreserve(facilitiesVO);
+
+        result =facilitiesRepository.insertReserve(Imap);
         if (result > 0) {
-            facilitiesRepository.InsertreserveDetail(facilitiesVO);
+            facilitiesRepository.insertReserveDetail(Imap);
         }
         return result;
     }
 
     //예약수정
-    public int reserveUpdate(FacilitiesVO facilitiesVO) {
-        int result = 0;
-        logger.info("예약수정파라미터 (facilitiesVO): {}" + facilitiesVO);
-        result = facilitiesRepository.reserveUpdate(facilitiesVO);
-        return result;
-    }
+//    public int reserveUpdate(FacilitiesVO facilitiesVO) {
+//        int result = 0;
+//        logger.info("예약수정파라미터 (facilitiesVO): {}" + facilitiesVO);
+//        result = facilitiesRepository.reserveUpdate(facilitiesVO);
+//        return result;
+//    }
 
     //예약삭제
     public int DeleteReserve(int facilityReserveId) {

@@ -30,28 +30,28 @@ public class Facilities_Repository {
     //등록
     //예약 시퀀스 뽑고 등록하기
     public Map<String, Object> SelectReserveId() {
-        logger.info("예약등록 Insert");
+        logger.info("예약등록id Insert");
         Map<String, Object> resultMap= sqlSessionTemplate.selectOne("createReserveId");
         logger.info(resultMap.toString());
         return resultMap;
     }
-    public int Insertreserve(FacilitiesVO facilitiesVO) {
-        logger.info("예약등록 Insert");
+    public int insertReserve(Map<String, Object> Imap) {
+        logger.info("예약마스터등록 Insert");
         int result = 0;//기억이 안나네`~~
-        result = sqlSessionTemplate.insert("Insertreserve",facilitiesVO);
+        result = sqlSessionTemplate.insert("insertReserve",Imap);
         return result;
     }
-    public int InsertreserveDetail(FacilitiesVO facilitiesVO) {
-        logger.info("예약등록 Insert");
+    public int insertReserveDetail(Map<String, Object> Imap) {
+        logger.info("예약등록디테일 Insert");
         int result = 0;//기억이 안나네`~~
-        result = sqlSessionTemplate.insert("InsertreserveDetail",facilitiesVO);
+        result = sqlSessionTemplate.insert("insertReserveDetail",Imap);
         return result;
     }
     //수정
-    public int reserveUpdate(FacilitiesVO facilitiesVO) {
+    public int reserveUpdate(Map<String, Object>imap) {
         logger.info("예약- 수정처리");
         int result = 0;
-        result = sqlSessionTemplate.update("reserveUpdate", facilitiesVO);// b_no=0이었다면
+        result = sqlSessionTemplate.update("reserveUpdate", imap);// b_no=0이었다면
         logger.info("result : " + result);
         return result;
     }

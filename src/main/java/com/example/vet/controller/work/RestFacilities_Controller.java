@@ -7,10 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -40,4 +38,23 @@ public class RestFacilities_Controller {
         String temp = g.toJson(list);// 파라미터로 받은 List<Map<>>형태를 JSON형식으로 전환해줌,전환해주는 함수 ==to.json
         return temp;
     }
+    //예약 생성
+    @PostMapping("insertReserve")
+    public String insertReserve(@RequestBody  Map<String, Object> Imap ){
+        logger.info("예약생성 컨트롤러 시작");
+
+        int result =0;
+        String path = "";
+        logger.info("Imap: " + Imap);
+        result = facilitiesService.insertReserve(Imap);
+        logger.info("성공이면 1: " + result);
+        if (result == 1) {// 입력이 성공했을때
+            path = "redirect:reservespot/dailyReserve";// forward안됨
+        } else {// 입력이 실패 했을때
+            path =  "error";
+        }
+        return path;
+    }
+
+
 }
