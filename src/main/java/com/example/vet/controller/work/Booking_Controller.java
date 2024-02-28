@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("booking")
+@RequestMapping("booking/")
 
 public class Booking_Controller {
 
@@ -109,6 +106,7 @@ public class Booking_Controller {
         bookingVO.setBookingStart(bookingStart);
 
         // 종료시간
+        logger.info(rmap.get("bookingEnd").toString());
         String bookingEnd = (String) rmap.get("bookingEnd");
         bookingVO.setBookingEnd(bookingEnd);
 
@@ -169,6 +167,17 @@ public class Booking_Controller {
         model.addAttribute("aList", aList);
 
         return "pages/docbook/bookingRegister";
+    }
+
+    @ResponseBody
+    @GetMapping("GetAnimals")
+    public List<Map<String, Object>> getAnimals(@RequestParam("animalNm") String animalNm){
+        logger.info(animalNm);
+        AnimalVO animalVO = new AnimalVO();
+        animalVO.setAnimalNm(animalNm);
+        List<Map<String, Object>> animList = bookingService.SelectAnimal(animalVO);
+        logger.info(animList.toString());
+        return animList;
     }
 
 }

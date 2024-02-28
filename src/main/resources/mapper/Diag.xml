@@ -89,11 +89,24 @@
 
         </if>
         <if test="diagPk==null">
-            INSERT INTO DIAG_TEST(DIAG_PK, DIAG_PRESCRIPTION, BOOKING_PK, DIGESTIVE_SYSTEM, CIRCULATORY_SYSTEM, RESPIRATORY_SYSTEM, NERVOUS_SYSTEM, ENDOCRINE_SYSTEM, EYES, DERMATOLOGY, ORTHOPEDICS, ABDOMINAL_SURGERY, NEUROSURGERY, THORACIC_SURGERY, DENTAL)
-            VALUES (DIAG_PK_SEQ.nextval,'' , #{bookingPk}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            INSERT INTO DIAG_TEST(DIAG_PK, DIAG_PRESCRIPTION, BOOKING_PK)
+            VALUES (DIAG_PK_SEQ.nextval,'' , #{bookingPk})
         </if>
+
     </insert>
-    <select id="serviceCost" parameterType="int" resultType="int">
+    <update id="updateBookingTest" parameterType="java.util.Map">
+        <if test="diagPk==null">
+            UPDATE BOOKING_TEST
+            SET COMMON_CODE_PK = 124
+            WHERE BOOKING_PK = #{bookingPk}
+        </if>
+    </update>
+    <select id="getDiagNowMade" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT DIAG_PK
+        FROM DIAG_TEST
+        WHERE BOOKING_PK = #{bookingPk}
+    </select>
+    <select id="serviceCost" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT SERVICE_PRICE
         FROM SERVICE_TEST
         WHERE SERVICE_PK=#{servicePk}
@@ -104,114 +117,6 @@
         <choose>
             <when test="diagPrescription != null">
                 #{diagPrescription}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        DIGESTIVE_SYSTEM =
-        <choose>
-            <when test="digestiveSystem != null">
-                #{digestiveSystem}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        CIRCULATORY_SYSTEM =
-        <choose>
-            <when test="circulatorySystem != null">
-                #{circulatorySystem}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        RESPIRATORY_SYSTEM =
-        <choose>
-            <when test="respiratorySystem != null">
-                #{respiratorySystem}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        NERVOUS_SYSTEM =
-        <choose>
-            <when test="nervousSystem != null">
-                #{nervousSystem}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        ENDOCRINE_SYSTEM =
-        <choose>
-            <when test="endocrineSystem != null">
-                #{endocrineSystem}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        EYES =
-        <choose>
-            <when test="eyes != null">
-                #{eyes}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        DERMATOLOGY =
-        <choose>
-            <when test="dermatology != null">
-                #{dermatology}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        ORTHOPEDICS =
-        <choose>
-            <when test="orthopedics != null">
-                #{orthopedics}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        THORACIC_SURGERY =
-        <choose>
-            <when test="thoracicSurgery != null">
-                #{thoracicSurgery}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        NEUROSURGERY =
-        <choose>
-            <when test="neurosurgery != null">
-                #{neurosurgery}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        ABDOMINAL_SURGERY =
-        <choose>
-            <when test="abdominalSurgery != null">
-                #{abdominalSurgery}
-            </when>
-            <otherwise>
-                '0'
-            </otherwise>
-        </choose>,
-        DENTAL =
-        <choose>
-            <when test="dental != null">
-                #{dental}
             </when>
             <otherwise>
                 '0'

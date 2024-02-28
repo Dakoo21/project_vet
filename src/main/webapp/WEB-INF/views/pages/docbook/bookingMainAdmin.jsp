@@ -27,8 +27,11 @@
             let events;
             const calendarEl = document.getElementById('calendar')
             const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-                , schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'
+                initialView: 'dayGridMonth',
+                    eventLimit: true, // 더보기 버튼 활성화
+                    eventLimitText: '더 보기', // 더보기 버튼 텍스트
+                    eventLimitClick: 'popover' // 더보기 버튼 클릭 시 팝오버 형태로 표시
+                ,schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'
                 , locale: 'ko'
                 , fixedWeekCount: false
                 , dayCellContent: function (info) {
@@ -84,77 +87,6 @@
         })
 
     </script>
-
-    <style>
-        /* CSS 코드를 여기에 작성합니다 */
-        #calendar {
-            height: 65vh;
-            width: 70vw;
-            margin: 0 auto;
-        }
-
-        #calendarTimeline{
-            height: 40vh;
-        }
-        /*사이드바 */
-        .main-sidebar {z-index: 2;}
-        .main-header {z-index: 3;}
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        /* 선택바 스타일 */
-        .selectRoom-box {
-            width: 130px;
-            font-size: 25px;
-        }
-        .select-box{
-            width:100px;
-        }
-        /* 선택된 내용 출력 영역 스타일 */
-        .output {
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 38px;
-        }
-
-        .reservePicture img {
-            margin-right: 5%;/* 이미지 사이의 우측 간격을 10px로 설정합니다. */
-            max-width: 100%; /* 이미지의 최대 가로 너비를 부모 요소인 reservePicture의 너비에 맞게 조정합니다. */
-            height: auto; /* 이미지의 비율을 유지하면서 자동으로 높이를 조정합니다. */
-            float: right;
-        }
-
-        #r_content{
-            width: 100%;
-            padding: 0;
-            font-size: 14px;
-        }
-        .reserveContent,
-        .reservePicture {
-            display: flex;
-            align-items: center; /* 텍스트 수직 중앙 정렬 */
-
-        }
-
-        .textareaWrapper {
-            margin-left: 10px; /* 내용과 텍스트 영역 사이의 간격 설정 */
-        }
-
-        .fixedtable{
-            max-width: 100%;
-        }
-    </style>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -189,9 +121,6 @@
     <!--footer-->
 
 </div>
-
-
-
 
 <!-- ./wrapper -->
 <%@ include file="/include/footer.jsp"%>

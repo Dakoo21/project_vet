@@ -23,6 +23,7 @@ import java.util.Map;
 @RequestMapping("diag/*")
 public class DIAG_Controller {
 
+
     Logger logger = LoggerFactory.getLogger(DIAG_Controller.class);
 
     private final DIAG_Service diagService;
@@ -32,6 +33,8 @@ public class DIAG_Controller {
     }
 
 
+
+    //셀렉트문 실행으로 값 받아오기
     @GetMapping("diagList")
     public String SelectList(Model model, @RequestParam Map<String, Object> rmap){
 
@@ -61,14 +64,9 @@ public class DIAG_Controller {
     public String Insert(@RequestParam Map<String, Object> rmap) {
 
         logger.info(rmap.toString());
-        diagService.Insert(rmap);
-        return "redirect:diagList";
-    }
-
-    @GetMapping("checkCost")
-    public int checkCost(@RequestParam Map<String, Object> servicePk){
-        int cost = diagService.SelectCost(servicePk);
-        return cost;
+        List<Map<String, Object>> sList = diagService.Insert(rmap);
+        Map<String, Object> amap = sList.get(0);
+        return "redirect:diagDetail?diagPk="+amap.get("DIAG_PK").toString();
     }
 
     @PostMapping("/diagServiceInsert")
@@ -102,6 +100,14 @@ public class DIAG_Controller {
         return "redirect:diagList";
     }
 
+    @ResponseBody
+    @GetMapping("/GetServiceCost")
+    public List<Map<String, Object>> selectCost(@RequestParam Map<String, Object> rmap) {
+        logger.info(rmap.toString());
+        List<Map<String, Object>> mList = diagService.SelectCost(rmap);
+        logger.info(mList.toString());
+        return mList;
+    }
     public String Delete(){
 
         return null;

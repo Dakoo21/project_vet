@@ -24,16 +24,17 @@ public class DIAG_Repository {
         return dList;
     }
 
-    public void Insert(Map<String, Object> rmap) {
+    public List<Map<String, Object>> Insert(Map<String, Object> rmap) {
         sqlSessionTemplate.insert("diagInsert", rmap);
+        sqlSessionTemplate.update("updateBookingTest", rmap);
+        List<Map<String, Object>> sList = sqlSessionTemplate.selectList("getDiagNowMade", rmap);
         logger.info("Insert complete");
+        return sList;
     }
 
-    public int SelectCost(Map<String, Object> servicePk) {
+    public List<Map<String, Object>> SelectCost(Map<String, Object> servicePk) {
         List<Map<String,Object>> List = sqlSessionTemplate.selectList("serviceCost", servicePk);
-        Map<String, Object> rmap = List.get(0);
-        int cost = Integer.parseInt((String) rmap.get("SERVICE_COST"));
-        return cost;
+        return List;
     }
 
     public void Update(Map<String, Object> rmap) {
