@@ -265,6 +265,7 @@
                                     %>
                                     </tbody>
                                 </table>
+
                                 <div style="display:flex; justify-content:center;">
                                     <ul class="pagination"></ul>
                                 </div>
@@ -276,6 +277,9 @@
             <!-- /.card -->
         </section>
         <!-- /.content -->
+        <div class="col-3">
+            <button id="btn_insert" class="btn btn-danger" onClick="location.href='/eSignDraft/draftInsertPage'">등록</button>
+        </div>
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->

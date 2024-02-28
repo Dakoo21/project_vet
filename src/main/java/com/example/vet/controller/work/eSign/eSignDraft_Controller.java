@@ -54,9 +54,9 @@ public class eSignDraft_Controller {
     @ResponseBody
     public List<Member> selectLine(Model model) { // 파라미터 명을 JSP 파일에서 보낸 데이터와 일치시킴
         log.info("결재선 조회");
-        // List<Member> lineList = eSignDraft_service.findLine();
+        List<Member> lineList = eSignDraft_service.findLine();
         // model.addAttribute("lineList", lineList);
-        // log.info(lineList.toString());
+        log.info(lineList.toString());
         return eSignDraft_service.findLine();
     }
 }
