@@ -35,5 +35,9 @@ public class Member {
 		this.PROVIDER = PROVIDER;
 		this.PROVIDERID = PROVIDERID;
 	}
+	// 사용자 이름을 반환하는 메서드 추가
+	public String getMemberName() {
+		return MEMBER_MEMBERNAME;
+	}
 
 }
