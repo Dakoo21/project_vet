@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Slf4j
@@ -17,9 +18,9 @@ public class myDetail_Repository {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
 
-    public List<Member> myDetailList(int userPk) {
-        List<Member> myDetailList;
-        myDetailList = sqlSessionTemplate.selectOne("myDetailList", userPk);
-        return myDetailList;
+    public List<Map<String, Object>> myDetailList(int userPk) {
+        List<Map<String, Object>> myDetailLisst = null;
+        myDetailLisst = sqlSessionTemplate.selectList("myDetailList", userPk);
+        return myDetailLisst;
     }
 }

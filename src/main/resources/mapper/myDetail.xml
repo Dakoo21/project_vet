@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.vet.repository.myPage.myDetail_Repository">
-    <resultMap id="memberMap" type="com.example.vet.model.Member"/>
+    <resultMap id="memberMap2" type="java.util.Map"/>
 
-    <select id="myDetailList" parameterType="Integer" resultMap="memberMap">
+    <select id="myDetailList" parameterType="Integer" resultMap="memberMap2">
         SELECT * FROM user_test5
         WHERE MEMBER_PK = #{userPk}
     </select>

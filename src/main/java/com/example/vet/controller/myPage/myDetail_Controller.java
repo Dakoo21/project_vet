@@ -18,7 +18,6 @@ import java.util.Map;
 public class myDetail_Controller {
     private final myDetail_Service myDetail_service;
 
-
     public myDetail_Controller(myDetail_Service myDetail_service) {
         this.myDetail_service = myDetail_service;
     }
@@ -40,10 +39,10 @@ public class myDetail_Controller {
         int userPk = principalDetails.getID();
         log.info(String.valueOf(userPk));
 
-        List<Member> myDetail;
-        myDetail = myDetail_service.myDetailList(userPk);
-        log.info(myDetail.toString());
-        model.addAttribute("myDetailList", myDetail);
+        List<Map<String, Object>> myDetailList = null;
+        myDetailList = myDetail_service.myDetailList(userPk);
+        log.info(myDetailList.toString());
+        model.addAttribute("myDetailList", myDetailList);
         return "pages/mypage/employeeInsert";
     }
 }
