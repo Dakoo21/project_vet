@@ -8,4 +8,20 @@
         WHERE MEMBER_PK = #{userPk}
     </select>
 
+    <select id="passwordCheck" parameterType="Map" resultType="String">
+        SELECT MEMBER_PW
+        FROM user_test5
+        WHERE member_id = #{MEMBER_ID}
+    </select>
+
+    <update id="myDetailUpdate" parameterType="Map">
+        UPDATE user_test5
+        SET MEMBER_PW = #{MEMBER_PW},
+            MEMBER_EMAIL = #{MEMBER_EMAIL},
+            MEMBER_PHONE = #{MEMBER_PHONE},
+            MEMBER_POSTCODE = #{MEMBER_POSTCODE},
+            MEMBER_ADDRESS = #{MEMBER_ADDRESS}
+        WHERE MEMBER_ID = #{MEMBER_ID}
+    </update>
+
 </mapper>

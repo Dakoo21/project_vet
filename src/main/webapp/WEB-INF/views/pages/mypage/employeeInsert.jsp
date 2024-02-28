@@ -10,11 +10,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>사원관리 </title>
+    <title>내 정보</title>
     <%@ include file="/include/bootCommon.jsp" %>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-
+        const dataUpdate = (event) => {
+            document.querySelector("#myDetail").submit();
+        }
     </script>
     <![endif]-->
     <style>
@@ -42,7 +44,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>사원관리</h1>
+                            <h1>내 정보</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -79,18 +81,17 @@
                                 <div class="card-body">
                                     <!-- /.card -->
                                     <div class="tab-pane" id="settings">
-                                        <form id="" class="form-horizontal">
                                             <div class="form-group row">
-                                                <label for="" class="col-sm-2 col-form-label">이름:</label>
+                                                <label class="col-sm-2 col-form-label">이름:</label>
                                                 <div class="col-sm-10">
                                                     <!-- 유저 아이디  -->
-                                                    <%=userDetail.get("MEMBER_MEMBERNAME")%>
+                                                    <span><%=userDetail.get("MEMBER_MEMBERNAME")%></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">소속:</label>
                                                 <div class="col-sm-10">
-                                                    동물생심
+                                                    <span>동물생심</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -117,116 +118,117 @@
                                                             user_role = "일반 사용자";
                                                         }
                                                     %>
-                                                    <%= user_role %>
+                                                    <span><%= user_role %></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="" class="col-sm-2 col-form-label">아이디:</label>
                                                 <div class="col-sm-10">
                                                     <!-- 아이디 넣을 자리 -->
-                                                    <%=userDetail.get("MEMBER_ID")%>
+                                                    <span><%=userDetail.get("MEMBER_ID")%></span>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <label for="MEMBER_PW" class="col-sm-2 col-form-label">비빌번호:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="수정할 비빌번호를 입력하세요">
+                                            <form id="myDetail" action="/myDetailUpdate" method="post">
+                                                <input type="hidden" id="MEMBER_ID" name="MEMBER_ID" value="<%=username%>">
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_PW" class="col-sm-2 col-form-label">비빌번호:</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="수정할 비빌번호를 입력하세요" onblur="validatePassword()">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="MEMBER_EMAIL" class="col-sm-2 col-form-label">이메일:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="MEMBER_EMAIL" name="MEMBER_EMAIL" value="<%=userDetail.get("MEMBER_EMAIL")%>">
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_EMAIL" class="col-sm-2 col-form-label">이메일:</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" id="MEMBER_EMAIL" name="MEMBER_EMAIL" value="<%=userDetail.get("MEMBER_EMAIL")%>" onblur="validateEmail()">
+                                                    </div>
                                                 </div>
-                                            </div>
-                        <%--
-                                            <div class="form-group row">
-                                                <label for="MEMBER_PHONE" class="col-sm-2 col-form-label">전화번호:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="MEMBER_PHONE" name="MEMBER_PHONE" placeholder="010-1234-1234">
+                            <%--
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_PHONE" class="col-sm-2 col-form-label">전화번호:</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="MEMBER_PHONE" name="MEMBER_PHONE" placeholder="010-1234-1234">
+                                                    </div>
                                                 </div>
-                                            </div>
-                        --%>
-                                            <div class="form-group row">
-                                                <label for="" class="col-sm-2 col-form-label">전화번호:</label>
-                                                <div class="col-sm-10">
-                                                    <%
-                                                        String user_phone = null;
-                                                        String memberPhoneObj = (String) userDetail.get("MEMBER_PHONE");
-                                                        if (memberPhoneObj != null) {
-                                                            user_phone = memberPhoneObj;
-                                                        } else {
-                                                            user_phone = "전화번호를 등록해주세요!";
-                                                        }
-                                                    %>
-                                                    <input type="text" class="form-control" id="MEMBER_PHONE" name="MEMBER_PHONE" value="<%=user_phone%>">
+                            --%>
+                                                <div class="form-group row">
+                                                    <label for="" class="col-sm-2 col-form-label">전화번호:</label>
+                                                    <div class="col-sm-10">
+                                                        <%
+                                                            String user_phone = null;
+                                                            String memberPhoneObj = (String) userDetail.get("MEMBER_PHONE");
+                                                            if (memberPhoneObj != null) {
+                                                                user_phone = memberPhoneObj;
+                                                            } else {
+                                                                user_phone = "전화번호를 등록해주세요!";
+                                                            }
+                                                        %>
+                                                        <input type="text" class="form-control" id="MEMBER_PHONE" name="MEMBER_PHONE" value="<%=user_phone%>" onblur="validatePhone()">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- 우편 검색 API 넣어야됨 -->
-                                            <div class="form-group row">
-                                                <label for="MEMBER_POSTCODE" class="col-sm-2 col-form-label">자택주소</label>
-                                                <div class="col-sm-8"> <!-- col-sm-8 추가 -->
-                                                    <%
-                                                        String user_postcode = null;
-                                                        String memberPostcodeObj = (String) userDetail.get("MEMBER_POSTCODE");
-                                                        if (memberPostcodeObj != null) {
-                                                            user_postcode = memberPostcodeObj;
-                                                        } else {
-                                                            user_postcode = "주소를 등록해 주세요!";
-                                                        }
-                                                    %>
-                                                    <input type="text" class="form-control" id="MEMBER_POSTCODE" name="MEMBER_POSTCODE" value="<%=user_postcode%>">
-                                                </div>
+                                                <!-- 우편 검색 API 넣어야됨 -->
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_POSTCODE" class="col-sm-2 col-form-label">자택주소</label>
+                                                    <div class="col-sm-8"> <!-- col-sm-8 추가 -->
+                                                        <%
+                                                            String user_postcode = null;
+                                                            String memberPostcodeObj = (String) userDetail.get("MEMBER_POSTCODE");
+                                                            if (memberPostcodeObj != null) {
+                                                                user_postcode = memberPostcodeObj;
+                                                            } else {
+                                                                user_postcode = "주소를 등록해 주세요!";
+                                                            }
+                                                        %>
+                                                        <input type="text" class="form-control" id="MEMBER_POSTCODE" name="MEMBER_POSTCODE" value="<%=user_postcode%>">
+                                                    </div>
 
-                                                <div class="col-sm-2"> <!-- col-sm-2 추가 -->
-                                                    <button type="button" class="btn btn-default" onclick="openZipcode()">우편번호 검색</button>
-                                                </div>
+                                                    <div class="col-sm-2"> <!-- col-sm-2 추가 -->
+                                                        <button type="button" class="btn btn-default" onclick="openZipcode()">우편번호 검색</button>
+                                                    </div>
 
-                                            </div>
-                        <%--
-                                            <div class="form-group row">
-                                                <label for="MEMBER_POSTCODE" class="col-sm-2 col-form-label"></label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="MEMBER_POSTCODE" name="MEMBER_POSTCODE" placeholder="우편번호">
                                                 </div>
-                                            </div>
-                        --%>
-                                            <div class="form-group row">
-                                                <label for="MEMBER_ADDRESS" class="col-sm-2 col-form-label"></label>
-                                                <div class="col-sm-10">
-                                                    <%
-                                                        String user_address = null;
-                                                        String memberaddressObj = (String) userDetail.get("MEMBER_ADDRESS");
-                                                        if (memberaddressObj != null) {
-                                                            user_address = memberaddressObj;
-                                                        } else {
-                                                            user_address = " ";
-                                                        }
-                                                    %>
-                                                    <input type="text" class="form-control" id="MEMBER_ADDRESS" name="MEMBER_ADDRESS" value="<%=user_address%>">
+                            <%--
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_POSTCODE" class="col-sm-2 col-form-label"></label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="MEMBER_POSTCODE" name="MEMBER_POSTCODE" placeholder="우편번호">
+                                                    </div>
                                                 </div>
-                                            </div>
-                        <%--
-                                            <div class="form-group row">
-                                                <label for="MEMBER_ADDRESS" class="col-sm-2 col-form-label"></label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="MEMBER_ADDRESS" name="MEMBER_ADDRESS" placeholder="주소">
+                            --%>
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_ADDRESS" class="col-sm-2 col-form-label"></label>
+                                                    <div class="col-sm-10">
+                                                        <%
+                                                            String user_address = null;
+                                                            String memberaddressObj = (String) userDetail.get("MEMBER_ADDRESS");
+                                                            if (memberaddressObj != null) {
+                                                                user_address = memberaddressObj;
+                                                            } else {
+                                                                user_address = " ";
+                                                            }
+                                                        %>
+                                                        <input type="text" class="form-control" id="MEMBER_ADDRESS" name="MEMBER_ADDRESS" value="<%=user_address%>">
+                                                    </div>
                                                 </div>
-                                            </div>
-                        --%>
-
+                            <%--
+                                                <div class="form-group row">
+                                                    <label for="MEMBER_ADDRESS" class="col-sm-2 col-form-label"></label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="MEMBER_ADDRESS" name="MEMBER_ADDRESS" placeholder="주소">
+                                                    </div>
+                                                </div>
+                            --%>
+                                            </form>
                                             <div class="form-group row">
                                                 <label for="inputExperience" class="col-sm-2 col-form-label">기타정보:</label>
                                                 <div class="col-sm-10">
                                                     <textarea class="form-control" id="inputExperience" placeholder="컬럼이 맞는지 수정부분 말씀해주시면 수정하겠습니다."></textarea>
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="text-align: right;">
-                                    <button type="button" class="btn btn-primary">수정</button>
+                                    <button type="button" class="btn btn-primary" onclick="dataUpdate()">수정</button>
                                 </div>
                             </div>
                         </div>
@@ -290,8 +292,16 @@
         if (isValid) {
             pwSpan.style.display = 'none';
         } else {
-            pwSpan.style.display = 'inline';
+            //pwSpan.style.display = 'inline';
+            mbrPwInput.type = 'text';
+            mbrPwInput.style.color = 'red';
+            mbrPwInput.value = "대소문자와 숫자 4~12자리로 입력하세요."
         }
+        mbrPwInput.onclick = function() {
+            mbrPwInput.type = 'password';
+            mbrPwInput.style.color = ''; // 글자색 초기화
+            mbrPwInput.value = ''; // 입력값 초기화
+        };
 
         return isValid;
     }
@@ -304,22 +314,34 @@
         if (isValid) {
             emailSpan.style.display = 'none';
         } else {
-            emailSpan.style.display = 'inline';
+            //emailSpan.style.display = 'inline';
+            mbrEmailInput.style.color = 'red';
+            mbrEmailInput.value = "이메일형식이 아닙니다."
         }
-
+            mbrEmailInput.onclick = function() {
+                mbrEmailInput.style.color = ''; // 글자색 초기화
+                mbrEmailInput.value = ''; // 입력값 초기화
+            };
         return isValid;
     }
 
     const validatePhone = () => {
         const numberSpan = document.getElementById('number');
-        const mbrPhoneInput = document.getElementById('mbr_phone');
+        const mbrPhoneInput = document.getElementById('MEMBER_PHONE');
         const isValid = expPhoneText.test(mbrPhoneInput.value);
 
         if (isValid) {
             numberSpan.style.display = 'none';
         } else {
-            numberSpan.style.display = 'inline';
+            //numberSpan.style.display = 'inline';
+            mbrPhoneInput.style.color = 'red';
+            mbrPhoneInput.value = "전화번호 형식이 아닙니다."
         }
+
+        mbrPhoneInput.onclick = function() {
+            mbrPhoneInput.style.color = ''; // 글자색 초기화
+            mbrPhoneInput.value = ''; // 입력값 초기화
+        };
 
         return isValid;
     }

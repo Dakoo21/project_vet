@@ -23,4 +23,18 @@ public class myDetail_Repository {
         myDetailLisst = sqlSessionTemplate.selectList("myDetailList", userPk);
         return myDetailLisst;
     }
+
+    public String PasswordCheckOut(Member member) {
+        String userPassword;
+        userPassword = sqlSessionTemplate.selectOne("passwordCheck", member);
+        log.info(userPassword);
+        return userPassword;
+    }
+
+    public int myDetailUpdate(Member member) {
+        log.info("내 정보 업데이트 레포");
+        int result;
+        result = sqlSessionTemplate.update("myDetailUpdate", member);
+        return result;
+    }
 }
