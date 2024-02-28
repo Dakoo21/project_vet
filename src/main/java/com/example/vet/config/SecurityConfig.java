@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -31,6 +32,11 @@ public class SecurityConfig {
         //새로운 BCryptPasswordEncoder 객체를 생성하고 반환
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder () {
+//        return new BCryptPasswordEncoder();
+//    }
 
     //아래 코드는 인증문제로 페이지가 열릴 때 정적내용은 적용을 하라는 메소드
     @Bean

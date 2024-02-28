@@ -115,7 +115,7 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">메뉴</span>
                 <div class="dropdown-divider"></div>
-                <a href="/myDetail" class="dropdown-item">
+                <a href="/myPageIn" class="dropdown-item">
                     <i class="fas fa-users mr-2"></i> 내정보 수정
                 </a>
                 <div class="dropdown-divider"></div>
@@ -128,7 +128,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="" class="brand-link">
         <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">동물생심</span>
     </a>
@@ -1111,6 +1111,3 @@
     <!-- Control sidebar content goes here -->
 </aside>
 <!-- /.control-sidebar -->
-<script>
-
-</script>

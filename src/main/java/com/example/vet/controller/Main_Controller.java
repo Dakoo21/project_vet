@@ -87,14 +87,12 @@ public class Main_Controller {
     /**********************************************************************************
      작성자 : 지장환
      작성일자 : 28.02.25
-     기능 : 내 정보 페이지 접속
+     기능 : 내 정보 접속 인증 페이지 접속
      **********************************************************************************/
 
-    @PostMapping("/myPageIn")
+    @GetMapping("/myPageIn")
     public String myPageIn () {
-        String path;
-
-        return null;
+        return "pages/main/myDetailAuthorization";
     }
 }
 
