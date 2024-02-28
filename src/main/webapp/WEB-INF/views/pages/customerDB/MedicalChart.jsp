@@ -28,7 +28,7 @@
     <script>
         let costSum = 0;
         let isChecked = [];
-        for(let i = 0; i<20 ; i++){
+        for(let i = 0; i<22 ; i++){
             isChecked.push(false);
         }
         console.log(isChecked);
@@ -36,11 +36,55 @@
 
         let checkList = [];
         function closeModal() {
+            //모달창 닫기
             var modal = document.getElementById("diagModal"); // 모달 요소 가져오기
             if (modal) {
                 modal.style.display = "none";
                 console.log("modal close");
             }
+        }
+        function closeDiagSelectedAllModal() {
+            var modal = document.getElementById("diagSelectedAllModal"); // 모달 요소 가져오기
+            if (modal) {
+                modal.style.display = "none";
+                console.log("modal close");
+            }
+            //모든 체크 해제
+            for(let i = 0; i<isChecked.length;i++) {
+                var checkIndex = document.getElementById("inlineCheckbox" + (i+1).toString());
+                checkIndex.checked = false;
+                //합계금액 초기화
+                costSum = 0;
+                var costSumDisplay = document.getElementById("costSumDisplay");
+
+                // costSum 값을 div 요소의 내용으로 설정
+                costSumDisplay.innerText = "Total Cost: " + costSum;
+
+
+            }
+            //checkList 초기화
+            checkList =[];
+        }
+        function closeDiagSelecteNotModal() {
+            //모달창 닫기
+            var modal = document.getElementById("diagSelecteNotModal"); // 모달 요소 가져오기
+            if (modal) {
+                modal.style.display = "none";
+                console.log("modal close");
+            }
+            //모든 체크 해제
+            for(let i = 0; i<isChecked.length;i++) {
+                var checkIndex = document.getElementById("inlineCheckbox" + (i+1).toString());
+                checkIndex.checked = false;
+                //합계금액 초기화
+                costSum = 0;
+                var costSumDisplay = document.getElementById("costSumDisplay");
+
+                // costSum 값을 div 요소의 내용으로 설정
+                costSumDisplay.innerText = "Total Cost: " + costSum;
+
+            }
+            checkList =[];
         }
 
         // Close 버튼에 클릭 이벤트 리스너 추가
@@ -59,8 +103,21 @@
 
         // Modal 열기
         function openModal() {
-            var modal = document.getElementById("diagModal"); // 모달 요소 가져오기
-            modal.style.display = "block";
+            if(isChecked[20] && isChecked[21]) {
+                var modal = document.getElementById("diagSelectedAllModal"); // "초진과 재진 중 하나만 선택 가능합니다."
+                modal.style.display = "block";
+
+            }
+            else if((!isChecked[20] && isChecked[21])||(isChecked[20] && !isChecked[21])){
+                var modal = document.getElementById("diagModal"); // 모달 요소 가져오기
+                modal.style.display = "block";
+            }
+            else{
+                var modal = document.getElementById("diagSelecteNotModal"); // "진료 형태를 선택해 주세요."
+                modal.style.display = "block";
+            }
+
+
         }
 
 
@@ -68,16 +125,34 @@
 
         function toggleCheckbox(index) {
             isChecked[index] = !isChecked[index]; // 체크박스 상태 변경
+            if(isChecked[20] && isChecked[21]) {
+                //진료 둘다선택했을때 막기
+                var modal = document.getElementById("diagSelectedAllModal"); // 모달 요소 가져오기
+                modal.style.display = "block";
 
-            if (isChecked[index]) {
-                // 체크박스가 체크된 상태이면 함수 실행
-                addCheckList(index); // 체크박스 인덱스는 0부터 시작하므로 1을 더해줌
-
-            } else {
-                // 체크박스가 해제된 상태이면 함수 취소
-                removeCheckList(index);
 
             }
+            else if((!isChecked[20] && isChecked[21])||(isChecked[20] && !isChecked[21])){
+                if (isChecked[index]) {
+                    // 체크박스가 체크된 상태이면 함수 실행
+                    addCheckList(index); // 체크박스 인덱스는 0부터 시작하므로 1을 더해줌
+
+
+                } else {
+                    // 체크박스가 해제된 상태이면 함수 취소
+                    removeCheckList(index);
+
+
+                }
+            }
+            else{
+                //진료 선택 안했을 때 막기
+                var modal = document.getElementById("diagSelecteNotModal"); // 모달 요소 가져오기
+                modal.style.display = "block";
+
+            }
+
+
             console.log(checkList)
         }
 
@@ -91,7 +166,7 @@
             newMap["servicePk"] = parameter + 1;
             checkList.push(newMap); // 새로운 map 객체를 checkList에 추가
             $.ajax({
-                url: 'http://localhost:8000/diag/GetServiceCost?servicePk=' + (parameter + 1), // GET 요청을 보낼 다른 엔드포인트 URL
+                url: 'GetServiceCost?servicePk=' + (parameter + 1), // GET 요청을 보낼 다른 엔드포인트 URL
                 type: 'GET',
                 success: function(response) {
                     // GET 요청이 성공했을 때 실행되는 코드
@@ -116,7 +191,7 @@
                 if (checkList[i]["servicePk"] === parameter + 1) {
                     checkList.splice(i, 1);
                     $.ajax({
-                        url: 'http://localhost:8000/diag/GetServiceCost?servicePk=' + (parameter + 1), // GET 요청을 보낼 다른 엔드포인트 URL
+                        url: 'GetServiceCost?servicePk=' + (parameter + 1), // GET 요청을 보낼 다른 엔드포인트 URL
                         type: 'GET',
                         success: function(response) {
                             // GET 요청이 성공했을 때 실행되는 코드
@@ -128,6 +203,7 @@
 
                             // costSum 값을 div 요소의 내용으로 설정
                             costSumDisplay.innerText = "Total Cost: " + costSum;
+
                         },
                         error: function(xhr, status, error) {
                             // GET 요청이 실패했을 때 실행되는 코드
@@ -143,44 +219,44 @@
             var jsonCheckList = JSON.stringify(checkList);
             // POST 요청 보내기
             $.ajax({
-                url: 'http://localhost:8000/diag/diagServiceInsert',
+                url: 'diagServiceInsert',
                 type: 'POST',
                 contentType: 'application/json',
                 data: jsonCheckList,
-                success: function(response) {
+                success: function (response) {
                     // POST 요청이 성공했을 때 실행되는 코드
                     console.log('POST 요청이 성공했습니다.');
+                    submitForm();
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     // POST 요청이 실패했을 때 실행되는 코드
                     console.error('POST 요청이 실패했습니다.', error);
                 }
             });
-
-// GET 요청 보내기
-            $.ajax({
-                url: 'http://localhost:8000/diag/GetServiceCost', // GET 요청을 보낼 다른 엔드포인트 URL
-                type: 'GET',
-                success: function(response) {
-                    // GET 요청이 성공했을 때 실행되는 코드
-                    console.log('GET 요청이 성공했습니다.');
-                    console.log(response); // 받은 응답 데이터
-                },
-                error: function(xhr, status, error) {
-                    // GET 요청이 실패했을 때 실행되는 코드
-                    console.error('GET 요청이 실패했습니다.', error);
-                }
-            });
-
-
         }
+
+        //서비스 가격 합계
         document.addEventListener("DOMContentLoaded", function() {
             // costSum 값을 표시할 div 요소를 가져옴
             var costSumDisplay = document.getElementById("costSumDisplay");
 
             // costSum 값을 div 요소의 내용으로 설정
             costSumDisplay.innerText = "Total Cost: " + costSum;
+            var diagPrice = document.getElementById("diagPrice");
+            diagPrice.value = costSum;
+            console.log(diagPrice.value);
+
         });
+        function submitForm() {
+            var diagPriceValue = document.getElementById("diagPrice");
+            diagPriceValue.value = costSum;
+            var form = document.getElementById("diagForm1");
+            form.submit();
+        }
+
+
+        $.widget.bridge('uibutton', $.ui.button)
+
     </script>
 
 </head>
@@ -255,6 +331,23 @@
                     <input type="hidden" id="bookingPk" name="bookingPk" value="<%=rmap.get("bookingPk")%>">
 
 
+                        <p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
+                            </svg>진료 형태
+                        </p>
+                        <div class="medical-checkbox-area">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox21" onclick="toggleCheckbox(20)">
+                                <label class="form-check-label" for="inlineCheckbox21">초진</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox22" onclick="toggleCheckbox(21)">
+                                <label class="form-check-label" for="inlineCheckbox22">재진</label>
+                            </div>
+
+                        </div>
+                        <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
                         <p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
@@ -378,6 +471,7 @@
                             <tr>
                                 <td class="project-actions text-right">
                                     <a id="costSumDisplay"></a>
+                                    <input type="hidden" id ="diagPrice" name = "diagPrice">
                                     <a class="btn btn-info btn-sm" onclick="openModal()">
                                         <i class="fas fa-pencil-alt">작성완료</i>
                                     </a>
@@ -387,7 +481,7 @@
 
                             </tr>
                             </tbody>
-                            <input type="hidden" id="checkListInput" name="checkList" value="">
+
                         </table>
                                 <!-- 서비스 종류 -->
 
@@ -407,20 +501,48 @@
                         <h3 class="card-title">진료 결과를 저장하시겠습니까?</h3>
                     </div>
                     <div class="card-body">
-                            <button id="diagSaveButton" onclick="submitForm()">저장</button>
+                            <button id="diagSaveButton" onclick="submitList()">저장</button>
                     </div>
                 </div>
                 <!-- /.card -->
             </div>
         </div>
             <!-- /.modal-content -->
+        <div id="diagSelectedAllModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeDiagSelectedAllModal()">&times;</span>
+                <!-- 예약 양식 -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">초진과 재진 중 하나만 선택 가능합니다.</h3>
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+        <div id="diagSelecteNotModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeDiagSelecteNotModal()">&times;</span>
+                <!-- 예약 양식 -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">진료 형태를 선택해 주세요.</h3>
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.modal-content -->
 
     <!-- ./wrapper -->
 
     <!--footer-->
 
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+
     </script>
 </body>
 <%@ include file="/include/footer.jsp"%>

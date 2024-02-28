@@ -39,5 +39,6 @@ public class DIAG_Repository {
 
     public void Update(Map<String, Object> rmap) {
         sqlSessionTemplate.update("diagUpdate", rmap);
+        sqlSessionTemplate.update("updateBookingPk", rmap);
     }
 }
