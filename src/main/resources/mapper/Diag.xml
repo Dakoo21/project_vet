@@ -54,8 +54,9 @@
         LEFT OUTER JOIN MASTER_TEST ON ANIMAL_TEST.MASTER_PK = MASTER_TEST.MASTER_PK
         LEFT OUTER JOIN COMMON_CODE_TEST ON COMMON_CODE_TEST.COMMON_CODE_PK = BOOKING_TEST.COMMON_CODE_PK
         <where>
+            BOOKING_TEST.COMMON_CODE_PK = 124
             <if test="diagPk != null">
-                DIAG_TEST.DIAG_PK = #{diagPk}
+                AND DIAG_TEST.DIAG_PK = #{diagPk}
             </if>
             <if test="gubun != null">
                 <choose>
@@ -100,11 +101,18 @@
             SET COMMON_CODE_PK = 124
             WHERE BOOKING_PK = #{bookingPk}
         </if>
+        <if test="diagPk!=null">
+            UPDATE BOOKING_TEST
+            SET COMMON_CODE_PK = 125
+            WHERE BOOKING_TEST.BOOKING_PK = (SELECT BOOKING_PK FROM DIAG_TEST WHERE DIAG_TEST.DIAG_PK = #{diagPk})
+        </if>
     </update>
     <select id="getDiagNowMade" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT DIAG_PK
         FROM DIAG_TEST
+        <if test="bookingPk!=null">
         WHERE BOOKING_PK = #{bookingPk}
+        </if>
     </select>
     <select id="serviceCost" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT SERVICE_PRICE
@@ -113,7 +121,8 @@
     </select>
     <update id="diagUpdate" parameterType="java.util.Map">
         UPDATE DIAG_TEST
-        SET DIAG_PRESCRIPTION =
+        SET
+        DIAG_PRESCRIPTION =
         <choose>
             <when test="diagPrescription != null">
                 #{diagPrescription}
@@ -121,8 +130,15 @@
             <otherwise>
                 '0'
             </otherwise>
-        </choose>
+        </choose>,
+        DIAG_PRICE = #{diagPrice}
         WHERE DIAG_PK = #{diagPk}
+    </update>
+    <update id="updateBookingPk" parameterType="java.util.Map">
+        UPDATE BOOKING_TEST
+        SET
+            COMMON_CODE_PK = 125
+        WHERE BOOKING_TEST.BOOKING_PK = #{bookingPk}
     </update>
 
 

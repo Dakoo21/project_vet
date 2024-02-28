@@ -70,32 +70,28 @@ public class DIAG_Controller {
     }
 
     @PostMapping("/diagServiceInsert")
-    public String ServiceInsert(@RequestParam Map<String,Object> formData2) {
-        // JSON 문자열 추출
-        String json = (String) formData2.get("checkList");
+    public String ServiceInsert(@RequestBody List<Map<String, Object>> formData2) {
+        Gson gson = new Gson();
+        String json = gson.toJson(formData2);
         logger.info(json);
 
-        // Gson 라이브러리를 사용하여 JSON 문자열을 List<Map<String, Object>>으로 변환합니다.
-        Gson gson = new Gson();
-        List<Map<String, Object>> maps = gson.fromJson(json, new TypeToken<List<Map<String, Object>>>(){}.getType());
-        logger.info(Arrays.toString(maps.toArray()));
-
-        Map<String, Object> rmap = new HashMap<>();
         // 변환된 List<Map>을 순회하며 로깅합니다.
-        for (Map<String, Object> map : maps) {
+        for (Map<String, Object> map : formData2) {
             logger.info(map.toString());
 
             // 정수 값으로 변환하여 사용
             String diagPk = (String) map.get("diagPk");
-            rmap.put("diagPk", diagPk);
+            Map<String, Object> rmap = new HashMap<>();
+            rmap.put("diagPk", Integer.parseInt(diagPk));
 
             Object servicePk = map.get("servicePk");
             if (servicePk instanceof Number) {
                 int intValue = ((Number) servicePk).intValue();
                 rmap.put("servicePk", intValue);
                 logger.info("servicePk: " + intValue);
+                diagService.Insert(rmap);
             }
-            diagService.Insert(rmap);
+
         }
         return "redirect:diagList";
     }
