@@ -46,6 +46,7 @@
                 closeModal();
             }
         }
+
     </script>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -120,8 +121,40 @@
             <div style="text-align: center;">
                 <a id="deleteButton" onclick="deleteBooking(<%=rmap.get("bookingPk")%>)"><button>예약삭제</button></a>
                 <script>
+                    function animalSearch(event) {
+                        event.preventDefault();
+
+                        let searchWord = document.getElementById("searchInput");
+                        if (searchWord) {
+                            $.ajax({
+                                url: 'http://localhost:8000/booking/GetAnimals?animalNm=' + searchWord.value,
+                                type: 'GET',
+                                success: function (response) {
+                                    console.log('Animals:', response);
+                                    // 받은 데이터를 옵션으로 추가
+                                    var animalSelect = document.getElementById("searchResult");
+                                    // 기존의 옵션을 모두 제거
+                                    animalSelect.innerHTML = "";
+                                    // 받은 데이터를 반복하여 옵션으로 추가
+                                    response.forEach(function (animal) {
+                                        var option = document.createElement("option");
+                                        option.value = animal.animalPk; // 동물의 PK 값을 value로 설정
+                                        option.text = animal.animalNm; // 동물의 이름을 텍스트로 설정
+                                        animalSelect.appendChild(option);
+                                    });
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Error:', error);
+                                }
+                            });
+                        } else {
+                            console.error('Error: searchWord is null');
+                            // 모달 표시
+                            $('#alertModal').modal('show');
+                        }
+                    }
                     function deleteBooking(bookingPk) {
-                        if (confirm("예약을 삭제하시겠습니까?")) {
+
                             var form = document.createElement("form");
                             form.setAttribute("method", "POST");
                             form.setAttribute("action", "http://localhost:8000/booking/bookingDelete?bookingPK=<%=rmap.get("bookingPk")%>");
@@ -135,10 +168,10 @@
 
                             document.body.appendChild(form);
                             form.submit();
-                        }
+
                     }
                     function startDiag(bookingPk){
-                        if (confirm("진료를 시작하시겠습니까?")) {
+
                             var form2 = document.createElement("form");
                             form2.setAttribute("method", "POST");
                             form2.setAttribute("action", "http://localhost:8000/diag/diagInsert");
@@ -152,7 +185,7 @@
 
                             document.body.appendChild(form2);
                             form2.submit();
-                        }
+
                     }
                 </script>
 
@@ -166,32 +199,74 @@
 
         <div id="reservationModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close" onclick="closeModal()">&times;</span>
                 <!-- 예약 양식 -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">고객진료예약등록</h3>
+                        <h3 class="card-title">고객진료예약</h3>
                     </div>
                     <div class="card-body">
                         <form id="reservationForm" action="http://localhost:8000/booking/bookingUpdate" method="POST">
                             <input type="hidden" name="bookingPk" value="<%=rmap.get("bookingPk")%>">
                         <!-- 보호자명 -->
-                        <div class="form-group" style="display: inline-block; width: 240px;">
-                            <label for="guardianName" style="display: inline-block; width: 70px;">보호자명</label>
-                            <input type="text" id="guardianName" class="form-control" placeholder="김주인" style="display: inline-block; width: 150px;">
-                        </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                        <span class="input-group-text" id="searchIcon">
+                            <input type="text" class="form-control" id="searchInput" placeholder="동물을 검색하세요..." aria-label="Search" aria-describedby="searchIcon" onkeyup="if (event.keyCode === 13) animalSearch(event)">
+                            <button onclick="animalSearch(event)">검색</button>
+                        </span>
+                                </div>
+                            </div>
                         <!-- 동물선택 -->
                         <div class="form-group" style="display: inline-block; width: 240px;">
 
                             <label style="display: inline-block; width: 70px;">환축명</label>
-                            <select class="form-control select2" style="display: inline-block; width: 150px;" name="animalPk">
-                                <option selected="selected">선택</option>
-                                <option value = "1">동물1</option>
-                                <option value = "2">동물2</option>
-                                <option value = "3">동물3</option>
+                            <select class="form-control select2" id = "searchResult" style="display: inline-block; width: 150px;" name="animalPk">
                             </select>
                         </div>
                         <!-- 예약일 -->
+                            <script>
+                                window.onload = function() {
+                                    // 현재 날짜를 가져오는 함수
+                                    function getCurrentDate() {
+                                        const today = new Date();
+                                        const year = today.getFullYear();
+                                        let month = today.getMonth() + 1;
+                                        let day = today.getDate();
+
+                                        // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여 두 자리로 만듦
+                                        month = month < 10 ? '0' + month : month;
+                                        day = day < 10 ? '0' + day : day;
+
+                                        return year + '-' + month + '-' + day;
+                                    }
+
+                                    // 3일 후의 날짜를 가져오는 함수
+                                    function getThreeDaysLater() {
+                                        const today = new Date();
+                                        today.setDate(today.getDate() + 3); // 현재 날짜에서 3일을 더함
+
+                                        const year = today.getFullYear();
+                                        let month = today.getMonth() + 1;
+                                        let day = today.getDate();
+
+                                        // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여 두 자리로 만듦
+                                        month = month < 10 ? '0' + month : month;
+                                        day = day < 10 ? '0' + day : day;
+
+                                        return year + '-' + month + '-' + day;
+                                    }
+
+                                    // 예약일 input 요소
+                                    const reservationDateInput = document.getElementById('reservationdate');
+
+
+                                    // 최소 날짜를 오늘로 설정
+                                    const currentDate = getCurrentDate();
+                                    reservationDateInput.min = currentDate;
+                                };
+                            </script>
                         <div class="form-group" style="display: inline-block; width: 240px;">
                             <label for="reservationdate" style="display: inline-block; width: 70px;">예약일</label>
                             <input type="date" id="reservationdate" class="form-control" style="display: inline-block; width: 150px;" name="bookingDate">
@@ -220,36 +295,47 @@
                                 <option value="18:00">18:00</option>
                                 <option value="18:30">18:30</option>
                                 <option value="19:00">19:00</option>
-                                <option value="19:30">19:30</option>
                             </select>
                         </div>
                         <div class="input-group-prepend" style="display: none">
-                            <label class="input-group-text" for="end-time">종료시간</label>
                             <select id="end-time" name="bookingEnd">
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                                <option value="16:30">16:30</option>
+                                <option value="17:00">17:00</option>
+                                <option value="17:30">17:30</option>
+                                <option value="18:00">18:00</option>
+                                <option value="18:30">18:30</option>
+                                <option value="19:00">19:00</option>
+                                <option value="19:30">19:30</option>
                             </select>
                         </div>
 
                         <script>
-                            function setEndTime(startTime) {
+                            function setEndTime() {
                                 var endTimeSelect = document.getElementById("end-time");
-                                endTimeSelect.innerHTML = ""; // 이전에 추가된 옵션 제거
+                                var startTimeIndex = document.getElementById("start-time").selectedIndex;
 
-                                // 종료 시간을 설정합니다. 예를 들어, 시작 시간 + 30분
-                                var endTime = addMinutes(startTime, 30);
+                                // 시작 시간 인덱스부터 end-time 옵션을 변경합니다.
+                                for (var i = startTimeIndex; i < endTimeSelect.options.length; i++) {
+                                    endTimeSelect.options[i].style.display = "block";
+                                }
 
-                                // 옵션을 추가합니다.
-                                var option = document.createElement("option");
-                                option.value = endTime;
-                                option.text = endTime;
-                                endTimeSelect.add(option);
-                            }
+                                // 선택한 start-time 이후의 end-time 옵션을 선택합니다.
+                                endTimeSelect.selectedIndex = startTimeIndex;
 
-                            // 분을 더하는 함수
-                            function addMinutes(time, minutes) {
-                                var [hour, minute] = time.split(":").map(Number);
-                                var date = new Date(0, 0, 0, hour, minute);
-                                date.setMinutes(date.getMinutes() + minutes);
-                                return (date.getHours().toString().padStart(2, "0") + ":" + date.getMinutes().toString().padStart(2, "0")).toString();
+                                // 종료 시간을 hidden input에 설정
+                                document.getElementById("end-time").value = endTime;
                             }
                         </script>
                         <!-- 예약구분 -->
@@ -307,13 +393,7 @@
             </div>
             <!-- /.modal-content -->
         </div>
-        <script>
-            // Form submit 함수
-            function submitForm() {
-                var form = document.getElementById("reservationForm");
-                form.submit();
-            }
-        </script>
+
 
 <!-- ./wrapper -->
 
@@ -321,20 +401,53 @@
 
 <script>
     $.widget.bridge('uibutton', $.ui.button)
+
+    // 페이지 로드 시 setMinDate 함수 호출하여 설정
+    window.onload = function () {
+        console.log("오늘날 최소값 설정");
+        setMinDate();
+        const facilityReserveDt = document.getElementById('facilityReserveDt');
+        facilityReserveDt.value = getCurrentDate();
+        dailyDate.value = getCurrentDate();
+    };
+    // 현재 날짜를 가져오는 함수
+    function getCurrentDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+
+        // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여 두 자리로 만듦
+        month = month < 10 ? '0' + month : month;
+        day = day < 10 ? '0' + day : day;
+        console.log("day:",day);
+        return year + '-' + month + '-' + day;
+        console.log("year"-"month"-"day");
+    }
+
+    // 오늘 이후의e 날짜만 선택할 수 있도록 설정하는 함수
+    function setMinDate() {
+        const facilityReserveDt = document.getElementById('facilityReserveDt');
+        const currentDate = getCurrentDate();
+        facilityReserveDt.min = currentDate;
+    }
+
+
+
 </script>
 </body>
-<%@ include file="/include/footer.jsp"%>
-<%@ include file="/include/bootCommonFoot.jsp"%>
+<%@ include file="/include/footer.jsp" %>
+<%@ include file="/include/bootCommonFoot.jsp" %>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 </html>
 <style typeof="text/css">
-    .form-control{
+    .form-control {
         width: 90%;
         text-align: center;
         line-height: 2.5;
     }
 
-    #contents_box{
+    #contents_box {
         display: flex;
         width: 100%;
         justify-content: space-evenly;
@@ -352,13 +465,45 @@
         width: 400px;
     }
 
-    .medical-checkbox-area{
-        display: flex;
-        gap: 20px;
-    }
-
     .btn btn-primary{
         display: inline-block;
         margin-top: 30px;
+    }
+    /* 모달 스타일 */
+    .modal {
+        display: none; /* 모달을 기본적으로 숨김 */
+        position: fixed; /* 모달이 화면에 고정되도록 설정 */
+        z-index: 1; /* 모달을 다른 요소들보다 위에 표시하기 위한 인덱스 설정 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* 모달이 화면 크기를 벗어날 경우 스크롤 가능하도록 설정 */
+        background-color: rgba(0, 0, 0, 0.4); /* 배경에 투명한 검은색을 입힘 */
+    }
+
+    /* 모달 콘텐츠 스타일 */
+    .modal-content {
+        margin: 15% auto; /* 콘텐츠를 화면의 중앙에 배치 */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%; /* 콘텐츠의 너비 설정 */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* 그림자 효과 추가 */
+    }
+
+    /* 모달 닫기 버튼 스타일 */
+    .close {
+        color: #aaaaaa; /* 닫기 버튼 색상 설정 */
+        float: right; /* 우측에 배치 */
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    /* 닫기 버튼에 호버 효과 추가 */
+    .close:hover,
+    .close:focus {
+        color: #000; /* 호버 시 색상 변경 */
+        text-decoration: none; /* 밑줄 제거 */
+        cursor: pointer; /* 커서를 포인터로 변경 */
     }
 </style>

@@ -22,7 +22,38 @@
             padding-top: 20px;
         }
     </style>
-
+    <script>
+        function animalSearch() {
+            let searchWord = document.getElementById("searchInput");
+            if (searchWord) {
+                $.ajax({
+                    url: 'http://localhost:8000/booking/GetAnimals?animalNm=' + searchWord.value,
+                    type: 'GET',
+                    success: function (response) {
+                        console.log('Animals:', response);
+                        // 받은 데이터를 옵션으로 추가
+                        var animalSelect = document.getElementById("animalSelect");
+                        // 기존의 옵션을 모두 제거
+                        animalSelect.innerHTML = "";
+                        // 받은 데이터를 반복하여 옵션으로 추가
+                        response.forEach(function (animal) {
+                            var option = document.createElement("option");
+                            option.value = animal.animalPk; // 동물의 PK 값을 value로 설정
+                            option.text = animal.animalNm; // 동물의 이름을 텍스트로 설정
+                            animalSelect.appendChild(option);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                console.error('Error: searchWord is null');
+                // 모달 표시
+                $('#alertModal').modal('show');
+            }
+        }
+    </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -51,35 +82,33 @@
             <!--여기 -->
             <div class="separator"></div>
 
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="searchIcon">
+                            <input type="text" class="form-control" id="searchInput" placeholder="동물을 검색하세요..." aria-label="Search" aria-describedby="searchIcon" onkeyup="if (event.keyCode === 13) animalSearch()">
+                            <button onclick="animalSearch()">검색</button>
+                        </span>
+                    </div>
+
+
+                </div>
             <form action="bookingInsert" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="animalSelect">동물명</label>
-                    </div>
-                    <select class="custom-select" id="animalSelect" name="animalPk">
-                        <option selected>동물을 선택하세요...</option>
-                        <%
-                            for(int i = 0 ; i<aList.size();i++){
-                                Map<String,Object> rmap = aList.get(i);
-                        %>
-                        <option value="<%=rmap.get("animalPk")%>"><%=rmap.get("animalNm")%>(<%=rmap.get("masterNm")%>)</option>
-                        <%
-                            }
-                        %>
-                    </select>
-                    <div class="input-group-append">
-
-                        <div class="input-group-text">
-
-                                    <span class="fas fa-user">
-
-                                    </span>
-                        </div>
+                <select class="custom-select" id="animalSelect" name="animalPk">
+                    <option selected>동물을 선택하세요...</option>
+                </select>
                     </div>
                 </div>
+
+
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="animalSelect"><%= "서비스 이름" %></label>
+                        <label class="input-group-text" for="typeSelect"><%= "서비스 이름" %></label>
                     </div>
                     <select class="custom-select" id="typeSelect" name="bookingType">
                         <option selected>원하는 서비스를 선택하세요</option>
@@ -152,7 +181,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="datepicker1">날짜선택</label>
                     </div>
-                    <input type="text" class="form-control" id="datepicker1" name="bookingDate" style="opacity: 1;">
+                    <input type="text" class="form-control" id="datepicker1" name="bookingDate" style="opacity: 1;" value="">
 
                 </div>
                 <div class="input-group mb-3">
@@ -181,27 +210,102 @@
                             <option value="18:00">18:00</option>
                             <option value="18:30">18:30</option>
                             <option value="19:00">19:00</option>
-                            <option value="19:30">19:30</option>
+
                         </select>
+                        <div>
+                            ~
+                        </div>
 
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="end-time">종료시간</label>
+                            <select type="hidden" id="end-time" name="bookingEnd">
+                                <option selected>시간 선택</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                                <option value="16:30">16:30</option>
+                                <option value="17:00">17:00</option>
+                                <option value="17:30">17:30</option>
+                                <option value="18:00">18:00</option>
+                                <option value="18:30">18:30</option>
+                                <option value="19:00">19:00</option>
+                                <option value="19:30">19:30</option>
+                            </select>
+
                         </div>
-                        <select id="end-time" name="bookingEnd">
-                        </select>
+                        <div class="col-4" id="submitButtonWrapper">
+                            <button type="submit" class="btn btn-primary btn-block">예약</button>
+                        </div>
                         <script>
-                            function setEndTime(startTime) {
+                            window.onload = function() {
+                                setDefaultDate();
+                                setEarliestTime();
+                                setEndTime();
+
+                            };
+                            function setEarliestTime() {
+                                const startTimeSelect = document.getElementById("start-time");
+                                const now = new Date();
+                                const currentHour = now.getHours();
+                                const currentMinute = now.getMinutes();
+                                // 가장 이른 시간을 계산합니다.
+                                let earliestTime = '';
+                                if (currentMinute < 30) {
+                                    earliestTime = currentHour + ":30";
+                                } else {
+                                    earliestTime = (currentHour + 1) + ":00";
+                                }
+                                // 선택한 시간이 시작 시간 select 요소에 있는지 확인하고, 없으면 모달을 표시합니다.
+                                if (!startTimeSelect.querySelector("option[value='" + earliestTime + "']")) {
+                                    showModal();
+                                } else {
+                                    // 기본값으로 가장 이른 시간을 선택합니다.
+                                    startTimeSelect.value = earliestTime;
+                                }
+                            }
+
+                            function showModal() {
+                                $('#nextDayModal').modal('show');
+                            }
+
+                            function setDefaultDate() {
+                                const datepicker1 = document.getElementById('datepicker1');
+                                const currentDate = getCurrentDate();
+                                datepicker1.value = currentDate; // 오늘의 날짜를 기본값으로 설정
+
+                            }
+
+                            function getCurrentDate() {
+                                const today = new Date();
+                                const year = today.getFullYear();
+                                let month = today.getMonth() + 1;
+                                let day = today.getDate();
+                                month = month < 10 ? '0' + month : month;
+                                day = day < 10 ? '0' + day : day;
+                                return year + '-' + month + '-' + day;
+                            }
+                            function setEndTime() {
                                 var endTimeSelect = document.getElementById("end-time");
-                                endTimeSelect.innerHTML = ""; // 이전에 추가된 옵션 제거
+                                var startTimeIndex = document.getElementById("start-time").selectedIndex;
 
-                                // 종료 시간을 설정합니다. 예를 들어, 시작 시간 + 30분
-                                var endTime = addMinutes(startTime, 30);
+                                // 시작 시간 인덱스부터 end-time 옵션을 변경합니다.
+                                for (var i = startTimeIndex; i < endTimeSelect.options.length; i++) {
+                                    endTimeSelect.options[i].style.display = "block";
+                                }
 
-                                // 옵션을 추가합니다.
-                                var option = document.createElement("option");
-                                option.value = endTime;
-                                option.text = endTime;
-                                endTimeSelect.add(option);
+                                // 선택한 start-time 이후의 end-time 옵션을 선택합니다.
+                                endTimeSelect.selectedIndex = startTimeIndex;
+
+                                // 종료 시간을 hidden input에 설정
+                                document.getElementById("end-time").value = endTime;
                             }
 
                             // 분을 더하는 함수
@@ -215,40 +319,47 @@
 
 
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                <label for="agreeTerms">
-                                    <a href="#">이용약관</a>에 동의합니다.
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4" id="submitButtonWrapper" style="display: none;">
-                            <button type="submit" class="btn btn-primary btn-block">예약</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
+
                 </div>
             </form>
         </section>
     </div>
-</div><!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
 <!-- Main content -->
+
 <section class="content">
     <!--여기 -->
+    <div class="modal" id="nextDayModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- 모달 헤더 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">알림</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
+                <!-- 모달 본문 -->
+                <div class="modal-body">
+                    오늘의 예약은 종료되었습니다. 내일 날짜로 예약해 주세요.
+                </div>
+
+                <!-- 모달 푸터 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>
 <!-- /.content -->
-</div>
 <!-- /.content-wrapper -->
 <!--footer-->
 <%@ include file="/include/footer.jsp"%>
-</div>
-<!-- ./wrapper -->
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <script>
+
     document.getElementById("typeSelect").addEventListener("change", function() {
         var type = this.value;
         if (type === "미용") {
@@ -285,7 +396,17 @@
             buttonWrapper.style.display = "none";
         }
     });
+
+
 </script>
 </body>
+<style>
+    /* 예약신청 폼의 너비를 조정 */
+    .content {
+        max-width: 600px; /* 원하는 최대 너비로 조정 */
+        margin: 0; /* 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
+        margin-left: 20px;
+    }
+</style>
 </html>
 

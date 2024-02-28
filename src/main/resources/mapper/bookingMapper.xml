@@ -27,7 +27,7 @@
 
     <select id="bookingSelect" parameterType="com.example.vet.model.BookingVO" resultMap="selectResultMap">
         SELECT BOOKING.BOOKING_TYPE as "bookingType", BOOKING.BOOKING_START as "bookingStart", BOOKING.BOOKING_END "bookingEnd",
-               BOOKING.BOOKING_DATE AS "bookingDate", BOOKING.BOOKING_PK AS "bookingPk",
+        BOOKING.BOOKING_DATE AS "bookingDate", BOOKING.BOOKING_PK AS "bookingPk",
         ANIMAL.ANIMAL_BREED as "animalBreed", ANIMAL.ANIMAL_NEUT as "animalNeut", ANIMAL.ANIMAL_NM as "animalName",
         ANIMAL.ANIMAL_BDATE as "animalBirthDate" , ANIMAL.ANIMAL_SEX as "animalSex", ANIMAL.ANIMAL_WEIGHT as "animalWeight",
         ANIMAL.ANIMAL_SPECIES as "animalSpecies", CODE.COMMON_CODE_NM as "commonCodeName", U.USER_NM as "userNm", M.MASTER_NM AS "masterNm", M.MASTER_EMAIL AS "masterEmail", M.MASTER_ADDRESS AS "masterAddress", M.MASTER_PNUMBER AS "masterPnumber",
@@ -37,12 +37,12 @@
         LEFT OUTER JOIN COMMON_CODE_TEST CODE ON BOOKING.COMMON_CODE_PK = CODE.COMMON_CODE_PK
         LEFT OUTER JOIN USER_TEST U ON BOOKING.USER_PK = U.USER_PK
         LEFT OUTER JOIN MASTER_TEST M ON ANIMAL.MASTER_PK = M.MASTER_PK
-        <if test="bookingPk != null">
-            <where>
-                #{bookingPk} = BOOKING.BOOKING_PK
-            </where>
-
-        </if>
+        <where>
+            BOOKING.COMMON_CODE_PK = 123
+            <if test="bookingPk != null">
+                AND #{bookingPk} = BOOKING.BOOKING_PK
+            </if>
+        </where>
     </select>
     <insert id="bookingInsert" parameterType="com.example.vet.model.BookingVO">
         INSERT INTO BOOKING_TEST(BOOKING_PK, BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_DATE, ANIMAL_PK, USER_PK, COMMON_CODE_PK)
@@ -73,6 +73,9 @@
         SELECT ANIMAL.ANIMAL_NM as "animalNm", ANIMAL.ANIMAL_PK as "animalPk", MASTER.MASTER_NM as "masterNm", MASTER.MASTER_PK as "masterPk"
         FROM ANIMAL_TEST ANIMAL
         LEFT OUTER JOIN MASTER_TEST MASTER ON ANIMAL.MASTER_PK = MASTER.MASTER_PK
+        <if test="animalNm!=null">
+            WHERE ANIMAL.ANIMAL_NM LIKE '%' || #{animalNm} || '%'
+        </if>
 
     </select>
 </mapper>

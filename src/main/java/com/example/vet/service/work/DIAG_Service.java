@@ -18,11 +18,12 @@ public class DIAG_Service {
         return diagRepository.Select(rmap);
     }
 
-    public void Insert(Map<String, Object> rmap) {
-        diagRepository.Insert(rmap);
+    public List<Map<String,Object>> Insert(Map<String, Object> rmap) {
+        List<Map<String,Object>> sList = diagRepository.Insert(rmap);
+        return sList;
     }
 
-    public int SelectCost(Map<String, Object> servicePk) {
+    public List<Map<String, Object>> SelectCost(Map<String, Object> servicePk) {
         return diagRepository.SelectCost(servicePk);
     }
 

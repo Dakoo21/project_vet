@@ -188,3 +188,38 @@
 <%@ include file="/include/footer.jsp"%>
 </body>
 </html>
+<style>
+    .modal {
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px; /* 모달이 화면 상단에서 100px 내려와 있도록 설정 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4); /* 모달 외의 영역이 어둡게 보이도록 설정 */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%; /* 모달의 너비를 조정 */
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
