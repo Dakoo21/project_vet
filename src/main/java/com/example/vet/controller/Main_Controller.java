@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,19 @@ public class Main_Controller {
     @GetMapping("/findPassword")
     public String foundPasswordPage () {
         return "pages/login/findPassword";
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 28.02.25
+     기능 : 내 정보 페이지 접속
+     **********************************************************************************/
+
+    @PostMapping("/myPageIn")
+    public String myPageIn () {
+        String path;
+
+        return null;
     }
 }
 
