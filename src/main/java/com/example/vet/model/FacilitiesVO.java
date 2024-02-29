@@ -24,9 +24,10 @@ public class FacilitiesVO {
     private int timeInterval;
 
     private String facilityRemarks;
+    private boolean searchMine;
 
     @Builder
-    public FacilitiesVO(int facilityReserveId, String facilityNm, String userNm, String animalNm,  int animalId, String animalBdate, int masterPk, int memberPk, String facilityReserveDt,String startTime, String endTime, int startInterval, int endInterval, int timeInterval, String facilityRemarks) {
+    public FacilitiesVO(int facilityReserveId, String facilityNm, String userNm, String animalNm,  int animalId, String animalBdate, int masterPk, int memberPk, String facilityReserveDt,String startTime, String endTime, int startInterval, int endInterval, int timeInterval, String facilityRemarks, boolean searchMine) {
         this.facilityReserveId = facilityReserveId;
         this.facilityNm = facilityNm;
         this.userNm = userNm;
@@ -42,5 +43,6 @@ public class FacilitiesVO {
         this.endInterval = endInterval;
         this.timeInterval = timeInterval;
         this.facilityRemarks = facilityRemarks;
+        this.searchMine = searchMine;
     }
 }

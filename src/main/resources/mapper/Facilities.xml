@@ -31,19 +31,75 @@
               WHERE 1=1
                 AND D.FACILITY_RESERVE_DT <![CDATA[>=]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD')
               GROUP BY R.FACILITY_RESERVE_ID)
+        <if test="searchMine!= null and searchMine != ''">
+            AND MEMBER_PK = #{memberPk}
+        </if>
         ORDER BY FACILITY_RESERVE_DT ASC
                , START_TIME ASC
+
+    </select>
+    <!--오늘 이후 내꺼 리스트-->
+    <select id="reserveMyList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT FACILITY_RESERVE_ID
+        , FACILITY_NM
+        , USER_NM
+        , ANIMAL_NM
+        , FACILITY_RESERVE_DT
+        , TO_CHAR(START_TIME + 30/(24*60)*RESERVE_START_TIME  , 'hh24:mi') AS START_TIME
+        , TO_CHAR(START_TIME + 30/(24*60)*(RESERVE_END_TIME+1), 'hh24:mi') AS END_TIME
+        FROM (SELECT R.FACILITY_RESERVE_ID
+        , MAX(FACILITY_NM) AS FACILITY_NM
+        , MAX(MEMBER_MEMBERNAME) AS USER_NM
+        , MAX(ANIMAL_NM) AS ANIMAL_NM
+        , MAX(FACILITY_RESERVE_DT) AS FACILITY_RESERVE_DT
+        , MIN(RESERVE_TIME_INTERVAL) AS RESERVE_START_TIME
+        , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
+        , TO_DATE('2019-08-21 10:00', 'yyyy-mm-dd hh24:mi') AS START_TIME
+        FROM FACILITY_RESERVE_TEST R
+        INNER JOIN USER_TEST5 U
+        ON 1=1
+        AND R.MEMBER_PK = U.MEMBER_PK
+        INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
+        ON 1=1
+        AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
+        INNER JOIN ANIMAL_TEST A
+        ON 1=1
+        AND R.ANIMAL_PK = A.ANIMAL_PK
+        WHERE 1=1
+
+        AND D.FACILITY_RESERVE_DT <![CDATA[>=]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+          AND R.MEMBER_PK = #{memberPk}
+
+        GROUP BY R.FACILITY_RESERVE_ID)
+
+
+        ORDER BY FACILITY_RESERVE_DT ASC
+        , START_TIME ASC
+
     </select>
 
-    <!--예약불가 확인-->
-    <select id="checkImpossible"  resultType="java.util.Map">
+    <!--예약불가 확인  이상  , 이하 -->
+    <select id="checkImpossible"   parameterType="java.util.Map"   resultType="java.util.Map">
         SELECT FACILITY_RESERVE_ID
         FROM FACILITY_RESERVE_DETAIL_TEST
         WHERE 1=1
-          AND FACILITY_RESERVE_NM = #{facilityNm}
+          AND FACILITY_NM = #{facilityNm}
           AND FACILITY_RESERVE_DT = #{facilityReserveDt}
-          AND RESERVE_TIME_INTERVAL BETWEEN #{startInterval} AND #{endInterval}
+          AND RESERVE_TIME_INTERVAL BETWEEN #{startTimeInterval} AND #{endTimeInterval}
     </select>
+    <!--예약불가 확인  이상  , 이하, 내 가 예약했던건 제외하고 체크 -->
+    <select id="checkImpossibleUpdate"   parameterType="java.util.Map"   resultType="java.util.Map">
+        SELECT FACILITY_RESERVE_ID
+        FROM FACILITY_RESERVE_DETAIL_TEST
+        WHERE 1=1
+          AND FACILITY_NM = #{facilityNm}
+          AND FACILITY_RESERVE_DT = #{facilityReserveDt}
+          AND RESERVE_TIME_INTERVAL BETWEEN #{startTimeInterval} AND #{endTimeInterval}
+          AND FACILITY_RESERVE_ID != #{facilityReserveId}
+
+    </select>
+
+
     <!--예약등록-->
     <select id="createReserveId" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT FACILITY_PK_SEQ.NEXTVAL AS FACILITY_RESERVE_ID
@@ -103,13 +159,13 @@
         DELETE FROM FACILITY_RESERVE_DETAIL_TEST
         WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
     </delete>
-    <delete id="DeleteReserveDetail" parameterType="int">
+    <delete id="deleteReserveDetail" parameterType="int">
         DELETE FROM FACILITY_RESERVE_TEST
         WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
     </delete>
 
     <!--수정-->
-    <update id="reserveUpdate" >
+    <update id="updateReserve" >
         UPDATE FACILITY_RESERVE_TEST
         SET FACILITY_REMARKS = #{facilityRemarks}
           , ANIMAL_PK = #{animalId}
