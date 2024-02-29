@@ -1,5 +1,9 @@
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    List<Map<String, Object>> dList = (List)request.getAttribute("dList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +59,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료기록조회</h1>
+                        <h1>진료완료기록</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -65,6 +69,54 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
+            <!-- 검색기 시작 -->
+            <form id="searchForm" onsubmit="boardSearch(event)">
+                <div class="row">
+                    <div class="col-3">
+                        <select id="gubun" name="gubun" class="form-select" aria-label="분류선택">
+                            <option selected="selected">분류선택</option>
+                            <option value="masterNm">고객명</option>
+                            <option value="animalNm">반려동물명</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색어를 입력하세요"
+                               aria-label="검색어를 입력하세요" aria-describedby="btn_search" />
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" id="btn_search" class="btn btn-danger" onclick="boardSearch()">검색</button>
+                    </div>
+                </div>
+            </form>
+
+            <script>
+                function boardSearch() {
+
+
+                    var form = document.getElementById('searchForm');
+                    var formData = new FormData(form);
+
+                    var queryString = new URLSearchParams(formData).toString();
+                    window.location.href = "localhost:8000/diag/diagList?" + queryString;
+                }
+            </script>
+            <!--카테고리 버튼-->
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://localhost:8080/diag/diagList" data-toggle="tab">전체조회</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/diag/diagList?species=dog" data-toggle="tab">강아지</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/diag/diagList?species=cat" data-toggle="tab">고양이</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/diag/diagList?species=etc" data-toggle="tab">기타동물</a>
+                    </li>
+                </ul>
+            </div>
         </section>
 
         <!-- Main content -->
@@ -75,6 +127,9 @@
                 <table id = "medlogtableList" class="table table-striped projects">
                     <thead>
                     <tr>
+                        <th style="width: 5%" class="text-center">
+                            차트번호
+                        </th>
                         <th style="width: 5%">
                             등록일시
                         </th>
@@ -90,114 +145,30 @@
                         <th style="width: 20%">
                             동물명
                         </th>
-                        <th style="width: 5%" class="text-center">
-                            차트번호
-                        </th>
                         <th style="width: 15%"> 수납상태
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>김보호</td>
-                        <td>010-1111-1111</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>이보호</td>
-                        <td>010-2222-2222</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>정보호</td>
-                        <td>010-3333-3333</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>양보호</td>
-                        <td>010-4444-4444</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr><tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>최보호</td>
-                        <td>010-5555-5555</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>강보호</td>
-                        <td>010-6666-6666</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>안보호</td>
-                        <td>010-7777-7777</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>유보호</td>
-                        <td>010-8888-8888</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>한보호</td>
-                        <td>010-9999-9999</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>임보호</td>
-                        <td>010-0000-0000</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-                    <tr>
-                        <td>2024.02.01</td>
-                        <td>강아지</td>
-                        <td>서보호</td>
-                        <td>010-1212-1212</td>
-                        <td>여기는동물이름</td>
-                        <td>20240201001</td>
-                        <td><button class="btn btn-info btn-sm openModalBtn">미수납</button></td>
-                    </tr>
-
+                    <%
+                        for(int i = 0 ; i<dList.size();i++){
+                            Map<String, Object> rmap = dList.get(i);
+                    %>
+                    <%--<tr>
+                        <td><%=rmap.get("diagPk")%></td>
+                        <td><%=rmap.get("bookingDate")%></td>
+                        <td><%=rmap.get("animalSpecies")%></td>
+                        <td><%=rmap.get("masterNM")%></td>
+                        <td><%=rmap.get("masterPhoneNumber")%></td>
+                        <td><%=rmap.get("animalNM")%></td>
+                        <td class="project-actions text-right">
+                            <a class="btn btn-info btn-sm" href="http://localhost:8000/diag/diagDetail?diagPk=<%=rmap.get("diagPk")%>">
+                                <i class="fas fa-pencil-alt"></i><%=rmap.get("commonCodeName")%></a>
+                        </td>
+                    </tr>--%>
+                    <%
+                        }
+                    %>
                     </tbody>
 
                 </table>
@@ -205,7 +176,6 @@
             <!-- /.card-body -->
         </section>
         <!-- /.content -->
-
     </div>
     <!-- /.content-wrapper -->
 
@@ -217,101 +187,15 @@
 </div>
 <!-- ./wrapper -->
 
-<%-- ===========================[modal]============================== --%>
-<div id="paymentModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="invoice p-1 mb-1">
-                        <div class="row invoice-info" id="invoiceInfo">
-                            <!-- 여기에 주문번호, 진료일 및 고객 정보가 자동으로 생성 -->
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-                            <div class="col-12 table-responsive">
-                                <table id="modalTable" class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>수량</th>
-                                        <th>진료항목</th>
-                                        <th>금액</th>
-                                        <th>비고</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>진료비</td>
-                                        <td>30,000</td>
-                                        <td>없음</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>엑스레이</td>
-                                        <td>20,000</td>
-                                        <td>없음</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>주사</td>
-                                        <td>50,000</td>
-                                        <td>없음</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>약 처방</td>
-                                        <td>20,000</td>
-                                        <td>없음</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-                            <div class="col-6"></div> <!-- 왼쪽 열 -->
-                            <div class="col-6 offset-6"> <!-- 오른쪽 열 -->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tr id="totalRow"> <!-- 합계 표시를 위한 새로운 <tr> 태그 -->
-                                            <td colspan="6" style="text-align: right;"><b>합계:</b></td> <!-- colspan은 표의 열 개수만큼 설정 -->
-                                            <td id="totalAmountCell"></td> <!-- 합계 금액이 표시될 셀 -->
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- this row will not appear when printing -->
-                        <div class="row no-print">
-                            <div class="col-12">
-                                <div class="row justify-content-end">
-                                    <div class="col-md-3">
-                                        <button type="button" class="btn btn-success btn-info" onclick="requestCashPay()"><i class="fa fa-money-bill"></i>현금결제</button>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button type="button" class="btn btn-success btn-primary" onclick="requestQRPay()"><i class="fa fa-qrcode"></i>QR결제</button>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button type="button" class="btn btn-success btn-secondary" onclick="requestCardPay()"><i class="far fa-credit-card"></i>신용카드</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.invoice -->
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-</div>
-
+<script>
+    function redirectToPaymentPage() {
+        // 버튼이 클릭된 행의 데이터를 가져올 수 있도록 원하는 정보를 추가해주세요
+        // 예: 동물의 이름, 차트번호 등
+        // 이동할 페이지에 해당 데이터를 전달하고 싶다면 쿼리 파라미터 형태로 추가하면 됩니다
+        window.location.href = "paymentDetail.jsp"; // 이동할 페이지의 경로를 설정해주세요
+    }
+</script>
+<%--
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // openModalBtn 함수를 버튼에 클릭 이벤트로 연결
@@ -383,28 +267,11 @@
 
     });
 </script>
+--%>
 
-<script>
-    // 현금결제 버튼 클릭 시 동작
-    function requestCashPay() {
-        // 알림창으로 현금으로 결제하시겠습니까? 메시지 표시
-        const confirmCashPayment = confirm("현금으로 결제하시겠습니까?");
 
-        if (confirmCashPayment) {
-            // "네" 버튼 클릭 시 현금 결제를 완료한 후 확인 버튼을 눌라는 메시지 표시
-            const cashPaymentComplete = confirm("현금 결제를 완료한 후 확인 버튼을 눌러주세요.");
 
-            if (cashPaymentComplete) {
-                // "확인" 버튼 클릭 시 paymentModal2로 이동 및 paymentModal 닫기
-                openPaymentModal2();
-            }
-        } else {
-            // "아니오" 버튼 클릭 시 알림창 닫기
-            alert("결제가 취소되었습니다.");
-        }
-    }
-</script>
-
+<%--
 <script>
     function openPaymentModal2() {
         // paymentModal 닫기
@@ -427,134 +294,7 @@
         document.getElementById("paymentAmountCell").textContent = amount + "원";
     }
 </script>
-
-
-<script>
-    // IMP 객체를 전역 변수로 선언하고, 상점에서 발급받은 식별키로 초기화
-    // IMP 변수가 이미 선언되었는지 확인하여 선언하지 않음
-    if (typeof IMP === "undefined") {
-        var IMP = window.IMP;
-    }
-    IMP.init("imp80707007");
-
-    // QR결제 요청 함수 정의
-    function requestQRPay() {
-        console.log("결제가 진행됩니다");
-
-        // IMP 객체를 사용하여 결제 요청
-        IMP.request_pay({
-            pg: 'kakaopay.TC0ONETIME',  // 결제 수단 지정
-            // kakaopay.TC0ONETIME / tosspay.tosstest / payco.AUTOPAY / html5_inicis
-            pg_tid: "pg_tid",         //pg사 승인번호
-            pay_method: "card",
-            merchant_uid: "order" + new Date().getTime(),  // 주문번호
-            name: 'test_order',   // 주문명
-            amount: 1000,   // 결제 금액
-            paid_amount: 1000,   // 결제 금액
-            buyer_name: "구매자 이름",     // 구매자 이름
-            buyer_tel: "연락처",        // 구매자 전화번호
-            m_redirect_url: "/"
-        }, function(rsp) { // callback 로직
-            console.log("콜백 시작");
-            console.log(rsp);
-            if (rsp.success) {
-                console.log("rsp.success");
-                // 결제가 완료되었습니다 알림창 띄우기
-                alert("결제가 완료되었습니다.");
-
-                // 결제 성공 시 서버로 결제 정보 전송
-                jQuery.ajax({
-                    url: "/payment/process-payment",
-                    method: "POST",
-                    data: {
-                        imp_uid: rsp.imp_uid,            // 결제 고유번호
-                        merchant_uid: rsp.merchant_uid,   // 주문번호
-                        pg_tid: rsp.pg_tid,
-                        name: rsp.name,   // 주문명
-                        amount: rsp.amount,   // 결제 금액
-                        paid_amount: rsp.paid_amount,   // 결제 금액
-                        buyer_name: rsp.buyer_name,     // 구매자 이름
-                        buyer_tel: rsp.buyer_tel        // 구매자 전화번호
-                    },
-                    error: function(xhr, status, error) { // 요청이 실패했을 때의 처리
-                        console.error("서버 요청 실패:", error);
-                    }
-                });
-            } else {
-                // 결제가 실패하였습니다 알림창 띄우기
-                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-            }
-        });
-    }
-</script>
-
-<!-- 모달 창 -->
-<div id="paymentModal2" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="invoice p-1 mb-1">
-                        <div class="row invoice-info">
-                            <div class="col-6">
-                                <b>결제일시:</b> <span id="paymentDate"></span>
-                            </div>
-                            <div class="col-6">
-                                <b>주문번호:</b> <span id="orderNumber"></span>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-                            <div class="col-12 table-responsive">
-                                <table id="modalTable2" class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>수량</th>
-                                        <th>진료항목</th>
-                                        <th>금액</th>
-                                        <th>비고</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <!-- 여기에 결제 항목이 추가될 수 있음 -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-                            <div class="col-6"></div> <!-- 왼쪽 열 -->
-                            <div class="col-6 offset-6"> <!-- 오른쪽 열 -->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tr id="paymentAmountRow"> <!-- 결제금액 표시를 위한 새로운 <tr> 태그 -->
-                                            <td colspan="6" style="text-align: right;"><b>결제금액:</b></td>
-                                            <td id="paymentAmountCell"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.invoice -->
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-</div>
-
-<script>
-    // 모달 창 닫기 버튼에 클릭 이벤트 리스너 추가
-    document.querySelector("#paymentModal2 .close").addEventListener("click", function() {
-        // 모달 창 닫기
-        document.getElementById("paymentModal2").style.display = "none";
-    });
-</script>
+--%>
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>

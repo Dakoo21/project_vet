@@ -121,7 +121,7 @@
                                             <td>여기는동물이름</td>
                                             <td>20240201001</td>
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" href="#">
+                                                <a class="btn btn-info btn-sm" href="#" onclick="selectDetail()">
                                                     <i class="fas fa-pencil-alt"></i> 미수납 </a>
                                             </td>
                                         </tr>
@@ -453,7 +453,7 @@
                                             <td>여기는동물이름</td>
                                             <td>20240201001</td>
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" href="#">
+                                                <a class="btn btn-info btn-sm" href="#" onclick="redirectToPaymentPage()">
                                                     <i class="fas fa-pencil-alt"></i> 미수납 </a>
                                             </td>
                                         </tr>
@@ -751,6 +751,11 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<script>
+    function selectDetail() {
+        window.location.href = "/payment/selectDetail";
+    }
+</script>
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>

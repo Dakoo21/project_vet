@@ -12,12 +12,17 @@ import java.util.Map;
 @Repository
 @Slf4j
 public class Payment_Repository {
-
     private final SqlSessionTemplate sqlSessionTemplate;
 
     @Autowired
     public Payment_Repository(SqlSessionTemplate sqlSessionTemplate) {
         this.sqlSessionTemplate = sqlSessionTemplate;
+    }
+
+    public List<Map<String, Object>> Select(Map<String, Object> rmap) {
+        List<Map<String, Object>> pList= sqlSessionTemplate.selectList("paymentSelect", rmap);
+        log.info("이것은 레포지토리" +pList.toString());
+        return pList;
     }
 
     public void savePayment(PaymentVO paymentVO) {
