@@ -30,7 +30,7 @@
 <body>
 <div id="contentwrite">
     <div id="modal">
-        <button type="button" id="modalBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm">검색</button>
+
     </div>
     <div>
         <form>
@@ -38,19 +38,19 @@
             <table style="border-collapse: collapse; width: 50%;">
                 <tr>
                     <th>유기동물</th>
-                    <td><button id="animal_search" class="btn btn-danger">검색</button></td>
+                    <td><input type="button" id="modalBtn1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm1"></td>
                 </tr>
                 <tr>
                     <th>신청자</th>
-                    <td><button id="master_search" class="btn btn-danger">검색</button></td>
+                    <td><input type="button" id="modalBtn2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm2">검색</td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
 <!--modal start-->
-<div class="modal" id="selectForm">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal" id="selectForm1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -60,7 +60,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <!-- <form id="f_board" method="get" action="./boardInsert"> -->
-                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
+                <form id="f_board1" method="post" enctype="multipart/form-data" action="./boardInsert">
                     <div class="col-6">
                         <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
                                aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
@@ -72,13 +72,13 @@
                 <div class="stockList">
                     <table class="table table-striped table-valign-middle" id="animalTable">
                         <thead>
-                        <tr>
-                            <td>유기번호</td>
-                            <td>품종명</td>
-                            <td>색</td>
-                            <td>나이(출생연도)</td>
-                            <td>몸무게</td>
-                        </tr>
+                            <tr>
+                                <td>유기번호</td>
+                                <td>품종명</td>
+                                <td>색</td>
+                                <td>나이(출생연도)</td>
+                                <td>몸무게</td>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
@@ -91,108 +91,172 @@
                 </div>
             </div>
         </div>
+<div class="modal-footer">
+    <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
+    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
+</div>
+</div>
+</div>
+<!--modal start-->
+<div class="modal" id="selectForm2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">유기동물 조회</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
+                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
+                    <div class="col-6">
+                        <input type="text" id="keyword1" class="form-control" placeholder="검색어를 입력하세요"
+                               aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
+                    </div>
+                    <div class="col-3">
+                        <button id="btn_search1" class="btn btn-danger">검색</button>
+                    </div>
+                </form>
+                <div class="stockList">
+                    <table class="table table-striped table-valign-middle" id="animalTable2">
+                        <thead>
+                        <tr>
+                            <td>이름</td>
+                            <td>전화번호</td>
+                            <td>이메일</td>
+                            <td>주소</td>
+                            <td>생일</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
             <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
         </div>
     </div>
-</div>
+<%--</div>--%>
 </body>
 <script>
     // 유기동물 조회 모달
     // 검색 버튼 클릭 시 모달창 열고 데이터 조회
-    $("#modalBtn").click(function() {
-        // Ajax를 사용하여 서버에 데이터 조회 요청
-        $.ajax({
-            type: "GET",
-            url: "/aAnimals/selectList",
-            data: { searchParam: "yourSearchParameter" },  // 필요한 검색 파라미터 전달
-            success: function(data) {
-                // 모달창에 받아온 데이터를 표시하는 코드
-                displayAnimalList(data)
-            },
-            error: function() {
-                // 오류 처리
-            }
+    $(document).ready(function() {
+        $("#modalBtn1").click(function() {
+            // Ajax를 사용하여 서버에 데이터 조회 요청
+            $.ajax({
+                type: "GET",
+                url: "/eSignDraft/abandonList",
+                data: { searchParam: "yourSearchParameter" },  // 필요한 검색 파라미터 전달
+                success: function(abandonList) {
+                    // 모달창에 받아온 데이터를 표시하는 코드
+                    displayAnimalList(abandonList)
+                    console.log("성공");
+                },
+                error: function() {
+                    // 오류 처리
+                    console.log("오류");
+                }
+            });
         });
-    });
-    $("#animalTable tbody").on("click", "tr", function(){
-        var rowData = $(this).find("td").map(function(){
-            return $(this).text();
-        }).get();
-        var selectedRowData = {
-            유기번호 : 1313131,
-            품종명 : rowData[0],
-            색 : rowData[1],
-            나이_출생연도 : rowData[2],
-            몸무게 : rowData[3]
-        };
-        var selectedAnimalId = $(this).data("animal-id");
-        // $("#selectedAnimalIdDisplay").text(selectedRowData);
-        $("#selectedAnimalIdDisplay").text(JSON.stringify(selectedRowData, null, 2));
-        console.log("Selected Animal ID:" + selectedAnimalId);
-        // $("#modal").hide();
-    });
-    // 모달창 닫기 버튼 클릭 이벤트
-    $(".close").click(function(){
-        // 모달창을 닫으면서 선택한 값을 전달하는 로직을 추가
-        $("#modal").hide();
-    })
-    function displayAnimalList(data){
-        var tableBody = $("#animalTable tbody")
-        tableBody.empty();
-        for (var i=0; i<data.length; i++) {
-            // String kindCd = mList.getKindcd();
-            // String colorCd = mList.getColorcd();
-            // String age = mList.getAge();
-            // String weight = mList.getWeight();
-            var row = "<tr data-animal-id='" + data[i].kindcd + "'>" +
-                        "<td>" + "13131313" + "</td>" +
-                        "<td>" + data[i].kindcd + "</td>" +
-                        "<td>" + data[i].colorcd + "</td>" +
-                        "<td>" + data[i].age + "</td>" +
-                        "<td>" + data[i].weight + "</td>" +
-                        "</tr>";
-                tableBody.append(row);
+        $("#animalTable tbody").on("click", "tr", function(){
+            var rowData = $(this).find("td").map(function(){
+                return $(this).text();
+            }).get();
+            var selectedRowData = {
+                유기번호 : 1313131,
+                품종명 : rowData[0],
+                색 : rowData[1],
+                나이_출생연도 : rowData[2],
+                몸무게 : rowData[3]
+            };
+            const modalbtn11 = document.getElementById('modalBtn1');
+            var selectedAnimalId = $(this).data("animal-id");
+            // $("#modalBtn1").text(selectedRowData.row[0]);
+            // $("#selectedAnimalIdDisplay").text(selectedRowData);
+            $("#selectedAnimalIdDisplay").text(JSON.stringify(selectedRowData, null, 2));
+            console.log("Selected Animal ID:" + selectedAnimalId);
+            // $("#modal").hide();
+            // $('#modalBtn1').text('abandonList[i].kindcd');
+            modalbtn11.type = 'text';
+            modalbtn11.value = 'zzz';
+
+
+        });
+        // 모달창 닫기 버튼 클릭 이벤트
+        $(".close").click(function(){
+            // 모달창을 닫으면서 선택한 값을 전달하는 로직을 추가
+            $("#modal").hide();
+        })
+        function displayAnimalList(abandonList){
+            var tableBody = $("#animalTable tbody")
+            tableBody.empty();
+            for (var i=0; i<abandonList.length; i++) {
+                console.log(abandonList[i]);
+                console.log(abandonList[i].kindcd);
+                // String kindCd = mList.getKindcd();
+                // String colorCd = mList.getColorcd();
+                // String age = mList.getAge();
+                // String weight = mList.getWeight();
+                var row = "<tr data-animal-id='" + abandonList[i].kindcd + "'>" +
+                            "<td>" + "13131313" + "</td>" +
+                            "<td>" + abandonList[i].kindcd + "</td>" +
+                            "<td>" + abandonList[i].colorcd + "</td>" +
+                            "<td>" + abandonList[i].age + "</td>" +
+                            "<td>" + abandonList[i].weight + "</td>" +
+                            "</tr>";
+                    tableBody.append(row);
+                }
+            // JSON 데이터를 JavaScript 객체로 파싱
+            var parsedData = JSON.parse(JSON.stringify(abandonList));
+            // 각 키와 값을 분리하여 출력
+            for (var key in parsedData) {
+                var value = parsedData[key];
+                console.log("키: " + key + ", 값: " + value);
             }
-        // JSON 데이터를 JavaScript 객체로 파싱
-        var parsedData = JSON.parse(JSON.stringify(selectedRowData));
-        // 각 키와 값을 분리하여 출력
-        for (var key in parsedData) {
-            var value = parsedData[key];
-            console.log("키: " + key + ", 값: " + value);
         }
-    }
+    });
 </script>
 <script>
     // 신청자 조회 모달
     // 검색 버튼 클릭 시 모달창 열고 데이터 조회
-    $("#modalBtn").click(function() {
+    $("#modalBtn2").click(function() {
         // Ajax를 사용하여 서버에 데이터 조회 요청
         $.ajax({
             type: "GET",
-            url: "/aAnimals/selectList",
+            url: "/eSignDraft/adopterList",
             data: { searchParam: "yourSearchParameter" },  // 필요한 검색 파라미터 전달
             success: function(data) {
                 // 모달창에 받아온 데이터를 표시하는 코드
                 displayAnimalList(data)
+                console.log("신청자 조회 성공");
             },
             error: function() {
                 // 오류 처리
+                console.log("신청자 조회 실패");
             }
         });
     });
-    $("#animalTable tbody").on("click", "tr", function(){
+    $("#animalTable2 tbody").on("click", "tr", function(){
         var rowData = $(this).find("td").map(function(){
             return $(this).text();
         }).get();
 
         var selectedRowData = {
-            유기번호 : 1313131,
-            품종명 : rowData[0],
-            색 : rowData[1],
-            나이_출생연도 : rowData[2],
-            몸무게 : rowData[3]
+            이름 : rowData[0],
+            전화번호 : rowData[1],
+            이메일 : rowData[2],
+            주소 : rowData[3],
+            생일 : rowData[4]
         };
         var selectedAnimalId = $(this).data("animal-id");
         // $("#selectedAnimalIdDisplay").text(selectedRowData);
@@ -203,22 +267,23 @@
     // 모달창 닫기 버튼 클릭 이벤트
     $(".close").click(function(){
         // 모달창을 닫으면서 선택한 값을 전달하는 로직을 추가
-        $("#modal").hide();
+        $("#modal2").hide();
     })
     function displayAnimalList(data){
-        var tableBody = $("#animalTable tbody")
+        var tableBody = $("#animalTable2 tbody")
         tableBody.empty();
         for (var i=0; i<data.length; i++) {
+            console.log(data[i]);
             // String kindCd = mList.getKindcd();
             // String colorCd = mList.getColorcd();
             // String age = mList.getAge();
             // String weight = mList.getWeight();
-            var row = "<tr data-animal-id='" + data[i].kindcd + "'>" +
-                "<td>" + "13131313" + "</td>" +
-                "<td>" + data[i].kindcd + "</td>" +
-                "<td>" + data[i].colorcd + "</td>" +
-                "<td>" + data[i].age + "</td>" +
-                "<td>" + data[i].weight + "</td>" +
+            var row = "<tr data-animal-id='" + data[i].master_nm + "'>" +
+                "<td>" + data[i].master_nm + "</td>" +
+                "<td>" + data[i].master_pnumber + "</td>" +
+                "<td>" + data[i].master_email + "</td>" +
+                "<td>" + data[i].master_address + "</td>" +
+                "<td>" + data[i].master_bdate + "</td>" +
                 "</tr>";
             tableBody.append(row);
         }
@@ -231,4 +296,4 @@
         }
     }
 </script>
->>>>>>> test2
+
