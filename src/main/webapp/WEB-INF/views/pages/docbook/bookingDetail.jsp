@@ -127,7 +127,7 @@
                         let searchWord = document.getElementById("searchInput");
                         if (searchWord) {
                             $.ajax({
-                                url: 'http://localhost:8000/booking/GetAnimals?animalNm=' + searchWord.value,
+                                url: 'http://localhost:8000/booking/GetAnimals?animalNm=' + searchWord.value+'&masterNm',
                                 type: 'GET',
                                 success: function (response) {
                                     console.log('Animals:', response);
@@ -139,7 +139,8 @@
                                     response.forEach(function (animal) {
                                         var option = document.createElement("option");
                                         option.value = animal.animalPk; // 동물의 PK 값을 value로 설정
-                                        option.text = animal.animalNm; // 동물의 이름을 텍스트로 설정
+                                        option.text = animal.animalNm+'('+animal.masterNm+')'; // 동물의 이름을 텍스트로 설정
+
                                         animalSelect.appendChild(option);
                                     });
                                 },
@@ -206,7 +207,7 @@
                         <h3 class="card-title">고객진료예약</h3>
                     </div>
                     <div class="card-body">
-                        <form id="reservationForm" action="http://localhost:8000/booking/bookingUpdate" method="POST">
+                        <form id="reservationForm" action="bookingUpdate" method="POST">
                             <input type="hidden" name="bookingPk" value="<%=rmap.get("bookingPk")%>">
                         <!-- 보호자명 -->
 
@@ -274,7 +275,7 @@
                         <!-- 예약시간 -->
                         <div class="form-group" style="display: inline-block; width: 240px;">
                             <label style="display: inline-block; width: 70px;">예약시간</label>
-                            <select class="form-control select2" style="display: inline-block; width: 150px;" name="bookingStart" onchange="setEndTime(this.value)">
+                            <select class="form-control select2" style="display: inline-block; width: 150px;" name="bookingStart" id="start-time" onchange="setEndTime()">
                                 <option selected="selected">선택</option>
                                 <option value="10:00">10:00</option>
                                 <option value="10:30">10:30</option>
@@ -297,47 +298,41 @@
                                 <option value="19:00">19:00</option>
                             </select>
                         </div>
-                        <div class="input-group-prepend" style="display: none">
-                            <select id="end-time" name="bookingEnd">
-                                <option value="10:30">10:30</option>
-                                <option value="11:00">11:00</option>
-                                <option value="11:30">11:30</option>
-                                <option value="12:00">12:00</option>
-                                <option value="12:30">12:30</option>
-                                <option value="13:00">13:00</option>
-                                <option value="13:30">13:30</option>
-                                <option value="14:00">14:00</option>
-                                <option value="14:30">14:30</option>
-                                <option value="15:00">15:00</option>
-                                <option value="15:30">15:30</option>
-                                <option value="16:00">16:00</option>
-                                <option value="16:30">16:30</option>
-                                <option value="17:00">17:00</option>
-                                <option value="17:30">17:30</option>
-                                <option value="18:00">18:00</option>
-                                <option value="18:30">18:30</option>
-                                <option value="19:00">19:00</option>
-                                <option value="19:30">19:30</option>
-                            </select>
-                        </div>
+                            <div class="input-group-prepend" style="display: none">
+                                <select id="end-time" name="bookingEnd">
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                </select>
+                            </div>
 
-                        <script>
-                            function setEndTime() {
-                                var endTimeSelect = document.getElementById("end-time");
-                                var startTimeIndex = document.getElementById("start-time").selectedIndex;
+                            <script>
+                                function setEndTime() {
+                                    var endTimeIndex = document.getElementById("end-time");
+                                    var startTimeIndex = document.getElementById("start-time").selectedIndex;
 
-                                // 시작 시간 인덱스부터 end-time 옵션을 변경합니다.
-                                for (var i = startTimeIndex; i < endTimeSelect.options.length; i++) {
-                                    endTimeSelect.options[i].style.display = "block";
+
+                                    // 선택한 start-time 이후의 end-time 옵션을 선택합니다.
+                                    endTimeIndex.selectedIndex = startTimeIndex;
+
                                 }
-
-                                // 선택한 start-time 이후의 end-time 옵션을 선택합니다.
-                                endTimeSelect.selectedIndex = startTimeIndex;
-
-                                // 종료 시간을 hidden input에 설정
-                                document.getElementById("end-time").value = endTime;
-                            }
-                        </script>
+                            </script>
                         <!-- 예약구분 -->
                             <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label style="display: inline-block; width: 70px;">진료유형</label>
@@ -349,7 +344,7 @@
                             </div>
 
                             <div class="form-group" style="display: inline-block; width: 240px;">
-                                <label style="display: inline-block; width: 70px;">담당의</label>
+                                <label style="display: inline-block; width: 70px;">담당자</label>
                                 <select id="userPkSelect" class="form-control select2" style="display: inline-block; width: 150px;" name="userPk">
                                     <option value="">선택</option>
                                     <option value="9999999">원장</option>

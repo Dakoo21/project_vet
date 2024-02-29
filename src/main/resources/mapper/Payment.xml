@@ -9,17 +9,7 @@
         <result property="amount" column="amount"/>
     </resultMap>
 
-    <select id="selectDetail" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT PAYMENT.PAYMENT_PK AS payment_pk
-        FROM PAYMENT_TEST payment_test
-        <if test="paymentPK != null">
-            <where>
-                PAYMENT.PAYMENT_PK = #{paymentPK}
-            </where>
-        </if>
-    </select>
-
-    <!--<select id="paymentSelect" parameterType="com.example.vet.model.PaymentVO" resultMap="selectResultMap">
+    <select id="paymentSelect" parameterType="com.example.vet.model.PaymentVO" resultMap="selectResultMap">
         SELECT PAYMENT.PAYMENT_PK AS payment_pk,
         PAYMENT.BUYER_NAME AS buyer_name,
         PAYMENT.BUYER_TEL AS buyer_tel,
@@ -31,7 +21,7 @@
                 PAYMENT.PAYMENT_PK = #{paymentPK}
             </where>
         </if>
-    </select>-->
+    </select>
 
     <insert id="insertPayment" parameterType="com.example.vet.model.PaymentVO">
         INSERT INTO payment_test (payment_pk, imp_uid, merchant_uid,pg_tid,name,paid_amount,buyer_name,buyer_tel, amount)

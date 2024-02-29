@@ -1,8 +1,6 @@
 package com.example.vet.service.work.eSign;
 
-import com.example.vet.model.MasterVO;
 import com.example.vet.model.Member;
-import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.repository.work.eSign.eSignDraft_Repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,22 +15,9 @@ public class eSignDraft_Service {
     public eSignDraft_Service(eSignDraft_Repository eSignDraft_repository) {
         this.eSignDraft_repository = eSignDraft_repository;
     }
-
-    public List<MasterVO> selectAdopter() {
-        List<MasterVO> aList = null;
-        aList = eSignDraft_repository.selectAdopter();
-        return aList;
-    }
-
     public List<Member> findLine() {
         List<Member> lineList = new ArrayList<>();
         lineList = eSignDraft_repository.findLine();
         return lineList;
-    }
-
-    public List<MissedAnimal> selectAbandon() {
-        List<MissedAnimal> abandonList;
-        abandonList = eSignDraft_repository.selectAbandon();
-        return abandonList;
     }
 }

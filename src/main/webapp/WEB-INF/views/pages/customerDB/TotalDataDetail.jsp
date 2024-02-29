@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>통합데이터 상세정보</title>
+    <title>AdminLTE 3 | Dashboard</title>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -89,7 +89,7 @@
         </section>
         <!-- /.content -->
         <div class="text-center">
-            <a href="http://localhost:8000/CustomerDB/TotalDataList" type="button" class="btn btn-primary" style="margin-right: 10px;">뒤로가기</a>
+            <button type="button" class="btn btn-primary" style="margin-right: 10px;">뒤로가기</button>
             <button type="button" class="btn btn-success">진료등록</button>
         </div>
     </div>
@@ -103,9 +103,6 @@
 
 </body>
 </html>
-
-
-
 <style typeof="text/css">
     .form-control{
         width: 50%;

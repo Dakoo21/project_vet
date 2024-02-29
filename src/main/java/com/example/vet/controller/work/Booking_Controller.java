@@ -49,6 +49,8 @@ public class Booking_Controller {
         return "pages/docbook/bookingDetail";
     }
 
+
+
     @PostMapping("bookingUpdate")
     public String update(@RequestParam Map<String, Object> rmap) throws ParseException {
         BookingVO bookingVO = new BookingVO();
@@ -78,7 +80,7 @@ public class Booking_Controller {
 
         //직원, 서비스 담당자
         Integer userPK = Integer.parseInt(rmap.get("userPk").toString());
-        bookingVO.setAnimalPk(userPK);
+        bookingVO.setUserPk(userPK);
 
         //상태 - 무조건 '예약됨' 으로
         Integer commonCodePk = 123;

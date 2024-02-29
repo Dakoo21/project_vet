@@ -2,7 +2,7 @@ package com.example.vet.controller.adopt;
 
 
 import com.example.vet.model.adopt.MissingAnimalResVO;
-import com.example.vet.service.board.AdoptService;
+import com.example.vet.service.adopt.AdoptService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AdoptController {
 
-    private  AdoptService adoptService;
+    private AdoptService adoptService;
 
     @GetMapping("/missed")
     public MissingAnimalResVO getMissedAnimal(){

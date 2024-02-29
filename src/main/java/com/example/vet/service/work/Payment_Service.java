@@ -13,22 +13,17 @@ import java.util.Map;
 @Slf4j
 public class Payment_Service {
 
-    private final Payment_Repository paymentRepository;
+    private final Payment_Repository payment_repository;
 
     @Autowired
-    public Payment_Service(Payment_Repository paymentRepository) {
-        this.paymentRepository = paymentRepository;
-    }
-
-    public List<Map<String, Object>> Select(Map<String, Object> rmap) {
-        log.info("서비스1");
-        return paymentRepository.Select(rmap);
+    public Payment_Service(Payment_Repository payment_repository) {
+        this.payment_repository = payment_repository;
     }
 
     public void savePayment(PaymentVO paymentVO) {
-        log.info("서비스2");
+        log.info("서비스");
         // 결제 정보를 레포지토리를 통해 저장
-        paymentRepository.savePayment(paymentVO);
+        payment_repository.savePayment(paymentVO);
     }
 
 }

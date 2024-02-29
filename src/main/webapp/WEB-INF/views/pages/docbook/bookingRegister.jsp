@@ -39,7 +39,7 @@
                         response.forEach(function (animal) {
                             var option = document.createElement("option");
                             option.value = animal.animalPk; // 동물의 PK 값을 value로 설정
-                            option.text = animal.animalNm; // 동물의 이름을 텍스트로 설정
+                            option.text = animal.animalNm+animal.masterNm; // 동물의 이름을 텍스트로 설정
                             animalSelect.appendChild(option);
                         });
                     },
@@ -341,7 +341,7 @@
 
                 <!-- 모달 본문 -->
                 <div class="modal-body">
-                    오늘의 예약은 종료되었습니다. 내일 날짜로 예약해 주세요.
+                    현재 시간으로 예약할 수 없습니다. 다른 시간을 선택해 주세요.
                 </div>
 
                 <!-- 모달 푸터 -->

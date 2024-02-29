@@ -16,20 +16,10 @@
         <result column="ANIMAL_SEX" property="animalSex"/>
         <result column="ANIMAL_NEUT" property="animalNeut"/>
         <result column="ANIMAL_BDATE" property="animalBirthDate"/>
+        <result column="ANIMAL_WEIGHT" property="animalWeight"/>
         <result column="BOOKING_PK" property="bookingPk"/>
         <result column="DIAG_PRESCRIPTION" property="diagPrescription"/>
-        <result column="DIGESTIVE_SYSTEM" property="digestiveSystem"/>
-        <result column="CIRCULATORY_SYSTEM" property="circulatorySystem"/>
-        <result column="RESPIRATORY_SYSTEM" property="respiratorySystem"/>
-        <result column="NERVOUS_SYSTEM" property="nervousSystem"/>
-        <result column="ENDOCRINE_SYSTEM" property="endocrineSystem"/>
-        <result column="EYES" property="eyes"/>
-        <result column="DERMATOLOGY" property="dermatology"/>
-        <result column="ORTHOPEDICS" property="orthopedics"/>
-        <result column="ABDOMINAL_SURGERY" property="abdominalSurgery"/>
-        <result column="NEUROSURGERY" property="neurosurgery"/>
-        <result column="THORACIC_SURGERY" property="thoracicSurgery"/>
-        <result column="DENTAL" property="dental"/>
+
     </resultMap>
     <select id="diagSelect" parameterType="com.example.vet.model.diagVO" resultMap="DiagMap">
         SELECT
@@ -45,6 +35,7 @@
         ANIMAL_TEST.ANIMAL_SEX,
         ANIMAL_TEST.ANIMAL_NEUT,
         ANIMAL_TEST.ANIMAL_BDATE,
+        ANIMAL_TEST.ANIMAL_WEIGHT,
         DIAG_TEST.*,
         COMMON_CODE_TEST.COMMON_CODE_NM
         FROM
@@ -71,13 +62,13 @@
             <if test="species != null">
                 <choose>
                     <when test="species == 'dog'">
-                        AND ANIMAL.animal_Species='강아지'
+                        AND ANIMAL_TEST.animal_Species='강아지'
                     </when>
-                    <when test="species == 'cat'">
-                        AND ANIMAL.animal_Species='고양이'
+                    <when test="species == 'cats'">
+                        AND ANIMAL_TEST.animal_Species='고양이'
                     </when>
                     <when test="species == 'etc'">
-                        AND ANIMAL.animal_Species NOT IN ('강아지', '고양이')
+                        AND ANIMAL_TEST.animal_Species NOT IN ('강아지', '고양이')
                 </when>
                 </choose>
             </if>

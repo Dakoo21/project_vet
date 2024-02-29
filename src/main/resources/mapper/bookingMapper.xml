@@ -58,7 +58,8 @@
         <if test="bookingType != null">BOOKING_TYPE = #{bookingType},</if>
         <if test="bookingDate != null">BOOKING_DATE = #{bookingDate},</if>
         <if test="bookingEnd != null">BOOKING_END = #{bookingEnd},</if>
-        <if test="bookingStart != null">BOOKING_START = #{bookingStart}</if>
+        <if test="bookingStart != null">BOOKING_START = #{bookingStart},</if>
+        <if test="animalPk != null">ANIMAL_PK = #{animalPk}</if>
         <where>
         BOOKING_PK = #{bookingPk}
         </where>
@@ -75,7 +76,12 @@
         LEFT OUTER JOIN MASTER_TEST MASTER ON ANIMAL.MASTER_PK = MASTER.MASTER_PK
         <if test="animalNm!=null">
             WHERE ANIMAL.ANIMAL_NM LIKE '%' || #{animalNm} || '%'
+            <if test="masterNm!=null">
+            AND MASTER.MASTER_NM = #{masterNm}
+
+            </if>
         </if>
 
     </select>
+
 </mapper>

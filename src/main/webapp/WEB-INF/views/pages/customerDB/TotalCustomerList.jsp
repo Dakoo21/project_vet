@@ -1,42 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.vet.model.MasterVO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 
-    <%
-        List<MasterVO> cList = (List)request.getAttribute("cList");
-    %>
+<%
 
-<script type="text/javascript">
-    function searchEnter(){
-        console.log('searchEnter')
-        console.log(window.event.keyCode);
-        if(window.enent.keyCode==13){
-            customerDataSearch();
-        }
-    }
+    List<MasterVO> cList = (List)request.getAttribute("cList");
 
-    function customerDataSearch(){
-        console.log('customerDataSearch');
-        location.href ="/CustomerDB/TotalCustomerList?master_Pk="
-    }
-
-    const customerDataInsert = () => {
-    document.querySelector("#f_customerdata").submit();
-    }
-
-    const customerDataDetail = (master_Pk) =>{
-        location.href = "/CustomerDB/TotalCustomerDetail?master_Pk="+master_Pk;
-    }
-
-
-</script>
-
-
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +23,10 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <%@ include file="/include/sidebar.jsp"%>
+
+
+
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -78,14 +57,14 @@
                               <div class="input-group">
                                   <input type="search" class="form-control form-control-lg" placeholder="고객명, 동물이름">
                                   <div class="input-group-append">
-                                      <button type="submit" class="btn btn-lg btn-default" onClick="customerDataSearch()">
+                                      <button type="submit" class="btn btn-lg btn-default">
                                         <i class="fa fa-search"></i>
                                       </button>
                                   </div>
                                    <div class="text-right">
-                                     <div id="padding-right50" class="position-absolute top-0 end-20">
-                                      <a href="TotalCustomerInsert" type="button" class="btn btn-primary"  style="margin-left: 70px">등록</a>
-                                     </div>
+                                 <div id="padding-right50" class="position-absolute top-0 end-20">
+                                <button type="button" class="btn btn-primary" style="margin-left: 70px">등록</button>
+                                 </div>
                                    </div>
                               </div>
                           </form>
@@ -113,7 +92,7 @@
 
                         %>
                         <tr>
-                            <td><a href="javascript:customerDataDetail('<%=masterVO.getMaster_pk()%>')"><%=masterVO.getMaster_nm()%></a></td>
+                            <td><%=masterVO.getMaster_nm()%></td>
                             <td><%=masterVO.getMaster_username()%></td>
                             <td><%=masterVO.getMaster_gender()%></td>
                             <td><%=masterVO.getMaster_bdate()%></td>
