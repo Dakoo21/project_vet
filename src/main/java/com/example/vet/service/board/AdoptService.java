@@ -1,4 +1,4 @@
-package com.example.vet.service.adopt;
+package com.example.vet.service.board;
 
 
 import com.example.vet.config.rest_template.RestTemplateConfig;
@@ -6,7 +6,6 @@ import com.example.vet.model.adopt.MissedAnimalReqVO;
 import com.example.vet.model.adopt.MissingAnimalResVO;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
