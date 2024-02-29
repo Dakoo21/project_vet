@@ -29,12 +29,12 @@ public class TotalCustomerController {
         this.totalCustomerService = totalCustomerService;
     }
 
-    @GetMapping("CustomerList")
-    public String list(Model model) {
-        MasterVO masterVO = null;
-        List<Map<String, Object>> cList = totalCustomerService.Select(masterVO);
-        logger.info(cList.toString());
-        model.addAttribute("cList", cList);
-        return "pages/customerDB/TotalCustomerList";
-    }
+    // @GetMapping("CustomerList")
+    // public String list(Model model) {
+    //     MasterVO masterVO = null;
+    //     List<Map<String, Object>> cList = totalCustomerService.Select(masterVO);
+    //     logger.info(cList.toString());
+    //     model.addAttribute("cList", cList);
+    //     return "pages/customerDB/TotalCustomerList";
+    // }
 }
