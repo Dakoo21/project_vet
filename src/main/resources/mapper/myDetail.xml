@@ -20,7 +20,7 @@
             MEMBER_PHONE = #{MEMBER_PHONE},
             MEMBER_POSTCODE = #{MEMBER_POSTCODE},
             MEMBER_ADDRESS = #{MEMBER_ADDRESS}
-        WHERE MEMBER_ID = #{MEMBER_ID}
+        WHERE MEMBER_MEMBERNAME = #{MEMBER_MEMBERNAME}
     </update>
 
     <update id="passwordUpdate" parameterType="Map">

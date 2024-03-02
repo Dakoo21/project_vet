@@ -138,8 +138,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form id="myDetail" action="/myDetailUpdate" method="post">
-                                        <input type="hidden" id="MEMBER_ID" name="MEMBER_ID" value="<%=username%>">
+                                    <form id="myDetail" action="/employeeUpdate" method="post">
+                                        <input type="hidden" id="MEMBER_MEMBERNAME" name="MEMBER_MEMBERNAME" value="<%=userDetail.get("MEMBER_MEMBERNAME")%>">
                                         <div class="form-group row">
                                             <label for="MEMBER_EMAIL" class="col-sm-2 col-form-label">이메일:</label>
                                             <div class="col-sm-10">
@@ -251,7 +251,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="pwChange" action="/passwordUpdate" method="post">
+                    <form id="pwChange" action="/employeePasswordUpdate" method="post">
                         <div class="form-group row">
                             <label for="MEMBER_MEMBERNAME" class="col-sm-2 col-form-label">이름:</label>
                             <div class="col-sm-10">
