@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -50,7 +49,7 @@ public class myDetail_Controller {
         myDetailList = myDetail_service.myDetailList(userPk);
         log.info(myDetailList.toString());
         model.addAttribute("myDetailList", myDetailList);
-        return "pages/mypage/employeeInsert";
+        return "pages/mypage/myDetail";
     }
 
     /**********************************************************************************

@@ -140,7 +140,7 @@
                 <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><%=username%></a>
+                <a href="/" class="d-block"><%=username%> 환영합니다</a>
             </div>
         </div>
         <%
@@ -1096,6 +1096,15 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <!-- 메뉴 끝-->
+                <!-- 메뉴13 시작 -->
+                <li class="nav-item">
+                    <a href="/employeeList" class="nav-link">
+                        <p>
+                            사원관리
+                        </p>
+                    </a>
                 </li>
                 <!-- 메뉴 끝-->
             </ul>

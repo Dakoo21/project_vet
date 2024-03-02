@@ -122,7 +122,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="" class="col-sm-2 col-form-label">아이디:</label>
+                                                <label class="col-sm-2 col-form-label">아이디:</label>
                                                 <div class="col-sm-10">
                                                     <!-- 아이디 넣을 자리 -->
                                                     <span><%=userDetail.get("MEMBER_ID")%></span>
@@ -152,7 +152,7 @@
                                                 </div>
                             --%>
                                                 <div class="form-group row">
-                                                    <label for="" class="col-sm-2 col-form-label">전화번호:</label>
+                                                    <label class="col-sm-2 col-form-label">전화번호:</label>
                                                     <div class="col-sm-10">
                                                         <%
                                                             String user_phone = null;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vet.employeeMapper">
+    <resultMap id="employeeMap" type="com.example.vet.model.Member"/>
+
+    <select id="employeeList" parameterType="map" resultType="map">
+        SELECT MEMBER_PK, MEMBER_ID, MEMBER_MEMBERNAME, MEMBER_EMAIL, MEMBER_ROLE, MEMBER_CREATEDATE, MEMBER_POSTCODE, MEMBER_ADDRESS, MEMBER_PHONE, PROVIDER, PROVIDERID FROM USER_TEST5
+        <where>
+            <if test="MEMBER_PK!=null">AND MEMBER_PK = #{MEMBER_PK}</if>
+            <if test="gubun!=null">
+                <choose>
+                    <when test='gubun.equals("MEMBER_MEMBERNAME")'>
+                        AND MEMBER_MEMBERNAME LIKE '%'||#{keyword}||'%'
+                    </when>
+                    <when test='gubun.equals("MEMBER_EMAIL")'>
+                        AND MEMBER_EMAIL LIKE '%'||#{keyword}||'%'
+                    </when>
+                    <when test='gubun.equals("MEMBER_ROLE")'>
+                        AND (MEMBER_ROLE = 'ROLE_ADMIN' OR MEMBER_ROLE = 'ROLE_MASTER')
+                    </when>
+                    <when test='gubun.equals("MEMBER_ROLE1")'>
+                        AND MEMBER_ROLE = 'ROLE_NURSE'
+                    </when>
+                    <when test='gubun.equals("MEMBER_ROLE2")'>
+                        AND MEMBER_ROLE = 'ROLE_INFO'
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY MEMBER_PK DESC
+    </select>
+</mapper>
