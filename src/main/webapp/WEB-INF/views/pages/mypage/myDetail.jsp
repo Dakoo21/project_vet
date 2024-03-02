@@ -139,7 +139,7 @@
                                                     </div>
                                                 </div>
                                             <form id="myDetail" action="/myDetailUpdate" method="post">
-                                                <input type="hidden" id="MEMBER_ID" name="MEMBER_ID" value="<%=username%>">
+                                                <input type="hidden" id="MEMBER_MEMBERNAME" name="MEMBER_MEMBERNAME" value="<%=userDetail.get("MEMBER_MEMBERNAME")%>">
                                                 <div class="form-group row">
                                                     <label for="MEMBER_EMAIL" class="col-sm-2 col-form-label">이메일:</label>
                                                     <div class="col-sm-10">
