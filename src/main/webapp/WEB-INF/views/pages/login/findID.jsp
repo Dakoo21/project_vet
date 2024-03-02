@@ -87,8 +87,8 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <label id="userIdInput">
-
                 </label>
+
             </div>
         </div>
     </div>
@@ -143,6 +143,8 @@
             userIdInput.append(row);
         }
     }
+
+
 
 </script>
 </body>

@@ -33,11 +33,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder () {
-//        return new BCryptPasswordEncoder();
-//    }
-
     //아래 코드는 인증문제로 페이지가 열릴 때 정적내용은 적용을 하라는 메소드
     @Bean
     // WebSecurityCustomizer를 반환하는 메소드를 정의하겠다 라는 의미
