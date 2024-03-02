@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class myDetail_Controller {
 
     /**********************************************************************************
      작성자 : 지장환
-     작성일자 : 26.02.25
+     작성일자 : 26.02.24
      기능 : 내 정보 페이지 연결
      **********************************************************************************/
 
@@ -54,7 +55,7 @@ public class myDetail_Controller {
 
     /**********************************************************************************
      작성자 : 지장환
-     작성일자 : 28.02.25
+     작성일자 : 28.02.24
      기능 : 비밀번호 확인 후 내 정보 페이지 접속
      **********************************************************************************/
 
@@ -79,7 +80,7 @@ public class myDetail_Controller {
 
     /**********************************************************************************
      작성자 : 지장환
-     작성일자 : 28.02.25
+     작성일자 : 28.02.24
      기능 : 내 정보 업데이트 기능
      **********************************************************************************/
 
@@ -89,11 +90,35 @@ public class myDetail_Controller {
         int result;
         String path;
 
+        result = myDetail_service.myDetailUpdate(member);
+        if (result == 1) {
+            path = "redirect:myDetail";
+        } else {
+
+            path = "error";
+        }
+        return path;
+    }
+
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 02.03.24
+     기능 : 내 정보 비밀번호 업데이트 기능
+     **********************************************************************************/
+
+    @PostMapping("/passwordUpdate")
+    public String passwordUpdate (Member member) {
+        int result;
+        String path;
+        log.info(member.toString());
+        String username = member.getMemberName();
         String rowPassword = member.getMEMBER_PW();
         String encodePassword = bCryptPasswordEncoder.encode(rowPassword);
         member.setMEMBER_PW(encodePassword);
+        member.setMEMBER_MEMBERNAME(username);
 
-        result = myDetail_service.myDetailUpdate(member);
+
+        result = myDetail_service.passwordUpdate(member);
         if (result == 1) {
             path = "redirect:myDetail";
         } else {

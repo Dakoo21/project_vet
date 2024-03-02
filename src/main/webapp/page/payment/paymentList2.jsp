@@ -61,35 +61,35 @@
                             <h3 class="card-title">수납 결제페이지</h3>
                         </div>
                         <div class="card-body">
-                                <!-- 고객명 검색을 위한 폼 시작 -->
-                                <form id="searchForm">
-                                    <div class="form-group">
-                                        <label for="merchantUid">주문번호</label>
-                                        <input type="text" class="form-control" id="merchantUid" name="merchantUid">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="orderName">주문명</label>
-                                        <input type="text" class="form-control" id="orderName" name="orderName" value="주문명">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="amount">결제 금액</label>
-                                        <input type="text" class="form-control" id="amount" name="amount" value="100">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="buyerEmail">고객 이메일</label>
-                                        <input type="email" class="form-control" id="buyerEmail" name="buyerEmail" value="daeunj404@gmail.com">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="buyerName">고객 이름</label>
-                                        <input type="text" class="form-control" id="buyerName" name="buyerName" value="정다은">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="buyerTel">고객 전화번호</label>
-                                        <input type="text" class="form-control" id="buyerTel" name="buyerTel" value="010-8971-9641">
-                                    </div>
-                                    <button type="button" class="btn btn-primary" onclick="submitForm()">검색</button>
-                                </form>
-                                <!-- 고객명 검색을 위한 폼 끝 -->
+                            <!-- 고객명 검색을 위한 폼 시작 -->
+                            <form id="searchForm">
+                                <div class="form-group">
+                                    <label for="merchantUid">주문번호</label>
+                                    <input type="text" class="form-control" id="merchantUid" name="merchantUid">
+                                </div>
+                                <div class="form-group">
+                                    <label for="orderName">주문명</label>
+                                    <input type="text" class="form-control" id="orderName" name="orderName" value="주문명">
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">결제 금액</label>
+                                    <input type="text" class="form-control" id="amount" name="amount" value="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="buyerEmail">고객 이메일</label>
+                                    <input type="email" class="form-control" id="buyerEmail" name="buyerEmail" value="daeunj404@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="buyerName">고객 이름</label>
+                                    <input type="text" class="form-control" id="buyerName" name="buyerName" value="정다은">
+                                </div>
+                                <div class="form-group">
+                                    <label for="buyerTel">고객 전화번호</label>
+                                    <input type="text" class="form-control" id="buyerTel" name="buyerTel" value="010-8971-9641">
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="submitForm()">검색</button>
+                            </form>
+                            <!-- 고객명 검색을 위한 폼 끝 -->
                             <table id="paymentTable" class="table table-hover">
                                 <thead>
                                 <tr>

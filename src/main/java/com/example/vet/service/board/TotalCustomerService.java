@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class TotalCustomerService {
     Logger logger = LoggerFactory.getLogger(TotalCustomerService.class);
@@ -23,5 +24,19 @@ public class TotalCustomerService {
         cList = totalCustomer_repository.Select(masterVO);
         logger.info(cList.toString());
         return cList;
+    }
+    public MasterVO Detail(MasterVO masterVO){
+        MasterVO masterVO2 = new MasterVO();
+        masterVO2 = totalCustomer_repository.Detail(masterVO);
+        logger.info(masterVO2.toString());
+        return masterVO2;
+    }
+
+    public int Insert(MasterVO masterVO) {
+        return totalCustomer_repository.Insert(masterVO);
+    }
+
+    public int Update(MasterVO masterVO) {
+        return totalCustomer_repository.Update(masterVO);
     }
 }

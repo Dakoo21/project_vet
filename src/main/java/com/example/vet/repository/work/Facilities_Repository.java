@@ -27,12 +27,19 @@ public class Facilities_Repository {
         logger.info(rList.toString());
         return rList;
     }
-    //등록
-    //예약 시퀀스 뽑고 등록하기
+    //예약리스트 mine
+
+    public List<Map<String, Object>> reserveMyList( FacilitiesVO facilitiesVO) {
+
+        List<Map<String, Object>> myList= sqlSessionTemplate.selectList("reserveMyList",facilitiesVO);
+        logger.info(myList.toString());
+        return myList;
+    }
+    //등록 -예약 시퀀스 뽑고 등록하기
     public Map<String, Object> SelectReserveId() {
         logger.info("예약등록id Insert");
         Map<String, Object> resultMap= sqlSessionTemplate.selectOne("createReserveId");
-        logger.info(resultMap.toString());
+        logger.info("id채번"+resultMap.toString());
         return resultMap;
     }
     public int insertReserve(Map<String, Object> Imap) {
@@ -47,26 +54,36 @@ public class Facilities_Repository {
         result = sqlSessionTemplate.insert("insertReserveDetail",Imap);
         return result;
     }
-    //수정
-    public int reserveUpdate(Map<String, Object>imap) {
+    //수정 유효성 체크 1 이라면 안된다.
+    public int checkImpossibleUpdate(Map<String, Object> checkMap) {
+        logger.info("예약업데이트id 유효성 체크");
+        Map<String, Object> result= sqlSessionTemplate.selectOne("checkImpossibleUpdate");
+        logger.info("id채번"+result.toString());
+        int possible = result != null ? 1: 0;
+        return possible;
+
+    }
+    // 수정 처리
+    public int updateReserve(Map<String, Object> uMap) {
         logger.info("예약- 수정처리");
         int result = 0;
-        result = sqlSessionTemplate.update("reserveUpdate", imap);// b_no=0이었다면
+        result = sqlSessionTemplate.update("updateReserve", uMap);
         logger.info("result : " + result);
         return result;
+
     }
     //삭제
     public int DeleteReserve(int facilityReserveId) {
         logger.info("reserveDelete - 삭제처리");
         int result = 0;
-        result = sqlSessionTemplate.delete("DeleteReserve", facilityReserveId);
+        result = sqlSessionTemplate.delete("deleteReserve", facilityReserveId);
         logger.info("result : " + result);
         return result;
     }
     public int DeleteReserveDetail(int facilityReserveId) {
         logger.info("reserveDelete - 삭제처리");
         int result = 0;
-        result = sqlSessionTemplate.delete("DeleteReserveDetail", facilityReserveId);
+        result = sqlSessionTemplate.delete("deleteReserveDetail", facilityReserveId);
         logger.info("result : " + result);
         return result;
     }
@@ -85,9 +102,9 @@ public class Facilities_Repository {
         return list;
     }
     //예약가능확인
-    public List<Map<String, Object>> checkImpossible(FacilitiesVO facilitiesVO) {
+    public List<Map<String, Object>> checkImpossible(Map<String, Object> cMap) {
 
-        List<Map<String, Object>> cList= sqlSessionTemplate.selectList("checkImpossible",facilitiesVO);
+        List<Map<String, Object>> cList= sqlSessionTemplate.selectList("checkImpossible",cMap);
         logger.info(cList.toString());
         return cList;
     }

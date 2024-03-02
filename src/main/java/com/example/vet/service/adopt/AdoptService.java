@@ -34,10 +34,10 @@ public class AdoptService {
                 .queryParam("serviceKey",missedAnimalReqVO.getServiceKey())
                 .build();
 
-            String str   = restTemplateConfig.restTemplate()
+        String str   = restTemplateConfig.restTemplate()
                 .getForObject(uriComponents.toUriString(), String.class);
 
-            System.out.println(str);
+        System.out.println(str);
         return new MissingAnimalResVO();
     }
 

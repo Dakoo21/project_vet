@@ -21,12 +21,21 @@
 //			Map<String,Object> comlist
 //		}
     }
+    //내꺼 리스트
+    //insert here
+    int mysize = 0;// 예약 전체 레코드 수
+    //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
+    List<Map<String, Object>> myList = (List)request.getAttribute("myList");
+
+    if(myList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
+        mysize = myList.size();}
 //한 페이지에 몇개씩 뿌릴거야?
     int numPerPage = 5;
     int nowPage = 0;
     if(request.getParameter("nowPage")!=null) {
         nowPage = Integer.parseInt(request.getParameter("nowPage"));
     }
+    //동물검색 리스트
     int asize = 0;//animal 검색 레코드 수
     //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
     List<Map<String, Object>> aList = (List)request.getAttribute("aList");
@@ -45,6 +54,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.10/index.global.min.js'></script>
     <script>
+        let isSending = false;
         let todayDate = new Date().toISOString().split('T')[0];
         // Set the minimum value of the date input to today
         document.getElementById("date").min = todayDate;
@@ -86,12 +96,12 @@
             // 선택된 값에 따라 이미지 변경
             if (selectedValue === '1') {
                 imageContainer.innerHTML = `
-                <img src="/img/1.jpg" alt="시설사진1">
-                <img src="/img/2.jpg" alt="시설사진2">
+                <img src="img/1.jpg" alt="시설사진1">
+                <img src="img/2.jpg" alt="시설사진2">
             `;
             } else if (selectedValue === '2') {
                 imageContainer.innerHTML = `
-                <img src="/img/3.jpg" alt="시설사진3">
+                <img src="img/3.jpg" alt="시설사진3">
                 <img src="/img/4.jpg" alt="시설사진4">
             `;
             } else if (selectedValue === '3') {
@@ -107,9 +117,46 @@
             }
         }
 
+        //예약 디테일
+        document.ready(function(){
+            // 테이블 셀이 클릭되면 모달을 표시하고 해당 ID 값을 가져옵니다.
+            'td[data-toggle="modal"]'.click(function(){
+                var id = this.data('id'); // 클릭된 테이블 셀의 ID 값 가져오기
+                showModal(id); // 모달 표시 함수 호출
+            });
+        });
 
-    //예약넣기
+        // Ajax를 사용하여 서버에 해당 ID에 관한 데이터를 요청합니다.
+        function showModal(id) {
+            ajax({
+                url: '/getData?id=' + id, // 데이터를 가져올 URL
+                type: 'GET',
+                success: function(response) {
+                    // 서버로부터 받은 데이터를 모달에 삽입합니다.
+                    '#modal-lg'.find('.modal-body').html(response);
+                    // 모달을 표시합니다.
+                    '#modal-lg'.modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Ajax request failed:', status, error);
+                }
+            });
+        }
+
+        //예약수정
+        function update(facilityReserveId){
+            window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
+        }
+
+        //예약넣기
+
         function reserveInsert() {
+            //@CHS@
+            if(isSending) {
+                return;
+            }
+            isSending = true;
+            //@CHS@
             const animalPk = document.getElementById("animalPk").value;
             console.log("1:" + animalPk);
             const facilityReserveDt = document.getElementById("facilityReserveDt").value;
@@ -124,6 +171,81 @@
             console.log("7:" + selecStartTimetBox);
             const selecEndTimeBox = parseInt(document.getElementById("selecEndTimeBox").value);
             console.log("6:" + selecEndTimeBox);
+
+            // @CHS@
+            let data = JSON.stringify({
+                facilityReserveDt: facilityReserveDt,
+                facilityNm: facilityNm,
+                animalId: animalPk,
+                memberPk: memberPk,
+                facilityRemarks: facilityRemarks,
+                startTimeInterval: selecStartTimetBox,
+                endTimeInterval: selecEndTimeBox
+            });
+
+            console.log("제이슨데이터:" + data);
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = () => {
+                isSending = false;
+                if (selecEndTimeBox < selecStartTimetBox) {alert("종료 시간은 시작 시간보다 작을 수 없습니다.")}
+                else
+                {
+
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        var res = xhr.responseText;
+                        if (res == "suc") {
+
+                            window.location.href = 'http://localhost:8000/reservespot/dailyReserve';
+
+                        } else if (res == "error") {
+                            alert("예약 생성 중 오류가 발생하였습니다. 잠시 후 다시 시도 해주세요.")
+
+                        } else if (res == "dup") {
+                            alert("이미 예약된 건이 있습니다. 예약시간을 확인해주세요.")
+                        }
+                    } else {
+                        console.error("예약 생성 중 오류가 발생하였습니다.");
+                        alert("환자명을 입력해주세요")
+                    }
+                }
+            };
+            xhr.open('POST', '/reservespot/insertReserve', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(data);
+            // @CHS@
+            /* @JES@
+               for (let i = selecStartTimetBox; i <= selecEndTimeBox; i++) {
+
+
+                   let data = JSON.stringify({
+                       facilityReserveDt: facilityReserveDt,
+                       facilityNm: facilityNm,
+                       animalId: animalPk,
+                       memberPk: memberPk,
+                       facilityRemarks: facilityRemarks,
+                       timeInterval: i
+                   });
+                   console.log("제이슨데이터:" + data);
+                   const xhr = new XMLHttpRequest();
+
+                   xhr.onload = () => {
+                       isSending = false;
+                       if (xhr.status === 200) {
+
+                           window.location.href = 'http://localhost:8000/reservespot/dailyReserve';
+                       } else {
+                           console.error("예약 생성 중 오류가 발생하였습니다.");
+                       }
+                   };
+                   xhr.open('POST', '/reservespot/insertReserve', true);
+                   xhr.setRequestHeader('Content-Type', 'application/json');
+                   xhr.send(data);
+            }
+
+            // @CHS@
+            /* @JES@
             for (let i = selecStartTimetBox; i <= selecEndTimeBox; i++) {
 
 
@@ -139,6 +261,7 @@
                 const xhr = new XMLHttpRequest();
 
                 xhr.onload = () => {
+                    isSending = false;
                     if (xhr.status === 200) {
 
                         window.location.href = 'http://localhost:8000/reservespot/dailyReserve';
@@ -149,9 +272,7 @@
                 xhr.open('POST', '/reservespot/insertReserve', true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(data);
-
-
-            }
+            } @JES@ */
         }
         function searchEnter(){
             console.log('searchEnter')
@@ -208,30 +329,13 @@
                 // 클릭 이벤트 리스너 등록
                 listItem.addEventListener('click', function() {
                     // 다른 모달에 Nm 내용 추가
-                document.getElementById('inputMasterNm').value = result.MASTER_NM;
+                    document.getElementById('inputMasterNm').value = result.MASTER_NM;
                     document.getElementById('animalNm').value = result.ANIMALNM;
                     document.getElementById('animalPk').value = result.ANIMALID;
                 });
             });
         }
-        function checkReservation() {
-            // 여기서 예약이 이미 있는지 확인하는 로직을 작성합니다.
 
-            //오늘 이전 선택 불가
-            var alreadyReserved = false; // 예약이 이미 있으면 true로 설정
-
-            if (alreadyReserved) {
-                // 이미 예약이 있는 경우
-                alert("예약할려는 시간대에 이미 예약한 건이 있습니다.");
-                // } else if {
-                //     // 예약이 없는 경우
-                //     // 여기에 예약 등록 로직을 추가하면 됩니다.
-                //     // 예약 등록 코드를 추가하세요.
-                //     alert("잘못된 시간입력입니다.");
-            } else {
-                alert("잘못된 시간입력입니다.");
-            }
-        }
 
     </script>
 
@@ -399,7 +503,7 @@
         <!-- Main content -->
         <section class="content">
             <%--달력--%>
-            <div id='calendar'>일일 표가 안 떠~ 2023-01-02 달력선택기에 버튼 오늘,<,></div>
+            <div id='calendar'>사진경로  이상함, 예약 정보 리셋 필요ㅡ ,일일 표가 안 떠~ 2023-01-02 달력선택기에 버튼 오늘,<,> 내껏만 삭제하게 하던, 그냥 내꺼로만 삭제 버튼 뜨게하던, 페이징 버튼 바 5개로 해줘, 업데이트 작업하면 됨</div>
 
 
             <!--여기 -->
@@ -466,7 +570,7 @@
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">전체 예약 현황</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">내 예약 현황</a></li>
+                            <li class="nav-item"><a id=checkMine class="nav-link" href="#timeline" data-toggle="tab">내 예약 현황</a></li>
                         </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -494,8 +598,9 @@
                                         <td><%=rmap.get("FACILITY_NM")%></td>
                                         <td><%=rmap.get("USER_NM")%></td>
                                         <td><%=rmap.get("ANIMAL_NM")%></td>
-                                        <td><%=rmap.get("FACILITY_RESERVE_DT")%></td>
+                                        <td data-toggle="modal"  data-id=<%=rmap.get("FACILITY_RESERVE_ID")%> data-target="#modal-lg"><%=rmap.get("FACILITY_RESERVE_DT")%></td>
                                         <td><%=rmap.get("START_TIME")%>~<%=rmap.get("END_TIME")%></td>
+
                                         <td class="cancel-button-cell">
 
                                             <button onclick='cancel(<%=rmap.get("FACILITY_RESERVE_ID")%>)' type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
@@ -506,14 +611,6 @@
                                     %>
                                     </tbody>
                                 </table>
-                                <!-- [[ 페이징 처리  구간  ]] -->
-
-<%--                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>--%>
-
                                 <!-- [[ 페이징 처리  구간  ]] -->
                                 <div class="card-footer clearfix">
                                     <ul class="pagination pagination-sm m-0 float-right">
@@ -526,56 +623,51 @@
                                 </div>
                                 <!-- [[ 페이징 처리  구간  ]] -->
                             </div>
-
                             <div class="tab-pane" id="timeline">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                     <tr>
                                         <th>예약시설</th>
-
                                         <th>환자명</th><!-- 고민 -->
                                         <th>예약날짜</th><!-- 고민 -->
                                         <th>예약시간</th>
-                                        <th>취소</th>
+                                        <th class="cancel-header" >취소</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+
+                                    <%
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i==mysize) break;//NullPointerException방어
+                                            Map<String,Object> myMap = myList.get(i);
+                                            // {[조회 결과]:[{START_TIME=10:00, END_TIME=11:00, USER_NM=토마토, FACILITY_NM=수술실, FACILITY_RESERVE_ID=0, ANIMAL_NM=멍돌이, FACILITY_RESERVE_DT=2024-02-23}]}
+                                    %>
                                     <tr>
-                                        <td>예약시설</td>
+                                        <td><%=myMap.get("FACILITY_NM")%></td>
+                                        <td><%=myMap.get("ANIMAL_NM")%></td>
+                                        <td><%=myMap.get("FACILITY_RESERVE_DT")%></td>
+                                        <td><%=myMap.get("START_TIME")%>~<%=myMap.get("END_TIME")%></td>
 
-                                        <td>환자명</td>
-                                        <td>2024-02-01</td>
-                                        <td>15:30 ~ 16:30</td>
-                                        <th><button onclick="cancle()" type="button" class="btn btn-block btn-default">취소</button></th>
+                                        <td class="cancel-button-cell">
 
+                                            <button onclick='cancel(<%=myMap.get("FACILITY_RESERVE_ID")%>)' type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>예약시설</td>
-
-                                        <td>환자명</td>
-                                        <td>2024-02-01</td>
-                                        <td>15:30 ~ 16:30</td>
-                                        <th><button onclick="cancle()" type="button" class="btn btn-block btn-default">취소</button></th>
-                                    </tr>
-                                    <tr>
-                                        <td>예약시설</td>
-
-                                        <td>환자명</td>
-                                        <td>2024-02-01</td>
-                                        <td>15:30 ~ 16:30</td>
-                                        <th><button onclick="cancle()" type="button" class="btn btn-block btn-default">취소</button></th>
-                                    </tr>
+                                    <%
+                                        }
+                                    %>
                                     </tbody>
                                 </table>
                                 <div class="card-footer clearfix">
                                     <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                        <%
+                                            String mypagePath = "dailyReserve";
+                                            BSPageBar mypb = new BSPageBar(numPerPage,  mysize, nowPage, mypagePath);
+                                            out.print(mypb.getPageBar());
+                                        %>
                                     </ul>
                                 </div>
+
                             </div>
 
                         </div>
@@ -623,22 +715,23 @@
                                             <option value="0">10:00</option>
                                             <option value="1">10:30</option>
                                             <option value="2">11:00</option>
-                                            <option value="3">12:00</option>
+                                            <option value="3">11:30</option>
+                                            <option value="4">12:00</option>
                                             <option value="5">12:30</option>
-                                            <option value="6">01:00</option>
-                                            <option value="7">01:30</option>
-                                            <option value="8">02:00</option>
-                                            <option value="9">02:30</option>
-                                            <option value="10">03:00</option>
-                                            <option value="11">03:30</option>
-                                            <option value="12">04:00</option>
-                                            <option value="13">04:30</option>
-                                            <option value="14">05:00</option>
-                                            <option value="15">05:30</option>
-                                            <option value="16">06:00</option>
-                                            <option value="17">06:30</option>
-                                            <option value="18">07:00</option>
-                                            <option value="19">07:30</option>
+                                            <option value="6">13:00</option>
+                                            <option value="7">13:30</option>
+                                            <option value="8">14:00</option>
+                                            <option value="9">14:30</option>
+                                            <option value="10">15:00</option>
+                                            <option value="11">15:30</option>
+                                            <option value="12">16:00</option>
+                                            <option value="13">16:30</option>
+                                            <option value="14">17:00</option>
+                                            <option value="15">17:30</option>
+                                            <option value="16">18:00</option>
+                                            <option value="17">18:30</option>
+                                            <option value="18">19:00</option>
+                                            <option value="19">19:30</option>
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                         <span>~</span>
@@ -648,27 +741,28 @@
                                             <option value="2">11:30</option>
                                             <option value="3">12:00</option>
                                             <option value="4">12:30</option>
-                                            <option value="5">01:00</option>
-                                            <option value="6">01:30</option>
-                                            <option value="7">02:00</option>
-                                            <option value="8">02:30</option>
-                                            <option value="9">03:00</option>
-                                            <option value="10">03:30</option>
-                                            <option value="11">04:00</option>
-                                            <option value="12">04:30</option>
-                                            <option value="13">05:00</option>
-                                            <option value="14">05:30</option>
-                                            <option value="15">06:00</option>
-                                            <option value="16">06:30</option>
-                                            <option value="17">07:00</option>
-                                            <option value="18">07:30</option>
-                                            <option value="19">08:00</option>
+                                            <option value="5">13:00</option>
+                                            <option value="6">13:30</option>
+                                            <option value="7">14:00</option>
+                                            <option value="8">14:30</option>
+                                            <option value="9">15:00</option>
+                                            <option value="10">15:30</option>
+                                            <option value="11">16:00</option>
+                                            <option value="12">16:30</option>
+                                            <option value="13">17:00</option>
+                                            <option value="14">17:30</option>
+                                            <option value="15">18:00</option>
+                                            <option value="16">18:30</option>
+                                            <option value="17">19:00</option>
+                                            <option value="18">19:30</option>
+                                            <option value="19">20:00</option>
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                     </div>
-                                    <div><input type="text" id="memberNm" class="text-input" readonly value="<%=name%>">
+                                    <div><input type="text" id="memberNm" class="text-input" readonly value="name">
                                         <span>
-                                            <input type="text" id="memberPk" class="text-input" readonly value="<%=userpk%>" hidden>
+                                            <input type="text" id="memberPk" class="text-input" readonly value="1" hidden>
+                                            <%--name,userpk--%>
                                         </span>
                                         <span>
                                             <input type="text" id="animalPk" class="text-input" readonly >
@@ -690,7 +784,7 @@
 
                             <div class="modal-footer" style="text-align: right;">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">목록으로 돌아가기</button>
-                                <button type="button" class="btn btn-primary">예약수정</button>
+                                <button type="button" class="btn btn-primary" >예약수정</button>
                                 <button type="button" class="btn btn-primary">예약취소</button>
                                 <button type="button" class="btn btn-primary" onclick="reserveInsert()">예약등록</button>
                             </div>

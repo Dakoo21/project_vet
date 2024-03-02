@@ -158,10 +158,10 @@
                                         <span class="stamp-step-num">사원</span>
                                     </td>
                                     <td class="team name" scope="row" id="cell1">
-<%--                                        <span class="stamp-step-num">부원장</span>--%>
+                                        <%--                                        <span class="stamp-step-num">부원장</span>--%>
                                     </td>
                                     <td class="team name" scope="row" id="cell2">
-<%--                                        <span class="stamp-step-num">관리자</span>--%>
+                                        <%--                                        <span class="stamp-step-num">관리자</span>--%>
                                     </td>
                                     <th></th>
                                     <th></th>
@@ -262,14 +262,14 @@
     $(document).ready(function() {
         // Summernote
         $('#summernote').summernote(
-        {
-            height: 300,
-            minHeight: null,
-            maxHeight: null,
-            focus: true,
-            lang: "ko-KR",
-            placeholder: '최대 2048자까지 쓸 수 있습니다'
-        });
+            {
+                height: 300,
+                minHeight: null,
+                maxHeight: null,
+                focus: true,
+                lang: "ko-KR",
+                placeholder: '최대 2048자까지 쓸 수 있습니다'
+            });
         // CodeMirror
         CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
             mode: "htmlmixed",

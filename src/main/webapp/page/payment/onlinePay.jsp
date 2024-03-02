@@ -55,18 +55,18 @@
         <!-- Main content -->
         <section class="content">
             <h2>구매자 정보 입력</h2>
-                <div>
-                    <label for="buyer_email">이메일:</label>
-                    <input type="email" id="buyer_email" name="buyer_email">
-                </div>
-                <div>
-                    <label for="buyer_name">이름:</label>
-                    <input type="text" id="buyer_name" name="buyer_name">
-                </div>
-                <div>
-                    <label for="buyer_tel">전화번호:</label>
-                    <input type="tel" id="buyer_tel" name="buyer_tel">
-                </div>
+            <div>
+                <label for="buyer_email">이메일:</label>
+                <input type="email" id="buyer_email" name="buyer_email">
+            </div>
+            <div>
+                <label for="buyer_name">이름:</label>
+                <input type="text" id="buyer_name" name="buyer_name">
+            </div>
+            <div>
+                <label for="buyer_tel">전화번호:</label>
+                <input type="tel" id="buyer_tel" name="buyer_tel">
+            </div>
             <!-- 'Pay' 버튼 클릭 시 결제 요청 함수 호출 -->
             <button onclick="requestPay()">결제</button>
             <!-- 결제 버튼 생성 -->

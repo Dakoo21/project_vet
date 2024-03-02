@@ -50,4 +50,11 @@ public class myDetail_Service {
         result = myDetail_repository.myDetailUpdate(member);
         return result;
     }
+
+
+    public int passwordUpdate(Member member) {
+        int result;
+        result = myDetail_repository.passwordUpdate(member);
+        return result;
+    }
 }

@@ -72,30 +72,30 @@
                 <div class="stockList">
                     <table class="table table-striped table-valign-middle" id="animalTable">
                         <thead>
-                            <tr>
-                                <td>유기번호</td>
-                                <td>품종명</td>
-                                <td>색</td>
-                                <td>나이(출생연도)</td>
-                                <td>몸무게</td>
-                            </tr>
+                        <tr>
+                            <td>유기번호</td>
+                            <td>품종명</td>
+                            <td>색</td>
+                            <td>나이(출생연도)</td>
+                            <td>몸무게</td>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
+                        <tr>
+                            <td>
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-<div class="modal-footer">
-    <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
-    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
-</div>
-</div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
+            <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
+        </div>
+    </div>
 </div>
 <!--modal start-->
 <div class="modal" id="selectForm2">
@@ -145,7 +145,7 @@
             <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
         </div>
     </div>
-<%--</div>--%>
+    <%--</div>--%>
 </body>
 <script>
     // 유기동물 조회 모달
@@ -208,14 +208,14 @@
                 // String age = mList.getAge();
                 // String weight = mList.getWeight();
                 var row = "<tr data-animal-id='" + abandonList[i].kindcd + "'>" +
-                            "<td>" + "13131313" + "</td>" +
-                            "<td>" + abandonList[i].kindcd + "</td>" +
-                            "<td>" + abandonList[i].colorcd + "</td>" +
-                            "<td>" + abandonList[i].age + "</td>" +
-                            "<td>" + abandonList[i].weight + "</td>" +
-                            "</tr>";
-                    tableBody.append(row);
-                }
+                    "<td>" + "13131313" + "</td>" +
+                    "<td>" + abandonList[i].kindcd + "</td>" +
+                    "<td>" + abandonList[i].colorcd + "</td>" +
+                    "<td>" + abandonList[i].age + "</td>" +
+                    "<td>" + abandonList[i].weight + "</td>" +
+                    "</tr>";
+                tableBody.append(row);
+            }
             // JSON 데이터를 JavaScript 객체로 파싱
             var parsedData = JSON.parse(JSON.stringify(abandonList));
             // 각 키와 값을 분리하여 출력

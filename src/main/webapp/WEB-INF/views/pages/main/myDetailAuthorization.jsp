@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>전자결재</title>
+    <title>내 정보</title>
     <%@ include file="/include/bootCommon.jsp"%>
     <%@ include file="/include/common/quill_common.jsp"%>
     <style>
