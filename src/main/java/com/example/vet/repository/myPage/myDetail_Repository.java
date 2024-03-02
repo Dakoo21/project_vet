@@ -37,4 +37,10 @@ public class myDetail_Repository {
         result = sqlSessionTemplate.update("myDetailUpdate", member);
         return result;
     }
+
+    public int passwordUpdate(Member member) {
+        int result;
+        result = sqlSessionTemplate.update("passwordUpdate", member);
+        return result;
+    }
 }

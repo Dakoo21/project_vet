@@ -157,11 +157,11 @@
                                     <td class="team name" scope="row">
                                         <span class="stamp-step-num">사원</span>
                                     </td>
-                                    <td class="team name" scope="row">
-                                        <span class="stamp-step-num">부원장</span>
+                                    <td class="team name" scope="row" id="cell1">
+                                        <%--                                        <span class="stamp-step-num">부원장</span>--%>
                                     </td>
-                                    <td class="team name" scope="row">
-                                        <span class="stamp-step-num">관리자</span>
+                                    <td class="team name" scope="row" id="cell2">
+                                        <%--                                        <span class="stamp-step-num">관리자</span>--%>
                                     </td>
                                     <th></th>
                                     <th></th>
@@ -262,14 +262,14 @@
     $(document).ready(function() {
         // Summernote
         $('#summernote').summernote(
-        {
-            height: 300,
-            minHeight: null,
-            maxHeight: null,
-            focus: true,
-            lang: "ko-KR",
-            placeholder: '최대 2048자까지 쓸 수 있습니다'
-        });
+            {
+                height: 300,
+                minHeight: null,
+                maxHeight: null,
+                focus: true,
+                lang: "ko-KR",
+                placeholder: '최대 2048자까지 쓸 수 있습니다'
+            });
         // CodeMirror
         CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
             mode: "htmlmixed",
@@ -349,7 +349,14 @@
             if (selectedCell) {
                 $(selectedCell).html(selectedValue);
             }
-
+            // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
+            if (selectedValue === "토마토" && selectedCell) {
+                $('#cell1').text('부원장');
+            }
+            // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
+            if (selectedValue === "사과" && selectedCell) {
+                $('#cell2').text('원장');
+            }
             // 모달 닫기
             $('#myModal').modal('hide');
         }

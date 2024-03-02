@@ -129,14 +129,17 @@
                                                 </div>
                                             </div>
 
-                                            <form id="myDetail" action="/myDetailUpdate" method="post">
-                                                <input type="hidden" id="MEMBER_ID" name="MEMBER_ID" value="<%=username%>">
                                                 <div class="form-group row">
                                                     <label for="MEMBER_PW" class="col-sm-2 col-form-label">비빌번호:</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="수정할 비빌번호를 입력하세요" onblur="validatePassword()">
+                                                    <div class="col-sm-2">
+                                                        <%--<input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="수정할 비빌번호를 입력하세요" onblur="validatePassword()">--%>
+                                                        <div id="modal">
+                                                            <button type="button" id="modalBtn" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#selectForm">비밀번호 변경</button>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            <form id="myDetail" action="/myDetailUpdate" method="post">
+                                                <input type="hidden" id="MEMBER_ID" name="MEMBER_ID" value="<%=username%>">
                                                 <div class="form-group row">
                                                     <label for="MEMBER_EMAIL" class="col-sm-2 col-form-label">이메일:</label>
                                                     <div class="col-sm-10">
@@ -238,6 +241,37 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        <%-- model--%>
+        <div class="modal" id="selectForm">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">변경할 비밀번호를 입력해주세요</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form id="pwChange" action="/passwordUpdate" method="post">
+                            <div class="form-group row">
+                                <label for="MEMBER_MEMBERNAME" class="col-sm-2 col-form-label">이름:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="MEMBER_MEMBERNAME" name="MEMBER_MEMBERNAME" value="<%=userDetail.get("MEMBER_MEMBERNAME")%>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="MEMBER_PW" class="col-sm-2 col-form-label">비밀번호:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="MEMBER_PW" name="MEMBER_PW" placeholder="수정할 비밀번호를 입력하세요" onblur="validatePassword()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="text-align: right;">
+                        <button type="button" class="btn btn-primary" onclick="passwordChange()">변경</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--footer-->
         <%@ include file="/include/footer.jsp" %>
     </div>
@@ -255,13 +289,8 @@
                 }
                 console.log(data);
                 console.log(addr);
-                //console.log(post.postNum);
-                //setPost({...post, zipcode:data.zonecode, addr:addr}) ;
-                // document.querySelector("#mem_zipcode").value = data.zonecode;//우편번호
-                // document.querySelector("#mem_address").value = addr;//주소
                 document.getElementById("MEMBER_ADDRESS").value = addr;//주소
                 document.getElementById("MEMBER_POSTCODE").value =  data.zonecode;//우
-                //document.getElementById("postDetail").focus();
             }
         }).open();
     }
@@ -344,6 +373,18 @@
         };
 
         return isValid;
+    }
+
+    $(document).ready(function() {
+        $("#modalBtn").click(function() {
+            // 클릭 이벤트 핸들러 함수가 실행되는지 확인하기 위해 콘솔에 메시지 출력
+            console.log("버튼이 클릭되었습니다.");
+            $('#selectForm').modal('show');
+        });
+    });
+
+    const passwordChange = (event) => {
+      document.querySelector("#pwChange").submit();
     }
 
 </script>

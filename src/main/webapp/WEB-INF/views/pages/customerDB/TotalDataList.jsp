@@ -1,11 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+
+<%
+    List<Map<String,Object>> dList =(List)request.getAttribute("dList");
+    int size = (dList != null) ? dList.size() : 0;
+
+%>
+<script type="text/javascript">
+    function searchEnter(){
+        console.log('searchEnter')
+        console.log(window.event.keyCode);//13
+        if(window.event.keyCode == 13){
+            dataSearch();
+        }
+        function dataSearch(){
+            console.log('dataSearch');
+            const gubun = document.querySelector("#gubun").value; // n_title을 선택시 value값은 n_title 이고 const gubun에 n_title 담김
+            const keyword = document.querySelector("#keyword").value; // 주차 검색클릭, 엔터시 value값은 주차로 동시에 반영되고 const keyword도 주차 담김
+            console.log(`${gubun} , ${keyword}`);
+            location.href="/CustomerDB/TotalDataList?gubun="+gubun+"&keyword="+keyword;  //검색버튼 누르는 순간 주소창이 바뀌기 때문에 컨트롤러에 전달해주기위한 코드 -> 컨트롤러 이동
+            //검색 후에 검색창은 다시 초기화됨
+            document.querySelector("#gubun").value = '분류선택';
+            document.querySelector("#keyword").value = '';
+        }
+
+        const dataDetail = () => {
+            location.href = "/CustomerDB/TotalDataDetail?animal_pk=" + animal_pk;
+        }
+        const dataInsert = () => {
+            document.querySelector("#f_totaldata").submit();
+        }
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>재고관리</title>
+    <title>통합데이터리스트</title>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
 
@@ -40,10 +74,10 @@
                 </div>
                 <div class="col-6">
                     <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
-                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
+                           aria-label="검색어를 입력하세요" aria-describedby="btn_search"/>
                 </div>
                 <div class="col-3">
-                    <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
+                    <button id="btn_search" class="btn btn-danger" >검색</button>
                 </div>
             </div>
             <!--카테고리 버튼-->
@@ -87,419 +121,19 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>서견주<a href="totalDataDetail.jsp?고객명"></a></td>
-                                        <td>뭉치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>망치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>양치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>남</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>고영주</td>
-                                        <td>루루</td>
-                                        <td>고양이</td>
-                                        <td>코리안숏헤어</td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart tab-pane" id="select-dogs" style="position: relative; height: 100%;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>고객명</th>
-                                        <th>동물이름</th>
-                                        <th>축종</th>
-                                        <th>품종</th>
-                                        <th>성별</th>
-                                        <th>중성화</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>서견주<a href="totalDataDetail.jsp?고객명"></a></td>
-                                        <td>뭉치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>망치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>양치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>남</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>고영주</td>
-                                        <td>루루</td>
-                                        <td>고양이</td>
-                                        <td>코리안숏헤어</td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart tab-pane" id="select-cat" style="position: relative; height: 100%;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>고객명</th>
-                                        <th>동물이름</th>
-                                        <th>축종</th>
-                                        <th>품종</th>
-                                        <th>성별</th>
-                                        <th>중성화</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>서견주<a href="totalDataDetail.jsp?고객명"></a></td>
-                                        <td>뭉치</td>
-                                        <td>강아지</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>망치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>양치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>남</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>고영주</td>
-                                        <td>루루</td>
-                                        <td>고양이</td>
-                                        <td>코리안숏헤어</td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart tab-pane" id="select-animals" style="position: relative; height: 100%;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>고객명</th>
-                                        <th>동물이름</th>
-                                        <th>축종</th>
-                                        <th>품종</th>
-                                        <th>성별</th>
-                                        <th>중성화</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>서견주<a href="totalDataDetail.jsp?고객명"></a></td>
-                                        <td>뭉치</td>
-                                        <td>기타동물</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>망치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>여</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>서견주</td>
-                                        <td>양치</td>
-                                        <td>개</td>
-                                        <td>불독</td>
-                                        <td>남</td>
-                                        <td>O</td>
-                                    </tr>
-                                    <tr>
-                                        <td>고영주</td>
-                                        <td>루루</td>
-                                        <td>고양이</td>
-                                        <td>코리안숏헤어</td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>김톨이</td>
-                                        <td>햄토리</td>
-                                        <td>햄스터</td>
-                                        <td> - </td>
-                                        <td>남</td>
-                                        <td>X</td>
+                                        <%
+                                            for (int i =0; i<dList.size(); i++){
+                                                Map<String,Object> pmap =  dList.get(i);
+                                        %>
+                                        <td><%=pmap.get("MASTER_NM")%></td>
+                                        <td><%=pmap.get("ANIMAL_NM")%></td>
+                                        <td><%=pmap.get("ANIMAL_SPECIES")%></td>
+                                        <td><%=pmap.get("ANIMAL_BREED")%></td>
+                                        <td><%=pmap.get("ANIMAL_SEX")%></td>
+                                        <td><%=pmap.get("ANIMAL_NEUT")%></td>
+                                        <%
+                                            }
+                                        %>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -512,14 +146,13 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-default">등록</button>
+                    <a href=pages/customer/TotalDataInsert.jsp" type="button" class="btn btn-default">등록</a>
                 </div>
             </div>
+            <!-- /.content -->
         </section>
-        <!-- /.content -->
+        <!-- /.content-wrapper -->
     </div>
-    <!-- /.content-wrapper -->
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -528,29 +161,24 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<%@include file="/include/bootCommonFoot.jsp"%>
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-<script>
-    $(function () {
-        $('#stocktableList').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
-    });
-</script>
+
+
+<%--<script>--%>
+<%--    $(function () {--%>
+<%--        $('#stocktableList').DataTable({--%>
+<%--            "paging": true,--%>
+<%--            "lengthChange": false,--%>
+<%--            "searching": false,--%>
+<%--            "ordering": true,--%>
+<%--            "info": true,--%>
+<%--            "autoWidth": false--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 
 <%@ include file="/include/footer.jsp"%>
 </body>

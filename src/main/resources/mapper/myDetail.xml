@@ -16,12 +16,16 @@
 
     <update id="myDetailUpdate" parameterType="Map">
         UPDATE user_test5
-        SET MEMBER_PW = #{MEMBER_PW},
-            MEMBER_EMAIL = #{MEMBER_EMAIL},
+        SET MEMBER_EMAIL = #{MEMBER_EMAIL},
             MEMBER_PHONE = #{MEMBER_PHONE},
             MEMBER_POSTCODE = #{MEMBER_POSTCODE},
             MEMBER_ADDRESS = #{MEMBER_ADDRESS}
         WHERE MEMBER_ID = #{MEMBER_ID}
     </update>
 
+    <update id="passwordUpdate" parameterType="Map">
+        UPDATE user_test5
+        SET MEMBER_PW = #{MEMBER_PW}
+        WHERE MEMBER_MEMBERNAME = #{MEMBER_MEMBERNAME}
+    </update>
 </mapper>

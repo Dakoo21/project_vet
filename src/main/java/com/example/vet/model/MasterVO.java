@@ -10,7 +10,7 @@ public class MasterVO {
     private int master_pk;
     private String master_nm;
     private String master_username;
-    private  String master_gender;
+    private String master_gender;
     private String master_pw;
     private String master_email;
     private String master_pnumber;
@@ -19,7 +19,7 @@ public class MasterVO {
 
 
     @Builder
-    public MasterVO(int master_pk,  String master_nm, String master_username, String master_pw, String master_email,
+    public MasterVO(int master_pk, String master_nm, String master_username, String master_pw, String master_email,
                     String master_pnumber, String master_address, String master_bdate, String master_gender) {
         this.master_pk = master_pk;
         this.master_nm = master_nm;

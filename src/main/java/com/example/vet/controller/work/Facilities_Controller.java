@@ -1,10 +1,15 @@
 package com.example.vet.controller.work;
 
 
+import com.example.vet.config.auth.PrincipalDetails;
 import com.example.vet.model.FacilitiesVO;
 import com.example.vet.service.work.Facilities_Service;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +22,7 @@ import java.util.Map;
 //자 리스트랑 insert 부터 해봅시당
 //5개씩 리스트 뽑을거임
 
+@Slf4j
 @Controller
 @RequestMapping("/reservespot/*")
 public class Facilities_Controller {
@@ -35,18 +41,25 @@ public class Facilities_Controller {
         logger.info("예약목록 조회 파라미터(facilitiesVO): {}", facilitiesVO);
         List<Map<String, Object>> rList = facilitiesService.reserveList(facilitiesVO);
         logger.info("[예약목록 조회 결과(rList)]:{}", rList.toString());
+        //principalDetails 에서 가져옴
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+
+        Integer userPK = principalDetails.getID();
+        log.info(userPK.toString());
+
+//        int userPk = (int) session.getAttribute("userPK");
+        facilitiesVO.setMemberPk(userPK);
+        List<Map<String, Object>> myList = facilitiesService.reserveMyList(facilitiesVO);
+
+
         model.addAttribute("rList", rList);
+
+        model.addAttribute("myList", myList);
         return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
     }
 
-    //예약 수정
-//    @PostMapping("reserveUpdate")
-//    public String reserveUpdate(FacilitiesVO facilitiesVO){
-//        logger.info("예약수정시작");
-//        int result = 0;
-//        result = facilitiesService.reserveUpdate(facilitiesVO);
-//        return "redirect:/page/reservespot/dailyReserve";
-//    }
+
     //예약 삭제  파라미터 수정
 
     @GetMapping("reserveDelete")
@@ -54,19 +67,19 @@ public class Facilities_Controller {
         logger.info("reserveDelete 컨트롤러 시작");
         int result = 0;
         result = facilitiesService.DeleteReserve(facilityReserveId);
-        return "redirect:/page/reservespot/dailyReserve";
+        return "redirect:/reservespot/dailyReserve";
     }
 
     //동물 조회
 
     //예약 가능확인
-    @GetMapping("checkImpossible")
-    public String checkImpossible(Model model, FacilitiesVO facilitiesVO){
-        logger.info("예약목록조회컨트롤러시작");
-        logger.info("예약목록 조회 파라미터(facilitiesVO): {}", facilitiesVO);
-        List<Map<String, Object>> cList = facilitiesService.checkImpossible(facilitiesVO);
-        logger.info("[예약목록 조회 결과(cList)]:{}", cList.toString());
-        model.addAttribute("cList", cList);
-        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
-    }
+//    @GetMapping("checkImpossible")
+//    public String checkImpossible(Model model, FacilitiesVO facilitiesVO){
+//        logger.info("예약목록조회컨트롤러시작");
+//        logger.info("예약목록 조회 파라미터(facilitiesVO): {}", facilitiesVO);
+//        List<Map<String, Object>> cList = facilitiesService.checkImpossible(facilitiesVO);
+//        logger.info("[예약목록 조회 결과(cList)]:{}", cList.toString());
+//        model.addAttribute("cList", cList);
+//        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
+//    }
 }

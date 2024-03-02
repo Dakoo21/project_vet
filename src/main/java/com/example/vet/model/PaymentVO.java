@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PaymentVO {
-
     private Integer paymentPK;
     private String paymentOauthnum;
     private Integer paid_amount;
@@ -24,9 +23,15 @@ public class PaymentVO {
     private String buyer_tel;
     private String buyerAddress;
     private String name;
+    private Integer common_code_pk;
+    private Integer drugPrescription_pk;
 
     @Builder
-    public PaymentVO(int paymentPK, String paymentOauthnum, int paid_amount, int amount, int applyNum, String merchantUid, String impUid, String pg_tid, String paymentType, String paymentMethod, String paymentNm, String buyerEmail, String buyer_name, String buyer_tel, String buyerAddress, String name) {
+    public PaymentVO(int paymentPK, String paymentOauthnum, int paid_amount, int amount,
+                     int applyNum, String merchantUid, String impUid, String pg_tid,
+                     String paymentType, String paymentMethod, String paymentNm,
+                     String buyerEmail, String buyer_name, String buyer_tel, String buyerAddress,
+                     String name, int common_code_pk, int drugPrescription_pk) {
         this.paymentPK = paymentPK;
         this.paymentOauthnum = paymentOauthnum;
         this.paid_amount = paid_amount;
@@ -43,5 +48,7 @@ public class PaymentVO {
         this.buyer_tel = buyer_tel;
         this.buyerAddress = buyerAddress;
         this.name = name;
+        this.common_code_pk = common_code_pk;
+        this.drugPrescription_pk = drugPrescription_pk;
     }
 }
