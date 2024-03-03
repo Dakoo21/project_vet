@@ -2,6 +2,7 @@ package com.example.vet.repository.work.eSign;
 
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.Member;
+import com.example.vet.model.SignDocument;
 import com.example.vet.model.adopt.MissedAnimal;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -41,5 +42,17 @@ public class eSignDraft_Repository {
         }
         return abandonList;
 
+    }
+
+    public int insertDraft(SignDocument signDocument) {
+        int result = sqlSessionTemplate.insert("insertDraft", signDocument);
+        log.info(String.valueOf(result));
+        return result;
+    }
+
+    public List<SignDocument> selectDetail(int draftPk) {
+        List<SignDocument> draftDetail = sqlSessionTemplate.selectOne("selectDraftDetail");
+        log.info(draftDetail.toString());
+        return draftDetail;
     }
 }

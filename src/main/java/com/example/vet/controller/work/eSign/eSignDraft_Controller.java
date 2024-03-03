@@ -37,17 +37,6 @@ public class eSignDraft_Controller {
         return "pages/esignbox/esignInsert";
     }
 
-    /**********************************************************************************
-     작성자 : 최윤정
-     작성일자 : 26.02.25
-     기능 : 기안서 작성 기능
-     **********************************************************************************/
-
-    @GetMapping("draftInsert")
-    public String draftInsert(SignDocument signDocument){
-
-        return "pages/esignbox/docsBox";
-    }
 
     /**********************************************************************************
      작성자 : 최윤정
@@ -101,14 +90,39 @@ public class eSignDraft_Controller {
      작성일자 : 26.02.25
      기능 : 기안서 작성
      **********************************************************************************/
-    // @GetMapping("adopterList")
-    // public String eSignInsert(Model model, SignDocument signDocument) {
-    //     MasterVO masterVO = null;
-    //     List<MasterVO> aList = eSignDraft_Service.selectAdopter();
-    //     model.addAttribute("aList", aList);
-    //     log.info(aList.toString());
-    //     return "pages/customerDB/TotalCustomerList";
-    // }
+    @PostMapping("eDraftInsert")
+    public String eSignInsert(SignDocument signDocument) {
+        int result;
+        result = eSignDraft_service.insertDraft(signDocument);
+        return "pages/esignbox/docsBox";
+    }
 
+    /**********************************************************************************
+     작성자 : 최윤정
+     작성일자 : 26.02.25
+     기능 : 기안서 조회
+     **********************************************************************************/
+    @GetMapping("draftDetail")
+    public String draftDetail(@RequestParam("draftPk") int draft_pk, Model model) {
+        log.info("기안서 상세페이지 조회");
+        List<SignDocument> draftDetail = eSignDraft_service.selectDetail(draft_pk);
+        // model.addAttribute("lineList", lineList);
+
+        model.addAttribute("draftDetail",draftDetail);
+
+        return "pages/esignbox/esignDetail"; // forward라서 webapp아래에서 찾는다
+    }
+    /**********************************************************************************
+     작성자 : 최윤정
+     작성일자 : 26.02.25
+     기능 : 기안서 조회
+     **********************************************************************************/
+    @PostMapping("/eSignDraft/submitSelectedValue")
+    public String submitSelectedValue(@RequestBody SignDocument signDocument) {
+        // 받은 signDocumentVO를 이용한 원하는 작업 수행
+        System.out.println("Received signDocumentVO: " + signDocument.getSelectedValue());
+        // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+        return "Success";
+    }
 }
 

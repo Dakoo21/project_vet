@@ -258,6 +258,28 @@
 <script src="/plugins/codemirror/mode/css/css.js"></script>
 <script src="/plugins/codemirror/mode/xml/xml.js"></script>
 <script src="/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<!-- 모달 내용 -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">라디오 버튼 선택</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm">
+                    <!-- 사용자 목록을 표시할 위치 -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" id="confirmButton">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
 <script>
     $(document).ready(function() {
         // Summernote
@@ -347,18 +369,38 @@
 
             // 선택한 라디오 버튼의 값을 현재 선택된 셀에 버튼 대신 텍스트로 대체
             if (selectedCell) {
-                $(selectedCell).html(selectedValue);
+                $(selectedCell).children('.dynamicButton').hide();
+                // 새로운 버튼 대신 텍스트로 대체
+                var newText = $('<span>', {
+                    text: selectedValue
+                });
+                $(selectedCell).empty().append(newText);
             }
+
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "토마토" && selectedCell) {
                 // idSpan.style.display = 'none';
-                $(selectedCell).children('.dynamicButton').hide();
+                // $(selectedCell).children('.dynamicButton').hide();
             }
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "사과" && selectedCell) {
                 $('#cell2').text('원장');
             }
             // 모달 닫기
+            // 선택한 라디오 버튼의 값을 서버로 전송
+            if (selectedValue) {
+                $.ajax({
+                    type: 'POST',  // 또는 'GET'에 따라서 서버 요청 방식 선택
+                    url: '/eSignDraft/submitSelectedValue',  // 컨트롤러의 URL
+                    data: { selectedValue: selectedValue },  // 전송할 데이터
+                    success: function(response) {
+                        console.log('전송 성공:', response);
+                    },
+                    error: function(error) {
+                        console.error('전송 실패:', error);
+                    }
+                });
+            }
             $('#myModal').modal('hide');
         }
 
@@ -411,25 +453,3 @@
         }
     });
 </script>
-<!-- 모달 내용 -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">라디오 버튼 선택</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="userForm">
-                    <!-- 사용자 목록을 표시할 위치 -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary" id="confirmButton">확인</button>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>

@@ -17,11 +17,12 @@ public class SignDocument {
     private String sign_type;
     private int user_pk;
 	private int adopt_pk;
+    private String selectedValue;
 
 
     @Builder
     public SignDocument(int sign_pk, String sign_writer, String sign_no, String sign_title, String sign_content,
-                        String sign_date, String sign_state, String sign_type, int user_pk, int adopt_pk){
+                        String sign_date, String sign_state, String sign_type, int user_pk, int adopt_pk, String selectedValue){
         this.sign_pk = sign_pk;
         this.sign_writer = sign_writer;
         this.sign_no = sign_no;
@@ -32,6 +33,6 @@ public class SignDocument {
         this.sign_type = sign_type;
         this.user_pk = user_pk;
         this.adopt_pk = adopt_pk;
-
+        this.selectedValue = selectedValue;
     }
 }

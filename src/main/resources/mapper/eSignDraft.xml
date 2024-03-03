@@ -7,6 +7,8 @@
     </resultMap>
     <resultMap id="MissedAnimalList" type="com.example.vet.model.adopt.MissedAnimal">
     </resultMap>
+    <resultMap id="SignDocument" type="com.example.vet.model.SignDocument">
+    </resultMap>
     <select id="selectLine" resultMap="eSignLineResultMap">
         SELECT * FROM USER_TEST5
         WHERE MEMBER_ROLE = 'ROLE_ADMIN' OR MEMBER_ROLE = 'ROLE_MASTER'
@@ -18,4 +20,10 @@
     <select id="selectAbandon" resultMap="MissedAnimalList">
         SELECT KINDCD, COLORCD,AGE, WEIGHT FROM ABANDONED_ANIMAL_TEST
     </select>
+<!--    <select id="selectDetail" parameterType="int" resultMap="SignDocument">-->
+
+<!--    </select>-->
+<!--    <insert id="insertDraft" parameterType="SignDocument">-->
+
+<!--    </insert>-->
 </mapper>
