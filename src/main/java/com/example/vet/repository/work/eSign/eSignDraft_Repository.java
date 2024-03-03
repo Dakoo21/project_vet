@@ -1,13 +1,14 @@
 package com.example.vet.repository.work.eSign;
 
+import com.example.vet.controller.work.eSign.SignMapper;
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.Member;
-import com.example.vet.model.SignDocument;
+import com.example.vet.model.Sign;
 import com.example.vet.model.adopt.MissedAnimal;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,8 @@ import java.util.List;
 @Slf4j
 public class eSignDraft_Repository {
     private final SqlSessionTemplate sqlSessionTemplate;
+    @Autowired
+    private SignMapper signMapper;
 
     public eSignDraft_Repository(SqlSessionTemplate sqlSessionTemplate) {
         this.sqlSessionTemplate = sqlSessionTemplate;
@@ -44,15 +47,24 @@ public class eSignDraft_Repository {
 
     }
 
-    public int insertDraft(SignDocument signDocument) {
-        int result = sqlSessionTemplate.insert("insertDraft", signDocument);
-        log.info(String.valueOf(result));
-        return result;
-    }
+    // public int insertDraft(Sign sign) {
+    //     int result = sqlSessionTemplate.insert("insertDraft", sign);
+    //     log.info(String.valueOf(result));
+    //     return result;
+    // }
 
-    public List<SignDocument> selectDetail(int draftPk) {
-        List<SignDocument> draftDetail = sqlSessionTemplate.selectOne("selectDraftDetail");
+    public List<Sign> selectDetail(int draftPk) {
+        List<Sign> draftDetail = sqlSessionTemplate.selectOne("selectDraftDetail");
         log.info(draftDetail.toString());
         return draftDetail;
+    }
+
+    public Sign insertDraft(Sign sign) {
+        signMapper.insertSign(sign);
+        return sign;
+    }
+
+    public void insertDraftLine(int generatedSignPk) {
+        sqlSessionTemplate.insert("insertDraftLine", generatedSignPk);
     }
 }

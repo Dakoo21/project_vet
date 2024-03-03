@@ -1,13 +1,13 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.vet.model.eSign" %>
+<%@ page import="com.example.vet.model.Sign" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
     int size = 0;
-    List<eSign> docList = null;
-    docList = (List<eSign>)request.getAttribute("docList");
+    List<Sign> docList = null;
+    docList = (List<Sign>)request.getAttribute("docList");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +98,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (Sign doc : docList) {
                                             if ("Pending".equals(doc.getSign_state()) ||
                                                     "Scheduled".equals(doc.getSign_state()) ||
                                                     "InProgress".equals(doc.getSign_state())){
@@ -146,7 +146,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (Sign doc : docList) {
                                             if ("Pending".equals(doc.getSign_state())) {
                                                 String docNo = doc.getSign_no();
                                                 String docTitle = doc.getSign_title();
@@ -195,7 +195,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (Sign doc : docList) {
                                             if ("Scheduled".equals(doc.getSign_state())) {
                                                 String docNo = doc.getSign_no();
                                                 String docTitle = doc.getSign_title();
@@ -242,7 +242,7 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
+                                        for (Sign doc : docList) {
                                             if ("InProgress".equals(doc.getSign_state())) {
                                                 String docNo = doc.getSign_no();
                                                 String docTitle = doc.getSign_title();

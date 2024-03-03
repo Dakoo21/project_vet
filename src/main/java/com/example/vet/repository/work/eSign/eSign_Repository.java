@@ -1,6 +1,6 @@
 package com.example.vet.repository.work.eSign;
 
-import com.example.vet.model.eSign;
+import com.example.vet.model.Sign;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,8 +16,8 @@ public class eSign_Repository {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
 
-    public List<eSign> Select(int userPK) {
-        List<eSign> docList = sqlSessionTemplate.selectList("selectDocs", userPK);
+    public List<Sign> Select(int userPK) {
+        List<Sign> docList = sqlSessionTemplate.selectList("selectDocs", userPK);
         return docList;
     }
 
