@@ -44,7 +44,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>내 정보</h1>
+                        <h1>사원 정보</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -94,33 +94,7 @@
                                             <span>동물생심</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputExperience" class="col-sm-2 col-form-label">직위:</label>
-                                        <div class="col-sm-10">
-                                            <!-- 역활 (if 문으로 역활에 맞춰서 나타내기) -->
-                                            <%
-                                                String user_role = null;
-                                                Object memberRoleObj = userDetail.get("MEMBER_ROLE");
-                                                if (memberRoleObj != null && memberRoleObj instanceof String) {
-                                                    String memberRole = (String) memberRoleObj;
-                                                    if (memberRole.equals("ROLE_ADMIN")) {
-                                                        user_role = "관리자";
-                                                    } else if (memberRole.equals("ROLE_MASTER")) {
-                                                        user_role = "부관리자";
-                                                    } else if (memberRole.equals("ROLE_NURSE")) {
-                                                        user_role = "간호사";
-                                                    } else if (memberRole.equals("ROLE_INFO")) {
-                                                        user_role = "데스크";
-                                                    } else {
-                                                        user_role = "일반 사용자";
-                                                    }
-                                                } else {
-                                                    user_role = "일반 사용자";
-                                                }
-                                            %>
-                                            <span><%=user_role%></span>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">아이디:</label>
                                         <div class="col-sm-10">
@@ -140,6 +114,40 @@
                                     </div>
                                     <form id="myDetail" action="/employeeUpdate" method="post">
                                         <input type="hidden" id="MEMBER_MEMBERNAME" name="MEMBER_MEMBERNAME" value="<%=userDetail.get("MEMBER_MEMBERNAME")%>">
+                                        <div class="form-group row">
+                                            <label for="inputExperience" class="col-sm-2 col-form-label">직위:</label>
+                                            <div class="col-sm-10">
+                                                <!-- 역활 (if 문으로 역활에 맞춰서 나타내기) -->
+                                                <%
+                                                    String user_role = null;
+                                                    Object memberRoleObj = userDetail.get("MEMBER_ROLE");
+                                                    if (memberRoleObj != null && memberRoleObj instanceof String) {
+                                                        String memberRole = (String) memberRoleObj;
+                                                        if (memberRole.equals("ROLE_ADMIN")) {
+                                                            user_role = "관리자";
+                                                        } else if (memberRole.equals("ROLE_MASTER")) {
+                                                            user_role = "부관리자";
+                                                        } else if (memberRole.equals("ROLE_NURSE")) {
+                                                            user_role = "간호사";
+                                                        } else if (memberRole.equals("ROLE_INFO")) {
+                                                            user_role = "데스크";
+                                                        } else {
+                                                            user_role = "일반 사용자";
+                                                        }
+                                                    } else {
+                                                        user_role = "일반 사용자";
+                                                    }
+                                                %>
+                                                <%--<span><%=user_role%></span>--%>
+                                                <select id="SELECT_ROLE" class="form-select" aria-label="직책선택" onchange="setSelectedRole()">
+                                                    <option value="ROLE_USER"><%=user_role%></option>
+                                                    <option value="ROLE_NURSE">간호사</option>
+                                                    <option value="ROLE_INFO">데스크</option>
+                                                    <option value="ROLE_MASTER">부원장</option>
+                                                </select>
+                                            </div>
+                                            <input type="hidden" id="MEMBER_ROLE" name="MEMBER_ROLE" value="<%=user_role%>">
+                                        </div>
                                         <div class="form-group row">
                                             <label for="MEMBER_EMAIL" class="col-sm-2 col-form-label">이메일:</label>
                                             <div class="col-sm-10">
@@ -387,6 +395,11 @@
         document.querySelector("#pwChange").submit();
     }
 
+    function setSelectedRole() {
+        var selectElement = document.getElementById("SELECT_ROLE");
+        var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+        document.getElementById("MEMBER_ROLE").value = selectedValue;
+    }
 </script>
 </body>
 </html>
