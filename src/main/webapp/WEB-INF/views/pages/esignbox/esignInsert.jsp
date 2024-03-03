@@ -157,8 +157,8 @@
                                     <td class="team name" scope="row">
                                         <span class="stamp-step-num">사원</span>
                                     </td>
-                                    <td class="team name" scope="row" id="cell1" >
-<%--                                        <span class="stamp-step-num" id="cell1" style="display: inline"></span>--%>
+                                    <td class="team name" scope="row" id="cell1">
+                                        <%--                                        <span class="stamp-step-num">부원장</span>--%>
                                     </td>
                                     <td class="team name" scope="row" id="cell2">
                                         <%--                                        <span class="stamp-step-num">관리자</span>--%>
