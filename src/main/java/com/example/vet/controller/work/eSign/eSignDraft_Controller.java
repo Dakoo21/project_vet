@@ -1,29 +1,38 @@
 package com.example.vet.controller.work.eSign;
 
-import com.example.vet.model.AnimalVO;
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.Member;
-import com.example.vet.model.SignDocument;
+import com.example.vet.model.Sign;
 import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.service.work.eSign.eSignDraft_Service;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("eSignDraft/*")
 @Slf4j
 public class eSignDraft_Controller {
+    @Autowired
+    private SignMapper signMapper;
 
     private final eSignDraft_Service eSignDraft_service;
     public eSignDraft_Controller(eSignDraft_Service eSignDraft_service) {
         this.eSignDraft_service = eSignDraft_service;
+    }
+
+
+    @PostMapping("/create")
+    public String createSign(@RequestBody Sign sign) {
+        eSignDraft_service.createSign(sign);
+        int generatedSignPk = sign.getSign_pk(); // 생성된 키 받아오기
+        return "Sign created with ID: " + generatedSignPk;
     }
 
     /**********************************************************************************
@@ -90,12 +99,12 @@ public class eSignDraft_Controller {
      작성일자 : 26.02.25
      기능 : 기안서 작성
      **********************************************************************************/
-    @PostMapping("eDraftInsert")
-    public String eSignInsert(SignDocument signDocument) {
-        int result;
-        result = eSignDraft_service.insertDraft(signDocument);
-        return "pages/esignbox/docsBox";
-    }
+    // @PostMapping("eDraftInsert")
+    // public String eSignInsert(Sign sign) {
+    //     int result;
+    //     result = eSignDraft_service.insertDraft(sign);
+    //     return "pages/esignbox/docsBox";
+    // }
 
     /**********************************************************************************
      작성자 : 최윤정
@@ -105,7 +114,7 @@ public class eSignDraft_Controller {
     @GetMapping("draftDetail")
     public String draftDetail(@RequestParam("draftPk") int draft_pk, Model model) {
         log.info("기안서 상세페이지 조회");
-        List<SignDocument> draftDetail = eSignDraft_service.selectDetail(draft_pk);
+        List<Sign> draftDetail = eSignDraft_service.selectDetail(draft_pk);
         // model.addAttribute("lineList", lineList);
 
         model.addAttribute("draftDetail",draftDetail);
@@ -117,12 +126,42 @@ public class eSignDraft_Controller {
      작성일자 : 26.02.25
      기능 : 기안서 조회
      **********************************************************************************/
-    @PostMapping("/eSignDraft/submitSelectedValue")
-    public String submitSelectedValue(@RequestBody SignDocument signDocument) {
-        // 받은 signDocumentVO를 이용한 원하는 작업 수행
-        System.out.println("Received signDocumentVO: " + signDocument.getSelectedValue());
+    //@RequestBody Sign sign
+//     @PostMapping("/eSignDraft/submitSelectedValue")
+//     public String submitSelectedValue( ) {
+//
+//         Sign sign = new Sign();
+//         sign.setSign_title("Your Title");
+//         sign.setSign_content("Your Content");
+//
+//         signMapper.insertSign(sign);
+//
+// // 이제 sign 객체의 signPk에는 자동 생성된 키 값이 들어있습니다.
+//         int generatedKey = sign.getSign_pk();
+//         // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+//         return "Success";
+//     }
+    @GetMapping("submitSelectedValue")
+    public ResponseEntity<String> submitSelectedValue() {
+        Sign sign = new Sign();
+        sign.setSign_title("Your Title");
+        sign.setSign_content("Your Content");
+        sign.setMember_pk(1);
+        sign.setAdopt_pk(6);
+        // // 받은 signDocumentVO를 이용한 원하는 작업 수행
+        // try {
+        //     eSignDraft_service.createSign(sign);
+        //     log.info(String.valueOf(sign.getSign_pk()));
+        //     return ResponseEntity.ok("Sign created successfully");
+        // } catch (Exception e) {
+        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating sign");
+        // }
+        Sign insertedSign = eSignDraft_service.createSign(sign);
+        int generatedSignPk = insertedSign.getSign_pk();
+        log.info(String.valueOf(generatedSignPk));
+
         // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-        return "Success";
+        return ResponseEntity.ok("Sign created with ID: " + generatedSignPk);
     }
 }
 

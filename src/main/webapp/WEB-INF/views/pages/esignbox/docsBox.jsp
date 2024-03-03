@@ -1,13 +1,13 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.vet.model.eSign" %>
+<%@ page import="com.example.vet.model.Sign" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
     int size = 0;
-    List<eSign> docList = null;
-    docList = (List<eSign>)request.getAttribute("docList");
+    List<Sign> docList = null;
+    docList = (List<Sign>)request.getAttribute("docList");
 
 
 %>
@@ -101,31 +101,30 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
-                                            if ("Rejected".equals(doc.getSign_state()) ||
-                                                    "Drafted".equals(doc.getSign_state()) ||
-                                                    "Approval".equals(doc.getSign_state())){
-                                                String docNo = doc.getSign_no();
-                                                String docTitle = doc.getSign_title();
-                                                // String docContent = doc.getSign_content();
-                                                // int signpk = doc.getSign_pk();
-                                                String docDate = doc.getSign_date();
-                                                String docState = doc.getSign_state();
-                                                String docWriter = doc.getSign_writer();
-                                                String docType = doc.getSign_type();
-
+                                        // for (Sign doc : docList) {
+                                        //     if ("Rejected".equals(doc.getSign_state()) ||
+                                        //             "Drafted".equals(doc.getSign_state()) ||
+                                        //             "Approval".equals(doc.getSign_state())){
+                                        //         String docNo = doc.getSign_no();
+                                        //         String docTitle = doc.getSign_title();
+                                        //         // String docContent = doc.getSign_content();
+                                        //         // int signpk = doc.getSign_pk();
+                                        //         String docDate = doc.getSign_date();
+                                        //         String docState = doc.getSign_state();
+                                        //         String docWriter = doc.getSign_writer();
+                                        //         String docType = doc.getSign_type();
                                     %>
                                     <tr>
-                                        <td><%=docNo%></td>
-                                        <td><%=docTitle%></td>
-                                        <td><%=docDate%></td>
-                                        <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
-                                        <td><%=docType%></td>
+<%--                                        <td><%=docNo%></td>--%>
+<%--                                        <td><%=docTitle%></td>--%>
+<%--                                        <td><%=docDate%></td>--%>
+<%--                                        <td><%=docState%></td>--%>
+<%--                                        <td><%=docWriter%></td>--%>
+<%--                                        <td><%=docType%></td>--%>
                                     </tr>
                                     <%
-                                            }
-                                        }
+                                        //     }
+                                        // }
                                     %>
                                     </tbody>
                                 </table>
@@ -149,28 +148,28 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
-                                            if ("Rejected".equals(doc.getSign_state())) {
-                                            String docNo = doc.getSign_no();
-                                            String docTitle = doc.getSign_title();
-                                            // String docContent = doc.getSign_content();
-                                            // int signpk = doc.getSign_pk();
-                                            String docDate = doc.getSign_date();
-                                            String docState = doc.getSign_state();
-                                            String docWriter = doc.getSign_writer();
-                                            String docType = doc.getSign_type();
+                                        // for (Sign doc : docList) {
+                                        //     if ("Rejected".equals(doc.getSign_state())) {
+                                        //     String docNo = doc.getSign_no();
+                                        //     String docTitle = doc.getSign_title();
+                                        //     // String docContent = doc.getSign_content();
+                                        //     // int signpk = doc.getSign_pk();
+                                        //     String docDate = doc.getSign_date();
+                                        //     String docState = doc.getSign_state();
+                                        //     String docWriter = doc.getSign_writer();
+                                        //     String docType = doc.getSign_type();
                                     %>
                                     <tr>
-                                        <td><%=docNo%></td>
-                                        <td><%=docTitle%></td>
-                                        <td><%=docDate%></td>
-                                        <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
-                                        <td><%=docType%></td>
+<%--                                        <td><%=docNo%></td>--%>
+<%--                                        <td><%=docTitle%></td>--%>
+<%--                                        <td><%=docDate%></td>--%>
+<%--                                        <td><%=docState%></td>--%>
+<%--                                        <td><%=docWriter%></td>--%>
+<%--                                        <td><%=docType%></td>--%>
                                     </tr>
                                     <%
-                                            }
-                                        }
+                                        //     }
+                                        // }
                                     %>
                                     </tbody>
                                 </table>
@@ -194,30 +193,30 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
-                                            if ("Drafted".equals(doc.getSign_state())) {
-                                                String docNo = doc.getSign_no();
-                                                String docTitle = doc.getSign_title();
-                                                String docDate = doc.getSign_date();
-                                                String docState = doc.getSign_state();
-                                                String docWriter = doc.getSign_writer();
-                                                String docType = doc.getSign_type();
+                                        // for (Sign doc : docList) {
+                                        //     if ("Drafted".equals(doc.getSign_state())) {
+                                        //         String docNo = doc.getSign_no();
+                                        //         String docTitle = doc.getSign_title();
+                                        //         String docDate = doc.getSign_date();
+                                        //         String docState = doc.getSign_state();
+                                        //         String docWriter = doc.getSign_writer();
+                                        //         String docType = doc.getSign_type();
                                     %>
                                     <script>
                                         console.log(title);
                                         console.log("title");
                                     </script>
                                     <tr>
-                                        <td><%=docNo%></td>
-                                        <td><%=docTitle%></td>
-                                        <td><%=docDate%></td>
-                                        <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
-                                        <td><%=docType%></td>
+<%--                                        <td><%=docNo%></td>--%>
+<%--                                        <td><%=docTitle%></td>--%>
+<%--                                        <td><%=docDate%></td>--%>
+<%--                                        <td><%=docState%></td>--%>
+<%--                                        <td><%=docWriter%></td>--%>
+<%--                                        <td><%=docType%></td>--%>
                                     </tr>
                                     <%
-                                            }
-                                        }
+                                        //     }
+                                        // }
                                     %>
                                     </tbody>
                                 </table>
@@ -241,27 +240,27 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (eSign doc : docList) {
-                                            if ("Approval".equals(doc.getSign_state())) {
-                                                String docNo = doc.getSign_no();
-                                                String docTitle = doc.getSign_title();
-                                                String docDate = doc.getSign_date();
-                                                String docState = doc.getSign_state();
-                                                String docWriter = doc.getSign_writer();
-                                                String docType = doc.getSign_type();
+                                        // for (Sign doc : docList) {
+                                        //     if ("Approval".equals(doc.getSign_state())) {
+                                        //         String docNo = doc.getSign_no();
+                                        //         String docTitle = doc.getSign_title();
+                                        //         String docDate = doc.getSign_date();
+                                        //         String docState = doc.getSign_state();
+                                        //         String docWriter = doc.getSign_writer();
+                                        //         String docType = doc.getSign_type();
 
                                     %>
                                     <tr>
-                                        <td><%=docNo%></td>
-                                        <td><%=docTitle%></td>
-                                        <td><%=docDate%></td>
-                                        <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
-                                        <td><%=docType%></td>
+<%--                                        <td><%=docNo%></td>--%>
+<%--                                        <td><%=docTitle%></td>--%>
+<%--                                        <td><%=docDate%></td>--%>
+<%--                                        <td><%=docState%></td>--%>
+<%--                                        <td><%=docWriter%></td>--%>
+<%--                                        <td><%=docType%></td>--%>
                                     </tr>
                                     <%
-                                            }
-                                        }
+                                        //     }
+                                        // }
                                     %>
                                     </tbody>
                                 </table>

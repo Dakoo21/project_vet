@@ -2,7 +2,7 @@ package com.example.vet.controller.work.eSign;
 
 import com.example.vet.config.auth.PrincipalDetails;
 import com.example.vet.model.Member;
-import com.example.vet.model.eSign;
+import com.example.vet.model.Sign;
 import com.example.vet.service.work.eSign.eSign_Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -32,8 +32,8 @@ public class eSign_Controller {
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         String username = principalDetails.getUsername();
         Integer userPK = principalDetails.getID();
-        eSign esign = null;
-        List<eSign> docList = esService.Select(userPK);
+        Sign esign = null;
+        List<Sign> docList = esService.Select(userPK);
         log.info(userPK.toString());
         log.info("docList : " + String.valueOf(docList.get(0)));
         model.addAttribute("docList", docList);
@@ -48,8 +48,8 @@ public class eSign_Controller {
         String username = principalDetails.getUsername();
         Integer userPK = principalDetails.getID();
         log.info(userPK.toString());
-        eSign esign = null;
-        List<eSign> docList = esService.Select(userPK);
+        Sign esign = null;
+        List<Sign> docList = esService.Select(userPK);
         log.info("docList : " + String.valueOf(docList.get(0)));
         model.addAttribute("docList", docList);
         return "pages/esignbox/cancelledDocs";
@@ -61,8 +61,8 @@ public class eSign_Controller {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         Integer userPK = principalDetails.getID();
-        eSign esign = null;
-        List<eSign> docList = esService.Select(userPK);
+        Sign esign = null;
+        List<Sign> docList = esService.Select(userPK);
         log.info("docList : " + String.valueOf(docList.get(0)));
         model.addAttribute("docList", docList);
         return "pages/esignbox/progressDocs";

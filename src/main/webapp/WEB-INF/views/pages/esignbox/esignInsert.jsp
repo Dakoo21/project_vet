@@ -108,139 +108,143 @@
                         </span>
                     </fieldset>
                 </div>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>문서 종류</th>
-                        <td>
-                            <input type="hidden" id="prevApprovalCategoryNo" value="6747">
-                            <select name="approval_form_no" class="write-select" autocomplete="off">
-                                <option value="">선택</option><option value="42768">지출 결의서</option><option value="42769">품의서</option><option value="42770">입양신청서</option>
-                                <button class="weakblue" onclick="ApprovalDocument.getSelectApprovalForm();">문서보기</button>
-                                <input type="hidden" id="prevApprovalFormNo" value="42771">
-                                <input type="hidden" id="prevApprovalFormTitle" value="">
-                            </select>
-                        </td>
-                        <th>작성자</th>
-                        <td><%=username%></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">보존 연한</th>
-                        <td>
-                            <select name="preserved_term" class="fl write-select" id="set_preserved_term_y">
-                                <option value="">보존 연한</option>
-                                <option value="1">1년</option>
-                                <option value="3">3년</option>
-                                <option value="5">5년</option>
-                                <option value="10">10년</option>
-                                <option value="0">영구</option>
-                            </select>
-                            <span class="fl hide" id="set_preserved_term_n" style="display: none;">년</span>
-                        </td>
-                    </tr>
-                </table>
-                <div class="after" style="display: flex; align-items: center;">
-                    <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 선택 </h4>
-                    <button id="addButtons">결재선 추가</button>
-                </div>
-                <table class="table table-bordered" id="myTable">
-                    <thead>
-                    <tr>
-                        <th scope="row" class="gray-background centered-text sign">
-                            <div style="vertical-align: middle;">
-                                결재
-                            </div>
-                        </th>
-                        <th class="white-background">
-                            <table id="결재선" class="table table-bordered">
-                                <thead>
-                                <tr style="height: 20px;">
-                                    <td class="team name" scope="row">
-                                        <span class="stamp-step-num">사원</span>
-                                    </td>
-                                    <td class="team name" scope="row" id="cell1">
-                                        <%--                                        <span class="stamp-step-num">부원장</span>--%>
-                                    </td>
-                                    <td class="team name" scope="row" id="cell2">
-                                        <%--                                        <span class="stamp-step-num">관리자</span>--%>
-                                    </td>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="stamp"></td>
-                                    <td class="stamp"></td>
-                                    <td class="stamp"></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="name gt-position-relative">
-                                        <span class="stamp-step-num"><%=username%></span>
-                                    </td>
-                                    <td class="cell">
-                                        <div class="after" style="display: flex; align-items: center;">
-                                            <div id="modal1">
+                <form id="draftInsert" action="draftInsert" method="post">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>문서 종류</th>
+                            <td>
+                                <input type="hidden" id="prevApprovalCategoryNo" value="6747">
+                                <select name="approval_form_no" class="write-select" autocomplete="off">
+                                    <option value="">선택</option><option value="42768">지출 결의서</option><option value="42769">품의서</option><option value="42770">입양신청서</option>
+                                    <button class="weakblue" onclick="ApprovalDocument.getSelectApprovalForm();">문서보기</button>
+                                    <input type="hidden" id="prevApprovalFormNo" value="42771">
+                                    <input type="hidden" id="prevApprovalFormTitle" value="">
+                                </select>
+                            </td>
+                            <th>작성자</th>
+                            <td><%=username%></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">보존 연한</th>
+                            <td>
+                                <select name="preserved_term" class="fl write-select" id="set_preserved_term_y">
+                                    <option value="">보존 연한</option>
+                                    <option value="1">1년</option>
+                                    <option value="3">3년</option>
+                                    <option value="5">5년</option>
+                                    <option value="10">10년</option>
+                                    <option value="0">영구</option>
+                                </select>
+                                <span class="fl hide" id="set_preserved_term_n" style="display: none;">년</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="after" style="display: flex; align-items: center;">
+                        <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 선택 </h4>
+                        <button id="addButtons">결재선 추가</button>
+                    </div>
+                    <table class="table table-bordered" id="myTable">
+                        <thead>
+                        <tr>
+                            <th scope="row" class="gray-background centered-text sign">
+                                <div style="vertical-align: middle;">
+                                    결재
+                                </div>
+                            </th>
+                            <th class="white-background">
+                                <table id="결재선" class="table table-bordered">
+                                    <thead>
+                                    <tr style="height: 20px;">
+                                        <td class="team name" scope="row">
+                                            <span class="stamp-step-num">사원</span>
+                                        </td>
+                                        <td class="team name" scope="row" id="cell1" >
+                                            <input type="hidden" value="" id="draftLv2">
+    <%--                                        <span class="stamp-step-num" id="cell1" style="display: inline"></span>--%>
+                                        </td>
+                                        <td class="team name" scope="row" id="cell2">
+                                            <%--                                        <span class="stamp-step-num">관리자</span>--%>
+                                        </td>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="stamp"></td>
+                                        <td class="stamp"></td>
+                                        <td class="stamp"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="name gt-position-relative">
+                                            <span class="stamp-step-num"><%=username%></span>
+                                        </td>
+                                        <td class="cell">
+                                            <div class="after" style="display: flex; align-items: center;">
+                                                <div id="modal1">
+                                                </div>
+>>>>>>> test11
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cell">
-                                        <div class="after" style="display: flex; align-items: center;">
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </th>
-                    </tr>
-                    </thead>
-                </table>
-                <div id="drag_wrap">
-                    <div id="drag" class="ui-draggable ui-draggable-handle" style="left:0px;"></div>
-                </div>
-                <div id="contents">
-                    <form autocomplete="off" onsubmit="return false;">
-                        <input type="submit" style="display:none;" onclick="return false;">
-                        <div class="content_inbox">
-                            <div class="cont_box write">
-                                <div class="approval-wrap write">
-                                    <div id="approvalDocumentLine">
-                                        <%-- 이게 무슨용으로 만든 테이블인지 몰라서 일단 남겨놔요 --%>
-                                        <table class="cal_table1 approve-write js-approval-line">
-                                            <colgroup>
-                                                <col style="width:12.09%;">
-                                                <col style="width:37.62%;">
-                                                <col style="width:9.02%;">
-                                                <col style="width:41.27%;">
-                                            </colgroup>
-                                        </table>
-                                    </div>
-                                    <div id="textarea" style="width: 100%;">
-                                        <div class="form-group">
-                                            <label>제목</label>
-                                            <input type="text" class="form-control" placeholder="제목을 입력하세요">
-                                        </div>
-                                        <div class="col-md-12" style="width: 100%">
-                                            <!-- /.card-header -->
-                                            <div class="card-body">
-                                                <textarea id="summernote">
-                                                    Place <em>some</em> <u>text</u> <strong>here</strong>
-                                                </textarea>
+                                        </td>
+                                        <td class="cell">
+                                            <div class="after" style="display: flex; align-items: center;">
                                             </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div id="drag_wrap">
+                        <div id="drag" class="ui-draggable ui-draggable-handle" style="left:0px;"></div>
+                    </div>
+                    <div id="contents">
+                        <form autocomplete="off" onsubmit="return false;">
+                            <input type="submit" style="display:none;" onclick="return false;">
+                            <div class="content_inbox">
+                                <div class="cont_box write">
+                                    <div class="approval-wrap write">
+                                        <div id="approvalDocumentLine">
+                                            <%-- 이게 무슨용으로 만든 테이블인지 몰라서 일단 남겨놔요 --%>
+                                            <table class="cal_table1 approve-write js-approval-line">
+                                                <colgroup>
+                                                    <col style="width:12.09%;">
+                                                    <col style="width:37.62%;">
+                                                    <col style="width:9.02%;">
+                                                    <col style="width:41.27%;">
+                                                </colgroup>
+                                            </table>
                                         </div>
-                                        <!-- /.col-->
-                                        <div id="writein">
-                                            <%@include file="write.jsp"%>
+                                        <div id="textarea" style="width: 100%;">
+                                            <div class="form-group">
+                                                <label>제목</label>
+                                                <input type="text" class="form-control" placeholder="제목을 입력하세요">
+                                            </div>
+                                            <div class="col-md-12" style="width: 100%">
+                                                <!-- /.card-header -->
+                                                <div class="card-body">
+                                                    <textarea id="summernote">
+                                                        Place <em>some</em> <u>text</u> <strong>here</strong>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /.col-->
+                                            <div id="writein">
+                                                <%@include file="write.jsp"%>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                </form>
             </div>
         </section>
         <!-- /.content -->
@@ -381,6 +385,7 @@
             if (selectedValue === "토마토" && selectedCell) {
                 // idSpan.style.display = 'none';
                 // $(selectedCell).children('.dynamicButton').hide();
+
             }
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "사과" && selectedCell) {
