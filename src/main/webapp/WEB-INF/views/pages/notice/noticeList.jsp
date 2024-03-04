@@ -1,12 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>임시보관함</title>
+    <title>공지사항</title>
     <%@ include file="/include/bootCommon.jsp"%>
+    <script>
+        const noticeInsertPage = (event) => {
+          location.href = /* 컨트롤러에 연결하는 */
+        }
+    </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -19,12 +23,6 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>공지사항</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -61,7 +59,7 @@
                                 </div>
                                 <!-- [[ Bootstrap 페이징 처리  구간  ]] -->
                                 <div class='board-footer'>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm" onclick="noticeInsertPage()">
                                         기안하기
                                     </button>
                                 </div>

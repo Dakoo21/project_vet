@@ -48,60 +48,9 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/" class="nav-link">Home</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-        </li>
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="far fa-bell"><%=username%> 님</i>
-                <span class="badge badge-warning navbar-badge">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
-        </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
@@ -149,27 +98,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
-                <!-- 메뉴2 시작 -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            마이페이지
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <!-- 하위메뉴 시작 -->
-                    <ul class="nav nav-treeview">
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/mypage/customer.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>고객 마이페이지</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 메뉴 끝-->
                 <!-- 메뉴3 시작 -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -182,16 +110,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/guide/introMap.jsp" class="nav-link">
+                            <a href="/introMap" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>병원 위치안내</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>병원 이벤트 캘린더</p>
                             </a>
                         </li>
                     </ul>
@@ -230,7 +151,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/notice/noticeList.jsp" class="nav-link">
+                            <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>전체 조회</p>
                             </a>
@@ -253,27 +174,6 @@
                             <a href="/pages/qna/qnaList.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Q&A전체조회</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 메뉴 끝-->
-                <!-- 메뉴7 시작 -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            진료 예약
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <!-- 하위메뉴 시작 -->
-                    <ul class="nav nav-treeview">
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/docbook/bookingMainAdmin.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 조회 게시판(고객)</p>
                             </a>
                         </li>
                     </ul>
@@ -303,7 +203,7 @@
                             if (isInfo) {
                         %>
                         <li class="nav-item">
-                            <a href="/pages/mypage/employee.jsp" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>사원 마이페이지</p>
                             </a>
@@ -313,7 +213,7 @@
                         %>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/mypage/nurse.jsp" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>간호사 마이페이지</p>
                             </a>
@@ -336,16 +236,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/guide/introMap.jsp" class="nav-link">
+                            <a href="/introMap" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>병원 위치안내</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>병원 이벤트 캘린더</p>
                             </a>
                         </li>
                     </ul>
@@ -390,7 +283,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/notice/noticeList.jsp" class="nav-link">
+                            <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>전체 조회</p>
                             </a>
@@ -469,7 +362,7 @@
                             if (isInfo) {
                         %>
                         <li class="nav-item">
-                            <a href="/page/mypage/employee.jsp" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>사원 마이페이지</p>
                             </a>
@@ -479,7 +372,7 @@
                         %>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/page/mypage/nurse.jsp" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>간호사 마이페이지</p>
                             </a>
@@ -502,16 +395,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/page/guide/introMap.jsp" class="nav-link">
+                            <a href="/introMap" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>병원 위치안내</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/page/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>병원 이벤트 캘린더</p>
                             </a>
                         </li>
                     </ul>
@@ -556,7 +442,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/page/notice/noticeList.jsp" class="nav-link">
+                            <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>전체 조회</p>
                             </a>
@@ -718,7 +604,6 @@
                             <a href="/pages/esignbox/docsBox.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>문서보관함</p>
-                                <p>문서보관함zzzz</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작
@@ -819,7 +704,7 @@
                     <ul class="nav nav-treeview">
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/mypage/admin.jsp" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>관리자 마이페이지</p>
                             </a>
@@ -839,16 +724,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/guide/introMap.jsp" class="nav-link">
+                            <a href="/introMap" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>병원 위치안내</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/default/default.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>병원 이벤트 캘린더</p>
                             </a>
                         </li>
                     </ul>
@@ -893,7 +771,7 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/notice/noticeList.jsp" class="nav-link">
+                            <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>전체 조회</p>
                             </a>

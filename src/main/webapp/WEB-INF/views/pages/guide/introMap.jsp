@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,45 +7,19 @@
   <title>병원안내</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../../iCheck/flat/blue.css">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="plugins/morris/morris.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- DataTables -->
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
+  <%@ include file="/include/bootCommon.jsp"%>
+  <style>
+    .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+    .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+    .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+    .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+    .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+  </style>
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f3fa556ca3d996a5e0aac6ab5ac1018"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6ac54905ef797d47f8532567996ab799"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<%@ include file="/include/header.jsp"%>
 <%@ include file="/include/sidebar.jsp"%>
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
@@ -96,36 +69,86 @@
     <!-- Main content -->
     <section class="content">
       <div class="container">
+        <div class="main_header"></div>
         <div class="main">
+          <div>병원 위치</div>
           <hr style="height: 2px" />
           <div class="mapwrap">
             <div class="map" id="map" style="width: 500px; height: 400px">
               여기
             </div>
             <script type="text/javascript">
-              const container = document.getElementById("map");
-              const positions = [
-                {
-                  content: '<div style="padding:5px;">동물생심</div>',
-                  latlng: new kakao.maps.LatLng(37.476773, 126.879959),
-                },
-              ];
-              const options = {
-                center: positions[0].latlng,
-                level: 4,
-              };
-              const map = new kakao.maps.Map(container, options);
-            </script>
-            <%--<input class="btnGeoloc" type="button" value="현재위치" onclick="geoLoc()">--%>
-          </div>
+              var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                      mapOption = {
+                        center: new kakao.maps.LatLng(37.476773, 126.879959), // 지도의 중심좌표
+                        level: 4 // 지도의 확대 레벨
+                      };
 
-          <div class="map-introduction">
-            <p>서울특별시 금천구 가산디지털2로 95 (가산동,km타워) 3층 (08505)</p>
-            <p>가산디지털단지역에서 ⑦번 또는 ⑧번 출구에서 도보 7-10분</p>
+              var map = new kakao.maps.Map(mapContainer, mapOption);
+
+              var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
+                      imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+                      imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+              // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+              var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                      markerPosition = new kakao.maps.LatLng(37.476773, 126.879959); // 마커가 표시될 위치입니다
+
+              // 마커를 생성합니다
+              var marker = new kakao.maps.Marker({
+                position: markerPosition,
+                image: markerImage // 마커이미지 설정
+              });
+
+              // 마커가 지도 위에 표시되도록 설정합니다
+              marker.setMap(map);
+
+              // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+              var content = '<div class="customoverlay">' +
+                      '  <a href="https://map.kakao.com/?itemId=145553740" target="_blank">' +
+                      '    <span class="title">동물생심</span>' +
+                      '  </a>' +
+                      '</div>';
+
+              // 커스텀 오버레이가 표시될 위치입니다
+              var position = new kakao.maps.LatLng(37.476773, 126.879959);
+
+              // 커스텀 오버레이를 생성합니다
+              var customOverlay = new kakao.maps.CustomOverlay({
+                map: map,
+                position: position,
+                content: content,
+                yAnchor: 1
+              });
+            </script>
+
+            <input class="btnGeoloc" type="button" value="현재위치" onclick="getLoc()">
+
           </div>
+          <hr style="height: 2px" />
+          <table class="table" style="minwidth: 700px">
+            <tbody style="border: 1px solid lightgray">
+            <tr>
+              <td style="borderright: 1px solid lightgray">주소</td>
+              <td>
+                서울특별시 금천구 가산디지털2로 95 KM타워 3층 (T: 02-818-7950)
+              </td>
+            </tr>
+            <tr>
+              <td style="borderright: 1px solid lightgray">버스</td>
+              <td>
+                디지털3단지 사거리 정류장<br />
+                지선 5536/5714 간선 503/504 일반 21
+              </td>
+            </tr>
+            <tr>
+              <td style="borderright: 1px solid lightgray">지하철</td>
+              <td>지하철 1, 7호선 가산디지털단지역 5번출구 200m</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-        </div>
-        <div class="footer"></div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
@@ -145,8 +168,6 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
 
 <%@ include file="/include/footer.jsp"%>
 </body>
