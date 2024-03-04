@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.vet.FacilitiesMapper">
+    <select id="reserveListAll" resultType="java.util.Map">
+        SELECT FACILITY_RESERVE_ID
+             , FACILITY_NM
+             , USER_NM
+             , ANIMAL_NM
+             , MASTER_NM
+             , FACILITY_RESERVE_DT
+             , TO_CHAR(START_TIME + 30/(24*60)*RESERVE_START_TIME  , 'hh24:mi') AS START_TIME
+             , TO_CHAR(START_TIME + 30/(24*60)*(RESERVE_END_TIME+1), 'hh24:mi') AS END_TIME
+        FROM (SELECT R.FACILITY_RESERVE_ID
+                   , MAX(FACILITY_NM) AS FACILITY_NM
+                   , MAX(MEMBER_MEMBERNAME) AS USER_NM
+                   , MAX(ANIMAL_NM) AS ANIMAL_NM
+                   , MAX(MASTER_NM) AS MASTER_NM
+                   , MAX(FACILITY_RESERVE_DT) AS FACILITY_RESERVE_DT
+                   , MIN(RESERVE_TIME_INTERVAL) AS RESERVE_START_TIME
+                   , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
+                   , TO_DATE('2019-08-21 10:00', 'yyyy-mm-dd hh24:mi') AS START_TIME
+              FROM FACILITY_RESERVE_TEST R
+                       INNER JOIN USER_TEST5 U
+                                  ON 1=1
+                                      AND R.MEMBER_PK = U.MEMBER_PK
+                       INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
+                                  ON 1=1
+                                      AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
+                       INNER JOIN ANIMAL_TEST A
+                                  ON 1=1
+                                      AND R.ANIMAL_PK = A.ANIMALPK
+                       INNER JOIN MASTER_TEST M
+                                  ON 1=1
+                                      AND A.MASTERPK = M.MASTERPK
+              WHERE FACILITY_RESERVE_DT
+                        LIKE  '%' || #{facilityReserveDt} || '%'
+              GROUP BY R.FACILITY_RESERVE_ID)
+    </select>
     <!--메인 화면 lIST 예약 시설 예약자 환자명 예약날짜 예약시간  <where>동적  어쩌구 저쩌구</where>-->
     <select id="reserveList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT FACILITY_RESERVE_ID
@@ -27,13 +62,11 @@
                                       AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
                        INNER JOIN ANIMAL_TEST A
                                   ON 1=1
-                                      AND R.ANIMAL_PK = A.ANIMAL_PK
+                                      AND R.ANIMAL_PK = A.ANIMALPK
               WHERE 1=1
                 AND D.FACILITY_RESERVE_DT <![CDATA[>=]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD')
               GROUP BY R.FACILITY_RESERVE_ID)
-        <if test="searchMine!= null and searchMine != ''">
-            AND MEMBER_PK = #{memberPk}
-        </if>
+
         ORDER BY FACILITY_RESERVE_DT ASC
                , START_TIME ASC
 
@@ -64,7 +97,7 @@
         AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
         INNER JOIN ANIMAL_TEST A
         ON 1=1
-        AND R.ANIMAL_PK = A.ANIMAL_PK
+        AND R.ANIMAL_PK = A.ANIMALPK
         WHERE 1=1
 
         AND D.FACILITY_RESERVE_DT <![CDATA[>=]]> TO_CHAR(SYSDATE, 'YYYY-MM-DD')
@@ -136,30 +169,74 @@
 
     <!--동물 명으로 동물 id랑 보호자명 찾기 -->
     <select id="selectAnimalID" resultType="java.util.Map" >
-        select ANIMAL_PK AS animalId
+        select ANIMALPK AS animalId
              , ANIMAL_NM AS animalNm
              , ANIMAL_BDATE AS animalBdate
-             , A.MASTER_PK as masterPk
+             , A.MASTERPK as masterPk
              , MASTER_NM
         FROM ANIMAL_TEST A
                  INNER JOIN MASTER_TEST M
                             ON 1=1
-                                AND A.MASTER_PK = M.MASTER_PK
+                                AND A.MASTERPK = M.MASTERPK
         WHERE ANIMAL_NM
                   LIKE  '%' || #{keyword} || '%'
         order by ANIMAL_BDATE desc
 
     </select>
 
+<!--디테일 select  // 모달에 표시 데이터: 시설이름,예약날짜, 시작시간, 끝나는 시간, 이름, 환자pk, 보호자pk. 내용-->
+    <select id="detailList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT FACILITY_RESERVE_ID
+             , FACILITY_NM
+             , USER_NM
+             , ANIMAL_NM
+             , ANIMAL_PK
+             , MASTER_NM
+             , MEMBER_PK
+             , FACILITY_RESERVE_DT
+             , FACILITY_REMARKS
+             , RESERVE_START_TIME AS START_TIME
+             , RESERVE_END_TIME AS END_TIME
 
 
+        FROM (SELECT R.FACILITY_RESERVE_ID
+                   , MAX(FACILITY_NM) AS FACILITY_NM
+                   , MAX(MEMBER_MEMBERNAME) AS USER_NM
+                   , MAX(ANIMAL_NM) AS ANIMAL_NM
+                   , MAX(R.ANIMAL_PK) AS ANIMAL_PK
+                   , MAX(MASTER_NM) AS MASTER_NM
+                   , MAX(R.MEMBER_PK) AS MEMBER_PK
+                   , MAX(FACILITY_RESERVE_DT) AS FACILITY_RESERVE_DT
+                   , MAX(FACILITY_REMARKS) AS FACILITY_REMARKS
+                   , MIN(RESERVE_TIME_INTERVAL) AS RESERVE_START_TIME
+                   , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
+
+              FROM FACILITY_RESERVE_TEST R
+                       INNER JOIN USER_TEST5 U
+                                  ON 1=1
+                                      AND R.MEMBER_PK = U.MEMBER_PK
+                       INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
+                                  ON 1=1
+                                      AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
+                       INNER JOIN ANIMAL_TEST A
+                                  ON 1=1
+                                      AND R.ANIMAL_PK = A.ANIMALPK
+                       INNER JOIN MASTER_TEST M
+                                    ON 1=1
+                                        AND A.MASTERPK = M.MASTERPK
+            WHERE 1=1
+
+                  AND R.FACILITY_RESERVE_ID =#{facilityReserveId}
+              GROUP BY R.FACILITY_RESERVE_ID)
+    </select>
 
     <!--삭제-->
-    <delete id="deleteReserve" parameterType="int">
+    <delete id="deleteReserveDetail" parameterType="int">
         DELETE FROM FACILITY_RESERVE_DETAIL_TEST
         WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
     </delete>
-    <delete id="deleteReserveDetail" parameterType="int">
+
+    <delete id="deleteReserve" parameterType="int">
         DELETE FROM FACILITY_RESERVE_TEST
         WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
     </delete>
@@ -171,12 +248,6 @@
           , ANIMAL_PK = #{animalId}
         WHERE FACILITY_RESERVE_ID =#{facilityReserveId}
     </update>
-
-
-
-
-
-
 
 </mapper>
 

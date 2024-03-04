@@ -33,6 +33,15 @@ public class Facilities_Service {
         logger.info("[조회 결과]:{}", rList.toString());
         return rList;
     }
+    //    모든 사람의 예약 목록 Read 기능
+    public List<Map<String, Object>> reserveListAll(String facilityReserveDt) {
+        logger.info("모든예약목록조회시작");
+        logger.info("facilityDt: {}", facilityReserveDt);
+        List<Map<String, Object>> allList = facilitiesRepository.reserveListAll(facilityReserveDt);
+        logger.info("[allList조회 결과]:{}", allList.toString());
+        return allList;
+    }
+
 
     // 현 시간 부 나의 예약 목록 Read 가능
     public List<Map<String, Object>> reserveMyList(FacilitiesVO facilitiesVO) {
@@ -102,14 +111,12 @@ public class Facilities_Service {
         }
         return result;
     }
-
-    //    public List<Map<String, Object>> animalList(FacilitiesVO facilitiesVO){
-//        logger.info("예약목록조회시작");
-//        logger.info("VO: {}", facilitiesVO);
-//        List<Map<String, Object>> aList = new ArrayList<>();
-//        aList = facilitiesRepository.animaList(facilitiesVO);
-//        logger.info("[조회 결과]:{}", aList.toString());
-//        return aList;
+//디테일 1개에 대한 값
+    public Map<String, Object> detailList(int facilityReserveId) {
+        logger.info("animalList");
+        Map<String, Object> oneMap = facilitiesRepository.detailList(facilityReserveId);
+        return oneMap;
+    }// end of noticeList
 
     public List<Map<String, Object>> animalList(String animalNm) {
         logger.info("animalList");
@@ -152,7 +159,9 @@ public class Facilities_Service {
 
 
         //3. 디테일 테이블은 해당아이디로 삭제후
-        int facilityReserveId = facilitiesRepository.checkImpossibleUpdate(uMap);
+        String facilityReserveIdStr = (String) uMap.get("facilityReserveId");
+        int facilityReserveId = Integer.parseInt(facilityReserveIdStr);
+//        int facilityReserveId = facilitiesRepository.checkImpossibleUpdate(uMap);
         logger.info("삭제 resultMap id: " + facilityReserveId);
 
         int deletResult = facilitiesRepository.DeleteReserveDetail(facilityReserveId);
@@ -168,8 +177,8 @@ public class Facilities_Service {
             int startTimeInterval = (int) uMap.get("startTimeInterval");    // 시작시간 구간
             int endTimeInterval = (int) uMap.get("endTimeInterval");      // 종료시간 구간
 
-            // @CHS 실질적으로 result가 1이냐 아니냐랑 상관없이 세부내역은 필수로 따라옴(if문 필요 없음)
-            result = facilitiesRepository.insertReserve(uMap);
+//            // @CHS 실질적으로 result가 1이냐 아니냐랑 상관없이 세부내역은 필수로 따라옴(if문 필요 없음)
+//            result = facilitiesRepository.insertReserveDetail(uMap);
 
             for (int i = startTimeInterval; i <= endTimeInterval; i++) {
                 // @CHS 만약 11:00 ~ 12:30이라면 startTimeInterval=2, endTimeInterval=4
@@ -179,7 +188,7 @@ public class Facilities_Service {
                 // @CHS i++(4) > timeInterval=4 > insert
                 // @CHS 와 같이 진행될 예정(나머지 파라미터는 모두 같음)
                 uMap.put("timeInterval", i);
-                facilitiesRepository.insertReserveDetail(uMap);
+                result =facilitiesRepository.insertReserveDetail(uMap);
             }
         /* @JES@
 		if (result > 0) {

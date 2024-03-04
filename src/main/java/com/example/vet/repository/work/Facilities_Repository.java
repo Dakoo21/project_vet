@@ -35,6 +35,13 @@ public class Facilities_Repository {
         logger.info(myList.toString());
         return myList;
     }
+    //모든 리스트
+    public List<Map<String, Object>> reserveListAll( String facilityReserveDt) {
+
+        List<Map<String, Object>> allList= sqlSessionTemplate.selectList("reserveListAll",facilityReserveDt);
+        logger.info(allList.toString());
+        return allList;
+    }
     //등록 -예약 시퀀스 뽑고 등록하기
     public Map<String, Object> SelectReserveId() {
         logger.info("예약등록id Insert");
@@ -57,8 +64,8 @@ public class Facilities_Repository {
     //수정 유효성 체크 1 이라면 안된다.
     public int checkImpossibleUpdate(Map<String, Object> checkMap) {
         logger.info("예약업데이트id 유효성 체크");
-        Map<String, Object> result= sqlSessionTemplate.selectOne("checkImpossibleUpdate");
-        logger.info("id채번"+result.toString());
+        Map<String, Object> result= sqlSessionTemplate.selectOne("checkImpossibleUpdate",checkMap);
+        logger.info("id채번"+result);
         int possible = result != null ? 1: 0;
         return possible;
 
@@ -88,12 +95,6 @@ public class Facilities_Repository {
         return result;
     }
     //동물 리스트
-//    public List<Map<String, Object>> animaList(FacilitiesVO facilitiesVO) {
-//
-//        List<Map<String, Object>> aList= sqlSessionTemplate.selectList("selecteAnimalList",facilitiesVO);
-//        logger.info(aList.toString());
-//        return aList;
-//    }
     public List<Map<String, Object>> animalList(String animalNm) {// gubun:n_title, keyword:휴관
         logger.info("animalList");
         // JAVA -> MyBatis -> Oracle
@@ -108,8 +109,16 @@ public class Facilities_Repository {
         logger.info(cList.toString());
         return cList;
     }
-
+    //디테일 1개의 값에대한 값
+    public Map<String, Object> detailList(int facilityReserveId) {
+        logger.info("facilityReserveId:"+facilityReserveId);
+        // JAVA -> MyBatis -> Oracle
+        Map<String, Object> oneMap = sqlSessionTemplate.selectOne("detailList",facilityReserveId);
+        logger.info(oneMap.toString());
+        return oneMap;
+    }
 }
+
 //com.example.demo.FacilitiesMapper
 
 

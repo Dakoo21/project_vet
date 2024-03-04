@@ -42,6 +42,14 @@
     if(aList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
         asize = aList.size();
     }
+    // 리스트All
+//    int aSize = 0;
+//    List<Map<String, Object>> allList = (List)request.getAttribute("allList");
+//    if(aList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
+//        aSize = aList.size();
+//    }
+//    if(i==aSize) break;//NullPointerException방어
+//    Map<String,Object> aMap = allList.get(i);
 
 %>
 
@@ -53,7 +61,30 @@
     <title>AdminLTE 3 | Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.10/index.global.min.js'></script>
+<%--    차트스크립트--%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="jquery-1.8.1.js"></script>
+    <script type="text/javascript" src="ajax-sample.js"></script>
+
     <script>
+        function firstOpenModal() {
+            // 모달 열기 전에 hidden 속성을 제거하여 버튼을 표시
+            document.getElementById('inputButtton').removeAttribute('hidden');
+            document.getElementById('updateButton').setAttribute('hidden', 'hidden');
+            document.getElementById('cancelButtton').setAttribute('hidden', 'hidden');
+            // select 요소 초기화
+            document.getElementById('selecStartTimetBox').value = '0';
+            document.getElementById('selecEndTimeBox').value = '0';
+            //내용, 환자명, 보호자명
+            document.getElementById('facilityRemarks').value = '';
+            document.getElementById('inputMasterNm').value = '';
+            document.getElementById('animalPk').value = '';
+            document.getElementById('animalNm').value = '';
+            //유저 정보
+            document.getElementById('memberNm').value = "name";
+            document.getElementById('memberPk').value = 1;
+        }
+
         let isSending = false;
         let todayDate = new Date().toISOString().split('T')[0];
         // Set the minimum value of the date input to today
@@ -61,7 +92,13 @@
         //달력 이전 날짜 막기
         //삭제
         function cancel(facilityReserveId){
-            window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
+            if(facilityReserveId!=null){
+                window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
+            }else{
+                var facilityReserveId = document.getElementById('facilityReserveId').value;
+                window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
+            }
+
         }
 
         // 현재 날짜를 가져오는 함수
@@ -87,69 +124,114 @@
         }
 
 
-        //cchang pictur
+        //change picture
         function changeFacilityImage() {
             const selectBox = document.getElementById('facilityNm');
             const selectedValue = selectBox.value;
             const imageContainer = document.getElementById('facilityImageContainer');
 
             // 선택된 값에 따라 이미지 변경
-            if (selectedValue === '1') {
+            if (selectedValue === '수술실') {
                 imageContainer.innerHTML = `
-                <img src="img/1.jpg" alt="시설사진1">
-                <img src="img/2.jpg" alt="시설사진2">
+                <img src="/img/1.jpg" alt="시설사진1">
+                <img src="/img/2.jpg" alt="시설사진2">
             `;
-            } else if (selectedValue === '2') {
+            } else if (selectedValue === '면회실') {
                 imageContainer.innerHTML = `
-                <img src="img/3.jpg" alt="시설사진3">
+                <img src="/img/3.jpg" alt="시설사진3">
                 <img src="/img/4.jpg" alt="시설사진4">
             `;
-            } else if (selectedValue === '3') {
+            } else if (selectedValue === '방사선실') {
                 imageContainer.innerHTML = `
-                <img src="/img/5.jpg" alt="시설사진3">
-                <img src="/img/6.jpg" alt="시설사진4">
+                <img src="/img/5.jpg" alt="시설사진5">
+                <img src="/img/6.jpg" alt="시설사진6">
 `;
-            } else if (selectedValue === '4') {
+            } else if (selectedValue === '미용실') {
                 imageContainer.innerHTML = `
-                    <img src="/img/7.jpg" alt="시설사진3">
-                    <img src="/img/8.jpg" alt="시설사진4">
+                    <img src="/img/7.jpg" alt="시설사진7">
+                    <img src="/img/8.jpg" alt="시설사진8">
                     `;
             }
         }
 
-//예약 디테일
-        document.ready(function(){
-            // 테이블 셀이 클릭되면 모달을 표시하고 해당 ID 값을 가져옵니다.
-            'td[data-toggle="modal"]'.click(function(){
-                var id = this.data('id'); // 클릭된 테이블 셀의 ID 값 가져오기
-                showModal(id); // 모달 표시 함수 호출
-            });
-        });
 
-        // Ajax를 사용하여 서버에 해당 ID에 관한 데이터를 요청합니다.
-        function showModal(id) {
-            ajax({
-                url: '/getData?id=' + id, // 데이터를 가져올 URL
-                type: 'GET',
-                success: function(response) {
-                    // 서버로부터 받은 데이터를 모달에 삽입합니다.
-                    '#modal-lg'.find('.modal-body').html(response);
-                    // 모달을 표시합니다.
-                    '#modal-lg'.modal('show');
-                },
-                error: function(xhr, status, error) {
-                    console.error('Ajax request failed:', status, error);
+        //예약수정넣기
+        function reserveUdate(){
+            //@CHS@
+            if(isSending) {
+                return;
+            }
+            isSending = true;
+
+
+            //
+            const facilityReserveId = document.getElementById("facilityReserveId").value;
+            console.log("0:" + facilityReserveId);
+            const animalPk = document.getElementById("animalPk").value;
+            console.log("1:" + animalPk);
+            const facilityReserveDt = document.getElementById("facilityReserveDt").value;
+            console.log("2:" + facilityReserveDt);
+            const memberPk = document.getElementById("memberPk").value;
+            console.log("3:" + memberPk);
+            const facilityNm = document.getElementById("facilityNm").value;
+            console.log("4:" + facilityNm);
+            const facilityRemarks = document.getElementById("facilityRemarks").value;
+            console.log("5:" + facilityRemarks);
+            const selecStartTimetBox = parseInt(document.getElementById("selecStartTimetBox").value);
+            console.log("7:" + selecStartTimetBox);
+            const selecEndTimeBox = parseInt(document.getElementById("selecEndTimeBox").value);
+            console.log("6:" + selecEndTimeBox);
+
+
+            // 업데이트 내용 json
+            let data = JSON.stringify({
+                facilityReserveDt: facilityReserveDt,
+                facilityNm: facilityNm,
+                animalId: animalPk,
+                memberPk: memberPk,
+                facilityRemarks: facilityRemarks,
+                startTimeInterval: selecStartTimetBox,
+                endTimeInterval: selecEndTimeBox,
+                facilityReserveId: facilityReserveId
+            });
+
+            console.log("제이슨데이터:" + data);
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = () => {
+                isSending = false;
+                if (selecEndTimeBox < selecStartTimetBox) {alert("종료 시간은 시작 시간보다 작을 수 없습니다.")}
+                else
+                {
+
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        var res = xhr.responseText;
+                        if (res == "suc") {
+
+                            window.location.href = 'http://localhost:8000/reservespot/dailyReserve';
+
+                        } else if (res == "error") {
+                            alert("예약 생성 중 오류가 발생하였습니다. 잠시 후 다시 시도 해주세요.")
+
+                        } else if (res == "dup") {
+                            alert("이미 예약된 건이 있습니다. 예약시간을 확인해주세요.")
+                        }
+                    } else {
+                        console.error("예약 생성 중 오류가 발생하였습니다.");
+                        alert("환자명을 입력해주세요")
+                    }
                 }
-            });
+            };
+            xhr.open('POST', '/reservespot/reserveUpdate?facilityReserveId=' + facilityReserveId, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.send(data);
+
         }
 
-//예약수정
-        function update(facilityReserveId){
-            window.location.href = "/reservespot/reserveDelete?facilityReserveId=" +facilityReserveId;
-        }
 
-        //예약넣기
-
+//예약
         function reserveInsert() {
             //@CHS@
             if(isSending) {
@@ -281,7 +363,7 @@
                 animalIdSearch();
             }
         }//end of searchEnter
-        //삭제 버튼
+
 
         // 검색 및 결과 표시 함수
         function animalIdSearch(){
@@ -335,7 +417,6 @@
                 });
             });
         }
-
 
     </script>
 
@@ -503,65 +584,20 @@
         <!-- Main content -->
         <section class="content">
             <%--달력--%>
-            <div id='calendar'>사진경로  이상함, 예약 정보 리셋 필요ㅡ ,일일 표가 안 떠~ 2023-01-02 달력선택기에 버튼 오늘,<,> 내껏만 삭제하게 하던, 그냥 내꺼로만 삭제 버튼 뜨게하던, 페이징 버튼 바 5개로 해줘, 업데이트 작업하면 됨</div>
+            <div id='calendar'>해야할것 = 1.오늘값 푯시, onchange="changeTimeline()" +디테일처리+00실 표현 2. 섹션값 확인*5 함수에도있음 3. 배경색바꾸기,시간표시바꾸기, 페이징 버튼 바 5개로 해줘</div>
 
 
             <!--여기 -->
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <input type="date" id="dailyDate" class="date-header" min="" required >
-                        <button type="button" class="btn btn-block btn-info"data-toggle="modal" data-target="#modal-lg">예약</button>
+                        <input type="date" id="dailyDate" class="date-header" min="" required>
+                        <button type="button"  onclick="firstOpenModal()" class="btn btn-block btn-info"data-toggle="modal" data-target="#modal-lg" >예약</button>
                         <%--                        위 코드에서 data-toggle="modal" 및 data-target="#modal-lg" 속성은 해당 버튼이 모달을 트리거하도록 설정합니다.--%>
                     </div>
                     <div id="calendarTable">
                         <div class="card-body">
-
-                            <table class="table table-bordered">
-                                <%--21*5--%>
-                                <thead>
-                                <tr>
-                                    <th >예약시설</th>
-                                    <th colspan='2'>오전 10시</th>
-                                    <th colspan='2'>오전 11시</th>
-                                    <th colspan='2'>오후 12시</th>
-                                    <th colspan='2'>오후 1시</th>
-                                    <th colspan='2'>오후 2시</th>
-                                    <th colspan='2'>오후 3시</th>
-                                    <th colspan='2'>오후 4시</th>
-                                    <th colspan='2'>오후 5시</th>
-                                    <th colspan='2'>오후 6시</th>
-                                    <th colspan='2'>오후 7시</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>수술실</td>
-                                    <td>10시반까지</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                    <td>9</td>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>12</td>
-                                    <td>13</td>
-                                    <td>14</td>
-                                    <td>15</td>
-                                    <td>16</td>
-                                    <td>17</td>
-                                    <td>18</td>
-                                    <td>19</td>
-                                    <td>20</td>
-
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div id="timeline" style="height: 220px;"></div>
                         </div>
                     </div>
                 </div>
@@ -570,7 +606,7 @@
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">전체 예약 현황</a></li>
-                            <li class="nav-item"><a id=checkMine class="nav-link" href="#timeline" data-toggle="tab">내 예약 현황</a></li>
+                            <li class="nav-item"><a id=checkMine class="nav-link" href="#timelineAll" data-toggle="tab">내 예약 현황</a></li>
                         </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -595,15 +631,19 @@
                                             // {[조회 결과]:[{START_TIME=10:00, END_TIME=11:00, USER_NM=토마토, FACILITY_NM=수술실, FACILITY_RESERVE_ID=0, ANIMAL_NM=멍돌이, FACILITY_RESERVE_DT=2024-02-23}]}
                                     %>
                                     <tr>
-                                        <td><%=rmap.get("FACILITY_NM")%></td>
-                                        <td><%=rmap.get("USER_NM")%></td>
-                                        <td><%=rmap.get("ANIMAL_NM")%></td>
-                                        <td data-toggle="modal"  data-id=<%=rmap.get("FACILITY_RESERVE_ID")%> data-target="#modal-lg"><%=rmap.get("FACILITY_RESERVE_DT")%></td>
-                                        <td><%=rmap.get("START_TIME")%>~<%=rmap.get("END_TIME")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=rmap.get("FACILITY_RESERVE_ID")%>')"><%=rmap.get("FACILITY_NM")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=rmap.get("FACILITY_RESERVE_ID")%>')"><%=rmap.get("USER_NM")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=rmap.get("FACILITY_RESERVE_ID")%>')"><%=rmap.get("ANIMAL_NM")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=rmap.get("FACILITY_RESERVE_ID")%>')"><%=rmap.get("FACILITY_RESERVE_DT")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=rmap.get("FACILITY_RESERVE_ID")%>')"><%=rmap.get("START_TIME")%>~<%=rmap.get("END_TIME")%></td>
 
                                         <td class="cancel-button-cell">
-
-                                            <button onclick='cancel(<%=rmap.get("FACILITY_RESERVE_ID")%>)' type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
+<%--                                        <%=name%>--%>
+                                        <% if ("토가".equals(rmap.get("USER_NM"))) { %>
+                                        <button hidden onclick="cancel('<%= rmap.get("FACILITY_RESERVE_ID") %>')" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
+                                        <% } else { %>
+                                        <button onclick="cancel('<%= rmap.get("FACILITY_RESERVE_ID") %>')" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
+                                        <% } %>
                                         </td>
                                     </tr>
                                     <%
@@ -623,7 +663,7 @@
                                 </div>
                                 <!-- [[ 페이징 처리  구간  ]] -->
                             </div>
-                            <div class="tab-pane" id="timeline">
+                            <div class="tab-pane" id="timelineAll">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                     <tr>
@@ -643,10 +683,10 @@
                                             // {[조회 결과]:[{START_TIME=10:00, END_TIME=11:00, USER_NM=토마토, FACILITY_NM=수술실, FACILITY_RESERVE_ID=0, ANIMAL_NM=멍돌이, FACILITY_RESERVE_DT=2024-02-23}]}
                                     %>
                                     <tr>
-                                        <td><%=myMap.get("FACILITY_NM")%></td>
-                                        <td><%=myMap.get("ANIMAL_NM")%></td>
-                                        <td><%=myMap.get("FACILITY_RESERVE_DT")%></td>
-                                        <td><%=myMap.get("START_TIME")%>~<%=myMap.get("END_TIME")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=myMap.get("FACILITY_RESERVE_ID")%>')"><%=myMap.get("FACILITY_NM")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=myMap.get("FACILITY_RESERVE_ID")%>')"><%=myMap.get("ANIMAL_NM")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=myMap.get("FACILITY_RESERVE_ID")%>')"><%=myMap.get("FACILITY_RESERVE_DT")%></td>
+                                        <td data-toggle="modal" data-target="#modal-lg" onclick="detailOpen('<%=myMap.get("FACILITY_RESERVE_ID")%>')"><%=myMap.get("START_TIME")%>~<%=myMap.get("END_TIME")%></td>
 
                                         <td class="cancel-button-cell">
 
@@ -765,7 +805,10 @@
                                             <%--name,userpk--%>
                                         </span>
                                         <span>
-                                            <input type="text" id="animalPk" class="text-input" readonly >
+                                            <input type="text" id="animalPk" class="text-input" readonly hidden >
+                                        </span>
+                                        <span>
+                                            <input type="text" id="facilityReserveId" class="text-input" readonly hidden >
                                         </span>
                                     </div>
                                     <div>
@@ -784,9 +827,9 @@
 
                             <div class="modal-footer" style="text-align: right;">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">목록으로 돌아가기</button>
-                                <button type="button" class="btn btn-primary" >예약수정</button>
-                                <button type="button" class="btn btn-primary">예약취소</button>
-                                <button type="button" class="btn btn-primary" onclick="reserveInsert()">예약등록</button>
+                                <button hidden id="updateButton" type="button" class="btn btn-primary" onclick="reserveUdate()">예약수정</button>
+                                <button hidden id="cancelButtton" type="button" class="btn btn-primary" onclick="cancel()">예약취소</button>
+                                <button hidden id="inputButtton" type="button" class="btn btn-primary" onclick="reserveInsert()">예약등록</button>
                             </div>
 
                         </div>
@@ -846,7 +889,223 @@
         const facilityReserveDt = document.getElementById('facilityReserveDt');
         facilityReserveDt.value = getCurrentDate();
         dailyDate.value=  getCurrentDate();
-    };
+        }
+    //     const facilityReserveDt = dailyDateInput.value; // 날짜 입력란에서 선택한 날짜
+    //     console.log("선택날짜:" + dailyDateInput.value);
+    //
+    //     console.log("조건문 전 dataTable:"+dataTable.getNumberOfRows());
+    //     if (dataTable.getNumberOfRows()>0){
+    //         console.log("조건문 처리후 dataTable:"+dataTable.getNumberOfRows());
+    //         dataTable.removeRows(0,dataTable.getNumberOfRows());
+    //     }
+    //
+    //     fetch('/reservespot/dailyReserveAll?facilityReserveDt=' + facilityReserveDt)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //
+    //             // 서버에서 받아온 데이터를 바탕으로 DataTable에 행 추가
+    //             data.forEach(function(allList) {
+    //                 const room = allList.FACILITY_NM; //수술실,면회실,방사선실,미용실
+    //                 const startTimeString = allList.START_TIME; // "10:00"와 같은 형식의 문자열
+    //                 const endTimeString = allList.END_TIME; // "11:00"와 같은 형식의 문자열
+    //                 const dateString = allList.FACILITY_RESERVE_DT; // "2024-03-31"와 같은 형식의 문자열
+    //                 let animalNM;
+    //                 if (allList.MASTER_NM == "") {
+    //                     animalNM = allList.ANIMAL_NM + "(" + allList.MASTER_NM + ")";
+    //                 } else {
+    //                     animalNM = allList.ANIMAL_NM;
+    //                 }
+    //
+    //                 // 시작 시간을 처리
+    //                 let startHour = parseInt(startTimeString.split(":")[0]); // "10:00"에서 시간 부분 추출
+    //                 let startMinute = parseInt(startTimeString.split(":")[1]); // "10:00"에서 분 부분 추출
+    //                 const [year, month, day] = dateString.split("-").map(Number); // 년도, 월, 일 추출
+    //                 const start = new Date(year, month - 1, day, startHour, startMinute); // 시작 시간을 생성
+    //
+    //                 // 종료 시간을 처리
+    //                 let endHour = parseInt(endTimeString.split(":")[0]); // "11:00"에서 시간 부분 추출
+    //                 let endMinute = parseInt(endTimeString.split(":")[1]); // "11:00"에서 분 부분 추출
+    //                 const end = new Date(year, month - 1, day, endHour, endMinute); // 종료 시간을 생성
+    //
+    //                 // DataTable에 행 추가
+    //                 dataTable.addRow([room, animalNM, start, end]);
+    //                 console.log("데이터테이블 길이: "+dataTable.getNumberOfRows());
+    //
+    //                 // 옵션 설정
+    //                 const options = {
+    //                     timeline: { colorByRowLabel: true },
+    //                     backgroundColor: '#FFFFFF',
+    //                     hAxis: {
+    //                         format: 'HH:mm',
+    //                         minValue: new Date(year, month - 1, day, 10, 0, 0),  // 10시
+    //                         maxValue: new Date(year, month - 1, day, 20, 0, 0)  // 오후 8시
+    //                     }
+    //                 };
+    //
+    //                 // 차트 그리기
+    //                 chart.draw(dataTable, options);
+    // };
+
+
+    // 예약 디테일 모달이 열릴 때 이벤트를 감지하여 Ajax 요청을 보내고 데이터를 input 요소에 설정
+    function detailOpen(facilityReserveId){
+        console.log("예약등록 버튼을 클릭했습니다.");
+
+        console.log("아작스 수정id값:"+facilityReserveId);
+        // xhr.open("GET", `/reservespot/dailyReserve?nowPage=1`+facilityReserveId);
+        // Ajax 요청
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", '/reservespot/detailList?facilityReserveId='+facilityReserveId);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // 서버로부터 응답을 받았을 때 처리 json처리
+                const result = JSON.parse(xhr.responseText); // JSON 파싱
+                console.log(result);
+                //등록버튼 숨김
+                document.getElementById('inputButtton').setAttribute('hidden', 'hidden');
+                // 모달에 표시 데이터 설정
+
+                document.getElementById('facilityNm').value = result.FACILITY_NM;
+                document.getElementById('facilityReserveId').value = result.FACILITY_RESERVE_ID;
+                document.getElementById('memberPk').value = result.MEMBER_PK;
+                document.getElementById('facilityReserveDt').value = result.FACILITY_RESERVE_DT;
+                document.getElementById('selecStartTimetBox').value = result.START_TIME;
+                document.getElementById('selecEndTimeBox').value = result.END_TIME;
+                document.getElementById('animalNm').value = result.ANIMAL_NM;
+                document.getElementById('memberNm').value = result.USER_NM;
+                document.getElementById('animalPk').value = result.ANIMAL_PK;
+                document.getElementById('inputMasterNm').value = result.MASTER_NM;
+                document.getElementById('facilityRemarks').value = result.FACILITY_REMARKS !== undefined ? result.FACILITY_REMARKS : "입력내용이 없습니다.";
+            } else {
+                // 오류 처리
+                console.error('Failed to fetch data.');
+            }
+           //이미지도 반영
+            var facilityNm = document.getElementById('facilityNm').value;
+            const imageContainer = document.getElementById('facilityImageContainer');
+
+            if (facilityNm === '수술실') {
+                imageContainer.innerHTML = `
+                <img src="/img/1.jpg" alt="시설사진1">
+                <img src="/img/2.jpg" alt="시설사진2">
+            `;
+            } else if (facilityNm === '면회실') {
+                imageContainer.innerHTML = `
+                <img src="/img/3.jpg" alt="시설사진3">
+                <img src="/img/4.jpg" alt="시설사진4">
+                `;
+            }  else if (facilityNm === '방사선실') {
+                imageContainer.innerHTML = `
+                <img src="/img/5.jpg" alt="시설사진3">
+                <img src="/img/6.jpg" alt="시설사진4">
+                `;
+            }else if (facilityNm === '미용실') {
+                imageContainer.innerHTML = `
+                <img src="/img/7.jpg" alt="시설사진3">
+                <img src="/img/8.jpg" alt="시설사진4">
+                `;
+            }
+            // 버튼 요소 가져오기
+            var updateButton = document.getElementById('updateButton');
+            var cancelButton = document.getElementById('cancelButtton');
+            console.log(updateButton)
+
+            // 버튼을 숨김 처리
+            updateButton.removeAttribute('hidden');
+            cancelButton.removeAttribute('hidden');
+
+        }
+        xhr.send();
+    }
+
+
+        //동적 반영해보기
+        google.charts.load('current', {'packages':['timeline']});
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        function drawChart() {
+
+            const container = document.getElementById('timeline');
+
+            const chart = new google.visualization.Timeline(container);
+            let dataTable = new google.visualization.DataTable();
+
+
+            dataTable.addColumn({ type: 'string', id: 'Room' });
+            dataTable.addColumn({ type: 'string', id: 'animalNM' }); // 막대라벨
+            dataTable.addColumn({ type: 'date', id: 'Start' });
+            dataTable.addColumn({ type: 'date', id: 'End' });
+
+            const dailyDateInput = document.getElementById('dailyDate');
+            dailyDateInput.addEventListener('change', function() {
+                const facilityReserveDt = dailyDateInput.value; // 날짜 입력란에서 선택한 날짜
+                console.log("선택날짜:" + dailyDateInput.value);
+
+                console.log("조건문 전 dataTable:"+dataTable.getNumberOfRows());
+                if (dataTable.getNumberOfRows()>0){
+                    console.log("조건문 처리후 dataTable:"+dataTable.getNumberOfRows());
+                    dataTable.removeRows(0,dataTable.getNumberOfRows());
+                }
+
+                fetch('/reservespot/dailyReserveAll?facilityReserveDt=' + facilityReserveDt)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        // 서버에서 받아온 데이터를 바탕으로 DataTable에 행 추가
+                        data.forEach(function(allList) {
+                            const room = allList.FACILITY_NM; //수술실,면회실,방사선실,미용실
+                            const startTimeString = allList.START_TIME; // "10:00"와 같은 형식의 문자열
+                            const endTimeString = allList.END_TIME; // "11:00"와 같은 형식의 문자열
+                            const dateString = allList.FACILITY_RESERVE_DT; // "2024-03-31"와 같은 형식의 문자열
+                            let animalNM;
+                            if (allList.MASTER_NM != "") {
+                                animalNM = allList.ANIMAL_NM + "(" + allList.MASTER_NM + ")";
+                            } else {
+                                animalNM = allList.ANIMAL_NM;
+                            }
+
+                            // 시작 시간을 처리
+                            let startHour = parseInt(startTimeString.split(":")[0]); // "10:00"에서 시간 부분 추출
+                            let startMinute = parseInt(startTimeString.split(":")[1]); // "10:00"에서 분 부분 추출
+                            const [year, month, day] = dateString.split("-").map(Number); // 년도, 월, 일 추출
+                            const start = new Date(year, month - 1, day, startHour, startMinute); // 시작 시간을 생성
+
+                            // 종료 시간을 처리
+                            let endHour = parseInt(endTimeString.split(":")[0]); // "11:00"에서 시간 부분 추출
+                            let endMinute = parseInt(endTimeString.split(":")[1]); // "11:00"에서 분 부분 추출
+                            const end = new Date(year, month - 1, day, endHour, endMinute); // 종료 시간을 생성
+
+                            // DataTable에 행 추가
+                            dataTable.addRow([room, animalNM, start, end]);
+                            console.log("데이터테이블 길이: "+dataTable.getNumberOfRows());
+
+                            // 옵션 설정
+                            const options = {
+                                timeline: { colorByRowLabel: true },
+                                backgroundColor: '#FFFFFF',
+                                hAxis: {
+                                    format: 'HH:mm',
+                                    minValue: new Date(year, month - 1, day, 10, 0, 0),  // 10시
+                                    maxValue: new Date(year, month - 1, day, 20, 0, 0)  // 오후 8시
+                                }
+                            };
+
+                            // 차트 그리기
+                            chart.draw(dataTable, options);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Failed to fetch data:', error);
+                    });
+
+            });
+
+        }
+    document.addEventListener('DOMContentLoaded', function(){
+        console.log("돔돔:"+'DOMContentLoaded');
+       drawChart();
+    });
 </script>
 </body>
 </html>
