@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 public class eSignDraft_Repository {
     private final SqlSessionTemplate sqlSessionTemplate;
+
     @Autowired
     private SignMapper signMapper;
 
@@ -25,18 +26,14 @@ public class eSignDraft_Repository {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
 
+    // 입양자 조회
     public List<MasterVO> selectAdopter() {
         List<MasterVO> aList;
         aList = sqlSessionTemplate.selectList("selectAdopter");
         return aList;
     }
 
-    public List<Member> findLine() {
-        List<Member> lineList = new ArrayList<>();
-        lineList = sqlSessionTemplate.selectList("selectLine");
-        return lineList;
-    }
-
+    // 유기동물 조회
     public List<MissedAnimal> selectAbandon() {
         List<MissedAnimal> abandonList = sqlSessionTemplate.selectList("selectAbandon");
         // selectList 메서드가 null을 반환하는 경우 널 체크
@@ -44,26 +41,29 @@ public class eSignDraft_Repository {
             return Collections.emptyList();
         }
         return abandonList;
-
     }
 
-    // public int insertDraft(Sign sign) {
-    //     int result = sqlSessionTemplate.insert("insertDraft", sign);
-    //     log.info(String.valueOf(result));
-    //     return result;
-    // }
+    // 결재 라인 조회
+    public List<Member> findLine() {
+        List<Member> lineList;
+        lineList = sqlSessionTemplate.selectList("selectLine");
+        return lineList;
+    }
 
+    // 기안서 상세 조회
     public List<Sign> selectDetail(int draftPk) {
         List<Sign> draftDetail = sqlSessionTemplate.selectOne("selectDraftDetail");
         log.info(draftDetail.toString());
         return draftDetail;
     }
 
+    //
     public Sign insertDraft(Sign sign) {
         signMapper.insertSign(sign);
         return sign;
     }
 
+    //
     public void insertDraftLine(int generatedSignPk) {
         sqlSessionTemplate.insert("insertDraftLine", generatedSignPk);
     }

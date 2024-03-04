@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.MasterMapper">
+<mapper namespace="com.example.demo.SignMapper">
     <resultMap id="eSignResultMap" type="com.example.vet.model.Sign">
     </resultMap>
     <resultMap id="Sign" type="com.example.vet.model.Sign">
     </resultMap>
-<!--    <select id="selectDocs" parameterType="Integer" resultMap="eSignResultMap">-->
-<!--        SELECT SIGN_PK, SIGN_TITLE, SIGN_CONTENT, SIGN_DATE,SIGN_RESERV_YEAR, SIGN_TYPE, ADOPT_PK-->
-<!--        FROM SIGN_TEST-->
-<!--        WHERE MEMBER_PK = ${userPK}-->
+    <select id="selectDocs" parameterType="Integer" resultMap="eSignResultMap">
+        SELECT SIGN_PK, SIGN_TITLE, SIGN_CONTENT, SIGN_DATE,SIGN_RESERV_YEAR, SIGN_DOCTYPE, ADOPT_PK
+        FROM SIGN2_TEST
+        WHERE MEMBER_PK = ${userPK}
 
-<!--    </select>-->
-    <!-- insertSign 쿼리 -->
+    </select>
 <!--    <insert id="insertSign" parameterType="Sign" useGeneratedKeys="true" keyProperty="sign_pk">-->
 <!--        INSERT INTO SIGN2_TEST (SIGN_PK, SIGN_TITLE, SIGN_CONTENT)-->
 <!--        VALUES (SIGN_PK_SEQ.nextval, #{sign}, #{sign_content})-->
