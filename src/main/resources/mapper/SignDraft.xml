@@ -9,17 +9,17 @@
     </resultMap>
     <resultMap id="SIGN" type="com.example.vet.model.Sign">
     </resultMap>
-<!--    <select id="selectLine" resultMap="eSignLineResultMap">-->
-<!--        SELECT * FROM USER_TEST5-->
-<!--        WHERE MEMBER_ROLE = 'ROLE_ADMIN' OR MEMBER_ROLE = 'ROLE_MASTER'-->
-<!--    </select>-->
-<!--    <select id="selectAdopter" resultMap="MasterResultMap">-->
-<!--        SELECT MASTER_PK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER-->
-<!--        FROM MASTER_TEST-->
-<!--    </select>-->
-<!--    <select id="selectAbandon" resultMap="MissedAnimalList">-->
-<!--        SELECT KINDCD, COLORCD,AGE, WEIGHT FROM ABANDONED_ANIMAL_TEST-->
-<!--    </select>-->
+    <select id="selectLine" resultMap="eSignLineResultMap">
+        SELECT * FROM USER_TEST5
+        WHERE MEMBER_ROLE = 'ROLE_ADMIN' OR MEMBER_ROLE = 'ROLE_MASTER'
+    </select>
+    <select id="selectAdopter" resultMap="MasterResultMap">
+        SELECT MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
+        FROM MASTER_TEST
+    </select>
+    <select id="selectAbandon" resultMap="MissedAnimalList">
+        SELECT KINDCD, COLORCD,AGE, WEIGHT FROM ABANDONED_ANIMAL_TEST
+    </select>
 <!--    <select id="selectDetail" parameterType="int" resultMap="SignDocument">-->
 
 <!--    </select>-->

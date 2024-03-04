@@ -18,41 +18,43 @@ import java.util.List;
 @Slf4j
 public class eSignDraft_Service {
     private final eSignDraft_Repository eSignDraft_repository;
+
     @Autowired
     private SignMapper signMapper;
+
     public eSignDraft_Service(eSignDraft_Repository eSignDraft_repository, SignMapper signMapper) {
         this.eSignDraft_repository = eSignDraft_repository;
     }
 
-    public List<MasterVO> selectAdopter() {
-        List<MasterVO> aList = null;
-        aList = eSignDraft_repository.selectAdopter();
-        return aList;
-    }
-
+    // 결재 라인 조회
     public List<Member> findLine() {
         List<Member> lineList = new ArrayList<>();
         lineList = eSignDraft_repository.findLine();
         return lineList;
     }
 
+    // 유기동물 조회
     public List<MissedAnimal> selectAbandon() {
         List<MissedAnimal> abandonList;
         abandonList = eSignDraft_repository.selectAbandon();
         return abandonList;
     }
-    // public int insertDraft(Sign sign) {
-    //     // List<MissedAnimal> abandonList;
-    //     int result = eSignDraft_repository.insertDraft(sign);
-    //     return result;
-    // }
+
+    // 입양자 조회
+    public List<MasterVO> selectAdopter() {
+        List<MasterVO> aList = null;
+        aList = eSignDraft_repository.selectAdopter();
+        return aList;
+    }
+    
     // 기안서 조회
     public List<Sign> selectDetail(int draftPk) {
         List<Sign> draftDetail;
         draftDetail = eSignDraft_repository.selectDetail(draftPk);
         return draftDetail;
-
     }
+
+    // pk 추출
     @Transactional
     public Sign createSign(Sign sign) {
         Sign insertedSign = eSignDraft_repository.insertDraft(sign);

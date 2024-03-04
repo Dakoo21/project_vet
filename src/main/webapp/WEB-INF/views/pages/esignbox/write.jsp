@@ -103,7 +103,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">유기동물 조회</h4>
+                <h4 class="modal-title">입양자 조회</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -119,7 +119,7 @@
                     </div>
                 </form>
                 <div class="stockList">
-                    <table class="table table-striped table-valign-middle" id="animalTable2">
+                    <table class="table table-striped table-valign-middle" id="adopterTable">
                         <thead>
                         <tr>
                             <td>이름</td>
@@ -183,7 +183,8 @@
             var selectedAnimalId = $(this).data("animal-id");
             // $("#modalBtn1").text(selectedRowData.row[0]);
             // $("#selectedAnimalIdDisplay").text(selectedRowData);
-            $("#selectedAnimalIdDisplay").text(JSON.stringify(selectedRowData, null, 2));
+            $("#selectedAnimalIdDisplay").text(selectedRowData.색);
+
             console.log("Selected Animal ID:" + selectedAnimalId);
             // $("#modal").hide();
             // $('#modalBtn1').text('abandonList[i].kindcd');
@@ -237,7 +238,7 @@
             data: { searchParam: "yourSearchParameter" },  // 필요한 검색 파라미터 전달
             success: function(data) {
                 // 모달창에 받아온 데이터를 표시하는 코드
-                displayAnimalList(data)
+                displayAdopterList(data)
                 console.log("신청자 조회 성공");
             },
             error: function() {
@@ -246,11 +247,10 @@
             }
         });
     });
-    $("#animalTable2 tbody").on("click", "tr", function(){
+    $("#adopterTable tbody").on("click", "tr", function(){
         var rowData = $(this).find("td").map(function(){
             return $(this).text();
         }).get();
-
         var selectedRowData = {
             이름 : rowData[0],
             전화번호 : rowData[1],
@@ -258,10 +258,10 @@
             주소 : rowData[3],
             생일 : rowData[4]
         };
-        var selectedAnimalId = $(this).data("animal-id");
+        var selectedAdopterId = $(this).data("adopter-id");
         // $("#selectedAnimalIdDisplay").text(selectedRowData);
-        $("#selectedAnimalIdDisplay").text(JSON.stringify(selectedRowData, null, 2));
-        console.log("Selected Animal ID:" + selectedAnimalId);
+        $("#selectedAdopterDisplay").text(JSON.stringify(selectedRowData, null, 2));
+        console.log("Selected Adopter ID:" + selectedAdopterId);
         // $("#modal").hide();
     });
     // 모달창 닫기 버튼 클릭 이벤트
@@ -269,8 +269,8 @@
         // 모달창을 닫으면서 선택한 값을 전달하는 로직을 추가
         $("#modal2").hide();
     })
-    function displayAnimalList(data){
-        var tableBody = $("#animalTable2 tbody")
+    function displayAdopterList(data){
+        var tableBody = $("#adopterTable tbody")
         tableBody.empty();
         for (var i=0; i<data.length; i++) {
             console.log(data[i]);
@@ -278,7 +278,7 @@
             // String colorCd = mList.getColorcd();
             // String age = mList.getAge();
             // String weight = mList.getWeight();
-            var row = "<tr data-animal-id='" + data[i].master_nm + "'>" +
+            var row = "<tr data-adopter-id='" + data[i].master_nm + "'>" +
                 "<td>" + data[i].master_nm + "</td>" +
                 "<td>" + data[i].master_pnumber + "</td>" +
                 "<td>" + data[i].master_email + "</td>" +
@@ -288,7 +288,7 @@
             tableBody.append(row);
         }
         // JSON 데이터를 JavaScript 객체로 파싱
-        var parsedData = JSON.parse(JSON.stringify(selectedRowData));
+        var parsedData = JSON.parse(JSON.stringify(data));
         // 각 키와 값을 분리하여 출력
         for (var key in parsedData) {
             var value = parsedData[key];
