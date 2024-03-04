@@ -5,7 +5,6 @@
 <%
     List<Map<String,Object>> dList =(List)request.getAttribute("dList");
     int size = (dList != null) ? dList.size() : 0;
-
 %>
 <script type="text/javascript">
     function searchEnter(){
@@ -25,9 +24,6 @@
             document.querySelector("#keyword").value = '';
         }
 
-        const dataDetail = () => {
-            location.href = "/CustomerDB/TotalDataDetail?animal_pk=" + animal_pk;
-        }
         const dataInsert = () => {
             document.querySelector("#f_totaldata").submit();
         }
@@ -73,12 +69,15 @@
                     </select>
                 </div>
                 <div class="col-6">
+<%--                    <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"--%>
+<%--                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>--%>
                     <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
-                           aria-label="검색어를 입력하세요" aria-describedby="btn_search"/>
+                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="if(event.keyCode ===13) searchEnter(event)"/>
                 </div>
                 <div class="col-3">
-                    <button id="btn_search" class="btn btn-danger" >검색</button>
+                    <button id="btn_search" class="btn btn-danger" onClick="searchEnter(event)">검색</button>
                 </div>
+
             </div>
             <!--카테고리 버튼-->
             <div class="card-tools">
@@ -123,14 +122,17 @@
                                         <tr>
                                         <%
                                             for (int i =0; i<dList.size(); i++){
+                                                System.out.println(dList.get(i));
                                             Map<String,Object> pmap =  dList.get(i);
                                         %>
-                                            <td><%=pmap.get("MASTER_NM")%></td>
-                                            <td><%=pmap.get("ANIMAL_NM")%></td>
-                                            <td><%=pmap.get("ANIMAL_SPECIES")%></td>
-                                            <td><%=pmap.get("ANIMAL_BREED")%></td>
-                                            <td><%=pmap.get("ANIMAL_SEX")%></td>
-                                            <td><%=pmap.get("ANIMAL_NEUT")%></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/CustomerDB/TotalDataDetail/<%=pmap.get("animalPk")%>"><%=pmap.get("master_nm")%></a></td>
+                                            <td><%=pmap.get("animal_nm")%></td>
+                                            <td><%=pmap.get("animal_species")%></td>
+                                            <td><%=pmap.get("animal_breed")%></td>
+                                            <td><%=pmap.get("animal_sex")%></td>
+                                            <td><%=pmap.get("animal_neut")%></td>
                                         <%
                                             }
                                         %>
@@ -146,7 +148,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="col-md-2">
-                    <a href=pages/customer/TotalDataInsert.jsp" type="button" class="btn btn-default">등록</a>
+                    <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-default">등록</a>
                 </div>
             </div>
         <!-- /.content -->

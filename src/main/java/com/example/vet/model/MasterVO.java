@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class MasterVO {
-    private int master_pk;
+    private int masterPk;
     private String master_nm;
     private String master_username;
     private String master_gender;
@@ -19,9 +19,9 @@ public class MasterVO {
 
 
     @Builder
-    public MasterVO(int master_pk, String master_nm, String master_username, String master_pw, String master_email,
+    public MasterVO(int masterPk,  String master_nm, String master_username, String master_pw, String master_email,
                     String master_pnumber, String master_address, String master_bdate, String master_gender) {
-        this.master_pk = master_pk;
+        this.masterPk = masterPk;
         this.master_nm = master_nm;
         this.master_username = master_username;
         this.master_pw = master_pw;

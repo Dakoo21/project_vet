@@ -12,7 +12,42 @@
             rmap = cList.get(0);
         }
     }
+    System.out.println("페이지");
 %>
+<script>
+    function insert(){
+        // AJAX 요청 보내기
+        $.ajax({
+            url: "/CustomerDB/TotalCustomerInsert",
+            type: "POST",
+            data: JSON.stringify({
+                masterpk: $("#masterpk").val(),
+                master_nm: $("#master_nm").val(),
+                master_username: $("#master_username").val(),
+                master_pw: $("#master_pw").val(),
+                master_email: $("#master_email").val(),
+                master_pnumber: $("#master_pnumber").val(),
+                master_address: $("#master_address").val(),
+                master_bdate: $("#master_bdate").val(),
+                master_gender: $("#master_gender").val()
+            }),
+            contentType: "application/json",
+            success: function(response){
+                // 성공했을 때 실행할 코드
+                console.log("요청이 성공했습니다.");
+                console.log("서버에서 받은 응답: ", response);
+            },
+            error: function(xhr, status, error){
+                // 실패했을 때 실행할 코드
+                console.error("요청이 실패했습니다.");
+                console.error("에러: ", error);
+            }
+        });
+    }
+    const customerList = () => {
+        location.href="/CustomerDB/TotalCustomerList";
+    }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,13 +56,6 @@
     <title>고객 상세정보</title>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
-<script type ="text/javascript">
-    const customerList = () => {
-        location.href="/CustomerDB/TotalCustomerList";
-    }
-
-</script>
-
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <%@ include file="/include/sidebar.jsp"%>
@@ -50,13 +78,9 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
-
-        </div>
         <section class="content">
+            <div class="mb-3 row">
             <div id="contents_box">
-                <div id="img_area">
-                    <img src="../img/bulldog.svg" class="img-fluid img-thumbnail" alt="...">
-                </div>
                 <div id="table_area" >
                     <table class="table table-borderless" id="customerdataForm">
                         <tr>
@@ -88,25 +112,21 @@
                     </table>
                 </div>
             </div>
-        </section>
+            </div>
+
         <!-- /.content -->
         <div class="text-center">
-            <button type="button" class="btn btn-primary" style="margin-right: 10px;">취소</button>
-            <button type="button" class="btn btn-primary" style="margin-right: 10px;">등록</button>
+            <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="customerList()">취소</button>
+            <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="insert()">등록</button>
         </div>
+        </section>
     </div>
-    <!-- /.content-wrapper -->
-    <!--footer-->
     <%@ include file="/include/footer.jsp"%>
-</div>
 <!-- ./wrapper -->
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
-
 </body>
 </html>
-
-
 
 <style typeof="text/css">
     .form-control{

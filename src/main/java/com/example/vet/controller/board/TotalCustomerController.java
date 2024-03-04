@@ -6,11 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
@@ -37,22 +33,33 @@ public class TotalCustomerController {
     }
 
     @GetMapping("TotalCustomerDetail")
-    public String listDetail(@RequestParam int master_Pk, Model model){
+    public String listDetail(@RequestParam int masterPk, Model model){
         MasterVO masterVO = new MasterVO();
-        masterVO.setMaster_pk(master_Pk);
+        masterVO.setMasterPk(masterPk);
         logger.info(masterVO.toString());
 //        List<Map<String,Object>>cList = totalCustomerService.Detail(masterVO);
         masterVO = totalCustomerService.Detail(masterVO);
         model.addAttribute("cList", masterVO);
         return "pages/customerDB/TotalCustomerDetail";
-
     }
 
-    @PostMapping("TotalCustomerInsert")
+    /**
+     *  저장하는 화면 가져오는 메소드
+     * @return
+     */
+    @GetMapping("TotalCustomerInsertPage")
+    public String insertPage(){
+        return "pages/customerDB/TotalCustomerInsert";
+    }
+
+    @RequestMapping(value = "TotalCustomerInsert", method = {RequestMethod.GET, RequestMethod.POST})
+//    @PostMapping("TotalCustomerInsert")
     public String insert(@RequestParam Map<String, Object> rmap) {
         MasterVO masterVO = new MasterVO();
-        Integer masterPk = Integer.parseInt(rmap.get("MASTER_PK").toString());
-        masterVO.setMaster_pk(masterPk);
+        //masterVO.master1= new master1();
+        logger.info(rmap.get("MASTERPK").toString());
+        Integer masterPk = Integer.parseInt(rmap.get("MASTERPK").toString());
+        masterVO.setMasterPk(masterPk);
 
         //이름
         String masterNm = (String) rmap.get("MASTER_NM");
@@ -95,11 +102,12 @@ public class TotalCustomerController {
             return "error";
         }
     }
+
     @PostMapping("TotalCustomerDataUpdate")
     public String update(@RequestParam Map<String, Object> rmap) {
         MasterVO masterVO = new MasterVO();
-        Integer masterPk = Integer.parseInt(rmap.get("MASTER_PK").toString());
-        masterVO.setMaster_pk(masterPk);
+        Integer masterPk = Integer.parseInt(rmap.get("MASTERPK").toString());
+        masterVO.setMasterPk(masterPk);
 
         //이름
         String masterNm = (String) rmap.get("MASTER_NM");

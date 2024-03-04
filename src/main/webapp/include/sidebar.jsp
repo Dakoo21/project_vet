@@ -623,29 +623,28 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalDataList.jsp" class="nav-link">
+                            <a href="/CustomerDB/TotalDataList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객-동물 전체 데이터 조회</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalCustomerList.jsp" class="nav-link">
-                            <a href="/pages/customerDB/totalDataRegister.jsp" class="nav-link">
+                            <a href="/CustomerDB/TotalDataRegister" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객-동물 DB등록</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalDataDetail.jsp" class="nav-link">
+                            <a href="/CustomerDB/TotalDataDetail" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객-동물 상세페이지</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/page/customerDB/totalCustomerList.jsp" class="nav-link">
+                            <a href="/CustomerDB/TotalCustomerList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객 데이터</p>
                             </a>
@@ -960,14 +959,14 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalDataList.jsp" class="nav-link">
+                            <a href="CustomerDB/TotalDataList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객-동물 전체 데이터 조회</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/totalCustomerList.jsp" class="nav-link">
+                            <a href="/CustomerDB/TotalCustomerList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>고객 데이터</p>
                             </a>

@@ -1,5 +1,60 @@
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    List<Map<String,Object>> diagList = (List)request.getAttribute("diagList");
+%>
+
+<script>
+    function totalDataUpdate() {
+        var modal = document.getElementById("totalDataUpdate");
+        modal.style.display = "block";
+    }
+    // Modal 닫기
+    function closeModal() {
+        var modal = document.getElementById("totalDataUpdate");
+        modal.style.display = "none";
+        location.reload();
+    }
+
+    // Modal 닫기 버튼에 이벤트 리스너 추가
+    var closeButton = document.getElementsByClassName("close")[0];
+    closeButton.onclick = function() {
+        closeModal();
+    }
+
+    function ModifyData() {
+        $.ajax({
+            url: "/CustomerDB/TotalDataUpdate",
+            type: "POST",
+            data: JSON.stringify({
+                animalPk: $("#animal_pk").val(),
+                master_nm: $("#master_nm").val(),
+                master_pnumber: $("#master_pnumber").val(),
+                master_address: $("#master_address").val(),
+                master_email: $("#master_email").val(),
+                animal_nm: $("#animal_nm").val(),
+                animal_species: $("#animal_species").val(),
+                animal_breed: $("#animal_breed").val(),
+                animal_sex: $("#animal_sex").val(),
+                animal_bdate: $("#animal_bdate").val(),
+                animal_neut: $("#animal_neut").val(),
+                animal_weight: $("#animal_weight").val(),
+                masterpk: $("#masterpk").val()
+            }),
+            contentType: "application/json",
+            success: function(){
+                alert("변경이 완료되었습니다.");
+            },
+            error: function(xhr, status, error){
+                // 실패했을 때 실행할 코드
+                alert("변경이 완료되었습니다.");
+                closeModal();
+            }
+        });
+    }
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,65 +87,74 @@
         <!-- Main content -->
         <div class="text-right">
             <div id="padding-right50" class="position-absolute top-0 end-70">
-                <button id="margin-right20" type="button" class="btn btn-warning">정보수정</button>
-                <button type="button" class="btn btn-danger">삭제</button>
+                <button  class="btn btn-warning" id="margin-right20"  onclick="totalDataUpdate()" data-bs-target="#totalDataUpdate">정보수정</button>
             </div>
         </div>
         <section class="content">
             <div id="contents_box">
-                <div id="img_area">
-                    <img src="../img/bulldog.svg" class="img-fluid img-thumbnail" alt="...">
-                </div>
                 <div id="table_area">
                     <table class="table table-borderless">
                         <tr>
                             <th>고객명</th>
-                            <td><input class="form-control" type="text" value="서견주" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].master_nm}" aria-label="readonly input example" readonly></td>
                             <th>연락처</th>
-                            <td><input class="form-control" type="tel" value="010-7575-5757" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="tel" value="${dList[0].master_pnumber}" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>주소</th>
-                            <td><input class="form-control" type="text" value="금천구 가산동 123-12" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].master_address}" aria-label="readonly input example" readonly></td>
                             <th>email</th>
-                            <td><input class="form-control" type="email" value="seoul17@hot.com" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="email" value="${dList[0].master_email}" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>동물이름</th>
-                            <td><input class="form-control" type="text" value="뭉치" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].animal_nm}" aria-label="readonly input example" readonly></td>
                             <th>종류</th>
-                            <td><input class="form-control" type="text" value="개" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].animal_species}" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>품종</th>
-                            <td><input class="form-control" type="text" value="불독" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].animal_breed}" aria-label="readonly input example" readonly></td>
                             <th>성별</th>
-                            <td><input class="form-control" type="text" value="여" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].animal_sex}" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>생년월일</th>
-                            <td><input class="form-control" type="date" value="2012.02" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="date" value="${dList[0].animal_bdate}" aria-label="readonly input example" readonly></td>
                             <th>중성화</th>
-                            <td><input class="form-control"  type="text" value="O" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control"  type="text" value="${dList[0].animal_neut}" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
-                            <th>진료예약</th>
-                            <td><input class="form-control" type="text" value="2024.02.8 - 15:00" aria-label="readonly input example" readonly></td>
+                            <th>진료구분</th>
+                            <td><input class="form-control" type="text" value="진료" aria-label="readonly input example" readonly></td>
                             <th>몸무게</th>
-                            <td><input class="form-control" type="text" value="5.4kg" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="${dList[0].animal_weight}kg" aria-label="readonly input example" readonly></td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">최근 진료내역</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1"  aria-label="readonly input example" readonly style="width: 100%" rows="3"></textarea>
+                <div id="diag_box">
+                    <%
+                        for (int i =0; i < diagList.size(); i++){
+                            Map<String,Object> map = diagList.get(i);
+                    %>
+                    <div id="exampleFormControlTextarea1">
+                        <div><%=map.get("BOOKING_DATE")%></div>
+                        <div><%=map.get("BOOKING_START")%> ~</div>
+                        <div><%=map.get("BOOKING_END")%></div>
+                    </div>
+                    <%
+                        }
+                    %>
+                </div>
             </div>
         </section>
         <!-- /.content -->
         <div class="text-center">
             <a href="http://localhost:8000/CustomerDB/TotalDataList" type="button" class="btn btn-primary" style="margin-right: 10px;">뒤로가기</a>
-            <button type="button" class="btn btn-success">진료등록</button>
+            <a href="http://localhost:8000/booking/bookingRegister" type="button" class="btn btn-success">진료등록</a>
         </div>
     </div>
     <!-- /.content-wrapper -->
@@ -101,12 +165,114 @@
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 
+
+
+<%-- 수정 모달 시작 --%>
+<div class="modal" id="totalDataUpdate">
+    <div class="modal-dialog modal-dialog-centered">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">정보 수정</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                    <input type="hidden" id="animal_pk" name="animal_pk" value="${dList[0].animalPk}">
+                    <div id="table_area_M">
+                        <table class="table table-borderless">
+                            <tr>
+                                <th>고객명</th>
+                                <td><input class="form-control" id= "master_nm" type="text" value="${dList[0].master_nm}" ></td>
+                                <th>연락처</th>
+                                <td><input class="form-control" id="master_pnumber" type="tel" value="${dList[0].master_pnumber}"></td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td><input class="form-control" id="master_address" type="text" value="${dList[0].master_address}"></td>
+                                <th>email</th>
+                                <td><input class="form-control" id="master_email" type="email" value="${dList[0].master_email}"></td>
+                            </tr>
+                            <tr>
+                                <th>동물이름</th>
+                                <td><input class="form-control" id="animal_nm" type="text" value="${dList[0].animal_nm}" ></td>
+                                <th>종류</th>
+                                <td><input class="form-control" id="animal_species" type="text" value="${dList[0].animal_species}"></td>
+                            </tr>
+                            <tr>
+                                <th>품종</th>
+                                <td><input class="form-control" id="animal_breed" type="text" value="${dList[0].animal_breed}"></td>
+                                <th>성별</th>
+                                <td><input class="form-control" id="animal_sex" type="text" value="${dList[0].animal_sex}"></td>
+                            </tr>
+                            <tr>
+                                <th>생년월일</th>
+                                <td><input class="form-control" id="animal_bdate" type="date" value="${dList[0].animal_bdate}"></td>
+                                <th>중성화</th>
+                                <td><input class="form-control"  id="animal_neut" type="text" value="${dList[0].animal_neut}"></td>
+                            </tr>
+                            <tr>
+                                <th>진료구분</th>
+                                <td><input class="form-control"  type="text" value="진료"></td>
+                                <th>몸무게</th>
+                                <td><input class="form-control" id="animal_weight" type="text" value="${dList[0].animal_weight}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="ModifyData()">저장</button>
+                <input type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="closeModal()" value="닫기">
+            </div>
+        </div>
+    </div>
+</div>
+<%-- 수정 모달 끝 --%>
+
 </body>
 </html>
 
-
-
 <style typeof="text/css">
+    #diag_box{
+        border: 1px solid #efefef;
+        border-radius: 5px;
+        background-color: #efefef;
+        height: 300px;
+    }
+    #exampleFormControlTextarea1{
+        display: flex;
+        gap: 5px;
+        margin: 0 20px;
+    }
+
+    /* 수정된 CSS 코드 */
+    .modal-dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw; /* 모달 창의 너비를 뷰포트의 너비로 설정합니다. */
+        height: 100vh; /* 모달 창의 높이를 뷰포트의 높이로 설정합니다. */
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+    .modal-content {
+        height: 100%; /* 모달 내용의 높이를 100%로 설정합니다. */
+        border: none; /* 테두리 없이 스타일링합니다. */
+    }
+    .modal-body {
+        overflow-y: auto; /* 세로 스크롤이 필요한 경우 자동으로 스크롤이 생성됩니다. */
+        max-height: calc(100vh - 120px); /* 모달 창의 높이에서 헤더와 푸터의 높이를 뺀 나머지 공간을 설정합니다. */
+    }
+    .modal-footer {
+        display: flex;
+        justify-content: center;
+        padding: 15px;
+    }
+
     .form-control{
         width: 50%;
         text-align: center;
