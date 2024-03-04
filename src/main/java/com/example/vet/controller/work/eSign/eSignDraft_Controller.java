@@ -3,6 +3,7 @@ package com.example.vet.controller.work.eSign;
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.Member;
 import com.example.vet.model.Sign;
+import com.example.vet.model.SignAdopt;
 import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.service.work.eSign.eSignDraft_Service;
 import lombok.extern.slf4j.Slf4j;
@@ -42,12 +43,12 @@ public class eSignDraft_Controller {
      작성일자 : 26.02.25
      기능 : 기안서 작성
      **********************************************************************************/
-    // @PostMapping("draftInsert")
-    // public String eSignInsert(Sign sign) {
-    //     int result;
-    //     result = eSignDraft_service.insertDraft(sign);
-    //     return "pages/esignbox/docsBox";
-    // }
+    @PostMapping("draftInsert")
+    public String eSignInsert(SignAdopt signAdopt) {
+        int result;
+        result = eSignDraft_service.insertAdoptDraft(signAdopt);
+        return "pages/esignbox/docsBox";
+    }
 
     /**********************************************************************************
      작성자 : 최윤정
