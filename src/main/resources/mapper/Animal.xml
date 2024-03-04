@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.AnimalMapper">
+    <resultMap id="animalResultMap" type="java.util.HashMap">
+        <result column="ANIMALPK" property="animalPk"/>
+        <result column="ANIMAL_NM" property="animal_nm"/>
+        <result column="ANIMAL_BDATE" property="animal_bdate"/>
+        <result column="ANIMAL_SPECIES" property="animal_species"/>
+        <result column="ANIMAL_BREED" property="animal_breed"/>
+        <result column="ANIMAL_WEIGHT" property="animal_weight"/>
+        <result column="ANIMAL_SEX" property="animal_sex"/>
+        <result column="ANIMAL_NEUT" property="animal_neut"/>
+        <result column="MASTER_NM" property="master_nm"/>
+        <result column="MASTER_PNUMBER" property="master_pnumber"/>
+        <result column="MASTER_ADDRESS" property="master_address"/>
+        <result column="MASTER_EMAIL" property="master_email"/>
+        <result column="BOOKING_DATE" property="booking_date"/>
+    </resultMap>
+
+    <select id="animalSelect1" parameterType="com.example.vet.model.AnimalVO" resultMap="animalResultMap">
+    SELECT A.ANIMALPK, A.ANIMAL_NM,
+                A.ANIMAL_BDATE, A.ANIMAL_SPECIES,
+                A.ANIMAL_BREED, A.ANIMAL_WEIGHT,
+                A.ANIMAL_SEX, A.ANIMAL_NEUT,
+                M.MASTER_NM, M.MASTER_PNUMBER,
+                M.MASTER_ADDRESS, M.MASTER_EMAIL
+    FROM ANIMAL_TEST A
+    LEFT OUTER JOIN MASTER_TEST M ON A.MASTERPK = M.MASTERPK
+    where 1=1
+        <if test="master_nm != null">AND master_nm=#{master_nm}</if>
+        <if test="gubun != null">
+            <choose>
+                <when test ='gubun.equals("master_nm")'>
+                    AND master_nm LIKE '%'||#{keyword}||'%'
+                </when>
+                <when test='gubun.equals("anmimal_nm")'>
+                    AND animal_nm LIKE '%'||#{keyword}||'%'
+                </when>
+            </choose>
+        </if>
+    order by A.animalPk desc
+    </select>
+
+    <select id="selectAnimalDetail" parameterType="com.example.vet.model.AnimalVO" resultMap="animalResultMap">
+    SELECT A.ANIMALPK, A.ANIMAL_NM,
+                A.ANIMAL_BDATE, A.ANIMAL_SPECIES,
+                A.ANIMAL_BREED, A.ANIMAL_WEIGHT,
+                A.ANIMAL_SEX, A.ANIMAL_NEUT,
+                M.MASTER_NM, M.MASTER_PNUMBER,
+                M.MASTER_ADDRESS, M.MASTER_EMAIL
+    FROM ANIMAL_TEST A
+    LEFT OUTER JOIN MASTER_TEST M ON A.MASTERPK = M.MASTERPK
+    where 1=1
+        <if test="animalPk != null and animalPk != 0">AND A.ANIMALPK=#{animalPk}</if>
+    order by A.ANIMALPK desc
+    </select>
+
+    <select id="selectDiag" parameterType="int" resultType="Map">
+        SELECT
+            A.ANIMAL_NM,
+            C.*
+        FROM ANIMAL_TEST A
+        JOIN MASTER_TEST M ON A.MASTERPK = M.MASTERPK
+        JOIN BOOKING_TEST C ON A.ANIMALPK = C.ANIMAL_PK
+        where A.ANIMALPK = #{animalPk}
+    </select>
+
+    <select id="bookingSelect" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
+        select b.booking_date
+        from booking_test b
+        left outer join booking_test on b.booking_date = b.booking_date
+        where booking_date >= to_date(#{currentDate}, 'YYYY-MM-DD') and animalPk = #{animalPk}
+        order by booking_date desc
+        fetch first 1 row only
+    </select>
+
+
+    <select id="diagSelect" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
+    select diag_prescription
+    from diag_test
+    left outer join booking_test on booking_test.booking_pk = diag_test.booking_pk
+    left outer join animal_test on animal_test.animalPk = booking_test.animalPk
+    left outer join master_test on master_test.masterPk = animal_test.masterPk
+    </select>
+
+    <select id="selectMasterPk" parameterType="String" resultType="Integer">
+        select masterPk
+        from master_test
+        where master_nm = #{master_nm}
+    </select>
+
+    <insert id="animalInsert" parameterType="com.example.vet.model.AnimalVO">
+        INSERT INTO animal_test(
+                                ANIMALPK,
+                                ANIMAL_NM,
+                                ANIMAL_BDATE,
+                                ANIMAL_SPECIES,
+                                ANIMAL_BREED,
+                                ANIMAL_WEIGHT,
+                                ANIMAL_SEX,
+                                ANIMAL_NEUT,
+                                MASTERPK
+        )
+        VALUES(
+               animalPk_seq.nextval,
+               #{animal_nm},
+               #{animal_bdate},
+               #{animal_species},
+               #{animal_breed},
+               #{animal_weight},
+               #{animal_sex},
+               #{animal_neut},
+               #{masterpk}
+              )
+    </insert>
+
+    <update id="animalUpdate" parameterType="com.example.vet.model.TotalDataUpdateVO">
+        UPDATE ANIMAL_TEST
+        SET
+            ANIMAL_NM = #{animal_nm},
+            ANIMAL_BDATE = #{animal_bdate},
+            ANIMAL_SPECIES = #{animal_species},
+            ANIMAL_BREED = #{animal_breed},
+            ANIMAL_WEIGHT = #{animal_weight},
+            ANIMAL_SEX = #{animal_sex},
+            ANIMAL_NEUT = #{animal_neut}
+            WHERE
+                ANIMALPK = #{animalPk}
+  </update>
+
+    <select id="detailSelect" parameterType="com.example.vet.model.AnimalVO" resultType="com.example.vet.model.AnimalVO">
+        SELECT MASTERPK, MASTER_NM, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS,
+               ANIMAL_NM, ANIMAL_SPECIES, ANIMAL_BREED, ANIMAL_WEIGHT, ANIMAL_SEX, ANIMAL_NEUT
+        FROM ANIMAL_TEST
+        WHERE
+            MASTERPK = #{masterPk}
+    </select>
+</mapper>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
@@ -29,8 +28,8 @@
         document.querySelector("#f_customerdata").submit();
     }
 
-    const customerDataDetail = (master_Pk) =>{
-        location.href = "/CustomerDB/TotalCustomerDetail?master_Pk="+master_Pk;
+    const customerDataDetail = (masterPk) =>{
+        location.href = "/CustomerDB/TotalCustomerDetail?masterPk="+masterPk;
     }
 
 
@@ -74,21 +73,21 @@
                 <div class="row">
                     <div class="search-top-area" style="right: auto">
                         <div class="search-box">
-                            <form action="simple-results.html">
-                                <div class="input-group">
-                                    <input type="search" class="form-control form-control-lg" placeholder="고객명, 동물이름">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-lg btn-default" onClick="customerDataSearch()">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                    <div class="text-right">
-                                        <div id="padding-right50" class="position-absolute top-0 end-20">
-                                            <a href="TotalCustomerInsert" type="button" class="btn btn-primary"  style="margin-left: 70px">등록</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                          <form action="simple-results.html">
+                              <div class="input-group">
+                                  <input type="search" class="form-control form-control-lg" placeholder="고객명, 동물이름">
+                                  <div class="input-group-append">
+                                      <button type="submit" class="btn btn-lg btn-default" onClick="customerDataSearch()">
+                                        <i class="fa fa-search"></i>
+                                      </button>
+                                  </div>
+                                   <div class="text-right">
+                                     <div id="padding-right50" class="position-absolute top-0 end-20">
+                                      <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-primary"  style="margin-left: 70px">등록</a>
+                                     </div>
+                                   </div>
+                              </div>
+                          </form>
                         </div>
                     </div>
                 </div>
@@ -113,7 +112,7 @@
 
                         %>
                         <tr>
-                            <td><a href="javascript:customerDataDetail('<%=masterVO.getMaster_pk()%>')"><%=masterVO.getMaster_nm()%></a></td>
+                            <td><a href="javascript:customerDataDetail('<%=masterVO.getMasterPk()%>')"><%=masterVO.getMaster_nm()%></a></td>
                             <td><%=masterVO.getMaster_username()%></td>
                             <td><%=masterVO.getMaster_gender()%></td>
                             <td><%=masterVO.getMaster_bdate()%></td>

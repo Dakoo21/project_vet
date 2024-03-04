@@ -1,5 +1,9 @@
 package com.example.vet.service.board;
 
+import com.example.vet.model.AnimalVO;
+import com.example.vet.model.MasterVO;
+import com.example.vet.model.TotalDataUpdateVO;
+import com.example.vet.repository.board.TotalCustomer_Repository;
 import com.example.vet.repository.board.TotalData_Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,17 +28,27 @@ public class TotalDataService {
         return dList;
     }
 
-    public int dataUpdate(Map<String, Object> pmap) {
+    public List<Map<String, Object>> detail(AnimalVO animalVO) {
+        logger.info("dataList");
+        List<Map<String, Object>> dList = new ArrayList<>();
+        dList = totalData_repository.detail(animalVO);
+        return dList;
+    }
+
+    public int dataUpdate(TotalDataUpdateVO totalDataUpdateVO) {
         logger.info("dataUpdate");
-        int result = 0;
-        result = totalData_repository.dataUpdate(pmap);
+        int  result = totalData_repository.dataUpdate(totalDataUpdateVO);
         return result;
     }
 
-    public int dataInsert(Map<String, Object> pmap) {
+    public int dataInsert(AnimalVO animalVO) {
         logger.info("dataInsert");
         int result = 0;
-        result = totalData_repository.dataInsert(pmap);
+        result = totalData_repository.dataInsert(animalVO);
         return result;
+    }
+
+    public List<Map<String,Object>> selectDiag(int animalPk) {
+        return totalData_repository.selectDiag(animalPk);
     }
 }

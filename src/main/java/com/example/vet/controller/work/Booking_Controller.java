@@ -176,7 +176,7 @@ public class Booking_Controller {
     public List<Map<String, Object>> getAnimals(@RequestParam("animalNm") String animalNm){
         logger.info(animalNm);
         AnimalVO animalVO = new AnimalVO();
-        animalVO.setAnimalNm(animalNm);
+        animalVO.setAnimal_Nm(animalNm);
         List<Map<String, Object>> animList = bookingService.SelectAnimal(animalVO);
         logger.info(animList.toString());
         return animList;
