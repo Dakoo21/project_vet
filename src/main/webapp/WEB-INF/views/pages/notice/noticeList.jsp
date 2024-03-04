@@ -8,7 +8,7 @@
     <%@ include file="/include/bootCommon.jsp"%>
     <script>
         const noticeInsertPage = (event) => {
-          location.href = /* 컨트롤러에 연결하는 */
+          location.href = "/noticeInsertPage";
         }
     </script>
 </head>
@@ -60,7 +60,7 @@
                                 <!-- [[ Bootstrap 페이징 처리  구간  ]] -->
                                 <div class='board-footer'>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm" onclick="noticeInsertPage()">
-                                        기안하기
+                                        글쓰기
                                     </button>
                                 </div>
                             </div>
