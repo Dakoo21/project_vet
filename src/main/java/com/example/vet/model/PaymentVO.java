@@ -3,52 +3,39 @@ package com.example.vet.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @NoArgsConstructor
 public class PaymentVO {
-    private Integer paymentPK;
-    private String paymentOauthnum;
-    private Integer paid_amount;
-    private Integer amount;
-    private Integer applyNum;
-    private String merchantUid;
-    private String impUid;
+    private Integer payment_pk;
+    private String merchant_uid;
+    private String pg_provider;
+    private Integer paid_at;
+    private String status;
     private String pg_tid;
-    private String paymentType;
-    private String paymentMethod;
-    private String paymentNm;
-    private String buyerEmail;
     private String buyer_name;
     private String buyer_tel;
-    private String buyerAddress;
+    private Integer paid_amount;
+    private String imp_uid;
     private String name;
-    private Integer common_code_pk;
-    private Integer drugPrescription_pk;
 
     @Builder
-    public PaymentVO(int paymentPK, String paymentOauthnum, int paid_amount, int amount,
-                     int applyNum, String merchantUid, String impUid, String pg_tid,
-                     String paymentType, String paymentMethod, String paymentNm,
-                     String buyerEmail, String buyer_name, String buyer_tel, String buyerAddress,
-                     String name, int common_code_pk, int drugPrescription_pk) {
-        this.paymentPK = paymentPK;
-        this.paymentOauthnum = paymentOauthnum;
-        this.paid_amount = paid_amount;
-        this.amount = amount;
-        this.applyNum = applyNum;
-        this.merchantUid = merchantUid;
-        this.impUid = impUid;
+    public PaymentVO(int payment_pk, String merchant_uid, String pg_provider, int paid_at,
+                     String status, String pg_tid, String buyer_name, String buyer_tel,
+                     int paid_amount,String imp_uid, String name) {
+        log.info("VO빌더입니다");
+        this.payment_pk = payment_pk;
+        this.merchant_uid = merchant_uid;
+        this.pg_provider = pg_provider;
+        this.paid_at = paid_at;
+        this.status = status;
         this.pg_tid = pg_tid;
-        this.paymentType = paymentType;
-        this.paymentMethod = paymentMethod;
-        this.paymentNm = paymentNm;
-        this.buyerEmail = buyerEmail;
         this.buyer_name = buyer_name;
         this.buyer_tel = buyer_tel;
-        this.buyerAddress = buyerAddress;
+        this.paid_amount = paid_amount;
+        this.imp_uid = imp_uid;
         this.name = name;
-        this.common_code_pk = common_code_pk;
-        this.drugPrescription_pk = drugPrescription_pk;
     }
 }
