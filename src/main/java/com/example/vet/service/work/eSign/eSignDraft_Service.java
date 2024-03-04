@@ -4,6 +4,7 @@ import com.example.vet.controller.work.eSign.SignMapper;
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.Member;
 import com.example.vet.model.Sign;
+import com.example.vet.model.SignAdopt;
 import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.repository.work.eSign.eSignDraft_Repository;
 import lombok.extern.slf4j.Slf4j;
@@ -62,5 +63,12 @@ public class eSignDraft_Service {
         log.info("트랜잭션 서비스" + generatedSignPk);
         eSignDraft_repository.insertDraftLine(generatedSignPk);
         return sign;
+    }
+
+    public int insertAdoptDraft(SignAdopt signAdopt) {
+        int result = eSignDraft_repository.insertAdoptDraft(signAdopt);
+        log.info(String.valueOf(result));
+        return result;
+
     }
 }
