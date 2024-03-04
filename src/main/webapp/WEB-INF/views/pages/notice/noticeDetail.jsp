@@ -79,6 +79,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
+
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">공지사항수정</h4>
