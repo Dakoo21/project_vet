@@ -21,7 +21,6 @@
             url: "/CustomerDB/TotalCustomerInsert",
             type: "POST",
             data: JSON.stringify({
-                masterpk: $("#masterpk").val(),
                 master_nm: $("#master_nm").val(),
                 master_username: $("#master_username").val(),
                 master_pw: $("#master_pw").val(),
@@ -85,29 +84,29 @@
                     <table class="table table-borderless" id="customerdataForm">
                         <tr>
                             <th>고객명</th>
-                            <th><input type="text" class="form-control" id="exampleFormControlInput1"></th>
+                            <th><input type="text" class="form-control" id="master_nm"></th>
                             <th>ID</th>
-                            <th><input type="text" class="form-control" id="exampleFormControlInput2"></th>
+                            <th><input type="text" class="form-control" id="master_username"></th>
                         </tr>
                         <tr>
                             <th>성별</th>
-                            <th><select class="form-select" aria-label="default select example">
+                            <th><select id="master_gender" class="form-control" aria-label="default select example">
                                 <option selected>성별</option>
-                                <option value="1">Female</option>
-                                <option value="2">M</option>
+                                <option value="F">F</option>
+                                <option value="M">M</option>
                             </select></th>
                             <th>생년월일</th>
-                            <th><input type="date" class="form-control" id="exampleFormControlInput3"></th>
+                            <th><input type="date" class="form-control" id="master_bdate"></th>
                         </tr>
                         <tr>
                             <th>email</th>
-                            <th><input type="email" class="form-control" id="exampleFormControlInput4"></th>
+                            <th><input type="email" class="form-control" id="master_email"></th>
                             <th>연락처</th>
-                            <th><input type="text" class="form-control" id="exampleFormControlInput5"></th>
+                            <th><input type="text" class="form-control" id="master_pnumber"></th>
                         </tr>
                         <tr>
                             <th>주소</th>
-                            <th><input type="text" class="form-control" id="exampleFormControlInput6"></th>
+                            <th><input type="text" class="form-control" id="master_address"></th>
                         </tr>
                     </table>
                 </div>

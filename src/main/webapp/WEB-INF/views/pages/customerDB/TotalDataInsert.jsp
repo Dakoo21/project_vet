@@ -1,5 +1,12 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.vet.model.AnimalInsertMasterVO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
+<%
+    List<AnimalInsertMasterVO> masterInfo = (List)request.getAttribute("masterInfo");
+%>
+
 <script>
     function insert(){
         // AJAX 요청 보내기
@@ -17,58 +24,14 @@
                 masterPk: $("#masterPk").val()
             }),
             contentType: "application/json",
-            success: function(response){
-                // 성공했을 때 실행할 코드
-                console.log("요청이 성공했습니다.");
-                console.log("서버에서 받은 응답: ", response);
+            success: function(){
             },
             error: function(xhr, status, error){
-                // 실패했을 때 실행할 코드
-                console.error("요청이 실패했습니다.");
-                console.error("에러: ", error);
+                alert("저장되었습니다.");
+                window.history.back()
             }
         });
-
-    //모달
-    // function searchEnter() {
-    //     $("#customerSearchForm .modal-content").load("CustomerDB/Popup");
-    //     $("#customerSearchForm ").modal();
     }
-
-
-    // var modal = document.getElementById("customerSearchForm");
-    // var master_btn_search = document.getElementById("master_btn_search");
-    // var SearchMaster_nm = document.getElementById("SearchMaster_nm");
-    // // 검색 버튼 클릭 시
-    // master_btn_search.onclick = function() {
-    //     // 사용자가 입력한 검색어 가져오기
-    //     var searchTerm = SearchMaster_nm.value;
-    //
-    //     // 결과 출력 등 추가 처리 가능
-    //     console.log("검색 결과:", resultList);
-    //
-    // }
-
-    // function CustomerList() {
-    //     $.ajax({
-    //         url: "/CustomerDB/Popup",
-    //         type: "POST",
-    //         data: JSON.stringify({
-    //             master_nm: $("#master_nm").val(),
-    //         }),
-    //         contentType: "application/json",
-    //         success: function(response){
-    //             // 성공했을 때 실행할 코드
-    //             console.log("요청이 성공했습니다.");
-    //             searchEnter();
-    //         },
-    //         error: function(xhr, status, error){
-    //             // 실패했을 때 실행할 코드
-    //             console.error("요청이 실패했습니다.");
-    //             console.error("에러: ", error);
-    //         }
-    //     });
-    // }
 
 </script>
 <!DOCTYPE html>
@@ -107,10 +70,16 @@
                 <tr>
                     <th>고객명</th>
                     <th>
-                        <input type="text" class="form-control" id="master_nm" placeholder="">
-<%--                        <div class="col-6">--%>
-<%--                            <button id="btn_search" class="btn btn-dark" onClick="CustomerList()" data-toggle="modal" data-target="#customerSearchForm">검색</button>--%>
-<%--                        </div>--%>
+                        <select class="form-control select2" name="dropdown" id="masterPk">
+                            <%
+                                for (int i =0; i < masterInfo.size(); i++){
+                                    AnimalInsertMasterVO animalInsertMasterVO = masterInfo.get(i);
+                            %>
+                            <option value="<%=animalInsertMasterVO.getMasterpk()%>"><%=animalInsertMasterVO.getMaster_nm()%></option>
+                            <%
+                                }
+                            %>
+                        </select>
                    </th>
                     <th>연락처</th>
                     <th><input type="tel" class="form-control" id="master_pnumber" placeholder="- 포함"></th>
@@ -123,7 +92,7 @@
                 </tr>
                 <tr>
                     <th>동물이름</th>
-                    <th><input type="text" class="form-control" id="animal_nm" placeholder=></th>
+                    <th><input type="text" class="form-control" id="animal_Nm" placeholder=></th>
                     <th>축종</th>
                     <th><input type="text" class="form-control" id="animal_species" placeholder="개, 고양이, 토끼..."></th>
                 </tr>
@@ -131,20 +100,20 @@
                     <th>품종</th>
                     <th><input type="text" class="form-control" id="animal_breed" placeholder=></th>
                     <th>성별</th>
-                    <th><select id="animal_sex" class="form-select" aria-label="default select example">
+                    <th><select id="animal_sex" class="form-control" aria-label="default select example">
                         <option selected>성별</option>
-                        <option value=1>F</option>
-                        <option value=2>M</option>
+                        <option value="F">F</option>
+                        <option value="M">M</option>
                     </select></th>
                 </tr>
                 <tr>
                     <th>생년월일</th>
                     <th><input type="date" class="form-control" id="animal_bdate" placeholder="8자리"></th>
                     <th>중성화</th>
-                    <th><select class="form-select" id="animal_neut" aria-label="default select example">
+                    <th><select class="form-control" id="animal_neut" aria-label="default select example">
                         <option selected>중성화 여부</option>
-                        <option value=1>O</option>
-                        <option value=2>X</option>
+                        <option value="O">O</option>
+                        <option value="X">X</option>
                     </select></th>
                 </tr>
                 <tr>

@@ -12,7 +12,7 @@
         VALUES(masterPk_seq.nextval, #{master_nm}, #{master_username}, #{master_pw}, #{master_email}, #{master_pnumber}, #{master_address}, #{master_bdate})
     </insert>
 
-    <update id="masterUpdate" parameterType="com.example.vet.model.MasterVO">
+    <update id="masterUpdate" parameterType="com.example.vet.model.TotalCustomerUpdateVO">
         UPDATE MASTER_TEST
         SET
             MASTER_NM = #{master_nm},
@@ -26,8 +26,9 @@
             MASTERPK = #{masterPk}
   </update>
 
-    <select id="detailSelect" parameterType="com.example.vet.model.MasterVO" resultType="com.example.vet.model.MasterVO">
-        SELECT MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
+    <select id="masterDetail" parameterType="com.example.vet.model.MasterVO" resultType="com.example.vet.model.MasterVO">
+        SELECT MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW,
+               MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
         FROM MASTER_TEST
         WHERE
             MASTERPK = #{masterPk}

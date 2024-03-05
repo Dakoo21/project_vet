@@ -1,6 +1,7 @@
 package com.example.vet.repository.board;
 
 import com.example.vet.model.MasterVO;
+import com.example.vet.model.TotalCustomerUpdateVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,9 @@ public class TotalCustomer_Repository {
     }
 
     public MasterVO Detail(MasterVO masterVO){
-        MasterVO masterVO1 = sqlSessionTemplate.selectOne("detailSelect", masterVO);
+        MasterVO masterVO1 = sqlSessionTemplate.selectOne("masterDetail", masterVO);
         logger.info(masterVO1.toString());
+        logger.info("============");
         return masterVO1;
     }
 
@@ -36,13 +38,21 @@ public class TotalCustomer_Repository {
         return rowsInserted>0 ? 1 : 0;
     }
 
-    public int Update(MasterVO masterVO) {
-        int rowsUpdated = sqlSessionTemplate.update("masterUpdate", masterVO);
-        return rowsUpdated>0 ? 1 : 0;
+    public int update(TotalCustomerUpdateVO totalCustomerUpdateVO) {
+    logger.info("customerUpdate");
+        System.out.println("================");
+    int result = 0;
+    try{
+        result = sqlSessionTemplate.update("masterUpdate", totalCustomerUpdateVO);
+        System.out.println(result);
+    }catch (Exception e){
+        logger.info(e.toString());
+    }
+   return result;
     }
 
-    public List<MasterVO> Popup(MasterVO masterVO) {
-        return sqlSessionTemplate.selectList("selectPopupList", masterVO);
-    }
+//    public List<MasterVO> Popup(MasterVO masterVO) {
+//        return sqlSessionTemplate.selectList("selectPopupList", masterVO);
+//    }
 
 }

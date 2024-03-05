@@ -7,27 +7,22 @@
     int size = (dList != null) ? dList.size() : 0;
 %>
 <script type="text/javascript">
-    function searchEnter(){
-        console.log('searchEnter')
-        console.log(window.event.keyCode);//13
-        if(window.event.keyCode == 13){
-            dataSearch();
-        }
-        function dataSearch(){
-            console.log('dataSearch');
-            const gubun = document.querySelector("#gubun").value; // n_title을 선택시 value값은 n_title 이고 const gubun에 n_title 담김
-            const keyword = document.querySelector("#keyword").value; // 주차 검색클릭, 엔터시 value값은 주차로 동시에 반영되고 const keyword도 주차 담김
-            console.log(`${gubun} , ${keyword}`);
-            location.href="/CustomerDB/TotalDataList?gubun="+gubun+"&keyword="+keyword;  //검색버튼 누르는 순간 주소창이 바뀌기 때문에 컨트롤러에 전달해주기위한 코드 -> 컨트롤러 이동
-            //검색 후에 검색창은 다시 초기화됨
-            document.querySelector("#gubun").value = '분류선택';
-            document.querySelector("#keyword").value = '';
-        }
-
-        const dataInsert = () => {
-            document.querySelector("#f_totaldata").submit();
+    function searchEnter(event) {
+        if (event.key === 'Enter') {
+            boardSearch();
         }
     }
+
+    function boardSearch() {
+        var form = document.getElementById('searchForm');
+        var formData = new FormData(form);
+
+        // URL로 이동하거나, AJAX를 사용하여 서버로 데이터를 전송할 수 있습니다.
+        // 여기서는 URL로 이동하는 예제를 보여드리겠습니다.
+        var queryString = new URLSearchParams(formData).toString();
+        window.location.href = "localhost:8000/CustomerDB/TotalDataList?" + queryString;
+        }
+
 </script>
 
 <!DOCTYPE html>
@@ -60,25 +55,26 @@
                 </div>
             </div><!-- /.container-fluid -->
             <!-- 검색기 시작 -->
+            <form id="searchForm" onsubmit="boardSearch(event)">
             <div class="row">
                 <div class="col-3">
-                    <select id="gubun" class="form-select" aria-label="분류선택">
+                    <select id="gubun" name="gubun" class="form-select" aria-label="분류선택">
                         <option value="none">분류선택</option>
-                        <option value="b_title">고객명</option>
-                        <option value="b_writer">반려동물명</option>
+                        <option value="masterNm">고객명</option>
+                        <option value="animalNm">반려동물명</option>
                     </select>
                 </div>
                 <div class="col-6">
 <%--                    <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"--%>
 <%--                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>--%>
-                    <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
-                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="if(event.keyCode ===13) searchEnter(event)"/>
+                    <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색어를 입력하세요"
+                          aria-label="검색어를 입력하세요" aria-describedby="btn_search" />
                 </div>
                 <div class="col-3">
-                    <button id="btn_search" class="btn btn-danger" onClick="searchEnter(event)">검색</button>
+                    <button type="submit" id="btn_search" class="btn btn-danger" onclick="boardSearch()">검색</button>
                 </div>
-
             </div>
+       </form>
             <!--카테고리 버튼-->
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">

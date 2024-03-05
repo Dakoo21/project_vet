@@ -1,5 +1,6 @@
 package com.example.vet.repository.board;
 
+import com.example.vet.model.AnimalInsertMasterVO;
 import com.example.vet.model.AnimalVO;
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.TotalDataUpdateVO;
@@ -34,7 +35,6 @@ public class TotalData_Repository{
     }
     public int dataInsert(AnimalVO animalVO) {
         logger.info("dataInsert");
-        System.out.println("repo");
         System.out.println(animalVO);
         int result = 0;
         result = sqlSessionTemplate.insert("animalInsert", animalVO);
@@ -56,6 +56,10 @@ public class TotalData_Repository{
 
     public List<Map<String,Object>> selectDiag(int animalPk) {
         return sqlSessionTemplate.selectList("selectDiag", animalPk);
+    }
+
+    public List<AnimalInsertMasterVO> selectMasterInfo() {
+        return sqlSessionTemplate.selectList("selectMasterNm");
     }
 }
 

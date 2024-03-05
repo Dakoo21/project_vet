@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,8 +73,8 @@ public class TotalDataController {
      * @return
      */
     @GetMapping("TotalDataInsertPage")
-    public String insertPage(){
-
+    public String insertPage(Model model){
+        model.addAttribute("masterInfo",totalDataService.selectMasterInfo());
         return "pages/customerDB/TotalDataInsert";
     }
 
@@ -85,16 +84,8 @@ public class TotalDataController {
      * @return
      */
     @PostMapping("TotalDataInsert")
-    public String dataInsert(@RequestBody AnimalVO animalVO) {
+    public void dataInsert(@RequestBody AnimalVO animalVO) {
         logger.info("dataInsert");
-        int result = 0;
-        String path = "";
-        result = totalDataService.dataInsert(animalVO);
-        if (result == 1) {
-            path = "pages/customerDB/TotalDataInsert";
-        } else {
-            path = "redirect: error";
-        }
-        return path;
+        totalDataService.dataInsert(animalVO);
     }
 }
