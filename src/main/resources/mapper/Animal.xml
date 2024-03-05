@@ -65,7 +65,7 @@
         where A.ANIMALPK = #{animalPk}
     </select>
 
-    <select id="bookingSelect" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
+    <select id="bookingSelect1" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
         select b.booking_date
         from booking_test b
         left outer join booking_test on b.booking_date = b.booking_date
