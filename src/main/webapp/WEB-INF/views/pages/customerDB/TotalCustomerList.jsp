@@ -29,12 +29,10 @@
     }
 
     const customerDataDetail = (masterPk) =>{
-        location.href = "/CustomerDB/TotalCustomerDetail?masterPk="+masterPk;
+      location.href = "/CustomerDB/TotalCustomerDetail?masterPk="+masterPk;
+      //location.href = "/CustomerDB/TotalCustomerDetail/"+masterPk;
     }
-
-
 </script>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +107,6 @@
                         <%
                             for (int i =0; i < cList.size(); i++){
                                 MasterVO masterVO = cList.get(i);
-
                         %>
                         <tr>
                             <td><a href="javascript:customerDataDetail('<%=masterVO.getMasterPk()%>')"><%=masterVO.getMaster_nm()%></a></td>
@@ -123,7 +120,6 @@
                         <%
                             }
                         %>
-
                         </tbody>
                     </table>
                     <div style="display:flex; justify-content:center;">

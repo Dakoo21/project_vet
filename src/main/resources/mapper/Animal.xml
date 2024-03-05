@@ -61,7 +61,7 @@
             C.*
         FROM ANIMAL_TEST A
         JOIN MASTER_TEST M ON A.MASTERPK = M.MASTERPK
-        JOIN BOOKING_TEST C ON A.ANIMALPK = C.ANIMAL_PK
+        JOIN BOOKING_TEST C ON A.ANIMALPK = C.ANIMALPK
         where A.ANIMALPK = #{animalPk}
     </select>
 
@@ -102,15 +102,15 @@
                                 MASTERPK
         )
         VALUES(
-               animalPk_seq.nextval,
-               #{animal_nm},
+              ANIMAL_PK_SEQ.NEXTVAL,
+               #{animal_Nm},
                #{animal_bdate},
                #{animal_species},
                #{animal_breed},
                #{animal_weight},
                #{animal_sex},
                #{animal_neut},
-               #{masterpk}
+               #{masterPk}
               )
     </insert>
 
@@ -134,5 +134,9 @@
         FROM ANIMAL_TEST
         WHERE
             MASTERPK = #{masterPk}
+    </select>
+
+    <select id="selectMasterNm"  resultType="com.example.vet.model.AnimalInsertMasterVO">
+        select master_nm, masterpk from master_test
     </select>
 </mapper>

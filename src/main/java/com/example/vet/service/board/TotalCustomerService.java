@@ -1,6 +1,7 @@
 package com.example.vet.service.board;
 
 import com.example.vet.model.MasterVO;
+import com.example.vet.model.TotalCustomerUpdateVO;
 import com.example.vet.repository.board.TotalCustomer_Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,9 @@ public class TotalCustomerService {
         return totalCustomer_repository.Insert(masterVO);
     }
 
-    public int Update(MasterVO masterVO) {
-        return totalCustomer_repository.Update(masterVO);
+    public int update(TotalCustomerUpdateVO totalCustomerUpdateVO) {
+        logger.info("customerUpdate");
+        int result = totalCustomer_repository.update(totalCustomerUpdateVO);
+        return result;
     }
 }

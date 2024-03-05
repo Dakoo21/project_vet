@@ -1,5 +1,6 @@
 package com.example.vet.service.board;
 
+import com.example.vet.model.AnimalInsertMasterVO;
 import com.example.vet.model.AnimalVO;
 import com.example.vet.model.MasterVO;
 import com.example.vet.model.TotalDataUpdateVO;
@@ -37,7 +38,7 @@ public class TotalDataService {
 
     public int dataUpdate(TotalDataUpdateVO totalDataUpdateVO) {
         logger.info("dataUpdate");
-        int  result = totalData_repository.dataUpdate(totalDataUpdateVO);
+        int result = totalData_repository.dataUpdate(totalDataUpdateVO);
         return result;
     }
 
@@ -50,5 +51,8 @@ public class TotalDataService {
 
     public List<Map<String,Object>> selectDiag(int animalPk) {
         return totalData_repository.selectDiag(animalPk);
+    }
+    public List<AnimalInsertMasterVO> selectMasterInfo() {
+        return totalData_repository.selectMasterInfo();
     }
 }

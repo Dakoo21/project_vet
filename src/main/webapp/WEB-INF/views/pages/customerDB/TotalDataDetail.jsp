@@ -28,7 +28,7 @@
             url: "/CustomerDB/TotalDataUpdate",
             type: "POST",
             data: JSON.stringify({
-                animalPk: $("#animal_pk").val(),
+                animalPk: $("#animalPk").val(),
                 master_nm: $("#master_nm").val(),
                 master_pnumber: $("#master_pnumber").val(),
                 master_address: $("#master_address").val(),
@@ -179,12 +179,12 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                    <input type="hidden" id="animal_pk" name="animal_pk" value="${dList[0].animalPk}">
+                    <input type="hidden" id="animalPk" name="animalPk" value="${dList[0].animalPk}">
                     <div id="table_area_M">
                         <table class="table table-borderless">
                             <tr>
                                 <th>고객명</th>
-                                <td><input class="form-control" id= "master_nm" type="text" value="${dList[0].master_nm}" ></td>
+                                <td><input class="form-control" id= "master_nm" type="text" value="${dList[0].master_nm}"></td>
                                 <th>연락처</th>
                                 <td><input class="form-control" id="master_pnumber" type="tel" value="${dList[0].master_pnumber}"></td>
                             </tr>
@@ -204,13 +204,21 @@
                                 <th>품종</th>
                                 <td><input class="form-control" id="animal_breed" type="text" value="${dList[0].animal_breed}"></td>
                                 <th>성별</th>
-                                <td><input class="form-control" id="animal_sex" type="text" value="${dList[0].animal_sex}"></td>
+                                <td><select class="form-control" id="animal_sex" type="text" >
+                                    <option selected>${dList[0].animal_sex}</option>
+                                    <option value="F">F</option>
+                                    <option value="M">M</option>
+                                </select></td>
                             </tr>
                             <tr>
                                 <th>생년월일</th>
                                 <td><input class="form-control" id="animal_bdate" type="date" value="${dList[0].animal_bdate}"></td>
                                 <th>중성화</th>
-                                <td><input class="form-control"  id="animal_neut" type="text" value="${dList[0].animal_neut}"></td>
+                                <td><select class="form-control" id="animal_neut" type="text">
+                                <option selected>${dList[0].animal_neut}</option>
+                                <option value="O">O</option>
+                                <option value="X">X</option></select>
+                                </td>
                             </tr>
                             <tr>
                                 <th>진료구분</th>

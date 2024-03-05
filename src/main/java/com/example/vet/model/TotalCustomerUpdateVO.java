@@ -6,19 +6,15 @@ import lombok.ToString;
 
 @Setter @ToString
 @Getter
-public class TotalDataUpdateVO {
+public class TotalCustomerUpdateVO {
 
     private String master_nm;
-    private int animalPk;
+    private String master_username;
+    private String master_pw;
+    private String master_gender;
+    private String master_bdate;
     private String master_pnumber;
     private String master_address;
     private String master_email;
-    private String animal_nm;
-    private String animal_breed;
-    private String animal_sex;
-    private String  animal_bdate;
-    private String animal_neut;
-    private String animal_species;
-    private long animal_weight;
     private int masterPk;
 }

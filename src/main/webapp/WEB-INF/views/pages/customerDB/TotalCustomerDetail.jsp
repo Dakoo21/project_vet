@@ -32,13 +32,13 @@
     }
 
     //모달 열기
-    function totalDataUpdate() {
-        var modal = document.getElementById("totalDataUpdate");
+    function totalCustomerUpdate() {
+        var modal = document.getElementById("totalCustomerUpdate");
         modal.style.display = "block";
     }
     // Modal 닫기
     function closeModal() {
-        var modal = document.getElementById("totalDataUpdate");
+        var modal = document.getElementById("totalCustomerUpdate");
         modal.style.display = "none";
     }
 
@@ -62,11 +62,14 @@
                 master_address: $("#master_address").val()
             }),
             contentType: "application/json",
-            success: function(response){
-                // 성공했을 때 실행할 코드
-                console.log("요청이 성공했습니다.");
-                console.log("서버에서 받은 응답: ", response);
+            success: function(){
+                alert("변경이 완료되었습니다.");
             },
+            // success: function(response){
+            //     // 성공했을 때 실행할 코드
+            //     console.log("요청이 성공했습니다.");
+            //     console.log("서버에서 받은 응답: ", response);
+            // },
             error: function(xhr, status, error){
                 // 실패했을 때 실행할 코드
                 console.error("요청이 실패했습니다.");
@@ -135,9 +138,8 @@
                 </div>
         </section>
         <!-- /.content -->
-
         <div class="text-center">
-            <a href="http://localhost:8000/CustomerDB/" type="button" class="btn btn-warning" style="margin-right: 10px;">정보수정</a>
+            <button class="btn btn-warning" style="margin-right: 10px;" onclick="totalCustomerUpdate()">정보수정</button>
             <a href="http://localhost:8000/CustomerDB/TotalCustomerList" type="button" class="btn btn-primary" style="margin-right: 10px;">뒤로가기</a>
         </div>
     </div>
@@ -149,9 +151,8 @@
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 
-
 <%-- 수정 모달 시작 --%>
-<div class="modal" id="totalDataUpdate">
+<div class="modal" id="totalCustomerUpdate">
     <div class="modal-dialog modal-dialog-centered">
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="modal-content">
@@ -161,47 +162,41 @@
                 <h4 class="modal-title">정보 수정</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
-                <form id="f_board" method="post" action="/TotalCustomerUpdate">
-                    <input type="hidden" name="method" value="TotalCustomerUpdate">
-                    <input type="hidden" name="animal_pk" value="<%=masterVO.getMasterPk()%>">
-
-                    <section class="content">
+                    <input type="hidden" id="masterPk" name="masterPk" value="<%=masterVO.getMasterPk()%>">
                         <div id="table_area_M">
                             <table class="table table-borderless">
                                 <tr>
                                     <th>고객명</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_nm()%>"></td>
+                                    <td><input class="form-control" id="master_nm" type="text" value="<%=masterVO.getMaster_nm()%>"></td>
                                     <th>ID</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_username()%>"></td>
+                                    <td><input class="form-control" id="master_username"  type="text" value="<%=masterVO.getMaster_username()%>"></td>
                                 </tr>
                                 <tr>
                                     <th>성별</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_gender()%>"></td>
+                                    <td><input class="form-control" id="master_gender" type="text" value="<%=masterVO.getMaster_gender()%>"></td>
                                     <th>생년월일</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_bdate()%>"></td>
+                                    <td><input class="form-control" id="master_bdate" type="date" value="<%=masterVO.getMaster_bdate()%>"></td>
                                 </tr>
                                 <tr>
                                     <th>email</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_email()%>"></td>
+                                    <td><input class="form-control" id="master_email" type="text" value="<%=masterVO.getMaster_email()%>"></td>
                                     <th>연락처</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_pnumber()%>"></td>
+                                    <td><input class="form-control" id="master_pnumber" type="text" value="<%=masterVO.getMaster_pnumber()%>"></td>
                                 </tr>
                                 <tr>
                                     <th>주소</th>
-                                    <td><input class="form-control" type="text" value="<%=masterVO.getMaster_address()%>"></td>
+                                    <td><input class="form-control" id="master_address" type="text" value="<%=masterVO.getMaster_address()%>"></td>
                                 </tr>
                             </table>
                         </div>
-                    </section>
+            </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" onclick="ModifyData()">저장</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="ModifyData()">저장</button>
                         <input type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="closeModal()" value="닫기">
                     </div>
-            </div>
         </div>
     </div>
 </div>

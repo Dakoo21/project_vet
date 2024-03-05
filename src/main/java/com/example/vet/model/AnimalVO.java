@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AnimalVO {
-    private int animal_Pk;
+    private int animalPk;
     private String animal_Nm;
     private String animal_bdate;
     private String animal_species;
@@ -20,18 +20,17 @@ public class AnimalVO {
 
 
     @Builder
-    public AnimalVO(int animal_Pk, String animalNm, String animalBdate, String animalSpecies, String animalBreed, long animalWeight, int userPk, String animalSex, String animalNeut, int masterPk){
-        this.animal_Pk=animal_Pk;
-        this.animal_Nm=animalNm;
-        this.animal_bdate=animalBdate;
-        this.animal_species=animalSpecies;
-        this.animal_breed=animalBreed;
-        this.animal_weight=animalWeight;
-        this.userPk=userPk;
-        this.animal_sex=animalSex;
-        this.animal_neut=animalNeut;
-        this.masterPk=masterPk;
+    public AnimalVO(int animalPk, String animal_Nm, String animal_bdate, String animal_species, String animal_breed, long animal_weight, int userPk, String animal_sex, String animal_neut, int masterPk){
+        this.animalPk = animalPk;
+        this.animal_Nm = animal_Nm;
+        this.animal_bdate = animal_bdate;
+        this.animal_species = animal_species;
+        this.animal_breed = animal_breed;
+        this.animal_weight = animal_weight;
+        this.userPk = userPk;
+        this.animal_sex = animal_sex;
+        this.animal_neut = animal_neut;
+        this.masterPk = masterPk;
 
     }
 }
-g
