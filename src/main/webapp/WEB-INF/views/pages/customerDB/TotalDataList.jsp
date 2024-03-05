@@ -22,7 +22,6 @@
         var queryString = new URLSearchParams(formData).toString();
         window.location.href = "localhost:8000/CustomerDB/TotalDataList?" + queryString;
         }
-
 </script>
 
 <!DOCTYPE html>
@@ -35,8 +34,8 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<%@ include file="/include/sidebar.jsp"%>
 <div class="wrapper">
+    <%@ include file="/include/sidebar.jsp"%>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -53,28 +52,33 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
+        </section>
+        <section class="content">
+            <div class="board">
+                <div class="card-header">
+                    <h3 class="card-title">
             <!-- 검색기 시작 -->
-            <form id="searchForm" onsubmit="boardSearch(event)">
-            <div class="row">
-                <div class="col-3">
-                    <select id="gubun" name="gubun" class="form-select" aria-label="분류선택">
-                        <option value="none">분류선택</option>
-                        <option value="masterNm">고객명</option>
-                        <option value="animalNm">반려동물명</option>
-                    </select>
-                </div>
-                <div class="col-6">
+                        <div class="row">
+                          <div class="col-3">
+                               <select id="gubun" name="gubun" class="form-select" aria-label="분류선택">
+                                   <option value="none">분류선택</option>
+                                    <option value="masterNm">고객명</option>
+                                    <option value="animalNm">반려동물명</option>
+                              </select>
+                          </div>
+                            <div class="spacer"></div>
+                           <div class="col-5">
 <%--                    <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"--%>
 <%--                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>--%>
-                    <input type="text" id="keyword" name="keyword" class="form-control" placeholder="검색어를 입력하세요"
-                          aria-label="검색어를 입력하세요" aria-describedby="btn_search" />
-                </div>
-                <div class="col-3">
-                    <button type="submit" id="btn_search" class="btn btn-danger" onclick="boardSearch()">검색</button>
-                </div>
-            </div>
-       </form>
+                                 <input type="text" id="keyword"  class="form-control" placeholder="검색어를 입력하세요"
+                                    aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
+                           </div>
+                       <div class="col-3">
+                          <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
+                      </div>
+                   </div>
+                 </h3>
             <!--카테고리 버튼-->
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
@@ -92,7 +96,9 @@
                     </li>
                 </ul>
             </div>
-        </section>
+         </div>
+      </div>
+   </section>
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
@@ -142,13 +148,15 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
                 <!-- /.card-body -->
-                <div class="col-md-2">
+                <div class="col-md-2" >
                     <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-default">등록</a>
                 </div>
             </div>
             <!-- /.content -->
-        </section>
+
         <!-- /.content-wrapper -->
     </div>
     <!-- Control Sidebar -->
@@ -181,3 +189,12 @@
 <%@ include file="/include/footer.jsp"%>
 </body>
 </html>
+<style>
+    .spacer {
+        width: 20px; /* 조절할 공간의 너비를 지정하세요 */
+        height: auto; /* 필요에 따라 높이를 조절하세요 */
+        display: inline-block;
+    }
+
+
+</style>

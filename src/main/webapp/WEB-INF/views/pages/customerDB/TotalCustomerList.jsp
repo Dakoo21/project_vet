@@ -80,8 +80,11 @@
                                       </button>
                                   </div>
                                    <div class="text-right">
-                                     <div id="padding-right50" class="position-absolute top-0 end-20">
-                                      <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-primary"  style="margin-left: 70px">등록</a>
+<%--                                       <div class="col-md-2" >--%>
+<%--                                           <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-default">등록</a>--%>
+<%--                                       </div>--%>
+                                     <div id="padding-right50" class="position-absolute top-20 end-20">
+                                      <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-default" >등록</a>
                                      </div>
                                    </div>
                               </div>
@@ -162,4 +165,16 @@
         justify-content: center;
     }
 
+    #padding-right50 .btn {
+        width: 70px; /* 원하는 가로 크기로 설정하세요 */
+    }
+    /*.search-top-area {*/
+    /*    position: relative; !* 부모 요소를 상대적 위치로 설정합니다. *!*/
+    /*}*/
+
+    /*.search-top-area .text-right {*/
+    /*    position: absolute; !* 등록 버튼을 절대적 위치로 설정합니다. *!*/
+    /*    top: 0; !* 부모 요소의 상단에 배치합니다. *!*/
+    /*    right: 0; !* 부모 요소의 오른쪽에 배치합니다. *!*/
+    /*}*/
 </style>
