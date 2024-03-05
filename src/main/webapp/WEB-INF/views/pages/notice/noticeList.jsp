@@ -1,4 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, java.util.Map, java.util.ArrayList" %>
+<%@ page import="com.example.vet.model.Notice" %>
+<%@ page import="com.util.BSPageBar" %>
+<%
+    List<Notice> noticeList = (List<Notice>) request.getAttribute("noticeList");
+    int size = 0;
+    if (noticeList != null) {
+        size = noticeList.size();
+    }
+    int numPerPage = 10;
+    int nowPage = 0;
+    if(request.getParameter("nowPage")!=null){
+        nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +24,11 @@
     <script>
         const noticeInsertPage = (event) => {
           location.href = "/noticeInsertPage";
+        }
+
+        function noticeOneDetail (NOTICE_PK) {
+            console.log("공지사항 디테일 조회 요청")
+            location.href = "/noticeDetail?NOTICE_PK="+NOTICE_PK;
         }
     </script>
 </head>
@@ -40,29 +60,54 @@
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
-                                        <th width="10%">등록일시</th>
-                                        <th width="40%">제목</th>
-                                        <th width="20%">작성자</th>
-                                        <th width="15%">조회수</th>
-                                        <th width="15%">구분</th>
+                                        <th width="10%" style="text-align: center;">번호</th>
+                                        <th width="40%" style="text-align: center;">제목</th>
+                                        <th width="20%" style="text-align: center;">작성자</th>
+                                        <th width="15%" style="text-align: center;">작성일자</th>
+                                        <th width="15%" style="text-align: center;">조회수</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <%
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
+                                            Notice notice = noticeList.get(i);
+                                    %>
+                                    <tr onclick="noticeOneDetail('<%=notice.getNOTICE_PK()%>')">
+                                        <td width="10%" style="text-align: center;"><%=notice.getNOTICE_PK()%></td>
+                                        <td width="40%" style="text-align: center;"><%=notice.getNOTICE_TITLE()%></td>
+                                        <td width="20%" style="text-align: center;"><%=notice.getMEMBER_MEMBERNAME()%></td>
+                                        <td width="15%" style="text-align: center;"><%=notice.getNOTICE_TIME()%></td>
+                                        <td width="15%" style="text-align: center;"><%=notice.getNOTICE_HITS()%></td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
                                     </tbody>
                                 </table>
                                 <hr />
                                 <!-- [[ Bootstrap 페이징 처리  구간  ]] -->
                                 <div style="display:flex;justify-content:center;">
                                     <ul class="pagination">
-
+                                        <%
+                                            String pagePath = "/noticeList";
+                                            BSPageBar bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);
+                                            out.print(bspb.getPageBar());
+                                        %>
                                     </ul>
                                 </div>
                                 <!-- [[ Bootstrap 페이징 처리  구간  ]] -->
+                                <%
+                                    if (isAdmin || isMaster) {
+                                %>
                                 <div class='board-footer'>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#boardForm" onclick="noticeInsertPage()">
                                         글쓰기
                                     </button>
                                 </div>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>

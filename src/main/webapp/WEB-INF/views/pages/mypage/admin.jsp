@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>마이 페이지</title>
     <%@ include file="/include/bootCommon.jsp" %>
     <!-- Google Charts 라이브러리 로드 -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, java.util.Map, java.util.ArrayList" %>
-<%@ page import="com.example.vet.model.Member" %>
 <%@ page import="com.util.BSPageBar" %>
 <%
     int size = 0;

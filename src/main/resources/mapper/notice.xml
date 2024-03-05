@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.vet.noticeMapper">
+
+    <select id="noticeList" parameterType="com.example.vet.model.Notice" resultType="com.example.vet.model.Notice">
+        SELECT
+            a.notice_pk AS notice_pk,
+            a.notice_title AS notice_title,
+            a.notice_content AS notice_content,
+            a.notice_hits AS notice_hits,
+            a.notice_time AS notice_time,
+            a.notice_highlighted AS notice_highlighted,
+            a.member_pk AS member_pk,
+            b.member_membername AS member_membername
+        FROM notice_test2 a
+        INNER JOIN user_test5 b
+        ON a.member_pk = b.member_pk
+        <if test="NOTICE_PK != null">
+            WHERE a.notice_pk = #{NOTICE_PK}
+        </if>
+    ORDER BY a.notice_pk ASC
+    </select>
+
+    <update id="hitCount" parameterType="com.example.vet.model.Notice">
+        UPDATE notice_test2
+        SET NOTICE_HITS = NOTICE_HITS + 1
+        WHERE NOTICE_PK = #{NOTICE_PK}
+    </update>
+
     <insert id="noticeInsert" parameterType="com.example.vet.model.Notice">
-        INSERT INTO notice_test (NOTICE_PK, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_HITS, NOTICE_TIME, NOTICE_HIGHLIGHTED, COMMON_CODE_PK, ATTACHED_PK, USER_PK)
-        VALUES (notice_pk_seq.nextval, #{NOTICE_TITLE}, #{NOTICE_CONTENT}, 0, to_char(sysdate, 'YYYY-MM-DD'), #{NOTICE_HIGHLIGHTED, jdbcType=INTEGER}, #{COMMON_CODE_PK, jdbcType=INTEGER}, #{ATTACHED_PK}, #{USER_PK})
+        INSERT INTO notice_test2 (NOTICE_PK, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_HITS, NOTICE_TIME, NOTICE_HIGHLIGHTED, MEMBER_PK)
+        VALUES (notice_pk_seq.nextval, #{NOTICE_TITLE}, #{NOTICE_CONTENT}, 0, to_char(sysdate, 'YYYY-MM-DD'), #{NOTICE_HIGHLIGHTED, jdbcType=INTEGER}, (SELECT MEMBER_PK FROM USER_TEST5 WHERE MEMBER_MEMBERNAME = #{MEMBER_MEMBERNAME}))
     </insert>
+
+    <update id="noticeUpdate" parameterType="com.example.vet.model.Notice">
+        UPDATE notice_test2
+        SET notice_title = #{NOTICE_TITLE},
+            notice_content = #{NOTICE_CONTENT}
+        WHERE notice_pk = #{NOTICE_PK}
+    </update>
+
+    <delete id="noticeDelete" parameterType="Integer">
+        DELETE FROM notice_test2 WHERE notice_pk = #{value}
+    </delete>
 </mapper>
