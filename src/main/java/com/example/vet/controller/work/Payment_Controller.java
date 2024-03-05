@@ -52,4 +52,21 @@ public class Payment_Controller {
         }
     }
 
+    @PostMapping("/paymentCash")
+    public String paymentCash(@RequestParam Map<String, Object> pmap) {
+        logger.info("paymentCash입니다");
+
+        // 결제 서비스를 통해 데이터를 삽입하고 결과를 받음
+        int result = paymentService.paymentCash(pmap);
+
+        // 결과에 따라 다음 경로 결정
+        if (result == 1) {
+            // 삽입 성공 시 paymentList로 리다이렉트
+            return "redirect:/payment/paymentList";
+        } else {
+            // 삽입 실패 시 에러 페이지로 리다이렉트
+            return "redirect:/paymentError.jsp";
+        }
+    }
+
 }

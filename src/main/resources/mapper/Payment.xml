@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.mybatis.mapper.PaymentMapper">
     <insert id="paymentInsert" parameterType="java.util.Map">
         INSERT INTO PAYMENT_TEST(PAYMENT_PK, MERCHANT_UID, PG_PROVIDER, PAID_AT, STATUS, PG_TID,
                                  BUYER_NAME, BUYER_TEL, PAID_AMOUNT, IMP_UID, NAME)
-        VALUES(PAYMENT_PK_SEQ.NEXTVAL, #{merchant_uid}, #{pg_provider}, #{paid_at},
-               #{status}, #{pg_tid}, #{buyer_name}, #{buyer_tel}, #{paid_amount}, #{imp_uid}, #{name})
+        VALUES(PAYMENT_PK_SEQ.NEXTVAL, #{merchant_uid, jdbcType=VARCHAR}, #{pg_provider, jdbcType=VARCHAR}, #{paid_at, jdbcType=INTEGER},
+               #{status, jdbcType=VARCHAR}, #{pg_tid, jdbcType=VARCHAR}, #{buyer_name, jdbcType=VARCHAR}, #{buyer_tel, jdbcType=VARCHAR},
+               #{paid_amount, jdbcType=INTEGER}, #{imp_uid, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="paymentCash" parameterType="java.util.Map">
+        INSERT INTO PAYMENT_TEST(PAYMENT_PK, MERCHANT_UID,BUYER_NAME, BUYER_TEL, PAID_AMOUNT, IMP_UID, NAME)
+        VALUES(PAYMENT_PK_SEQ.NEXTVAL, #{merchant_uid, jdbcType=VARCHAR},#{buyer_name, jdbcType=VARCHAR}, #{buyer_tel, jdbcType=VARCHAR},
+               #{paid_amount, jdbcType=INTEGER}, #{imp_uid, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR})
     </insert>
 
     <select id="paymentList" parameterType="map"  resultType = "map">
-        select payment_pk, merchant_uid, pg_provider, paid_at, status,
-        pg_tid , buyer_name, buyer_tel, paid_amount, imp_uid, name from payment_test
-        LEFT JOIN master_test ON payment_test.buyer_name = master_test.master_nm
+        SELECT
+        PAYMENT.PAYMENT_PK AS payment_pk,
+        PAYMENT.MERCHANT_UID AS merchant_uid,
+        PAYMENT.PG_PROVIDER AS pg_provider,
+        PAYMENT.PAID_AT AS paid_at,
+        PAYMENT.STATUS AS status,
+        PAYMENT.PG_TID AS pg_tid,
+        PAYMENT.BUYER_NAME AS buyer_name,
+        PAYMENT.BUYER_TEL AS buyer_tel,
+        PAYMENT.PAID_AMOUNT AS paid_amount,
+        PAYMENT.IMP_UID AS imp_uid,
+        PAYMENT.NAME AS name
+        FROM
+        PAYMENT_TEST PAYMENT
         <where>
-            <if test="payment_pk!=null">AND payment_pk=#{payment_pk}</if>
+            <if test="payment_pk!=null">AND PAYMENT.PAYMENT_PK=#{payment_pk}</if>
             <if test="gubun!=null">
                 <choose>
                     <when test="gubun.equals('buyer_name')">
-                        AND master_test.master_nm LIKE '%' || #{keyword} || '%'
+                        AND PAYMENT.BUYER_NAME LIKE '%' || #{keyword} || '%'
                     </when>
                     <when test='gubun.equals("buyer_tel")'>
-                        AND buyer_tel LIKE '%'||#{keyword}||'%'
+                        AND PAYMENT.BUYER_TEL LIKE '%'||#{keyword}||'%'
                     </when>
                 </choose>
             </if>
         </where>
-        order by payment_pk desc
+        ORDER BY
+        PAYMENT.PAYMENT_PK DESC
     </select>
 
 </mapper>

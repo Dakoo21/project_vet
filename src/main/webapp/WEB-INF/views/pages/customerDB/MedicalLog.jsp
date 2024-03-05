@@ -1,4 +1,6 @@
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.vet.controller.work.Payment_Controller" %>
+<%@ page import="com.example.vet.repository.work.Payment_Repository" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
@@ -103,8 +105,14 @@
                                     <table class="table table-striped projects">
                                         <thead>
                                         <tr>
-                                            <th style="width: 5%">
+                                            <th style="width: 13%" class="text-center">
+                                                진료번호
+                                            </th>
+                                            <th style="width: 15%">
                                                 등록일시
+                                            </th>
+                                            <th style="width: 10%">
+                                                동물명
                                             </th>
                                             <th style="width: 10%">
                                                 축종
@@ -112,40 +120,45 @@
                                             <th style="width: 10%">
                                                 보호자
                                             </th>
-                                            <th style="width: 20%">
+                                            <th style="width: 15%">
                                                 연락처
                                             </th>
-                                            <th style="width: 20%">
-                                                동물명
+                                            <th style="width: 10%" class="text-center">
+                                                수납상태
                                             </th>
-                                            <th style="width: 5%" class="text-center">
-                                                차트번호
-                                            </th>
-                                            <th style="width: 15%">
+                                            <th style="width: 13%">
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <%
-                                            for(int i = 0 ; i<dList.size();i++){
+                                        <% for(int i = 0; i < dList.size(); i++) {
                                             Map<String, Object> rmap = dList.get(i);
                                         %>
-                                        <tr>
-                                            <td><%=rmap.get("bookingDate")%></td>
-                                            <td><%=rmap.get("animalSpecies")%></td>
-                                            <td><%=rmap.get("masterNM")%></td>
-                                            <td><%=rmap.get("masterPhoneNumber")%></td>
-                                            <td><%=rmap.get("animalNM")%></td>
-                                            <td><%=rmap.get("diagPk")%></td>
+                                        <tr onclick="redirectToLink('<%= rmap.get("diagPk") %>')">
+                                            <td><%= rmap.get("diagPk") %></td>
+                                            <td><%= rmap.get("bookingDate") %></td>
+                                            <td><%= rmap.get("animalNM") %></td>
+                                            <td><%= rmap.get("animalSpecies") %></td>
+                                            <td><%= rmap.get("masterNM") %></td>
+                                            <td><%= rmap.get("masterPhoneNumber") %></td>
+                                            <td><%=rmap.get("commonCodeName")%></td>
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" href="http://localhost:8000/diag/diagDetail?diagPk=<%=rmap.get("diagPk")%>">
-                                                    <i class="fas fa-pencil-alt"></i><%=rmap.get("commonCodeName")%></a>
+                                                <a class="btn btn-info btn-sm" href="http://localhost:8000/payment/paymentList?diagPk=<%=rmap.get("diagPk")%>">
+                                                    <i class="fas fa-pencil-alt"></i>수납</a>
                                             </td>
                                         </tr>
                                         <%
                                             }
                                         %>
                                         </tbody>
+
+                                        <script>
+                                            function redirectToLink(diagPk) {
+                                                window.location.href = "http://localhost:8000/diag/diagDetail?diagPk=" + diagPk;
+                                            }
+                                        </script>
+
+
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
@@ -176,7 +189,7 @@
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
 
@@ -196,3 +209,5 @@
 <%@ include file="/include/footer.jsp"%>
 </body>
 </html>
+
+

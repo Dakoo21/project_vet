@@ -32,4 +32,11 @@ public class Payment_Service {
         result = paymentRepository.paymentInsert(pmap);
         return result;
     }
+
+    public int paymentCash(Map<String, Object> pmap) {
+        logger.info("paymentService cash입니다");
+        int result = 0;
+        result = paymentRepository.paymentCash(pmap);
+        return result;
+    }
 }

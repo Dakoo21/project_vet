@@ -31,12 +31,12 @@
         ANIMAL.ANIMAL_BREED as "animalBreed", ANIMAL.ANIMAL_NEUT as "animalNeut", ANIMAL.ANIMAL_NM as "animalName",
         ANIMAL.ANIMAL_BDATE as "animalBirthDate" , ANIMAL.ANIMAL_SEX as "animalSex", ANIMAL.ANIMAL_WEIGHT as "animalWeight",
         ANIMAL.ANIMAL_SPECIES as "animalSpecies", CODE.COMMON_CODE_NM as "commonCodeName", U.USER_NM as "userNm", M.MASTER_NM AS "masterNm", M.MASTER_EMAIL AS "masterEmail", M.MASTER_ADDRESS AS "masterAddress", M.MASTER_PNUMBER AS "masterPnumber",
-        ANIMAL.ANIMAL_PK as "animalPk"
+        ANIMAL.ANIMALPK as "animalPk"
         FROM BOOKING_TEST BOOKING
-        LEFT OUTER JOIN ANIMAL_TEST ANIMAL ON BOOKING.ANIMAL_PK = ANIMAL.ANIMAL_PK
+        LEFT OUTER JOIN ANIMAL_TEST ANIMAL ON BOOKING.ANIMALPK = ANIMAL.ANIMALPK
         LEFT OUTER JOIN COMMON_CODE_TEST CODE ON BOOKING.COMMON_CODE_PK = CODE.COMMON_CODE_PK
         LEFT OUTER JOIN USER_TEST U ON BOOKING.USER_PK = U.USER_PK
-        LEFT OUTER JOIN MASTER_TEST M ON ANIMAL.MASTER_PK = M.MASTER_PK
+        LEFT OUTER JOIN MASTER_TEST M ON ANIMAL.MASTERPK = M.MASTERPK
         <where>
             BOOKING.COMMON_CODE_PK = 123
             <if test="bookingPk != null">
@@ -45,7 +45,7 @@
         </where>
     </select>
     <insert id="bookingInsert" parameterType="com.example.vet.model.BookingVO">
-        INSERT INTO BOOKING_TEST(BOOKING_PK, BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_DATE, ANIMAL_PK, USER_PK, COMMON_CODE_PK)
+        INSERT INTO BOOKING_TEST(BOOKING_PK, BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_DATE, ANIMALPK, USER_PK, COMMON_CODE_PK)
         VALUES (BOOKING_PK_SEQ.nextval, #{bookingType}, #{bookingStart}, #{bookingEnd}, #{bookingDate},#{animalPk}, #{userPk}, #{commonCodePk})
     </insert>
     <delete id="bookingDelete" parameterType="int">
@@ -59,7 +59,7 @@
         <if test="bookingDate != null">BOOKING_DATE = #{bookingDate},</if>
         <if test="bookingEnd != null">BOOKING_END = #{bookingEnd},</if>
         <if test="bookingStart != null">BOOKING_START = #{bookingStart},</if>
-        <if test="animalPk != null">ANIMAL_PK = #{animalPk}</if>
+        <if test="animalPk != null">ANIMALPK = #{animalPk}</if>
         <where>
         BOOKING_PK = #{bookingPk}
         </where>
@@ -71,9 +71,9 @@
         <result property="masterPk" column="masterPk"/>
     </resultMap>
     <select id = "animalSelect" parameterType="com.example.vet.model.AnimalVO" resultMap="selectAnimalResultMap">
-        SELECT ANIMAL.ANIMAL_NM as "animalNm", ANIMAL.ANIMAL_PK as "animalPk", MASTER.MASTER_NM as "masterNm", MASTER.MASTER_PK as "masterPk"
+        SELECT ANIMAL.ANIMAL_NM as "animalNm", ANIMAL.ANIMALPK as "animalPk", MASTER.MASTER_NM as "masterNm", MASTER.MASTERPK as "masterPk"
         FROM ANIMAL_TEST ANIMAL
-        LEFT OUTER JOIN MASTER_TEST MASTER ON ANIMAL.MASTER_PK = MASTER.MASTER_PK
+        LEFT OUTER JOIN MASTER_TEST MASTER ON ANIMAL.MASTERPK = MASTER.MASTERPK
         <if test="animalNm!=null">
             WHERE ANIMAL.ANIMAL_NM LIKE '%' || #{animalNm} || '%'
             <if test="masterNm!=null">
