@@ -41,11 +41,11 @@
         FROM
         DIAG_TEST
         LEFT OUTER JOIN BOOKING_TEST ON DIAG_TEST.BOOKING_PK = BOOKING_TEST.BOOKING_PK
-        LEFT OUTER JOIN ANIMAL_TEST ON BOOKING_TEST.ANIMAL_PK= ANIMAL_TEST.ANIMAL_PK
-        LEFT OUTER JOIN MASTER_TEST ON ANIMAL_TEST.MASTER_PK = MASTER_TEST.MASTER_PK
+        LEFT OUTER JOIN ANIMAL_TEST ON BOOKING_TEST.ANIMALPK= ANIMAL_TEST.ANIMALPK
+        LEFT OUTER JOIN MASTER_TEST ON ANIMAL_TEST.MASTERPK = MASTER_TEST.MASTERPK
         LEFT OUTER JOIN COMMON_CODE_TEST ON COMMON_CODE_TEST.COMMON_CODE_PK = BOOKING_TEST.COMMON_CODE_PK
         <where>
-            BOOKING_TEST.COMMON_CODE_PK = 124
+            BOOKING_TEST.COMMON_CODE_PK IN (124, 125, 126)
             <if test="diagPk != null">
                 AND DIAG_TEST.DIAG_PK = #{diagPk}
             </if>
@@ -69,7 +69,7 @@
                     </when>
                     <when test="species == 'etc'">
                         AND ANIMAL_TEST.animal_Species NOT IN ('강아지', '고양이')
-                </when>
+                    </when>
                 </choose>
             </if>
         </where>
@@ -102,7 +102,7 @@
         SELECT DIAG_PK
         FROM DIAG_TEST
         <if test="bookingPk!=null">
-        WHERE BOOKING_PK = #{bookingPk}
+            WHERE BOOKING_PK = #{bookingPk}
         </if>
     </select>
     <select id="serviceCost" parameterType="java.util.Map" resultType="java.util.Map">

@@ -40,17 +40,18 @@ public class DIAG_Controller {
 
         List<Map<String,Object>> dList = diagService.Select(rmap);
         logger.info(dList.toString());
+        logger.info("컨트롤러 리스트");
         model.addAttribute("dList", dList);
         return "pages/customerDB/MedicalLog";
     };
 
     @GetMapping("diagDetail")
     public String ListDetail(Model model, @RequestParam Map<String, Object> rmap){
-
         List<Map<String,Object>> dList = diagService.Select(rmap);
+        logger.info("컨트롤러 디테일");
         logger.info(dList.toString());
         model.addAttribute("dList", dList);
-        return "pages/customerDB/MedicalChart";
+            return "pages/customerDB/MedicalChart";
     };
 
     @PostMapping("/diagUpdate")
@@ -64,6 +65,7 @@ public class DIAG_Controller {
     public String Insert(@RequestParam Map<String, Object> rmap) {
 
         logger.info(rmap.toString());
+        logger.info("diagInsert입니다");
         List<Map<String, Object>> sList = diagService.Insert(rmap);
         Map<String, Object> amap = sList.get(0);
         return "redirect:diagDetail?diagPk="+amap.get("DIAG_PK").toString();
@@ -109,3 +111,4 @@ public class DIAG_Controller {
         return null;
     };
 }
+

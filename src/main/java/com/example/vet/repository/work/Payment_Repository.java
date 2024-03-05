@@ -29,4 +29,11 @@ public class Payment_Repository {
         result = sqlSessionTemplate.insert("paymentInsert", pMap);
         return result;
     }
+
+    public int paymentCash(Map<String, Object> pMap) {
+        logger.info("paymentRepository cash입니다");
+        int result = 0;
+        result = sqlSessionTemplate.insert("paymentCash", pMap);
+        return result;
+    }
 }

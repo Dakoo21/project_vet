@@ -330,7 +330,6 @@
 
                                     // 선택한 start-time 이후의 end-time 옵션을 선택합니다.
                                     endTimeIndex.selectedIndex = startTimeIndex;
-
                                 }
                             </script>
                         <!-- 예약구분 -->

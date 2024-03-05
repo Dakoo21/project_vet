@@ -1,11 +1,12 @@
 package com.example.vet.service.work;
 
 import com.example.vet.repository.work.DIAG_Repository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Slf4j
 @Service
 public class DIAG_Service {
     private final DIAG_Repository diagRepository;
@@ -15,10 +16,12 @@ public class DIAG_Service {
     }
 
     public List<Map<String, Object>> Select(Map<String, Object> rmap) {
+        log.info("서비스");
         return diagRepository.Select(rmap);
     }
 
     public List<Map<String,Object>> Insert(Map<String, Object> rmap) {
+        log.info("서비스 diagInsert입니다");
         List<Map<String,Object>> sList = diagRepository.Insert(rmap);
         return sList;
     }
