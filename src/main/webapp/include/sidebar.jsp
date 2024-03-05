@@ -59,7 +59,7 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <span><%=username%> 님</span>
+                <span><%=name%> 님</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">메뉴</span>
@@ -89,7 +89,7 @@
                 <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="/" class="d-block"><%=username%> 환영합니다</a>
+                <a href="/" class="d-block"><%=name%>님 환영합니다</a>
             </div>
         </div>
         <%
@@ -178,7 +178,7 @@
                         </li>
                     </ul>
                 </li>
-                <!-- 메뉴 끝-->
+                <!-- 메뉴 끝 -->
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
