@@ -108,7 +108,7 @@
             <!-- 검색기 시작 -->
                         <div class="row">
                           <div class="col-3">
-                               <select id="gubun" name="gubun" class="form-select" aria-label="분류선택">
+                               <select id="gubun" name="gubun" class="form-control" aria-label="분류선택">
                                    <option value="none">분류선택</option>
                                     <option value="master_nm">고객명</option>
                                     <option value="animal_nm">반려동물명</option>
@@ -194,7 +194,7 @@
         </section>
                 <!-- /.card-body -->
                 <div class="col-md-2" >
-                    <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-default">등록</a>
+                    <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-warning">등록</a>
                 </div>
             </div>
             <!-- /.content -->
@@ -238,5 +238,7 @@
         display: inline-block;
     }
 
-
+    #gubun{
+        width: auto;
+    }
 </style>
