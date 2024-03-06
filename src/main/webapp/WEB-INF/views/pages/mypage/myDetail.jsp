@@ -131,10 +131,10 @@
                                                                 } else if (memberRole.equals("ROLE_INFO")) {
                                                                     user_role = "데스크";
                                                                 } else {
-                                                                    user_role = "일반 사용자";
+                                                                    user_role = "임시 사용자";
                                                                 }
                                                             } else {
-                                                                user_role = "일반 사용자";
+                                                                user_role = "임시 사용자";
                                                             }
                                                         %>
                                                         <span><%= user_role %></span>

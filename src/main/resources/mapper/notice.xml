@@ -18,7 +18,7 @@
         <if test="NOTICE_PK != null">
             WHERE a.notice_pk = #{NOTICE_PK}
         </if>
-    ORDER BY a.notice_pk ASC
+        ORDER BY a.notice_highlighted DESC, a.notice_pk ASC
     </select>
 
     <update id="hitCount" parameterType="com.example.vet.model.Notice">

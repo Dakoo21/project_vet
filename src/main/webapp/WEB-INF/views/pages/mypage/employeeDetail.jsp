@@ -165,7 +165,7 @@
                                                     } else if ("ROLE_INFO".equals(rmap.get("MEMBER_ROLE"))) {
                                                         user_role = "데스크";
                                                     } else {
-                                                        user_role = "일반 사용자";
+                                                        user_role = "임시 사용자";
                                                     }
                                                 %>
                                                 <%=user_role%>
