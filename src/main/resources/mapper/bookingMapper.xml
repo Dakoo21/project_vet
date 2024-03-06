@@ -44,14 +44,17 @@
             </if>
         </where>
     </select>
+
     <insert id="bookingInsert" parameterType="com.example.vet.model.BookingVO">
         INSERT INTO BOOKING_TEST(BOOKING_PK, BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_DATE, ANIMALPK, USER_PK, COMMON_CODE_PK)
         VALUES (BOOKING_PK_SEQ.nextval, #{bookingType}, #{bookingStart}, #{bookingEnd}, #{bookingDate},#{animalPk}, #{userPk}, #{commonCodePk})
     </insert>
+
     <delete id="bookingDelete" parameterType="int">
         DELETE FROM BOOKING_TEST
         WHERE BOOKING_PK=#{bookingPk}
     </delete>
+
     <update id="bookingUpdate" parameterType="com.example.vet.model.BookingVO">
         UPDATE BOOKING_TEST
         SET
@@ -64,12 +67,14 @@
         BOOKING_PK = #{bookingPk}
         </where>
     </update>
+
     <resultMap id="selectAnimalResultMap" type="java.util.HashMap">
         <result property="animalNm" column="animalNm"/>
         <result property="animalPk" column="animalPk"/>
         <result property="masterNm" column="masterNm"/>
         <result property="masterPk" column="masterPk"/>
     </resultMap>
+
     <select id = "animalSelect" parameterType="com.example.vet.model.AnimalVO" resultMap="selectAnimalResultMap">
         SELECT ANIMAL.ANIMAL_NM as "animalNm", ANIMAL.ANIMALPK as "animalPk", MASTER.MASTER_NM as "masterNm", MASTER.MASTERPK as "masterPk"
         FROM ANIMAL_TEST ANIMAL

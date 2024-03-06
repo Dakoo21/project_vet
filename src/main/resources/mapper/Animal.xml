@@ -61,11 +61,11 @@
             C.*
         FROM ANIMAL_TEST A
         JOIN MASTER_TEST M ON A.MASTERPK = M.MASTERPK
-        JOIN BOOKING_TEST C ON A.ANIMALPK = C.ANIMALPK
+        JOIN BOOKING_TEST C ON A.ANIMALPK = C.ANIMAL_PK
         where A.ANIMALPK = #{animalPk}
     </select>
 
-    <select id="bookingSelect1" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
+    <select id="bookingSelect" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
         select b.booking_date
         from booking_test b
         left outer join booking_test on b.booking_date = b.booking_date
@@ -102,15 +102,15 @@
                                 MASTERPK
         )
         VALUES(
-              ANIMAL_PK_SEQ.NEXTVAL,
-               #{animal_Nm},
+               animalPk_seq.nextval,
+               #{animal_nm},
                #{animal_bdate},
                #{animal_species},
                #{animal_breed},
                #{animal_weight},
                #{animal_sex},
                #{animal_neut},
-               #{masterPk}
+               #{masterpk}
               )
     </insert>
 
@@ -134,9 +134,5 @@
         FROM ANIMAL_TEST
         WHERE
             MASTERPK = #{masterPk}
-    </select>
-
-    <select id="selectMasterNm"  resultType="com.example.vet.model.AnimalInsertMasterVO">
-        select master_nm, masterpk from master_test
     </select>
 </mapper>
