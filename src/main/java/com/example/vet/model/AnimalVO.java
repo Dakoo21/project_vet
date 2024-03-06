@@ -15,6 +15,8 @@ public class AnimalVO {
     private long animal_weight;
     private String animal_sex;
     private String  animal_neut;
+    private String  gubun;
+    private String  master_nm;
     private int masterPk;
     private int userPk;
 

@@ -16,7 +16,7 @@ public class MasterVO {
     private String master_pnumber;
     private String master_address;
     private String master_bdate;
-
+    private String keyword;
 
     @Builder
     public MasterVO(int masterPk,  String master_nm, String master_username, String master_pw, String master_email,

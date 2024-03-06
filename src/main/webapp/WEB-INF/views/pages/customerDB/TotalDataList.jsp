@@ -14,14 +14,61 @@
     }
 
     function boardSearch() {
-        var form = document.getElementById('searchForm');
-        var formData = new FormData(form);
-
-        // URL로 이동하거나, AJAX를 사용하여 서버로 데이터를 전송할 수 있습니다.
-        // 여기서는 URL로 이동하는 예제를 보여드리겠습니다.
-        var queryString = new URLSearchParams(formData).toString();
-        window.location.href = "localhost:8000/CustomerDB/TotalDataList?" + queryString;
+        if($("#gubun").val() === '' || $("#gubun").val() === null ){
+            alert("분류를 선택해주세요.");
+            return;
         }
+        if($("#keyword").val() === '' || $("#keyword").val() === null ){
+            alert("검색어를 입력해주세요.");
+            return;
+        }
+        let searchData = {
+            gubun: $("#gubun").val(),
+            keyword: $("#keyword").val(),
+        }
+        // AJAX 요청 보내기
+        $.ajax({
+            url: "/CustomerDB/TotalDataSelectedList",
+            type: "GET",
+            data: searchData,
+            contentType: "application/json",
+            success: function(data){
+                updateTable(data);
+            },
+            error: function(xhr, status, error){
+            }
+        });
+        }
+    function updateTable(data) {
+        // 받은 데이터를 사용하여 테이블을 업데이트하는 로직을 작성
+        let tableContent = "";
+        $('#boardAnimalList > td').remove();
+        // 예를 들어, 받은 데이터를 사용하여 테이블의 각 행을 구성하는 HTML을 생성
+        data.forEach(function(row) {
+            tableContent += '<table class="table table-striped table-bordered table-hover dt-responsive">';
+            tableContent += "<thead>";
+            tableContent += "<tr>";
+            tableContent += "<th>고객명</th>";
+            tableContent += "<th>동물이름</th>";
+            tableContent += "<th>축종</th>";
+            tableContent += "<th>품종</th>";
+            tableContent += "<th>성별</th>";
+            tableContent += "<th>중성화</th>";
+            tableContent += "</tr>";
+            tableContent += "</thead>";
+            tableContent += "<tr>";
+            tableContent += "<td><a href=/CustomerDB/TotalDataDetail/" + row.animalPk + '>' + row.master_nm + "</td>";
+            tableContent += "<td>" + row.animal_nm + "</td>";
+            tableContent += "<td>" + row.animal_species + "</td>";
+            tableContent += "<td>" + row.animal_breed + "</td>";
+            tableContent += "<td>" + row.animal_sex + "</td>";
+            tableContent += "<td>" + row.animal_neut + "</td>";
+            // 이와 같이 필요한 만큼 테이블의 열을 추가
+            tableContent += "</tr>";
+        });
+        // 테이블을 업데이트
+        $("#boardAnimalList").html(tableContent);
+    }
 </script>
 
 <!DOCTYPE html>
@@ -30,12 +77,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>통합데이터리스트</title>
-    <%@ include file="/include/bootCommon.jsp"%>
+    <%@ include file="/include/bootCommon.jsp" %>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    <%@ include file="/include/sidebar.jsp"%>
+    <%@ include file="/include/sidebar.jsp" %>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -63,14 +110,12 @@
                           <div class="col-3">
                                <select id="gubun" name="gubun" class="form-select" aria-label="분류선택">
                                    <option value="none">분류선택</option>
-                                    <option value="masterNm">고객명</option>
-                                    <option value="animalNm">반려동물명</option>
+                                    <option value="master_nm">고객명</option>
+                                    <option value="animal_nm">반려동물명</option>
                               </select>
                           </div>
                             <div class="spacer"></div>
                            <div class="col-5">
-<%--                    <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"--%>
-<%--                           aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>--%>
                                  <input type="text" id="keyword"  class="form-control" placeholder="검색어를 입력하세요"
                                     aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
                            </div>
@@ -108,8 +153,8 @@
                         <!-- Morris chart - Sales -->
                         <div class="chart tab-pane active" id="select-all"
                              style="position: relative; height: 100%;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                            <div>
+                                <table id="boardAnimalList" class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>고객명</th>
@@ -121,14 +166,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
                                         <%
                                             for (int i =0; i<dList.size(); i++){
-                                                System.out.println(dList.get(i));
                                             Map<String,Object> pmap =  dList.get(i);
                                         %>
-                                        </tr>
-                                        <tr>
+                                        <tr >
                                             <td><a href="/CustomerDB/TotalDataDetail/<%=pmap.get("animalPk")%>"><%=pmap.get("master_nm")%></a></td>
                                             <td><%=pmap.get("animal_nm")%></td>
                                             <td><%=pmap.get("animal_species")%></td>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,16 +24,24 @@ public class TotalDataController {
     /**
      * 리스트
      * @param model
-     * @param pmap
+     * @param
      * @return
      */
     @GetMapping("TotalDataList")
-    public String dataList(Model model, @RequestParam Map<String, Object> pmap) {
+    public String dataList(Model model, @RequestParam(required = false) Map<String, Object> pmap ) {
         logger.info("list");
+        System.out.println(pmap);
         List<Map<String, Object>> dList = null;
         dList = totalDataService.dataList(pmap);
         model.addAttribute("dList", dList);
         return "pages/customerDB/TotalDataList";
+    }
+
+    @GetMapping("TotalDataSelectedList")
+    @ResponseBody
+    public List<Map<String, Object>> dataList(@RequestParam(required = false) Map<String, Object> pmap ) {
+        List<Map<String, Object>> animalVO = totalDataService.dataList(pmap);
+        return animalVO;
     }
 
     /**

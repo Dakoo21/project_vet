@@ -36,9 +36,7 @@ public class TotalCustomerService {
         return totalCustomer_repository.Insert(masterVO);
     }
 
-    public int update(TotalCustomerUpdateVO totalCustomerUpdateVO) {
-        logger.info("customerUpdate");
-        int result = totalCustomer_repository.update(totalCustomerUpdateVO);
-        return result;
+    public void update(TotalCustomerUpdateVO totalCustomerUpdateVO) {
+        totalCustomer_repository.update(totalCustomerUpdateVO);
     }
 }

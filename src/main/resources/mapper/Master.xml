@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.MasterMapper">
-    <resultMap id="mastereMap" type="java.util.Map"/>
-    <select id="masterSelect" parameterType="com.example.vet.model.MasterVO" resultType="com.example.vet.model.MasterVO">
-        SELECT MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
+    <resultMap id="mastereMap" type="java.util.Map">
+            <result column="MASTERPK" property="masterPk"/>
+            <result column="MASTER_NM" property="master_nm"/>
+            <result column="MASTER_USERNAME" property="master_username"/>
+            <result column="MASTER_EMAIL" property="master_email"/>
+            <result column="MASTER_PNUMBER" property="master_pnumber"/>
+            <result column="MASTER_ADDRESS" property="master_address"/>
+            <result column="MASTER_BDATE" property="master_bdate"/>
+            <result column="MASTER_GENDER" property="master_gender"/>
+    </resultMap>
+    <select id="masterSelect" parameterType="com.example.vet.model.MasterVO" resultMap="mastereMap">
+        SELECT
+            MASTERPK,
+            MASTER_NM,
+            MASTER_USERNAME,
+            MASTER_EMAIL,
+             MASTER_BDATE,
+            MASTER_PNUMBER,
+            MASTER_ADDRESS,
+            MASTER_GENDER
         FROM MASTER_TEST
+        where 1=1
+        <if test="keyword != null">
+          AND master_nm LIKE '%'||#{keyword}||'%'
+        </if>
+        order by MASTERPK desc
     </select>
 
     <insert id="masterInsert" parameterType="com.example.vet.model.MasterVO">
-        INSERT INTO master_test(MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE)
-        VALUES(masterPk_seq.nextval, #{master_nm}, #{master_username}, #{master_pw}, #{master_email}, #{master_pnumber}, #{master_address}, #{master_bdate})
+        INSERT INTO master_test(MASTERPK, MASTER_NM, MASTER_GENDER,MASTER_USERNAME,MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE)
+        VALUES(master_pk_seq.nextval, #{master_nm}, #{master_gender}, #{master_username}, #{master_email}, #{master_pnumber}, #{master_address}, #{master_bdate})
     </insert>
 
     <update id="masterUpdate" parameterType="com.example.vet.model.TotalCustomerUpdateVO">
@@ -17,11 +39,11 @@
         SET
             MASTER_NM = #{master_nm},
             MASTER_USERNAME = #{master_username},
-            MASTER_PW = #{master_pw},
             MASTER_EMAIL = #{master_email},
             MASTER_PNUMBER = #{master_pnumber},
             MASTER_ADDRESS = #{master_address},
-            MASTER_BDATE = #{master_bdate}
+            MASTER_BDATE = #{master_bdate},
+            MASTER_GENDER = #{master_gender}
         WHERE
             MASTERPK = #{masterPk}
   </update>

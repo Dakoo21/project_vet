@@ -9,6 +9,10 @@
 
 <script>
     function insert(){
+        if(!/\d/.test($("#animal_weight").val())){
+            alert("숫자를 입력해주세요.");
+            return;
+        }
         // AJAX 요청 보내기
         $.ajax({
             url: "/CustomerDB/TotalDataInsert",
@@ -32,7 +36,6 @@
             }
         });
     }
-
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +129,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-danger" style="margin-right: 10px;">취소</button>
+                <button type="button" class="btn btn-danger" style="margin-right: 10px;" onclick="window.history.back()">취소</button>
                 <button type="button" class="btn btn-primary" onclick="insert()">등록</button>
             </div>
         </section>

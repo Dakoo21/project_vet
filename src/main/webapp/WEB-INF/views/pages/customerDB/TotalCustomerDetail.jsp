@@ -59,17 +59,14 @@
                 master_bdate: $("#master_bdate").val(),
                 master_email: $("#master_email").val(),
                 master_pnumber: $("#master_pnumber").val(),
-                master_address: $("#master_address").val()
+                master_address: $("#master_address").val(),
+                masterPk: $("#masterPk").val()
             }),
             contentType: "application/json",
             success: function(){
                 alert("변경이 완료되었습니다.");
+                location.href="/CustomerDB/TotalCustomerList";
             },
-            // success: function(response){
-            //     // 성공했을 때 실행할 코드
-            //     console.log("요청이 성공했습니다.");
-            //     console.log("서버에서 받은 응답: ", response);
-            // },
             error: function(xhr, status, error){
                 // 실패했을 때 실행할 코드
                 console.error("요청이 실패했습니다.");

@@ -33,7 +33,7 @@
                 <when test ='gubun.equals("master_nm")'>
                     AND master_nm LIKE '%'||#{keyword}||'%'
                 </when>
-                <when test='gubun.equals("anmimal_nm")'>
+                <when test='gubun.equals("animal_nm")'>
                     AND animal_nm LIKE '%'||#{keyword}||'%'
                 </when>
             </choose>
@@ -72,15 +72,6 @@
         where booking_date >= to_date(#{currentDate}, 'YYYY-MM-DD') and animalPk = #{animalPk}
         order by booking_date desc
         fetch first 1 row only
-    </select>
-
-
-    <select id="diagSelect" parameterType="com.example.vet.model.AnimalVO" resultType="Map">
-    select diag_prescription
-    from diag_test
-    left outer join booking_test on booking_test.booking_pk = diag_test.booking_pk
-    left outer join animal_test on animal_test.animalPk = booking_test.animalPk
-    left outer join master_test on master_test.masterPk = animal_test.masterPk
     </select>
 
     <select id="selectMasterPk" parameterType="String" resultType="Integer">

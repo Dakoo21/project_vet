@@ -38,21 +38,8 @@ public class TotalCustomer_Repository {
         return rowsInserted>0 ? 1 : 0;
     }
 
-    public int update(TotalCustomerUpdateVO totalCustomerUpdateVO) {
-    logger.info("customerUpdate");
-        System.out.println("================");
-    int result = 0;
-    try{
-        result = sqlSessionTemplate.update("masterUpdate", totalCustomerUpdateVO);
-        System.out.println(result);
-    }catch (Exception e){
-        logger.info(e.toString());
+    public void update(TotalCustomerUpdateVO totalCustomerUpdateVO) {
+        sqlSessionTemplate.update("masterUpdate", totalCustomerUpdateVO);
     }
-   return result;
-    }
-
-//    public List<MasterVO> Popup(MasterVO masterVO) {
-//        return sqlSessionTemplate.selectList("selectPopupList", masterVO);
-//    }
 
 }

@@ -28,18 +28,16 @@
                 master_pnumber: $("#master_pnumber").val(),
                 master_address: $("#master_address").val(),
                 master_bdate: $("#master_bdate").val(),
-                master_gender: $("#master_gender").val()
+                master_gender: $("#master_gender").val(),
             }),
             contentType: "application/json",
             success: function(response){
                 // 성공했을 때 실행할 코드
-                console.log("요청이 성공했습니다.");
-                console.log("서버에서 받은 응답: ", response);
+                alert("저장되었습니다.");
+                location.href="/CustomerDB/TotalCustomerList";
             },
             error: function(xhr, status, error){
                 // 실패했을 때 실행할 코드
-                console.error("요청이 실패했습니다.");
-                console.error("에러: ", error);
             }
         });
     }
