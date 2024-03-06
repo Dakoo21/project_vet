@@ -7,20 +7,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Sign {
-    private int sign_pk;
+    private Integer sign_pk;
     private String sign_title;
     private String sign_content;
     private String sign_date;
     private String sign_reserv_year;
     private String sign_type;
-    private int member_pk;
-	private int adopt_pk;
+    private Integer member_pk;
+	private Integer adopt_pk;
     private String selectedValue;
 
 
     @Builder
-    public Sign(int sign_pk, String sign_title, String sign_content,
-                String sign_date, String sign_reserv_year, String sign_type, int member_pk, int adopt_pk, String selectedValue){
+    public Sign(Integer sign_pk, String sign_title, String sign_content,
+                String sign_date, String sign_reserv_year, String sign_type, Integer member_pk, Integer adopt_pk, String selectedValue){
         this.sign_pk = sign_pk;
         this.sign_title = sign_title;
         this.sign_content = sign_content;
@@ -32,4 +32,5 @@ public class Sign {
         this.selectedValue = selectedValue;
 
     }
+
 }

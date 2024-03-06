@@ -1,10 +1,7 @@
 package com.example.vet.service.work.eSign;
 
 import com.example.vet.controller.work.eSign.SignMapper;
-import com.example.vet.model.MasterVO;
-import com.example.vet.model.Member;
-import com.example.vet.model.Sign;
-import com.example.vet.model.SignAdopt;
+import com.example.vet.model.*;
 import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.repository.work.eSign.eSignDraft_Repository;
 import lombok.extern.slf4j.Slf4j;
@@ -58,10 +55,11 @@ public class eSignDraft_Service {
     // pk 추출
     @Transactional
     public Sign createSign(Sign sign) {
-        Sign insertedSign = eSignDraft_repository.insertDraft(sign);
-        int generatedSignPk = insertedSign.getSign_pk();
-        log.info("트랜잭션 서비스" + generatedSignPk);
-        eSignDraft_repository.insertDraftLine(generatedSignPk);
+        // Sign insertedSign = eSignDraft_repository.insertDraft(sign);
+        // int generatedSignPk = insertedSign.getSign_pk();
+        signMapper.insertSign(sign);
+        // log.info("트랜잭션 서비스" + generatedSignPk);
+        // eSignDraft_repository.insertDraftLine(generatedSignPk);
         return sign;
     }
 
@@ -70,5 +68,26 @@ public class eSignDraft_Service {
         log.info(String.valueOf(result));
         return result;
 
+    }
+
+    @Transactional
+    public SignAdopt createAdoptSign(SignAdopt signAdopt) {
+        signMapper.insertSignAdopt(signAdopt);
+        // SignAdopt insertedAdoptSign = eSignDraft_repository.insertAdoptDraft(signAdopt);
+        // int generatedSignPk = insertedAdoptSign.getAdopt_pk();
+        // log.info("트랜잭션 서비스" + generatedSignPk);
+        // eSignDraft_repository.insertDraftLine(generatedSignPk);
+        return signAdopt;
+    }
+
+    public int insertSignDoc(Sign sign) {
+        int result = eSignDraft_repository.insertSignDoc(sign);
+        return result;
+    }
+
+    public int insertSignLine(SignLine signLine) {
+        int result = eSignDraft_repository.insertSignLine(signLine);
+        log.info(String.valueOf(result));
+        return result;
     }
 }

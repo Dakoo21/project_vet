@@ -18,21 +18,57 @@
         FROM MASTER_TEST
     </select>
     <select id="selectAbandon" resultMap="MissedAnimalList">
-        SELECT KINDCD, COLORCD,AGE, WEIGHT FROM ABANDONED_ANIMAL_TEST
+        SELECT DESERTION_NO, KINDCD, COLORCD, AGE, WEIGHT, POPFILE, NEUTERAL_YESORNO, SEX FROM ABANDONED_ANIMAL_TEST
     </select>
     <insert id="insertSign" parameterType="com.example.vet.model.Sign" statementType="PREPARED" useGeneratedKeys="true" keyProperty="sign_pk">
         <selectKey keyProperty="sign_pk" resultType="int" order="AFTER">
             SELECT SIGN_PK_SEQ.currval AS sign_pk FROM DUAL
         </selectKey>
         <![CDATA[
-            INSERT INTO SIGN2_TEST (SIGN_PK, SIGN_TITLE, SIGN_CONTENT, MEMBER_PK, ADOPT_PK) VALUES (SIGN_PK_SEQ.nextval, #{sign_title}, #{sign_content}, #{member_pk}, #{adopt_pk})
+            INSERT INTO SIGN2_TEST ("SIGN_PK", "SIGN_TITLE", "SIGN_CONTENT", "MEMBER_PK", "ADOPT_PK")
+                   VALUES (SIGN_PK_SEQ.NEXTVAL, #{SIGN_TITLE}, #{SIGN_CONTENT}, #{MEMBER_PK}, #{ADOPT_PK})
         ]]>
     </insert>
-    <insert id="insertDraftLine" parameterType="int">
-        INSERT INTO SIGN_LINE2_TEST (SIGN_PK,MEMBER_PK) VALUES (#{generatedSignPk},1)
+<!--    <insert id="insertDraftLine" parameterType="int">-->
+<!--        INSERT INTO SIGN_LINE2_TEST (SIGN_PK,MEMBER_PK) VALUES (#{generatedSignPk},1)-->
+<!--    </insert>-->
+<!--    <insert id="insertAdoptDraft" parameterType="com.example.vet.model.SignAdopt">-->
+<!--        INSERT INTO SIGN_ADOPT_TEST ("ADOPT_PK", "ADOPT_NM", "DESERTION_NO", "ADOPT_SPECIES", "ADOPT_BREED", "ADOPT_NEUT", "MASTERPK", "ADOPT_REASON", "ADOPT_BDATE", "ADOPT_SEX", "ADOPT_WEIGHT")-->
+<!--        VALUES (sign_adopt_pk_seq.nextval, #{adopt_nm}, #{desertion_no}, #{adopt_species}, #{adopt_breed}, #{adopt_neut},#{masterpk}, #{adopt_reason}, #{adopt_bdate}, #{adopt_sex}, #{adopt_weight})-->
+<!--    </insert>-->
+    <insert id="insertSignAdopt" parameterType="com.example.vet.model.SignAdopt" statementType="PREPARED" useGeneratedKeys="true" keyProperty="adopt_pk">
+        <selectKey keyProperty="adopt_pk" resultType="int" order="AFTER">
+            SELECT SIGN_ADOPT_PK.currval AS adopt_pk FROM DUAL
+        </selectKey>
+        <![CDATA[
+            INSERT INTO SIGN_ADOPT_TEST ("ADOPT_PK", "ADOPT_NM", "DESERTION_NO", "ADOPT_SPECIES", "ADOPT_BREED", "ADOPT_NEUT", "MASTERPK", "ADOPT_REASON", "ADOPT_BDATE", "ADOPT_SEX", "ADOPT_WEIGHT")
+            VALUES (SIGN_ADOPT_PK_SEQ.NEXTVAL, #{ADOPT_NM}, #{DESERTION_NO}, #{ADOPT_SPECIES}, #{ADOPT_BREED}, #{ADOPT_NEUT},#{MASTERPK}, #{ADOPT_REASON}, #{ADOPT_BDATE}, #{ADOPT_SEX}, #{ADOPT_WEIGHT})
+        ]]>
     </insert>
-    <insert id="insertAdoptDraft" parameterType="com.example.vet.model.SignAdopt">
-        INSERT INTO SIGN_ADOPT_TEST (ADOPT_PK, ADOPT_NM, DESERTION_NO, ADOPT_SPECIES, ADOPT_BREED, ADOPT_NEUT, MASTERPK, ADOPT_REASON, ADOPT_BDATE, ADOPT_SEX, ADOPT_WEIGHT)
-        VALUES (sign_adopt_pk_seq.nextval, #{ADOPT_NM}, #{DESRTION_NO}, #{ADOPT_SPECIES}, #{ADOPT_BREED}, #{ADOPT_NEUT}, #{ADOPT_REASON}, #{ADOPT_BDATE}, #{ADOPT_SEX}, #{ADOPT_WEIGHT})
-    </insert>
+<!--    <insert id="insertSignDoc" parameterType="com.example.vet.model.Sign">-->
+<!--        INSERT INTO SIGN2_TEST-->
+<!--        (-->
+<!--            sign_pk,-->
+<!--            sign_title,-->
+<!--            sign_content,-->
+<!--            sign_date,-->
+<!--            sign_reserv_year,-->
+<!--            sign_type,-->
+<!--            member_pk,-->
+<!--            adopt_pk,-->
+<!--            selectedValue-->
+<!--        )-->
+<!--        VALUES-->
+<!--            (-->
+<!--                sign_pk_seq.netval,-->
+<!--                #{sign_title},-->
+<!--                #{sign_content},-->
+<!--                #{sign_date},-->
+<!--                #{sign_reserv_year},-->
+<!--                #{sign_type},-->
+<!--                #{member_pk},-->
+<!--                #{adopt_pk},-->
+<!--                #{selectedValue}-->
+<!--            )-->
+<!--    </insert>-->
 </mapper>

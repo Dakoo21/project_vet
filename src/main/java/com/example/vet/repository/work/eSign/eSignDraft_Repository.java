@@ -1,10 +1,7 @@
 package com.example.vet.repository.work.eSign;
 
 import com.example.vet.controller.work.eSign.SignMapper;
-import com.example.vet.model.MasterVO;
-import com.example.vet.model.Member;
-import com.example.vet.model.Sign;
-import com.example.vet.model.SignAdopt;
+import com.example.vet.model.*;
 import com.example.vet.model.adopt.MissedAnimal;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -71,6 +68,17 @@ public class eSignDraft_Repository {
 
     public int insertAdoptDraft(SignAdopt signAdopt) {
         int result = sqlSessionTemplate.insert("insertAdoptDraft", signAdopt);
+        return result;
+    }
+
+    public int insertSignDoc(Sign sign) {
+
+        int result = sqlSessionTemplate.insert("insertAdoptDraft", sign);
+        return result;
+    }
+
+    public int insertSignLine(SignLine signLine) {
+        int result = sqlSessionTemplate.insert("insertSignLine", signLine);
         return result;
     }
 }
