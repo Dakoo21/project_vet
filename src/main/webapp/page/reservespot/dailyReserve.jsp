@@ -51,6 +51,7 @@
 //    if(i==aSize) break;//NullPointerException방어
 //    Map<String,Object> aMap = allList.get(i);
 
+
 %>
 
 <!DOCTYPE html>
@@ -67,23 +68,7 @@
     <script type="text/javascript" src="ajax-sample.js"></script>
 
     <script>
-        function firstOpenModal() {
-            // 모달 열기 전에 hidden 속성을 제거하여 버튼을 표시
-            document.getElementById('inputButtton').removeAttribute('hidden');
-            document.getElementById('updateButton').setAttribute('hidden', 'hidden');
-            document.getElementById('cancelButtton').setAttribute('hidden', 'hidden');
-            // select 요소 초기화
-            document.getElementById('selecStartTimetBox').value = '0';
-            document.getElementById('selecEndTimeBox').value = '0';
-            //내용, 환자명, 보호자명
-            document.getElementById('facilityRemarks').value = '';
-            document.getElementById('inputMasterNm').value = '';
-            document.getElementById('animalPk').value = '';
-            document.getElementById('animalNm').value = '';
-            //유저 정보
-            document.getElementById('memberNm').value = "name";
-            document.getElementById('memberPk').value = 1;
-        }
+
 
         let isSending = false;
         let todayDate = new Date().toISOString().split('T')[0];
@@ -637,10 +622,11 @@
 
                                         <td class="cancel-button-cell">
 <%--                                        <%=name%>--%>
-                                        <% if ("토가".equals(rmap.get("USER_NM"))) { %>
-                                        <button hidden onclick="cancel('<%= rmap.get("FACILITY_RESERVE_ID") %>')" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
-                                        <% } else { %>
+
+                                        <% if (name.equals(rmap.get("USER_NM"))) { %>
                                         <button onclick="cancel('<%= rmap.get("FACILITY_RESERVE_ID") %>')" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
+                                        <% } else { %>
+                                        <button hidden onclick="cancel('<%= rmap.get("FACILITY_RESERVE_ID") %>')" type="button" class="btn btn-block btn-default" style="float: right;">취소</button>
                                         <% } %>
                                         </td>
                                     </tr>
@@ -797,9 +783,9 @@
                                             <!-- 오늘일경우 오늘 시간 이후 시간 셀렉트 -->
                                         </select>
                                     </div>
-                                    <div><input type="text" id="memberNm" class="text-input" readonly value="name">
+                                    <div><input type="text" id="memberNm" class="text-input" readonly value=<%=name%>>
                                         <span>
-                                            <input type="text" id="memberPk" class="text-input" readonly value="1" hidden>
+                                            <input type="text" id="memberPk" class="text-input" readonly value=<%=userpk%> hidden>
                                             <%--name,userpk--%>
                                         </span>
                                         <span>
@@ -1005,13 +991,17 @@
             }
             // 버튼 요소 가져오기
             var updateButton = document.getElementById('updateButton');
+
             var cancelButton = document.getElementById('cancelButtton');
             console.log(updateButton)
-
+            var inputName = document.getElementById('inputName');
+            console.log(updateButton)
             // 버튼을 숨김 처리
+            name = principalDetails.getName()
             updateButton.removeAttribute('hidden');
-            cancelButton.removeAttribute('hidden');
-
+            if(name==inputName) {//섹션 값이랑
+                cancelButton.removeAttribute('hidden');
+            }
         }
         xhr.send();
     }
@@ -1104,6 +1094,32 @@
         console.log("돔돔:"+'DOMContentLoaded');
        drawChart();
     });
+    function firstOpenModal() {
+        // 모달 열기 전에 hidden 속성을 제거하여 버튼을 표시
+        document.getElementById('inputButtton').removeAttribute('hidden');
+        document.getElementById('updateButton').setAttribute('hidden', 'hidden');
+        document.getElementById('cancelButtton').setAttribute('hidden', 'hidden');
+        // select 요소 초기화
+        const facilityReserveDt = document.getElementById('facilityReserveDt');
+        facilityReserveDt.value = getCurrentDate();
+        dailyDate.value=  getCurrentDate();
+        document.getElementById('selecStartTimetBox').value = '0';
+        document.getElementById('selecEndTimeBox').value = '0';
+        document.getElementById('facilityReserveDt').value = dailyDate.value;
+        //내용, 환자명, 보호자명
+        document.getElementById('facilityRemarks').value = '';
+        document.getElementById('inputMasterNm').value = '';
+        document.getElementById('animalPk').value = '';
+        document.getElementById('animalNm').value = '';
+        //유저 정보
+        const userpk = principalDetails.getID();
+        console.log("유저pk:"+userpk);
+
+        const name = principalDetails.getName();
+        console.log("유저name:"+name);
+        document.querySelector('#memberNm').value = name;
+        document.querySelector('#memberPk').value = userpk;
+    }
 </script>
 </body>
 </html>

@@ -114,7 +114,7 @@ public class Facilities_Repository {
         logger.info("facilityReserveId:"+facilityReserveId);
         // JAVA -> MyBatis -> Oracle
         Map<String, Object> oneMap = sqlSessionTemplate.selectOne("detailList",facilityReserveId);
-        logger.info(oneMap.toString());
+
         return oneMap;
     }
 }

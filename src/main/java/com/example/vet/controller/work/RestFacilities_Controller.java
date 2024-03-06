@@ -113,41 +113,107 @@ public class RestFacilities_Controller {
         List<Map<String, Object>> allList = facilitiesService.reserveListAll(facilityReserveDt);
         logger.info("[모든약목록 조회 결과(allList)]:{}", allList.toString());
         // 만약 allList가 비어 있다면 "수술실", "면회실", "방사선실", "미용실" 맵을 포함하는 리스트 생성
-        if (allList.isEmpty()) {
-            logger.info("[모든약목록 조회 결과(allList)]:{}"+"빈배열이래요");
-            Map<String, Object> map1 = new HashMap<>();
-            map1.put("FACILITY_NM", "수술실");
-            map1.put("FACILITY_RESERVE_DT", facilityReserveDt);
-            map1.put("ANIMAL_NM", "예약없음");
-            map1.put("START_TIME", "8:00");
-            map1.put("END_TIME", "8:00");
+//        if (allList.isEmpty()) {
+//            logger.info("[모든약목록 조회 결과(allList)]:{}"+"빈배열이래요");
+//            Map<String, Object> map1 = new HashMap<>();
+//            map1.put("FACILITY_NM", "수술실");
+//            map1.put("FACILITY_RESERVE_DT", facilityReserveDt);
+//            map1.put("ANIMAL_NM", "예약없음");
+//            map1.put("START_TIME", "8:00");
+//            map1.put("END_TIME", "8:00");
+//
+//            allList.add(map1);
+//
+//            Map<String, Object> map2 = new HashMap<>();
+//            map2.put("FACILITY_NM", "면회실");
+//            map2.put("FACILITY_RESERVE_DT", facilityReserveDt);
+//            map2.put("ANIMAL_NM", "예약없음");
+//            map2.put("START_TIME", "8:00");
+//            map2.put("END_TIME", "8:00");
+//            allList.add(map2);
+//
+//            Map<String, Object> map3 = new HashMap<>();
+//            map3.put("FACILITY_NM", "방사선실");
+//            map3.put("FACILITY_RESERVE_DT", facilityReserveDt);
+//            map3.put("START_TIME", "8:00");
+//            map3.put("END_TIME", "8:00");
+//            map3.put("ANIMAL_NM", "예약없음");
+//            allList.add(map3);
+//
+//            Map<String, Object> map4 = new HashMap<>();
+//            map4.put("FACILITY_NM", "미용실");
+//            map4.put("FACILITY_RESERVE_DT", facilityReserveDt);
+//            map4.put("ANIMAL_NM", "예약없음");
+//            map4.put("START_TIME", "8:00");
+//            map4.put("END_TIME", "8:00");
+//            allList.add(map4);
+//            logger.info("[조회 결과 비었을 때 추가해준 결과(allList)]: {}", allList);
+//        }
+        boolean isRadiologyRoomExist = false;
+        boolean isBeautyRoomExist = false;
+        boolean isSurgeryRoomExist = false;
+        boolean isVisitingRoomExist = false;
 
-            allList.add(map1);
+// 리스트에 각각의 방이 있는지 확인
+        for (Map<String, Object> map : allList) {
+            String facilityName = (String) map.get("FACILITY_NM");
+            if (facilityName.equals("방사선실")) {
+                isRadiologyRoomExist = true;
+            } else if (facilityName.equals("미용실")) {
+                isBeautyRoomExist = true;
+            } else if (facilityName.equals("수술실")) {
+                isSurgeryRoomExist = true;
+            } else if (facilityName.equals("면회실")) {
+                isVisitingRoomExist = true;
+            }
+        }
 
-            Map<String, Object> map2 = new HashMap<>();
-            map2.put("FACILITY_NM", "면회실");
-            map2.put("FACILITY_RESERVE_DT", facilityReserveDt);
-            map2.put("ANIMAL_NM", "예약없음");
-            map2.put("START_TIME", "8:00");
-            map2.put("END_TIME", "8:00");
-            allList.add(map2);
+// "방사선실"이 없으면 맵 추가
+        if (!isRadiologyRoomExist) {
+            Map<String, Object> radiologyRoom = new HashMap<>();
+            radiologyRoom.put("FACILITY_NM", "방사선실");
+            radiologyRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
+            radiologyRoom.put("ANIMAL_NM", "예약없음");
+            radiologyRoom.put("MASTER_NM", "");
+            radiologyRoom.put("START_TIME", "8:00");
+            radiologyRoom.put("END_TIME", "8:00");
+            allList.add(radiologyRoom);
+        }
 
-            Map<String, Object> map3 = new HashMap<>();
-            map3.put("FACILITY_NM", "방사선실");
-            map3.put("FACILITY_RESERVE_DT", facilityReserveDt);
-            map3.put("START_TIME", "8:00");
-            map3.put("END_TIME", "8:00");
-            map3.put("ANIMAL_NM", "예약없음");
-            allList.add(map3);
+// "미용실"이 없으면 맵 추가
+        if (!isBeautyRoomExist) {
+            Map<String, Object> beautyRoom = new HashMap<>();
+            beautyRoom.put("FACILITY_NM", "미용실");
+            beautyRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
+            beautyRoom.put("ANIMAL_NM", "예약없음");
+            beautyRoom.put("MASTER_NM", "");
+            beautyRoom.put("START_TIME", "8:00");
+            beautyRoom.put("END_TIME", "8:00");
+            allList.add(beautyRoom);
+        }
 
-            Map<String, Object> map4 = new HashMap<>();
-            map4.put("FACILITY_NM", "미용실");
-            map4.put("FACILITY_RESERVE_DT", facilityReserveDt);
-            map4.put("ANIMAL_NM", "예약없음");
-            map4.put("START_TIME", "8:00");
-            map4.put("END_TIME", "8:00");
-            allList.add(map4);
-            logger.info("[조회 결과 비었을 때 추가해준 결과(allList)]: {}", allList);
+// "수술실"이 없으면 맵 추가
+        if (!isSurgeryRoomExist) {
+            Map<String, Object> surgeryRoom = new HashMap<>();
+            surgeryRoom.put("FACILITY_NM", "수술실");
+            surgeryRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
+            surgeryRoom.put("ANIMAL_NM", "예약없음");
+            surgeryRoom.put("MASTER_NM", "");
+            surgeryRoom.put("START_TIME", "8:00");
+            surgeryRoom.put("END_TIME", "8:00");
+            allList.add(surgeryRoom);
+        }
+
+// "면회실"이 없으면 맵 추가
+        if (!isVisitingRoomExist) {
+            Map<String, Object> visitingRoom = new HashMap<>();
+            visitingRoom.put("FACILITY_NM", "면회실");
+            visitingRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
+            visitingRoom.put("ANIMAL_NM", "예약없음");
+            visitingRoom.put("MASTER_NM", "");
+            visitingRoom.put("START_TIME", "8:00");
+            visitingRoom.put("END_TIME", "8:00");
+            allList.add(visitingRoom);
         }
 
         

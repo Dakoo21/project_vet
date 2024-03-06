@@ -56,7 +56,8 @@ public class Facilities_Controller {
         model.addAttribute("rList", rList);
 
         model.addAttribute("myList", myList);
-        return "forward:/page/reservespot/dailyReserve.jsp";//경로확인 webapp아래서 찾는
+        return "pages/reservespot/dailyReserve";//경로확인
+
     }
 
 
@@ -69,7 +70,8 @@ public class Facilities_Controller {
         logger.info("reserveDelete 컨트롤러 시작");
         int result = 0;
         result = facilitiesService.DeleteReserve(facilityReserveId);
-        return "redirect:/reservespot/dailyReserve";
+//        return "redirect:/pages/reservespot/dailyReserve";
+        return "redirect:dailyReserve";
     }
 
     //동물 조회

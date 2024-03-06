@@ -255,16 +255,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/reservespot/dailyReserve.jsp" class="nav-link">
+                            <a href="/reservespot/dailyReserve" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>일일 에약 현황</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/reservespot/allReserve.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>에약 현황 조회</p>
                             </a>
                         </li>
                     </ul>
@@ -474,16 +467,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/reservespot/dailyReserve.jsp" class="nav-link">
+                            <a href="/reservespot/dailyReserve" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>일일 에약 현황</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/reservespot/allReserve.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>에약 현황 조회</p>
                             </a>
                         </li>
                     </ul>

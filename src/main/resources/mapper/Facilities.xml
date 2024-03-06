@@ -5,8 +5,8 @@
         SELECT FACILITY_RESERVE_ID
              , FACILITY_NM
              , USER_NM
-             , ANIMAL_NM
-             , MASTER_NM
+             , NVL(ANIMAL_NM, '') AS ANIMAL_NM
+             , NVL(MASTER_NM, '') AS MASTER_NM
              , FACILITY_RESERVE_DT
              , TO_CHAR(START_TIME + 30/(24*60)*RESERVE_START_TIME  , 'hh24:mi') AS START_TIME
              , TO_CHAR(START_TIME + 30/(24*60)*(RESERVE_END_TIME+1), 'hh24:mi') AS END_TIME
@@ -20,16 +20,17 @@
                    , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
                    , TO_DATE('2019-08-21 10:00', 'yyyy-mm-dd hh24:mi') AS START_TIME
               FROM FACILITY_RESERVE_TEST R
-                       INNER JOIN USER_TEST5 U
-                                  ON 1=1
-                                      AND R.MEMBER_PK = U.MEMBER_PK
                        INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
                                   ON 1=1
                                       AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
-                       INNER JOIN ANIMAL_TEST A
+                       LEFT OUTER JOIN USER_TEST5 U
+                                  ON 1=1
+                                      AND R.MEMBER_PK = U.MEMBER_PK
+
+                       LEFT OUTER JOIN ANIMAL_TEST A
                                   ON 1=1
                                       AND R.ANIMAL_PK = A.ANIMALPK
-                       INNER JOIN MASTER_TEST M
+                       LEFT OUTER JOIN MASTER_TEST M
                                   ON 1=1
                                       AND A.MASTERPK = M.MASTERPK
               WHERE FACILITY_RESERVE_DT
@@ -54,13 +55,14 @@
                    , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
                    , TO_DATE('2019-08-21 10:00', 'yyyy-mm-dd hh24:mi') AS START_TIME
               FROM FACILITY_RESERVE_TEST R
-                       INNER JOIN USER_TEST5 U
-                                  ON 1=1
-                                      AND R.MEMBER_PK = U.MEMBER_PK
                        INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
                                   ON 1=1
                                       AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
-                       INNER JOIN ANIMAL_TEST A
+                       LEFT OUTER JOIN USER_TEST5 U
+                                  ON 1=1
+                                      AND R.MEMBER_PK = U.MEMBER_PK
+
+                       LEFT OUTER JOIN ANIMAL_TEST A
                                   ON 1=1
                                       AND R.ANIMAL_PK = A.ANIMALPK
               WHERE 1=1
@@ -89,13 +91,15 @@
         , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
         , TO_DATE('2019-08-21 10:00', 'yyyy-mm-dd hh24:mi') AS START_TIME
         FROM FACILITY_RESERVE_TEST R
-        INNER JOIN USER_TEST5 U
-        ON 1=1
-        AND R.MEMBER_PK = U.MEMBER_PK
         INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
         ON 1=1
         AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
-        INNER JOIN ANIMAL_TEST A
+
+        LEFT OUTER JOIN USER_TEST5 U
+        ON 1=1
+        AND R.MEMBER_PK = U.MEMBER_PK
+
+        LEFT OUTER JOIN ANIMAL_TEST A
         ON 1=1
         AND R.ANIMAL_PK = A.ANIMALPK
         WHERE 1=1
@@ -175,7 +179,7 @@
              , A.MASTERPK as masterPk
              , MASTER_NM
         FROM ANIMAL_TEST A
-                 INNER JOIN MASTER_TEST M
+                 LEFT OUTER JOIN MASTER_TEST M
                             ON 1=1
                                 AND A.MASTERPK = M.MASTERPK
         WHERE ANIMAL_NM
@@ -189,9 +193,9 @@
         SELECT FACILITY_RESERVE_ID
              , FACILITY_NM
              , USER_NM
-             , ANIMAL_NM
+             , NVL(ANIMAL_NM, '') AS ANIMAL_NM
              , ANIMAL_PK
-             , MASTER_NM
+             , NVL(MASTER_NM, '') AS MASTER_NM
              , MEMBER_PK
              , FACILITY_RESERVE_DT
              , FACILITY_REMARKS
@@ -212,16 +216,17 @@
                    , MAX(RESERVE_TIME_INTERVAL) AS RESERVE_END_TIME
 
               FROM FACILITY_RESERVE_TEST R
-                       INNER JOIN USER_TEST5 U
-                                  ON 1=1
-                                      AND R.MEMBER_PK = U.MEMBER_PK
                        INNER JOIN FACILITY_RESERVE_DETAIL_TEST D
                                   ON 1=1
                                       AND R.FACILITY_RESERVE_ID = D.FACILITY_RESERVE_ID
-                       INNER JOIN ANIMAL_TEST A
+                       LEFT OUTER JOIN  USER_TEST5 U
+                                  ON 1=1
+                                      AND R.MEMBER_PK = U.MEMBER_PK
+
+                       LEFT OUTER JOIN ANIMAL_TEST A
                                   ON 1=1
                                       AND R.ANIMAL_PK = A.ANIMALPK
-                       INNER JOIN MASTER_TEST M
+                       LEFT OUTER JOIN MASTER_TEST M
                                     ON 1=1
                                         AND A.MASTERPK = M.MASTERPK
             WHERE 1=1
