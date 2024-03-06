@@ -73,7 +73,10 @@
                 </choose>
             </if>
         </where>
+        ORDER BY DIAG_TEST.DIAG_PK DESC
     </select>
+
+
     <insert id="diagInsert" parameterType="java.util.Map">
         <if test="diagPk!=null">
             INSERT INTO DIAG_SERVICE_TEST(DIAG_SERVICE_PK, SERVICE_PK, DIAG_PK)

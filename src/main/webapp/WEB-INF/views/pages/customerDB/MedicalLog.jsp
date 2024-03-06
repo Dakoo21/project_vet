@@ -103,7 +103,7 @@
                                                 진료번호
                                             </th>
                                             <th style="width: 15%">
-                                                등록일시
+                                                예약일시
                                             </th>
                                             <th style="width: 10%">
                                                 동물명
@@ -137,7 +137,7 @@
                                             <td><%= rmap.get("masterPhoneNumber") %></td>
                                             <td><%=rmap.get("commonCodeName")%></td>
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" href="http://localhost:8000/payment/paymentList?diagPk=<%=rmap.get("diagPk")%>">
+                                                <a class="btn btn-info btn-sm" onclick="redirectToPayment('<%= rmap.get("diagPk") %>')">
                                                     <i class="fas fa-pencil-alt"></i>수납</a>
                                             </td>
                                         </tr>
@@ -150,6 +150,25 @@
                                             function redirectToLink(diagPk) {
                                                 window.location.href = "http://localhost:8000/diag/diagDetail?diagPk=" + diagPk;
                                             }
+
+                                            function redirectToPayment(diagPk) {
+                                                // Ajax를 사용하여 서버에서 고객명과 연락처 가져오기
+                                                $.ajax({
+                                                    url: 'http://localhost:8000/payment/paymentList',
+                                                    type: 'GET',
+                                                    data: { diagPk: diagPk },
+                                                    success: function(data) {
+                                                        // 고객명과 연락처 값을 가져와서 폼 요소에 할당
+                                                        $('#buyer_name').val(data.masterNM);
+                                                        $('#buyer_tel').val(data.masterPhoneNumber);
+
+                                                        // 페이지 이동
+                                                        window.location.href = 'http://localhost:8000/payment/paymentList?diagPk=' + diagPk;
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        console.error('서버에서 데이터를 가져오는 중 에러 발생:', error);
+                                                    }
+                                                });
                                         </script>
 
 

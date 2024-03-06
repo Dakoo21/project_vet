@@ -1,5 +1,7 @@
 package com.example.vet.repository.work;
 
+import com.example.vet.model.AnimalVO;
+import com.example.vet.model.BookingVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,31 +19,25 @@ public class Booking_Repository {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
 
-    public List<Map<String, Object>> bookingSelect() {
-        List<Map<String, Object>> bList = sqlSessionTemplate.selectList("bookingSelect");
+    public List<Map<String, Object>> Select(BookingVO bookingVO) {
+        List<Map<String, Object>> bList= sqlSessionTemplate.selectList("bookingSelect", bookingVO);
         logger.info(bList.toString());
         return bList;
     }
 
-    public List<Map<String, Object>> selectBookingDetail(int bookingPK) {
-        List<Map<String, Object>> nList = sqlSessionTemplate.selectList("bookingDetail", bookingPK);
-        logger.info(nList.toString());
-        return nList;
+    public int Insert(BookingVO bookingVO) {
+        int rowsInserted = sqlSessionTemplate.insert("bookingInsert", bookingVO);
+        return rowsInserted> 0 ? 1 : 0;
     }
 
-    public int bookingUpdate(Map<String, Object> rmap) {
-        int rowsAffected = sqlSessionTemplate.update("bookingUpdate", rmap);
+    public int Update(BookingVO bookingVO) {
+        int rowsAffected = sqlSessionTemplate.update("bookingUpdate", bookingVO);
         return rowsAffected > 0 ? 1 : 0;
     }
 
-    public int bookingInsert(Map<String, Object> rmap) {
-        int rowsInserted = sqlSessionTemplate.insert("bookingInsert", rmap);
-        return rowsInserted > 0 ? 1 : 0;
-    }
-
-    public int bookingDelete(int bookingPK) {
-        int rowsDeleted = sqlSessionTemplate.delete("bookingDelete", bookingPK);
-        return rowsDeleted > 0 ? 1 : 0;
+    public int Delete(int bookingPK) {
+        int rowDeleted = sqlSessionTemplate.delete("bookingDelete", bookingPK);
+        return rowDeleted>0 ? 1 : 0;
     }
 
     public List<Map<String, Object>> SelectAnimal() {
@@ -49,11 +45,4 @@ public class Booking_Repository {
         logger.info(aList.toString());
         return aList;
     }
-
-    public List<Map<String, Object>> selectAnimalsByName(String animalNm) {
-        List<Map<String, Object>> animList = sqlSessionTemplate.selectList("animalSelectByName", animalNm);
-        logger.info(animList.toString());
-        return animList;
-    }
 }
-

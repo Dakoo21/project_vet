@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.bookingMapper">
     <resultMap id = "selectResultMap" type="java.util.HashMap">
         <result property="bookingType" column="bookingType"/>
@@ -22,8 +22,6 @@
         <result property="masterEmail" column="masterEmail"/>
         <result property="masterPnumber" column="masterPnumber"/>
     </resultMap>
-
-
 
     <select id="bookingSelect" parameterType="com.example.vet.model.BookingVO" resultMap="selectResultMap">
         SELECT BOOKING.BOOKING_TYPE as "bookingType", BOOKING.BOOKING_START as "bookingStart", BOOKING.BOOKING_END "bookingEnd",
@@ -75,7 +73,7 @@
         <result property="masterPk" column="masterPk"/>
     </resultMap>
 
-    <select id="animalSelect" parameterType="com.example.vet.model.AnimalVO" resultMap="selectAnimalResultMap">
+    <select id = "animalSelect" parameterType="java.util.Map" resultMap="selectAnimalResultMap">
         SELECT ANIMAL.ANIMAL_NM as "animalNm", ANIMAL.ANIMALPK as "animalPk", MASTER.MASTER_NM as "masterNm", MASTER.MASTERPK as "masterPk"
         FROM ANIMAL_TEST ANIMAL
         LEFT OUTER JOIN MASTER_TEST MASTER ON ANIMAL.MASTERPK = MASTER.MASTERPK
@@ -83,22 +81,9 @@
             WHERE ANIMAL.ANIMAL_NM LIKE '%' || #{animalNm} || '%'
             <if test="masterNm!=null">
                 AND MASTER.MASTER_NM = #{masterNm}
+
             </if>
         </if>
     </select>
 
-    <select id="animalSelectByName" parameterType="java.lang.String" resultMap="selectAnimalResultMap">
-        SELECT ANIMAL.ANIMAL_NM as "animalNm", ANIMAL.ANIMALPK as "animalPk", MASTER.MASTER_NM as "masterNm", MASTER.MASTERPK as "masterPk"
-        FROM ANIMAL_TEST ANIMAL
-        LEFT OUTER JOIN MASTER_TEST MASTER ON ANIMAL.MASTERPK = MASTER.MASTERPK
-        <where>
-            <if test="animalNm != null and animalNm != ''">
-                AND ANIMAL.ANIMAL_NM LIKE '%' || #{animalNm} || '%'
-            </if>
-        </where>
-    </select>
-
-
-
 </mapper>
-
