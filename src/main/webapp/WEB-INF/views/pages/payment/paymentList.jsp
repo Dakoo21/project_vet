@@ -45,8 +45,8 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<%@ include file="/include/header.jsp"%>
-<%--<%@ include file="/include/sidebar.jsp"%>--%>
+
+<%@ include file="/include/sidebar.jsp"%>
 <div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -56,12 +56,6 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>결제페이지</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Projects</li>
-                        </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

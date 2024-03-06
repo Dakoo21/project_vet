@@ -1,7 +1,5 @@
 package com.example.vet.repository.work;
 
-import com.example.vet.model.AnimalVO;
-import com.example.vet.model.BookingVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,3 +56,4 @@ public class Booking_Repository {
         return animList;
     }
 }
+

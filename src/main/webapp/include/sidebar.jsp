@@ -391,6 +391,14 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/booking/bookingList" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>진료 예약 조회</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <!-- 메뉴 끝-->
                 <!-- 메뉴8 시작 -->

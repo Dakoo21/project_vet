@@ -1,7 +1,5 @@
 package com.example.vet.service.work;
 
-import com.example.vet.model.AnimalVO;
-import com.example.vet.model.BookingVO;
 import com.example.vet.repository.work.Booking_Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,3 +45,4 @@ public class Booking_Service {
         return bookingRepository.selectAnimalsByName(animalNm);
     }
 }
+

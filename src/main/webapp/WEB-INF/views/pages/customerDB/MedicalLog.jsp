@@ -35,12 +35,6 @@
                     <div class="col-sm-6">
                         <h1>진료 기록 조회</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Projects</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
             <!-- 검색기 시작 -->
@@ -90,7 +84,7 @@
                              style="position: relative; height: 100%;">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">상세기록</h3>
+                                    <%--<h3 class="card-title">상세기록</h3>--%>
 
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
