@@ -30,7 +30,6 @@
 <body>
 <div id="contentwrite">
     <div id="modal">
-
     </div>
     <div>
         <form>
@@ -99,7 +98,7 @@
 </div>
 <!--modal start-->
 <div class="modal" id="selectForm2">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -259,10 +258,8 @@
             생일 : rowData[4]
         };
         var selectedAdopterId = $(this).data("adopter-id");
-        // $("#selectedAnimalIdDisplay").text(selectedRowData);
         $("#selectedAdopterDisplay").text(JSON.stringify(selectedRowData, null, 2));
         console.log("Selected Adopter ID:" + selectedAdopterId);
-        // $("#modal").hide();
     });
     // 모달창 닫기 버튼 클릭 이벤트
     $(".close").click(function(){
@@ -274,10 +271,6 @@
         tableBody.empty();
         for (var i=0; i<data.length; i++) {
             console.log(data[i]);
-            // String kindCd = mList.getKindcd();
-            // String colorCd = mList.getColorcd();
-            // String age = mList.getAge();
-            // String weight = mList.getWeight();
             var row = "<tr data-adopter-id='" + data[i].master_nm + "'>" +
                 "<td>" + data[i].master_nm + "</td>" +
                 "<td>" + data[i].master_pnumber + "</td>" +

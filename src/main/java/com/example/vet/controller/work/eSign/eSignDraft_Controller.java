@@ -1,9 +1,6 @@
 package com.example.vet.controller.work.eSign;
 
-import com.example.vet.model.MasterVO;
-import com.example.vet.model.Member;
-import com.example.vet.model.Sign;
-import com.example.vet.model.SignAdopt;
+import com.example.vet.model.*;
 import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.service.work.eSign.eSignDraft_Service;
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +40,10 @@ public class eSignDraft_Controller {
      작성일자 : 26.02.25
      기능 : 기안서 작성
      **********************************************************************************/
-    @PostMapping("draftInsert")
-    public String eSignInsert(SignAdopt signAdopt) {
+    @PostMapping("adoptDraftInsert")
+    public String adoptDraftInsert(SignAdopt signAdopt) {
+        log.info("draftAdoptInsert 컨트롤러 호출");
+        log.info(signAdopt.toString());
         int result;
         result = eSignDraft_service.insertAdoptDraft(signAdopt);
         return "pages/esignbox/docsBox";
@@ -71,11 +70,12 @@ public class eSignDraft_Controller {
      기능 : 입양자 선택 기능
      **********************************************************************************/
     @GetMapping("adopterList")
+    @ResponseBody
     public List<MasterVO> adopterList() {
         List<MasterVO> abandonList =  eSignDraft_service.selectAdopter();
         log.info("입양자 리스트");
         log.info(abandonList.toString());
-        return abandonList;
+        return eSignDraft_service.selectAdopter();
     }
 
     /**********************************************************************************
@@ -113,24 +113,143 @@ public class eSignDraft_Controller {
      작성일자 : 26.02.25
      기능 : pk 조회
      **********************************************************************************/
-    @GetMapping("submitSelectedValue")
-    public ResponseEntity<String> submitSelectedValue() {
-        Sign sign = new Sign();
-        sign.setSign_title("Your Title");
-        sign.setSign_content("Your Content");
-        sign.setMember_pk(1);
-        sign.setAdopt_pk(6);
-        Sign insertedSign = eSignDraft_service.createSign(sign);
-        int generatedSignPk = insertedSign.getSign_pk();
-        log.info(String.valueOf(generatedSignPk));
-        // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-        return ResponseEntity.ok("Sign created with ID: " + generatedSignPk);
-    }
+    // @GetMapping("submitSelectedValue")
+    // public ResponseEntity<String> submitSelectedValue(SignAdopt signAdopt) {
+    //     // Sign sign = new Sign();
+    //     // sign.setSign_title("Your Title");
+    //     // sign.setSign_content("Your Content");
+    //     // sign.setMember_pk(1);
+    //     // sign.setAdopt_pk(6);
+    //     Sign insertedSign = eSignDraft_service.createSign(sign);
+    //     int generatedSignPk = insertedSign.getSign_pk();
+    //     log.info(String.valueOf(generatedSignPk));
+    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+    //     return ResponseEntity.ok("Sign created with ID: " + generatedSignPk);
+    // }
+    /**********************************************************************************
+     작성자 : 최윤정
+     작성일자 : 26.02.25
+     기능 : pk 조회
+     **********************************************************************************/
+    // @GetMapping("generatedSignPk")
+    // public ResponseEntity<String> submitSelectedValue() {
+    //     Sign sign = new Sign();
+    //     SignAdopt signAdopt = new SignAdopt();
+    //     SignLine signLine = new SignLine();
+    //     log.info(sign.toString());
+    //     log.info(signAdopt.toString());
+    //     log.info(signLine.toString());
+    //     signAdopt.setAdopt_nm("토토");
+    //     signAdopt.setDesertion_no(1);
+    //     signAdopt.setMasterpk(1);
+    //     SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
+    //     int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
+    //     log.info(String.valueOf(generatedAdoptSignPk));
+    //     sign.setAdopt_pk(generatedAdoptSignPk);
+    //     // int result = eSignDraft_service.insertSignDoc(sign);
+    //     sign.setMember_pk(1);
+    //     sign.setAdopt_pk(6);
+    //     Sign insertedSign = eSignDraft_service.createSign(sign);
+    //     int generatedSignPk = insertedSign.getSign_pk();
+    //     signLine.setSign_pk(generatedSignPk);
+    //     signLine.setSign_state(0);
+    //     signLine.setLv1(1);
+    //     signLine.setLv2(0);
+    //     signLine.setLv3(0);
+    //     signLine.setMember_pk(1);
+    //     eSignDraft_service.insertSignLine(signLine);
+    //     // log.info(String.valueOf(result));
+    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+    //     return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+    // }
+
 
     // 테스트
     @GetMapping("testPage")
     public String testPage(){
         return "pages/customerDB/TotalDataInsert";
+    }
+
+    // @PostMapping("generatedSignPk")
+    // public ResponseEntity<String> submitSelectedValue(@ModelAttribute SignAdopt signAdopt,
+    //                                                   @ModelAttribute Sign sign,
+    //                                                   @ModelAttribute SignLine signLine) {
+    //     log.info(sign.toString());
+    //     log.info(signAdopt.toString());
+    //     log.info(signLine.toString());
+    //     SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
+    //     int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
+    //     log.info(String.valueOf(generatedAdoptSignPk));
+    //     sign.setAdopt_pk(generatedAdoptSignPk);
+    //     // int result = eSignDraft_service.insertSignDoc(sign);
+    //     Sign insertedSign = eSignDraft_service.createSign(sign);
+    //     int generatedSignPk = insertedSign.getSign_pk();
+    //     signLine.setSign_pk(generatedSignPk);
+    //     eSignDraft_service.insertSignLine(signLine);
+    //     // log.info(String.valueOf(result));
+    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+    //     return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+    // }
+
+    // @ResponseBody
+    // @PostMapping("generatedSignPk")
+    // public ResponseEntity<String> submitSelectedValue(@ModelAttribute("adoptForm") SignAdopt signAdopt,
+    //                                                    @ModelAttribute("signForm") Sign sign,
+    //                                                    @ModelAttribute("signLineForm") SignLine signLine) {
+    //     log.info(sign.toString());
+    //     log.info(signAdopt.toString());
+    //     log.info(signLine.toString());
+    //     SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
+    //     int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
+    //     log.info(String.valueOf(generatedAdoptSignPk));
+    //     sign.setAdopt_pk(generatedAdoptSignPk);
+    //     // int result = eSignDraft_service.insertSignDoc(sign);
+    //     Sign insertedSign = eSignDraft_service.createSign(sign);
+    //     int generatedSignPk = insertedSign.getSign_pk();
+    //     signLine.setSign_pk(generatedSignPk);
+    //     eSignDraft_service.insertSignLine(signLine);
+    //     // log.info(String.valueOf(result));
+    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+    //     return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+    // }
+
+    @PostMapping("generatedSignPk")
+    public ResponseEntity<String> submitSelectedValue(@RequestBody SignAdopt signAdopt
+                                                      ) {
+        log.info("generatedSignPk컨트롤러");
+        // log.info(sign.toString());
+        log.info(signAdopt.toString());
+        // log.info(signLine.toString());
+        SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
+        int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
+        log.info(String.valueOf(generatedAdoptSignPk));
+        // sign.setAdopt_pk(generatedAdoptSignPk);
+        // int result = eSignDraft_service.insertSignDoc(sign);
+        // Sign insertedSign = eSignDraft_service.createSign(sign);
+        // int generatedSignPk = insertedSign.getSign_pk();
+        // signLine.setSign_pk(generatedSignPk);
+        // eSignDraft_service.insertSignLine(signLine);
+        // log.info(String.valueOf(result));
+        // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+        return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+    }
+    //AdoptForm
+    @PostMapping("adoptForm")
+    public String submitAdoptForm(SignAdopt signAdopt){
+        log.info(signAdopt.toString());
+        return null;
+    }
+    //signLineForm
+    @PostMapping("/signLineForm")
+    public String submitSignLineForm(SignAdopt signAdopt){
+        log.info(signAdopt.toString());
+        return null;
+    }
+    //signForm
+    @PostMapping("/signForm")
+    public String submitSignForm(SignAdopt signAdopt){
+        log.info(signAdopt.toString());
+        return null;
     }
 }
 

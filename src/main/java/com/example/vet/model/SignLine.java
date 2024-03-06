@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SignLine {
-    private int sign_pk;
-    private int lv1;
-    private int lv2;
-    private int lv3;
-    private int member_pk;
-    private int sign_state;
+    private Integer sign_pk;
+    private Integer lv1;
+    private Integer lv2;
+    private Integer lv3;
+    private Integer member_pk;
+    private Integer sign_state;
 
 
     @Builder
-    public SignLine(int sign_pk, int lv1, int lv2, int lv3, int member_pk, int sign_state){
+    public SignLine(Integer sign_pk, Integer lv1, Integer lv2, Integer lv3, Integer member_pk, Integer sign_state){
         this.sign_pk = sign_pk;
         this.lv1 = lv1;
         this.lv2 = lv2;
