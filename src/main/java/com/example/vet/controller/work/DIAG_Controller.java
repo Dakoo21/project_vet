@@ -51,7 +51,7 @@ public class DIAG_Controller {
         logger.info("컨트롤러 디테일");
         logger.info(dList.toString());
         model.addAttribute("dList", dList);
-            return "pages/customerDB/MedicalChart";
+        return "pages/customerDB/MedicalChart";
     };
 
     @PostMapping("/diagUpdate")
@@ -98,6 +98,8 @@ public class DIAG_Controller {
         return "redirect:diagList";
     }
 
+
+
     @ResponseBody
     @GetMapping("/GetServiceCost")
     public List<Map<String, Object>> selectCost(@RequestParam Map<String, Object> rmap) {
@@ -110,5 +112,6 @@ public class DIAG_Controller {
 
         return null;
     };
+
 }
 

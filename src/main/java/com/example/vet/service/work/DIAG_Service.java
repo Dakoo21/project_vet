@@ -16,15 +16,16 @@ public class DIAG_Service {
     }
 
     public List<Map<String, Object>> Select(Map<String, Object> rmap) {
-        log.info("서비스");
+        log.info("서비스 리스트");
         return diagRepository.Select(rmap);
     }
 
     public List<Map<String,Object>> Insert(Map<String, Object> rmap) {
-        log.info("서비스 diagInsert입니다");
+        log.info("서비스 Insert입니다");
         List<Map<String,Object>> sList = diagRepository.Insert(rmap);
         return sList;
     }
+
 
     public List<Map<String, Object>> SelectCost(Map<String, Object> servicePk) {
         return diagRepository.SelectCost(servicePk);

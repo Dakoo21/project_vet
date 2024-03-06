@@ -36,4 +36,9 @@ public class Payment_Repository {
         result = sqlSessionTemplate.insert("paymentCash", pMap);
         return result;
     }
+
+    public Map<String, Object> getPaymentInfo(String diagPk) {
+        logger.info("paymentRepository getPaymentInfo입니다");
+        return sqlSessionTemplate.selectOne("getPaymentInfo", diagPk);
+    }
 }

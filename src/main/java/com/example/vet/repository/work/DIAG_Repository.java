@@ -23,7 +23,7 @@ public class DIAG_Repository {
     public List<Map<String, Object>> Select(Map<String, Object> rmap) {
         List<Map<String, Object>> dList= sqlSessionTemplate.selectList("diagSelect", rmap);
         logger.info(dList.toString());
-        log.info("레포지토리");
+        log.info("레포지토리 셀렉트");
         return dList;
     }
 
@@ -35,6 +35,7 @@ public class DIAG_Repository {
         logger.info("Insert complete");
         return sList;
     }
+
 
     public List<Map<String, Object>> SelectCost(Map<String, Object> servicePk) {
         List<Map<String,Object>> List = sqlSessionTemplate.selectList("serviceCost", servicePk);

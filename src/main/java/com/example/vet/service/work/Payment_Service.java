@@ -39,4 +39,12 @@ public class Payment_Service {
         result = paymentRepository.paymentCash(pmap);
         return result;
     }
+
+    public Map<String, Object> getPaymentInfo(String diagPk) {
+        logger.info("paymentService getPaymentInfo입니다");
+        return paymentRepository.getPaymentInfo(diagPk);
+    }
+
+
+
 }

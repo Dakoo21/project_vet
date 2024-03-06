@@ -128,17 +128,18 @@
                                         <% for(int i = 0; i < dList.size(); i++) {
                                             Map<String, Object> rmap = dList.get(i);
                                         %>
-                                        <tr onclick="redirectToLink('<%= rmap.get("diagPk") %>')">
-                                            <td><%= rmap.get("diagPk") %></td>
-                                            <td><%= rmap.get("bookingDate") %></td>
-                                            <td><%= rmap.get("animalNM") %></td>
-                                            <td><%= rmap.get("animalSpecies") %></td>
-                                            <td><%= rmap.get("masterNM") %></td>
-                                            <td><%= rmap.get("masterPhoneNumber") %></td>
-                                            <td><%=rmap.get("commonCodeName")%></td>
+                                        <tr>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%= rmap.get("diagPk") %></td>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%= rmap.get("bookingDate") %></td>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%= rmap.get("animalNM") %></td>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%= rmap.get("animalSpecies") %></td>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%= rmap.get("masterNM") %></td>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%= rmap.get("masterPhoneNumber") %></td>
+                                            <td onclick="redirectToLink('<%= rmap.get("diagPk") %>')"><%=rmap.get("commonCodeName")%></td>
                                             <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm" onclick="redirectToPayment('<%= rmap.get("diagPk") %>')">
-                                                    <i class="fas fa-pencil-alt"></i>수납</a>
+                                                <a class="btn btn-info btn-sm" onclick="redirectToPayment('<%= rmap.get("diagPk") %>', '<%= rmap.get("DIAG_PRICE") %>', '<%= rmap.get("masterNM") %>', '<%= rmap.get("masterPhoneNumber") %>')">
+                                                    <i class="fas fa-pencil-alt"></i>수납
+                                                </a>
                                             </td>
                                         </tr>
                                         <%
@@ -150,25 +151,15 @@
                                             function redirectToLink(diagPk) {
                                                 window.location.href = "http://localhost:8000/diag/diagDetail?diagPk=" + diagPk;
                                             }
-
-                                            function redirectToPayment(diagPk) {
-                                                // Ajax를 사용하여 서버에서 고객명과 연락처 가져오기
-                                                $.ajax({
-                                                    url: 'http://localhost:8000/payment/paymentList',
-                                                    type: 'GET',
-                                                    data: { diagPk: diagPk },
-                                                    success: function(data) {
-                                                        // 고객명과 연락처 값을 가져와서 폼 요소에 할당
-                                                        $('#buyer_name').val(data.masterNM);
-                                                        $('#buyer_tel').val(data.masterPhoneNumber);
-
-                                                        // 페이지 이동
-                                                        window.location.href = 'http://localhost:8000/payment/paymentList?diagPk=' + diagPk;
-                                                    },
-                                                    error: function(xhr, status, error) {
-                                                        console.error('서버에서 데이터를 가져오는 중 에러 발생:', error);
-                                                    }
-                                                });
+                                        </script>
+                                        <script>
+                                            function redirectToPayment(diagPk, diagPrice, masterNM, masterPhoneNumber) {
+                                                var url = 'http://localhost:8000/payment/paymentList?diagPk=' + diagPk +
+                                                    '&DIAG_PRICE=' + diagPrice +
+                                                    '&masterNM=' + masterNM +
+                                                    '&masterPhoneNumber=' + masterPhoneNumber;
+                                                window.location.href = url;
+                                            }
                                         </script>
 
 

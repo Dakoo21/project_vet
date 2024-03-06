@@ -81,9 +81,10 @@
                     <table class="table table-borderless">
                         <tr>
                             <th>고객명</th>
-                            <td><input class="form-control" type="text" value="<%=rmap.get("masterNm")%>" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="<%= rmap != null ? rmap.get("masterNm") : "" %>" aria-label="readonly input example" readonly></td>
+
                             <th>연락처</th>
-                            <td><input class="form-control" type="text" value="<%=rmap.get("masterPnumber")%>" aria-label="readonly input example" readonly></td>
+                            <td><input class="form-control" type="text" value="<%= rmap != null ? rmap.get("masterPnumber") : "" %>" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
                             <th>주소</th>

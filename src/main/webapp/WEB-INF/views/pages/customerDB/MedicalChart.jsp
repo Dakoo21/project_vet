@@ -117,11 +117,38 @@
                 modal.style.display = "block";
             }
 
+            // diagPrice 수집
+            var diagPrice = document.getElementById('diagPrice').value;
 
+            // diagPk 수집
+            var diagPk = document.querySelector('input[name="diagPk"]').value;
+
+            // 선택한 servicePk 수집
+            var servicePk = document.getElementById('servicePk').value;
+
+            // AJAX 요청 보내기
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/diag/diagInsert', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // 응답 처리
+                        alert('저장되었습니다.');
+                    } else {
+                        // 오류 처리
+                        alert('오류가 발생했습니다.');
+                    }
+                }
+            };
+            // 데이터 전송
+            var data = JSON.stringify({
+                diagPk: diagPk,
+                servicePk: servicePk, // 선택한 servicePk 값 추가
+                diagPrice: diagPrice
+            });
+            xhr.send(data);
         }
-
-
-
 
         function toggleCheckbox(index) {
             isChecked[index] = !isChecked[index]; // 체크박스 상태 변경
@@ -129,21 +156,19 @@
                 //진료 둘다선택했을때 막기
                 var modal = document.getElementById("diagSelectedAllModal"); // 모달 요소 가져오기
                 modal.style.display = "block";
-
-
             }
             else if((!isChecked[20] && isChecked[21])||(isChecked[20] && !isChecked[21])){
                 if (isChecked[index]) {
                     // 체크박스가 체크된 상태이면 함수 실행
                     addCheckList(index); // 체크박스 인덱스는 0부터 시작하므로 1을 더해줌
-
-
                 } else {
                     // 체크박스가 해제된 상태이면 함수 취소
                     removeCheckList(index);
-
-
                 }
+                // 선택한 서비스 pk를 얻어서 변수에 저장하는 예시 코드
+                var selectedServicePk = getServicePkByIndex(index);
+                // 선택한 서비스 pk를 숨은 입력 요소에 저장
+                document.getElementById("servicePk").value = selectedServicePk;
             }
             else{
                 //진료 선택 안했을 때 막기
@@ -473,7 +498,7 @@
                                     <a id="costSumDisplay"></a>
                                     <input type="hidden" id ="diagPrice" name = "diagPrice">
                                     <a class="btn btn-info btn-sm" onclick="openModal()">
-                                        <i class="fas fa-pencil-alt">작성완료</i>
+                                        <i class="fas fa-pencil-alt">저장</i>
                                     </a>
                                 </td>
                             </tr>

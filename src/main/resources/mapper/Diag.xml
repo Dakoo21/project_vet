@@ -87,8 +87,8 @@
             INSERT INTO DIAG_TEST(DIAG_PK, DIAG_PRESCRIPTION, BOOKING_PK)
             VALUES (DIAG_PK_SEQ.nextval,'' , #{bookingPk})
         </if>
-
     </insert>
+
     <update id="updateBookingTest" parameterType="java.util.Map">
         <if test="diagPk==null">
             UPDATE BOOKING_TEST

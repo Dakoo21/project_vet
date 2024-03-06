@@ -17,6 +17,7 @@ public class Payment_Controller {
     Logger logger = LoggerFactory.getLogger(Payment_Controller.class);
     @Autowired
     Payment_Service paymentService = null;
+
     @GetMapping("paymentList")
     public String paymentList(Model model, @RequestParam Map<String, Object> pmap) {
         List<Map<String, Object>> pList = null;
@@ -26,14 +27,17 @@ public class Payment_Controller {
         return "pages/payment/paymentList";
     }
 
-    @GetMapping("paymentDetail")
-    public String paymentDetail(Model model, @RequestParam Map<String, Object> pmap) {
-        logger.info("paymentDetail");
-        List<Map<String, Object>> pList = null;
-        pList = paymentService.paymentList(pmap);
-        model.addAttribute("pList", pList);
-        return "paymentList";
+    @PostMapping("/getPaymentInfo")
+    public String getPaymentInfo(@RequestParam String diagPk, Model model) {
+        // diagPk를 이용하여 필요한 정보를 데이터베이스에서 조회하고 가져옴
+        Map<String, Object> paymentInfo = paymentService.getPaymentInfo(diagPk);
+
+        // 조회된 정보를 모델에 담아서 paymentList 페이지로 전달
+        model.addAttribute("paymentInfo", paymentInfo);
+
+        return "pages/payment/paymentList";
     }
+
 
     @PostMapping("/paymentInsert")
     public String paymentInsert(@RequestParam Map<String, Object> pmap) {
