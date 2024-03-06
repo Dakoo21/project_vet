@@ -1,4 +1,3 @@
-<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -46,9 +45,8 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-
-<%@ include file="/include/sidebar.jsp"%>
-
+<%@ include file="/include/header.jsp"%>
+<%--<%@ include file="/include/sidebar.jsp"%>--%>
 <div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -120,13 +118,13 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="buyer_name" name="buyer_name" placeholder="입력하세요" value="<%= request.getParameter("buyerName") %>" />
+                                                        <input type="text" class="form-control" id="buyer_name" name="buyer_name" placeholder="buyer_name" />
                                                         <label for="buyer_name">고객명</label>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="buyer_tel" name="buyer_tel" placeholder="입력하세요" value="<%= request.getParameter("buyerTel") %>" />
+                                                        <input type="text" class="form-control" id="buyer_tel" name="buyer_tel" placeholder="buyer_tel" />
                                                         <label for="buyer_tel">연락처</label>
                                                     </div>
                                                 </div>
@@ -145,7 +143,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="paid_amount" name="paid_amount" placeholder="입력하세요" value="<%= request.getParameter("diagPrice") %>" />
+                                                        <input type="text" class="form-control" id="paid_amount" name="paid_amount" placeholder="paid_amount" />
                                                         <label for="paid_amount">결제금액</label>
                                                     </div>
                                                 </div>
@@ -158,56 +156,77 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-floating mb-8">
-                                                        <input type="text" class="form-control" id="pg_provider" name="pg_provider" placeholder="" readonly/>
+                                                        <input type="text" class="form-control" id="pg_provider" name="pg_provider" placeholder="pg_provider" />
                                                         <label for="pg_provider">PG사</label>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-floating mb-8">
-                                                        <input type="text" class="form-control" id="paid_at" name="paid_at" placeholder="" readonly/>
+                                                        <input type="text" class="form-control" id="paid_at" name="paid_at" placeholder="paid_at" />
                                                         <label for="paid_at">결제시각</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-floating mb-8">
-                                                        <input type="text" class="form-control" id="status" name="status" placeholder="" readonly/>
+                                                        <input type="text" class="form-control" id="status" name="status" placeholder="status" />
                                                         <label for="status">결제상태</label>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-floating mb-8">
-                                                        <input type="text" class="form-control" id="pg_tid" name="pg_tid" placeholder="" readonly/>
+                                                        <input type="text" class="form-control" id="pg_tid" name="pg_tid" placeholder="pg_tid" />
                                                         <label for="pg_tid">거래번호</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                             <!-- /.row -->
 
-                           <%-- <!-- Table row 여기 확인해야 함 -->
+                            <!-- Table row -->
                             <div class="row">
                                 <div class="col-12 table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th width="10%">번호</th>
-                                            <th width="40%">진료항목</th>
-                                            <th width="20%">금액</th>
-                                            <th width="15%">수량</th>
-                                            <th width="15%">합계</th>
+                                            <th>수량</th>
+                                            <th>진료항목</th>
+                                            <th>진료코드</th>
+                                            <th>세부사항</th>
+                                            <th>금액</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>service_nm</td>
+                                            <td>service_code</td>
+                                            <td>세부정보</td>
+                                            <td>service_price</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>service_nm</td>
+                                            <td>service_code</td>
+                                            <td>세부정보</td>
+                                            <td>service_price</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>service_nm</td>
+                                            <td>service_code</td>
+                                            <td>세부정보</td>
+                                            <td>service_price</td>
+                                        </tr>
                                         <tr>
                                             <td>1</td>
                                             <td>service_nm</td>
@@ -220,7 +239,7 @@
                                 </div>
                                 <!-- /.col -->
                             </div>
-                            <!-- /.row -->--%>
+                            <!-- /.row -->
 
                             <div class="row">
                                 <!-- accepted payments column -->
@@ -245,10 +264,9 @@
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-success float-right" onclick="requestPay()">
-                                        <i class="far fa-credit-card"></i> QR결제
+                                    <button type="button" class="btn btn-success float-right" onclick="requestPay()"><i class="far fa-credit-card"></i> QR결제
                                     </button>
-                                    <button type="button" class="btn btn-primary float-right" onclick="requestCashPay()" style="margin-right: 5px;">
+                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                                         <i class="fa fa-money-bill"></i> 현금결제
                                     </button>
                                 </div>
@@ -271,91 +289,27 @@
 </div>
 <!-- ./wrapper -->
 <script>
+    // 현금결제 버튼 클릭 시 동작
     function requestCashPay() {
-        // 입력 받은 정보 수집
-        var buyerName = document.getElementById("buyer_name").value;
-        var buyerTel = document.getElementById("buyer_tel").value;
-        var paidAmountString = document.getElementById("paid_amount").value;
-        var paid_amount = parseInt(paidAmountString);
-        var merchant_uid = document.getElementById("merchant_uid").value;
+        // 알림창으로 현금으로 결제하시겠습니까? 메시지 표시
+        const confirmCashPayment = confirm("현금으로 결제하시겠습니까?");
 
-        // AJAX 요청 보내기
-        $.ajax({
-            type: 'POST',
-            url: "/payment/paymentCash ", // 서버 URL
-            data: {
-                /*imp_uid: 'ImpUid', // 실제로 받아와야 하는 결제 식별자
-                pg_tid: 'pg_tid',*/
-                pg_provider: '현금결제',
-                paid_at: null,
-                merchant_uid: merchant_uid,
-                name: 'order_test',
-                amount: paid_amount,
-                paid_amount: paid_amount,
-                buyer_name: buyerName,
-                buyer_tel: buyerTel
-            },
-            success: function(response) {
-                if (rsp.success) {
-                    console.log("rsp.success");
-                    document.getElementById("buyer_name").value = rsp.buyer_name;
-                    document.getElementById("buyer_tel").value = rsp.buyer_tel;
-                    document.getElementById("merchant_uid").value = rsp.merchant_uid;
-                    document.getElementById("paid_amount").value = rsp.paid_amount;
-                    document.getElementById("pg_provider").value = rsp.pg_provider;
-                    /*document.getElementById("paid_at").value = rsp.paid_at;*/
-                    // 결제가 성공했을 때 실행되는 로직
-                    handlePaymentSuccess(rsp);
-                    document.getElementById("status").value = rsp.status;
-                    document.getElementById("pg_tid").value = rsp.pg_tid;
+        if (confirmCashPayment) {
+            // "네" 버튼 클릭 시 현금 결제를 완료한 후 확인 버튼을 눌라는 메시지 표시
+            const cashPaymentComplete = confirm("현금 결제를 완료한 후 확인 버튼을 눌러주세요.");
 
-                    // 결제가 완료되었습니다 알림창 띄우기
-                    alert("결제가 완료되었습니다.");
-                // 성공 시 필요한 동작 수행
+            if (cashPaymentComplete) {
+                // "확인" 버튼 클릭 시 paymentModal2로 이동 및 paymentModal 닫기
+                openPaymentModal2();
             }
-                },
-            error: function(xhr, status, error) {
-                // 서버 응답 처리
-                alert("결제에 실패하였습니다. 에러 내용: " + error);
-                // 실패 시 필요한 동작 수행
-            }
-        });
+        } else {
+            // "아니오" 버튼 클릭 시 알림창 닫기
+            alert("결제가 취소되었습니다.");
+        }
     }
 </script>
 
-
 <script>
-    // Unix 타임스탬프를 날짜 및 시간 문자열로 변환하는 함수
-    function formatUnixTimestamp(unixTimestamp) {
-        // Unix 타임스탬프를 밀리초 단위로 변환
-        var milliseconds = unixTimestamp * 1000;
-        // Date 객체 생성
-        var date = new Date(milliseconds);
-        // 원하는 날짜 및 시간 형식으로 포맷팅 (예: "YYYY-MM-DD HH:mm:ss")
-        var formattedDate = date.toLocaleString(); // 기본 로케일 설정에 따른 포맷팅
-        return formattedDate;
-    }
-
-    // 화면에 Unix 타임스탬프를 날짜 및 시간 문자열로 표시
-    function displayPaidAt(unixTimestamp) {
-        var paidAtInput = document.getElementById("paid_at");
-        if (paidAtInput) {
-            var formattedDate = formatUnixTimestamp(unixTimestamp);
-            paidAtInput.value = formattedDate;
-        }
-    }
-
-    // 결제가 성공했을 때 실행되는 로직
-    function handlePaymentSuccess(rsp) {
-        if (rsp && rsp.success) {
-            // 결제가 성공하고 rsp.paid_at 속성이 존재하면 해당 값을 사용하여 시간 표시
-            if (rsp.paid_at) {
-                displayPaidAt(rsp.paid_at);
-            }
-            // 그 외에도 필요한 로직 수행
-        }
-    }
-
     // QR결제 요청 함수 정의
     function requestPay() {
         console.log("결제가 진행됩니다");
@@ -364,9 +318,7 @@
         var merchant_uid = document.getElementById("merchant_uid").value;
         var buyer_tel = document.getElementById("buyer_tel").value;
         var buyer_name = document.getElementById("buyer_name").value;
-        var paidAmountString = document.getElementById("paid_amount").value;
-        var paid_amount = parseInt(paidAmountString);
-        console.log(paid_amount);
+        /*var paid_amount = document.getElementById("paid_amount").value;*/
 
         var IMP = window.IMP;
         IMP.init("imp80707007");
@@ -381,16 +333,12 @@
             status: null,
             pg_tid: null,
             name: 'test_order', // 주문명
-            amount: paid_amount,
-            paid_amount: paid_amount,
+            amount: document.getElementById("paid_amount").value,
             buyer_name: buyer_name,     // 구매자 이름
             buyer_tel: buyer_tel,        // 구매자 전화번호
         }, function(rsp) { // callback 로직
             console.log("콜백 시작");
             console.log(rsp);
-            // 결제가 성공했을 때 실행되는 로직
-            handlePaymentSuccess(rsp);
-            // 결제 성공 시 서버로 결제 정보 전송 등 추가 로직 수행
             if (rsp.success) {
                 console.log("rsp.success");
                 document.getElementById("buyer_name").value = rsp.buyer_name;
@@ -398,9 +346,7 @@
                 document.getElementById("merchant_uid").value = rsp.merchant_uid;
                 document.getElementById("paid_amount").value = rsp.paid_amount;
                 document.getElementById("pg_provider").value = rsp.pg_provider;
-                /*document.getElementById("paid_at").value = rsp.paid_at;*/
-                // 결제가 성공했을 때 실행되는 로직
-                handlePaymentSuccess(rsp);
+                document.getElementById("paid_at").value = rsp.paid_at;
                 document.getElementById("status").value = rsp.status;
                 document.getElementById("pg_tid").value = rsp.pg_tid;
 

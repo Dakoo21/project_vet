@@ -385,9 +385,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/pages/docbook/bookingMainCustomer.jsp" class="nav-link">
+                            <a href="/booking/bookingRegister" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약</p>
+                                <p>진료 예약 등록</p>
                             </a>
                         </li>
                     </ul>
@@ -419,36 +419,9 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
+                                <a href="/diag/diagList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록 조회</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/medlog/medlogList.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진료기록 조회2</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 메뉴 끝-->
-                <!-- 메뉴9 시작 -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            결제
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <!-- 하위메뉴 시작 -->
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/payment/process_payment" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>결제리스트</p>
                             </a>
                         </li>
                     </ul>

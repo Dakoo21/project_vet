@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,28 +19,31 @@ public class Booking_Service {
         this.bookingRepository = bookingRepository;
     }
 
-    public List<Map<String, Object>> Select(BookingVO bookingVO) {
-        List<Map<String,Object>> nList = new ArrayList<>();
-        nList = bookingRepository.Select(bookingVO);
-        logger.info(nList.toString());
-        return nList;
+    public List<Map<String, Object>> bookingSelect() {
+        return bookingRepository.bookingSelect();
     }
 
-    public int Insert(BookingVO bookingVO) {
-        return bookingRepository.Insert(bookingVO);
+    public List<Map<String, Object>> selectBookingDetail(int bookingPK) {
+        return bookingRepository.selectBookingDetail(bookingPK);
     }
 
-    public int Delete(int bookingPK) {
-        return bookingRepository.Delete(bookingPK);
+    public int bookingUpdate(Map<String, Object> rmap) {
+        return bookingRepository.bookingUpdate(rmap);
     }
 
-    public int Update(BookingVO bookingVO) {
-        return bookingRepository.Update(bookingVO);
+    public int bookingInsert(Map<String, Object> rmap) {
+        return bookingRepository.bookingInsert(rmap);
     }
 
-    public List<Map<String, Object>> SelectAnimal(AnimalVO animalVO) {
-        return bookingRepository.SelectAnimal(animalVO);
+    public int bookingDelete(int bookingPK) {
+        return bookingRepository.bookingDelete(bookingPK);
     }
 
+    public List<Map<String, Object>> SelectAnimal() {
+        return bookingRepository.SelectAnimal();
+    }
 
+    public List<Map<String, Object>> selectAnimalsByName(String animalNm) {
+        return bookingRepository.selectAnimalsByName(animalNm);
+    }
 }
