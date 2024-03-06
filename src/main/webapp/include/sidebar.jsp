@@ -223,6 +223,47 @@
                     </ul>
                 </li>
                 <!-- 메뉴 끝-->
+                <!-- 메뉴8 시작 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            데이터관리(고객-동물)
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <!-- 하위메뉴 시작 -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="CustomerDB/TotalDataList" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>고객-동물 전체 데이터 조회</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/CustomerDB/TotalCustomerList" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>고객 데이터</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>진료기록 조회</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/pages/medlog/medlogList.jsp" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>진료기록 조회2</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- 메뉴 끝-->
                 <!-- 메뉴7 시작 -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -237,7 +278,7 @@
                         <li class="nav-item">
                             <a href="/pages/docbook/bookingMainCustomer.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 조회 게시판(사원)</p>
+                                <p>진료 예약 조회 게시판</p>
                             </a>
                         </li>
                     </ul>
@@ -346,7 +387,7 @@
                         <li class="nav-item">
                             <a href="/pages/docbook/bookingMainCustomer.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 조회 게시판(사원)</p>
+                                <p>진료 예약</p>
                             </a>
                         </li>
                     </ul>
