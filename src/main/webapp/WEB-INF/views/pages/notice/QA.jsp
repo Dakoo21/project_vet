@@ -195,6 +195,7 @@
             <div class="modal-body">
                 <form id="f_board" method="post" action="noticeUpdate?noticePK=">
                     <input type="hidden" name="method" value="noticeUpdate">
+
                     <input type="hidden" name="noticeHits" value="">
                     <input type="hidden" name="noticeTime" value="">
                     <input type="hidden" name="commonCodePK" value="">
