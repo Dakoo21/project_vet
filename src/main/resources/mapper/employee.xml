@@ -27,6 +27,6 @@
                 </choose>
             </if>
         </where>
-        ORDER BY MEMBER_PK DESC
+        ORDER BY CASE WHEN MEMBER_ROLE = 'ROLE_USER' THEN 0 ELSE 1 END, MEMBER_PK DESC
     </select>
 </mapper>

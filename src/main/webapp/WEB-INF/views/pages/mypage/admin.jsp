@@ -281,9 +281,6 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
                                             제모과과고가ㅗ가곽
                                         </td>
                                         <td>2024.02.02</td>
