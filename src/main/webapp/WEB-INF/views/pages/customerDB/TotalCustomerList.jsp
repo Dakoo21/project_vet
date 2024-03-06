@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="text-right">
                                 <div id="padding-right50" class="position-absolute top-20 end-20">
-                                <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-default" >등록</a>
+                                <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-warning" >등록</a>
                                  </div>
                                 </div>
                             </div>
