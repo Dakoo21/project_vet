@@ -223,6 +223,34 @@
                     </ul>
                 </li>
                 <!-- 메뉴 끝-->
+                <!-- 메뉴7 시작 -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            진료 예약
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <!-- 하위메뉴 시작 -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/booking/bookingRegister" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>진료 예약 등록</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/booking/bookingList" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>진료 예약 조회</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- 메뉴 끝-->
                 <!-- 메뉴8 시작 -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -249,36 +277,51 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/customerDB/medicalLog.jsp" class="nav-link">
+                            <a href="/diag/diagList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록 조회</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/medlog/medlogList.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진료기록 조회2</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <!-- 메뉴 끝-->
-                <!-- 메뉴7 시작 -->
+                <!-- 메뉴10 시작 -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            진료 예약
+                            전자결재
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
+                        <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/docbook/bookingMainCustomer.jsp" class="nav-link">
+                            <a href="/pages/esignbox/esignDetail.jsp" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>진료 예약 조회 게시판</p>
+                                <p>기안서 조회</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/eSign/docsBox" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>문서보관함</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/eSign/cancelledDocs" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>취소보관함</p>
+                            </a>
+                        </li>
+                        <!-- 하위메뉴 시작 -->
+                        <li class="nav-item">
+                            <a href="/eSign/progressDocs" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>진행중인 문서</p>
                             </a>
                         </li>
                     </ul>
