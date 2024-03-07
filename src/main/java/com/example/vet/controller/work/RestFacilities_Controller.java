@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +109,13 @@ public class RestFacilities_Controller {
 
     //모든 리스트 뽑기
     @GetMapping("dailyReserveAll")
-    public String reservelistAll(@RequestParam String facilityReserveDt ){
+        public String reservelistAll(@RequestParam String facilityReserveDt ){
+        if (facilityReserveDt == null || facilityReserveDt.trim().isEmpty()) {
+            // facilityReserveDt 값이 없는 경우 현재 날짜로 설정
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate currentDate = LocalDate.now();
+            facilityReserveDt = formatter.format(currentDate);
+        }
         logger.info("모든예약목록조회컨트롤러시작");
         logger.info("모든예약목록 조회 파라미터(facilityDt): {}", facilityReserveDt);
         List<Map<String, Object>> allList = facilitiesService.reserveListAll(facilityReserveDt);
