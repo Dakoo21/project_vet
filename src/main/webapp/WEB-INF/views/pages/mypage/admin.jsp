@@ -1,4 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="com.example.vet.model.Notice" %>
+<%
+    List<Map<String, Object>> bList = (List)request.getAttribute("bList");
+    List<Notice> noticeList = (List<Notice>) request.getAttribute("noticeList");
+    List<Map<String, Object>> employList = (List) request.getAttribute("employList");
+    int size = 0;
+    int size1 = 0;
+    if (noticeList != null) {
+        size = noticeList.size();
+    }
+    if (employList != null) {
+        size1 = employList.size();
+    }
+    int numPerPage = 3;
+    int nowPage = 0;
+    if(request.getParameter("nowPage")!=null){
+        nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    }
+
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,28 +69,32 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            let events;
             const calendarEl = document.getElementById('calendar')
             const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'/* 세로줄 */
+                initialView: 'dayGridMonth',
+                eventLimit: true, // 더보기 버튼 활성화
+                eventLimitText: '더 보기', // 더보기 버튼 텍스트
+                eventLimitClick: 'popover' // 더보기 버튼 클릭 시 팝오버 형태로 표시
                 ,schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'
-                ,locale: 'ko'
-                ,fixedWeekCount: false
-                ,dayCellContent: function(info) {
+                , locale: 'ko'
+                , fixedWeekCount: false
+                , dayCellContent: function (info) {
                     if (info.view.type === "dayGridMonth") {
                         var number = document.createElement("a");
                         number.classList.add("fc-daygrid-day-number");
-                        number.innerHTML = info.dayNumberText.replace("일", '').replace("日","");
-                        return { html: number.outerHTML };
+                        number.innerHTML = info.dayNumberText.replace("일", '').replace("日", "");
+                        return {html: number.outerHTML};
                     }
                     return {};
                 }
 
-                ,headerToolbar: {//헤더 설정
+
+                , headerToolbar: {
                     left: 'prev',
                     center: 'title',
                     right: 'next today'
                 },
-
                 /*0000년 0월 0일 문제 왜 일이 +10을 해야하지?*/
                 titleFormat: function (date) {
                     let currentDate = new Date();
@@ -74,101 +103,31 @@
                     month = date.date.month + 1;
                     day = dayOfMonth;
 
-                    return year + "-" + month + "월"+"-"+day+"일";
+                    return year + "-" + month + "월" + "-" + day + "일";
                 },
-            })
+
+                events:[
+                    <% SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm"); %>
+                    <%
+                        for (int i = 0; i < bList.size(); i++) {
+                            Map<String, Object> rmap = bList.get(i);
+                            Date startDate = dateFormat.parse(rmap.get("bookingDate").toString() + " " + rmap.get("bookingStart").toString());
+                            Date endDate = dateFormat.parse(rmap.get("bookingDate").toString() + " " + rmap.get("bookingEnd").toString());
+                    %>
+                    {
+                        title: '<%= rmap.get("bookingType") %> 예약',
+                        start: '<%= dateFormat.format(startDate) %>',
+                        end: '<%= dateFormat.format(endDate) %>',
+                        url: 'bookingDetail?bookingPK=<%=Integer.parseInt(rmap.get("bookingPk").toString())%>',
+                        background: '000000',
+                    }
+                    <% if (i < bList.size() - 1) { %>,<% } %>
+                    <% } %>
+                ]
+            });
 
             calendar.render()
-
-
-            /*2번째*/
-
-            var calendarE = document.getElementById('calendarDay');
-
-            var calendarDay = new FullCalendar.Calendar(calendarE, { // 변수명 변경
-                timeZone: 'UTC',
-                initialView: 'timeGridFourDay',
-                schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'
-                ,locale: 'ko'
-                ,allDaySlot: false // 올데이 슬롯 비활성화
-                ,headerToolbar: {
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next'
-                },
-                slotMinTime: '10:00:00', // 시작 시간을 오전 10시로 설정
-                slotMaxTime: '20:00:00', // 종료 시간을 오후 8시로 설정
-                views: {
-                    timeGridFourDay: {
-                        type: 'timeGrid',
-                        duration: { days: 1},
-                        buttonText: '4 day'
-                    }
-                },
-            });
-            calendarDay.render() // 변수명 변경
-
-
-            // 세변쨰
-
-            var calendarEll = document.getElementById('calendar');
-
-            var calendarRoom = new FullCalendar.Calendar(calendarEll, {
-                timeZone: 'UTC',
-                initialView: 'resourceTimeGridDay',
-                schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-                locale: 'ko',
-                slotMinTime: '10:00:00', // 시작 시간을 오전 10시로 설정
-                slotMaxTime: '20:00:00', // 종료 시간을 오후 8시로 설정
-                allDaySlot: false, // 올데이 슬롯 비활성화
-                dayMinWidth: 50,
-
-                headerToolbar: {
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next'
-                },
-                resources: [
-                    { id: 'a', title: 'Room A' },
-                    { id: 'b', title: 'Room B'},
-                    { id: 'c', title: 'Room C' },
-                    { id: 'd', title: 'Room D' }
-                ],
-                events: [
-                    { id: '1', resourceId: 'a', start: '2024-02-16T09:00:00', end: '2024-02-17T09:00:00', title: 'event 1' },
-                    { id: '2', resourceId: 'a', start: '2023-11-07T09:00:00', end: '2023-11-07T14:00:00', title: 'event 2' },
-                    { id: '3', resourceId: 'b', start: '2023-11-07T12:00:00', end: '2023-11-08T06:00:00', title: 'event 3' },
-                    { id: '4', resourceId: 'c', start: '2023-11-07T07:30:00', end: '2023-11-07T09:30:00', title: 'event 4' },
-                    { id: '5', resourceId: 'd', start: '2023-11-07T10:00:00', end: '2023-11-07T15:00:00', title: 'event 5' }
-                ],
-            });
-
-            calendarRoom.render();
         });
-        <%--        &lt;%&ndash;이건 일일현황&ndash;%&gt;--%>
-        <%--        document.addEventListener('DOMContentLoaded', function() {--%>
-        <%--            var calendarTimelineEl = document.getElementById('calendarTimeline');--%>
-        <%--            var calendarTimeline = new FullCalendar.Calendar(calendarTimelineEl, {--%>
-        <%--                initialView: 'resourceTimelineOneDay'--%>
-        <%--                ,schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'--%>
-        <%--                ,views: {--%>
-        <%--                    resourceTimelineOneDay: {--%>
-        <%--                        type: 'resourceTimeline',--%>
-        <%--                        duration: { days: 1 }--%>
-        <%--                    }--%>
-        <%--                }--%>
-        <%--                ,locale: 'ko'--%>
-        <%--                ,slotMinTime: '10:00:00', // 시작 시간을 오전 10시로 설정--%>
-        <%--                slotMaxTime: '20:00:00' // 종료 시간을 오후 8시로 설정--%>
-        <%--                ,headerToolbar: {--%>
-        <%--                    left: 'prev',--%>
-        <%--                    center: 'title',--%>
-        <%--                    right: 'next'--%>
-
-        <%--                },--%>
-        <%--            });--%>
-        <%--            calendarTimeline.render();--%>
-        <%--        });--%>
     </script>
     <![endif]-->
     <style>
@@ -200,12 +159,6 @@
                     <div class="col-sm-6">
                         <h1>마이페이지</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -220,7 +173,7 @@
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="card-title">월별 캘린더</h3>
-                                    <a href="javascript:void(0);">더보기</a>
+                                    <a href="/booking/bookingList">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -349,201 +302,102 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">공지사항</h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0);">더보기</a>
+                                    <a href="/notice">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                     <tr>
-                                        <th></th>
-                                        <th>카테고리</th>
-                                        <th>제목</th>
-                                        <th>작성일</th>
-                                        <th>조회수</th>
+                                        <th width="15%" style="text-align: center;">번호</th>
+                                        <th width="40%" style="text-align: center;">제목</th>
+                                        <th width="20%" style="text-align: center;">작성자</th>
+                                        <th width="15%" style="text-align: center;">작성일자</th>
+                                        <th width="15%" style="text-align: center;">조회수</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            ✅
-                                        </td>
-                                        <td>공지</td>
-                                        <td>
-                                            국가지원 광견병 접종 안내
-                                        </td>
-                                        <td>
-                                            2024-01-19
-                                        </td>
-                                        <td>
-                                            76
-                                        </td>
+                                    <%
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
+                                            Notice notice = noticeList.get(i);
+                                    %>
+                                    <tr onclick="noticeOneDetail('<%=notice.getNOTICE_PK()%>')">
+                                        <%if(notice.getNOTICE_HIGHLIGHTED().equals(1)){%>
+                                        <td width="10%" style="text-align: center;">✅</td>
+                                        <%
+                                        } else {
+                                        %>
+                                        <td width="10%" style="text-align: center;"><%=notice.getNOTICE_PK()%></td>
+                                        <%
+                                            }
+                                        %>
+                                        <td width="40%" style="text-align: center;"><%=notice.getNOTICE_TITLE()%></td>
+                                        <td width="20%" style="text-align: center;"><%=notice.getMEMBER_MEMBERNAME()%></td>
+                                        <td width="15%" style="text-align: center;"><%=notice.getNOTICE_TIME()%></td>
+                                        <td width="15%" style="text-align: center;"><%=notice.getNOTICE_HITS()%></td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            ✅
-                                        </td>
-                                        <td>공지</td>
-                                        <td>
-                                            국가지원 광견병 접종 안내
-                                        </td>
-                                        <td>
-                                            2024-01-19
-                                        </td>
-                                        <td>
-                                            76
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            ✅
-                                        </td>
-                                        <td>공지</td>
-                                        <td>
-                                            국가지원 광견병 접종 안내
-                                        </td>
-                                        <td>
-                                            2024-01-19
-                                        </td>
-                                        <td>
-                                            76
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            ✅
-                                        </td>
-                                        <td>공지</td>
-                                        <td>
-                                            국가지원 광견병 접종 안내
-                                        </td>
-                                        <td>
-                                            2024-01-19
-                                        </td>
-                                        <td>
-                                            76
-                                        </td>
-                                    </tr>
+                                    <%
+                                        }
+                                    %>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-header border-0">
-                                <h3 class="card-title">직원관리</h3>
+                                <h3 class="card-title">사원관리</h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0);">>더보기</a>
+                                    <a href="employeeList">>더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                     <tr>
-                                        <th></th>
-                                        <th>이름</th>
-                                        <th>직무</th>
-                                        <th>이메일</th>
-                                        <th>전화번호</th>
-                                        <th>생년원일</th>
+                                        <th>사원 번호</th>
+                                        <th>사원 이름</th>
+                                        <th>사원 권한</th>
+                                        <th>사원 메일</th>
+                                        <th>사원 연락처</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <%
+                                        //스크립틀릿 - 지변이다, 메소드 선언불가, 생성자 선언불가, 실행문
+                                        //n건을 조회하는 경우이지만 resultType에는 map이나 vo패턴을 주는게 맞다
+                                        //주의사항 - 자동으로 키값을 생성함 - 디폴트가 대문자이다
+                                        //myBatis연동시 resultType=map{한행}으로 줌 -> selectList("noticeList", pMap)
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size1) break;
+                                            Map<String,Object> rmap = employList.get(i);
+                                    %>
+                                    <tr onclick="employeeOneDetail('<%=rmap.get("MEMBER_PK")%>')">
+                                        <td><%=rmap.get("MEMBER_PK")%></td>
+                                        <td><%=rmap.get("MEMBER_MEMBERNAME")%></td>
                                         <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            😉
+                                            <%
+                                                String user_role = null;
+                                                if ("ROLE_ADMIN".equals(rmap.get("MEMBER_ROLE"))) {
+                                                    user_role = "관리자";
+                                                } else if ("ROLE_MASTER".equals(rmap.get("MEMBER_ROLE"))) {
+                                                    user_role = "부관리자";
+                                                } else if ("ROLE_NURSE".equals(rmap.get("MEMBER_ROLE"))) {
+                                                    user_role = "간호사";
+                                                } else if ("ROLE_INFO".equals(rmap.get("MEMBER_ROLE"))) {
+                                                    user_role = "데스크";
+                                                } else {
+                                                    user_role = "임시 사용자";
+                                                }
+                                            %>
+                                            <%=user_role%>
                                         </td>
-                                        <td>김엘머</td>
-                                        <td>
-                                            간호
-                                        </td>
-                                        <td>
-                                            jang6831728@naver.com
-                                        </td>
-                                        <td>
-                                            010-1234-1234
-                                        </td>
-                                        <td>
-                                            2023-02-20
-                                        </td>
+                                        <td><%=rmap.get("MEMBER_EMAIL")%></td>
+                                        <td><%=rmap.get("MEMBER_PHONE")%></td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            😉
-                                        </td>
-                                        <td>김엘머</td>
-                                        <td>
-                                            간호
-                                        </td>
-                                        <td>
-                                            jang6831728@naver.com
-                                        </td>
-                                        <td>
-                                            010-1234-1234
-                                        </td>
-                                        <td>
-                                            2023-02-20
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            😉
-                                        </td>
-                                        <td>김엘머</td>
-                                        <td>
-                                            간호
-                                        </td>
-                                        <td>
-                                            jang6831728@naver.com
-                                        </td>
-                                        <td>
-                                            010-1234-1234
-                                        </td>
-                                        <td>
-                                            2023-02-20
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            😉
-                                        </td>
-                                        <td>김엘머</td>
-                                        <td>
-                                            간호
-                                        </td>
-                                        <td>
-                                            jang6831728@naver.com
-                                        </td>
-                                        <td>
-                                            010-1234-1234
-                                        </td>
-                                        <td>
-                                            2023-02-20
-                                        </td>
-                                    </tr>
+                                    <%
+                                        }
+                                    %>
                                     </tbody>
                                 </table>
                             </div>

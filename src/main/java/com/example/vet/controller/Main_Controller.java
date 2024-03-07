@@ -1,13 +1,20 @@
 package com.example.vet.controller;
 
 import com.example.vet.config.auth.PrincipalDetails;
+import com.example.vet.model.BookingVO;
+import com.example.vet.model.Notice;
+import com.example.vet.service.board.EmployeeManagement_Service;
+import com.example.vet.service.board.Notice_Board_Service;
+import com.example.vet.service.work.Booking_Service;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +23,17 @@ import java.util.Map;
 @Slf4j
 public class Main_Controller {
 
+    private final Booking_Service bookingService;
+    private final Notice_Board_Service notice_board_service;
+    private final EmployeeManagement_Service employeeManagement_service;
+
+    @Autowired
+    public Main_Controller(Booking_Service bookingService, Notice_Board_Service noticeBoardService, EmployeeManagement_Service employeeManagementService) {
+        this.bookingService = bookingService;
+        notice_board_service = noticeBoardService;
+        employeeManagement_service = employeeManagementService;
+    }
+
     /**********************************************************************************
      작성자 : 지장환
      작성일자 : 21.02.24
@@ -23,8 +41,44 @@ public class Main_Controller {
      **********************************************************************************/
 
     @GetMapping({"", "/"})
-    public String mainPage (HttpServletRequest req, Model model, Authentication authentication) {
+    public String mainPage (HttpServletRequest req, Model model, Authentication authentication, Notice notice, Map<String, Object> employeeMap) {
         log.info("main Page 접속 시작");
+
+
+        /**********************************************************************************
+         작성자 : 지장환
+         작성일자 : 06.03.24
+         기능 : 진료 예약 호출(캘린더)
+         **********************************************************************************/
+        BookingVO bookingVO = null;
+        List<Map<String,Object>> bList = bookingService.Select(bookingVO);
+        log.info(bList.toString());
+        model.addAttribute("bList", bList);
+
+        /**********************************************************************************
+         작성자 : 지장환
+         작성일자 : 06.03.24
+         기능 : 공지사항 호출
+         **********************************************************************************/
+        log.info(notice.toString());
+        List<Notice> noticeList;
+        noticeList = notice_board_service.noticeList(notice);
+        log.info(noticeList.toString());
+        model.addAttribute("noticeList", noticeList);
+
+        /**********************************************************************************
+         작성자 : 지장환
+         작성일자 : 06.03.24
+         기능 : 사원관리 호출
+         **********************************************************************************/
+        List<Map<String, Object>> employList = null;
+        log.info(employeeMap.toString());
+        employList = employeeManagement_service.employeeList(employeeMap);
+        model.addAttribute("employList", employList);
+
+
+
+
         String role = "default";
         String path = "";
         if (req.isUserInRole("ROLE_ADMIN")) {

@@ -46,12 +46,6 @@
                     <div class="col-sm-6">
                         <h1>사원 정보</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -60,23 +54,7 @@
             <!--여기 -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3">
-                        <!-- Profile Image -->
-                        <div class="card card-primary card-outline">
-                            <div class="card-body box-profile">
-                                <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"
-                                         src="../../dist/img/user4-128x128.jpg"
-                                         alt="User profile picture">
-                                </div>
-                                <br>
-                                <br>
-                                <a href="#" class="btn btn-primary btn-block"><b>사진등록</b></a>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                    </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <!-- /.card -->
