@@ -249,11 +249,11 @@
                                 </div>
                             </div>
                         <!-- SIGN_LINE2_TEST 테이블 -->
+                    </div>
+                    </form>
                         <div id="writein">
                             <%@include file="write3.jsp"%>
                         </div>
-                    </div>
-                    </form>
                 </div>
         </section>
         <!-- /.content -->
