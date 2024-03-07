@@ -7,30 +7,43 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SignAdopt {
-    private Integer adopt_pk;
-    private String adopt_nm;
-    private Integer desertion_no;
-    private String adopt_bdate;
-    private String adopt_species;
-    private String adopt_breed;
-    private String adopt_weight;
-    private String adopt_sex;
-    private String  adopt_neut;
-    private Integer masterpk;
-    private String adopt_reason;
+    // pk
+    private Integer ADOPT_PK;
+    // 입양 동물 이름
+    private String ADOPT_NM;
+    // 입양글 pk
+    private Integer DESERTION_NO;
+    // 입양동물 생일
+    private String ADOPT_BDATE;
+    // 입양동물 축종
+    private String ADOPT_SPECIES;
+    // 입양 동물 품종
+    private String ADOPT_BREED;
+    private String ADOPT_WEIGHT;
+    private String ADOPT_SEX;
+    // 중성화 여부
+    private String  ADOPT_NEUT;
+    // 주인 pk
+    private Integer MASTERPK;
+    // 입양사유
+    private String ADOPT_REASON;
 
     @Builder
-    public SignAdopt(Integer adopt_pk, String adopt_nm, Integer desertion_no, String adopt_bdate, String adopt_species, String adopt_breed, String adopt_weight, String adopt_sex, String adopt_neut, Integer masterpk, String adopt_reason) {
-        this.adopt_pk = adopt_pk;
-        this.adopt_nm = adopt_nm;
-        this.desertion_no = desertion_no;
-        this.adopt_bdate = adopt_bdate;
-        this.adopt_species = adopt_species;
-        this.adopt_breed = adopt_breed;
-        this.adopt_weight = adopt_weight;
-        this.adopt_sex = adopt_sex;
-        this.adopt_neut = adopt_neut;
-        this.masterpk = masterpk;
-        this.adopt_reason=adopt_reason;
+    public SignAdopt(Integer ADOPT_PK, String ADOPT_NM, Integer DESERTION_NO, String ADOPT_BDATE, String ADOPT_SPECIES, String ADOPT_BREED, String ADOPT_WEIGHT, String ADOPT_SEX, String ADOPT_NEUT, Integer MASTERPK, String ADOPT_REASON) {
+        this.ADOPT_PK = ADOPT_PK;
+        this.ADOPT_NM = ADOPT_NM;
+        this.DESERTION_NO = DESERTION_NO;
+        this.ADOPT_BDATE = ADOPT_BDATE;
+        this.ADOPT_SPECIES = ADOPT_SPECIES;
+        this.ADOPT_BREED = ADOPT_BREED;
+        this.ADOPT_WEIGHT = ADOPT_WEIGHT;
+        this.ADOPT_SEX = ADOPT_SEX;
+        this.ADOPT_NEUT = ADOPT_NEUT;
+        this.MASTERPK = MASTERPK;
+        this.ADOPT_REASON = ADOPT_REASON;
     }
+
+
+
+
 }

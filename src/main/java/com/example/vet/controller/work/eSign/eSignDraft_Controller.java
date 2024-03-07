@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("eSignDraft/*")
@@ -214,24 +215,87 @@ public class eSignDraft_Controller {
     // }
 
     @PostMapping("generatedSignPk")
-    public ResponseEntity<String> submitSelectedValue(@RequestBody SignAdopt signAdopt
-                                                      ) {
+    @ResponseBody
+    public ResponseEntity<String> submitSelectedValue(@RequestBody  List<Map<String, String>> formDataList){
+        SignAdopt signAdopt =  mapJsonToSignAdopt(formDataList);
+        log.info(formDataList.toString());
+        log.info(signAdopt.toString());
         log.info("generatedSignPk컨트롤러");
         // log.info(sign.toString());
-        log.info(signAdopt.toString());
+        // log.info(signAdopt.getADOPT_NM());
+        // log.info(signAdopt);
         // log.info(signLine.toString());
-        SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
-        int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
-        log.info(String.valueOf(generatedAdoptSignPk));
-        // sign.setAdopt_pk(generatedAdoptSignPk);
+        int generatedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
+        // int generatedAdoptSignPk = insertedAdoptSign.getADOPT_PK();
+        log.info(String.valueOf(generatedAdoptSign));
+        Sign sign = new Sign();
+        sign.setSIGN_CONTENT("내용");
+        sign.setSIGN_TITLE("제목");
+        sign.setSIGN_TYPE("입양신청서");
+        sign.setSIGN_RESERV_YEAR("5년");
+        sign.setSIGN_DATE("2024-03-01");
+        sign.setMEMBER_PK(1);
+        sign.setADOPT_PK(generatedAdoptSign);
         // int result = eSignDraft_service.insertSignDoc(sign);
-        // Sign insertedSign = eSignDraft_service.createSign(sign);
-        // int generatedSignPk = insertedSign.getSign_pk();
-        // signLine.setSign_pk(generatedSignPk);
-        // eSignDraft_service.insertSignLine(signLine);
-        // log.info(String.valueOf(result));
+        int generatedSignPk = eSignDraft_service.createSign(sign);
+        // int generatedSignPk = insertedSign.getSIGN_PK();
+        log.info(String.valueOf(generatedSignPk));
+        SignLine signLine = new SignLine();
+        signLine.setSIGN_STATE(0);
+        signLine.setLV1(1);
+        signLine.setLV2(0);
+        signLine.setLV3(0);
+        signLine.setMEMBER_PK(1);
+        signLine.setSIGN_PK(generatedSignPk);
+        int result = eSignDraft_service.insertSignLine(signLine);
+        log.info(String.valueOf("signline" + result));
         // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-        return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+        // return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+        return ResponseEntity.ok("Success");
+    }
+    private SignAdopt mapJsonToSignAdopt(List<Map<String, String>> formDataList) {
+        SignAdopt.SignAdoptBuilder signAdoptBuilder = SignAdopt.builder();
+        for (Map<String, String> formData : formDataList) {
+            String name = formData.get("name");
+            String value = formData.get("value");
+            // "name"에 해당하는 필드를 찾아서 값 설정
+            switch (name) {
+                case "ADOPT_NM":
+                    signAdoptBuilder.ADOPT_NM(value);
+                    break;
+                case "DESERTION_NO":
+                    signAdoptBuilder.DESERTION_NO(Integer.valueOf(value));
+                    break;
+                case "ADOPT_BDATE":
+                    signAdoptBuilder.ADOPT_BDATE(value);
+                    break;
+                case "ADOPT_SPECIES":
+                    signAdoptBuilder.ADOPT_SPECIES(value);
+                    break;
+                case "ADOPT_BREED":
+                    signAdoptBuilder.ADOPT_BREED(value);
+                    break;
+                case "ADOPT_WEIGHT":
+                    signAdoptBuilder.ADOPT_WEIGHT(value);
+                    break;
+                case "ADOPT_SEX":
+                    signAdoptBuilder.ADOPT_SEX(value);
+                    break;
+                case "ADOPT_NEUT":
+                    signAdoptBuilder.ADOPT_NEUT(value);
+                    break;
+                case "MASTERPK":
+                    signAdoptBuilder.MASTERPK(Integer.valueOf(value));
+                    break;
+                case "ADOPT_REASON":
+                    signAdoptBuilder.ADOPT_REASON(value);
+                    break;
+            }
+        }
+
+        SignAdopt signAdopt = new SignAdopt();
+        signAdopt = signAdoptBuilder.build();
+        return signAdopt;
     }
     //AdoptForm
     @PostMapping("adoptForm")
@@ -240,7 +304,7 @@ public class eSignDraft_Controller {
         return null;
     }
     //signLineForm
-    @PostMapping("/signLineForm")
+    @RequestMapping("/signLineForm")
     public String submitSignLineForm(SignAdopt signAdopt){
         log.info(signAdopt.toString());
         return null;

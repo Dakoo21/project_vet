@@ -7,30 +7,30 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Sign {
-    private Integer sign_pk;
-    private String sign_title;
-    private String sign_content;
-    private String sign_date;
-    private String sign_reserv_year;
-    private String sign_type;
-    private Integer member_pk;
-	private Integer adopt_pk;
-    private String selectedValue;
+    private Integer SIGN_PK;
+    private String SIGN_TITLE;
+    private String SIGN_CONTENT;
+    private String SIGN_DATE;
+    private String SIGN_RESERV_YEAR;
+    private String SIGN_TYPE;
+    private Integer MEMBER_PK;
+    private Integer ADOPT_PK;
+    private String selectedvalue;
 
-
-    @Builder
-    public Sign(Integer sign_pk, String sign_title, String sign_content,
-                String sign_date, String sign_reserv_year, String sign_type, Integer member_pk, Integer adopt_pk, String selectedValue){
-        this.sign_pk = sign_pk;
-        this.sign_title = sign_title;
-        this.sign_content = sign_content;
-        this.sign_date = sign_date;
-        this.sign_reserv_year = sign_reserv_year;
-        this.sign_type = sign_type;
-        this.member_pk = member_pk;
-        this.adopt_pk = adopt_pk;
-        this.selectedValue = selectedValue;
-
+    public Sign(Integer SIGN_PK, String SIGN_TITLE, String SIGN_CONTENT, String SIGN_DATE, String SIGN_RESERV_YEAR, String SIGN_TYPE, Integer MEMBER_PK, Integer ADOPT_PK, String selectedvalue) {
+        this.SIGN_PK = SIGN_PK;
+        this.SIGN_TITLE = SIGN_TITLE;
+        this.SIGN_CONTENT = SIGN_CONTENT;
+        this.SIGN_DATE = SIGN_DATE;
+        this.SIGN_RESERV_YEAR = SIGN_RESERV_YEAR;
+        this.SIGN_TYPE = SIGN_TYPE;
+        this.MEMBER_PK = MEMBER_PK;
+        this.ADOPT_PK = ADOPT_PK;
+        this.selectedvalue = selectedvalue;
     }
+
+
+
+
 
 }

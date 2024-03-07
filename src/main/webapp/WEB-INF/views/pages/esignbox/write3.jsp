@@ -3,52 +3,52 @@
          pageEncoding="UTF-8"%>
 <%@include file="/include/common/bootstrap_common.jsp"%>
 
-<form id="adoptForm" action="/eSignDraft/adoptDraftInsert">
+<form id="adoptForm" method="post" >
     <table class="table table-borderless">
         <thead>
         <tr>
             <th>동물이름</th>
-            <th><input type="text" class="form-control" id="adopt_nm" name="adopt_nm" placeholder=></th>
+            <th><input type="text" class="form-control" id="ADOPT_NM" name="ADOPT_NM" placeholder=></th>
         </tr>
         <tr>
             <th>생년월일</th>
-            <th><input type="text" class="form-control" id="adopt_bdate" name="adopt_bdate" placeholder=></th>
+            <th><input type="text" class="form-control" id="ADOPT_BDATE" name="ADOPT_BDATE" placeholder=></th>
         </tr>
         <tr>
             <th>축종</th>
-            <th><input type="text" class="form-control" id="adopt_species" name="adopt_species" placeholder="개, 고양이, 토끼..."></th>
+            <th><input type="text" class="form-control" id="ADOPT_SPECIES" name="ADOPT_SPECIES" placeholder="개, 고양이, 토끼..."></th>
         </tr>
         <tr>
             <th>체중</th>
-            <th><input type="text" class="form-control" id="adopt_weight" name="adopt_weight" placeholder=></th>
+            <th><input type="text" class="form-control" id="ADOPT_WEIGHT" name="ADOPT_WEIGHT" placeholder=></th>
         </tr>
         <tr>
             <th>성별</th>
-            <th><input type="text" class="form-control" id="adopt_sex" name="adopt_sex"></th>
+            <th><input type="text" class="form-control" id="ADOPT_SEX" name="ADOPT_SEX"></th>
         </tr>
         <tr>
             <th>중성화</th>
-            <th><input type="text" class="form-control" id="adopt_neut" name="adopt_neut"></th>
+            <th><input type="text" class="form-control" id="ADOPT_NEUT" name="ADOPT_NEUT"></th>
         </tr>
         <tr>
             <th>신청자</th>
-            <th><input type="text" class="form-control" id="master_nm" placeholder="" name="master_nm"></th>
+            <th><input type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM"></th>
         </tr>
         <tr>
             <th>입양신청서</th>
-            <th><input type="text" class="form-control" id="desertion_no" placeholder="" name="desertion_no"></th>
+            <th><input type="text" class="form-control" id="DESERTION_NO" placeholder="" name="DESERTION_NO"></th>
         </tr>
         <tr>
             <th>이유</th>
-            <th><input type="text" class="form-control" id="adopt_reason" placeholder="" name="adopt_reason"></th>
+            <th><input type="text" class="form-control" id="ADOPT_REASON" placeholder="" name="ADOPT_REASON"></th>
         </tr>
         <tr>
             <th>breed</th>
-            <th><input type="text" class="form-control" id="adopt_breed" placeholder="" name="adopt_breed"></th>
+            <th><input type="text" class="form-control" id="ADOPT_BREED" placeholder="" name="ADOPT_BREED"></th>
         </tr>
         <tr>
             <th>입양자 PK</th>
-            <th><input type="text" class="form-control" id="masterpk" placeholder="" name="masterpk"></th>
+            <th><input type="text" class="form-control" id="MASTERPK" placeholder="" name="MASTERPK"></th>
         </tr>
     </table>
     <div class="text-center">
@@ -253,13 +253,13 @@
             $("#selectedAnimalIdDisplay").text(species);
 
             console.log("Selected Animal ID:" + selectedAnimalId);
-            $("#adopt_species").val(species);
-            $("#adopt_breed").val(breed);
-            $("#adopt_neut").val(selectedRowData.중성화);
-            $("#adopt_weight").val(selectedRowData.몸무게);
-            $("#adopt_bdate").val(selectedRowData.나이);
-            $("#desertion_no").val(selectedRowData.유기번호);
-            $("#adopt_sex").val(selectedRowData.성별);
+            $("#ADOPT_SPECIES").val(species);
+            $("#ADOPT_BREED").val(breed);
+            $("#ADOPT_NEUT").val(selectedRowData.중성화);
+            $("#ADOPT_WEIGHT").val(selectedRowData.몸무게);
+            $("#ADOPT_BDATE").val(selectedRowData.나이);
+            $("#DESERTION_NO").val(selectedRowData.유기번호);
+            $("#ADOPT_SEX").val(selectedRowData.성별);
 
             // $("#modal").hide();
             // $('#modalBtn1').text('abandonList[i].kindcd');

@@ -78,9 +78,9 @@
         /*}*/
     </style>
     <script>
-        function submitBtn(){
-            document.querySelector("#adoptForm").submit();
-        }
+        // function submitBtn(){
+        //     document.querySelector("#adoptForm").submit();
+        // }
     </script>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -170,8 +170,10 @@
                                                 <span class="stamp-step-num">사원</span>
                                             </td>
                                             <td class="team name" scope="row" id="cell1" >
+                                                <%--                                        <span class="stamp-step-num" id="cell1" style="display: inline"></span>--%>
                                             </td>
                                             <td class="team name" scope="row" id="cell2">
+                                                <%--                                        <span class="stamp-step-num">관리자</span>--%>
                                             </td>
                                             <th></th>
                                             <th></th>
@@ -190,7 +192,6 @@
                                                 <span class="stamp-step-num"><%=username%></span>
                                             </td>
                                             <td class="cell">
-                                                <input type="text" id="" name="">
                                                 <div class="after" style="display: flex; align-items: center;">
                                                     <div id="modal1">
                                                     </div>
@@ -249,11 +250,11 @@
                                 </div>
                             </div>
                         <!-- SIGN_LINE2_TEST 테이블 -->
+                    </div>
+                    </form>
                         <div id="writein">
                             <%@include file="write3.jsp"%>
                         </div>
-                    </div>
-                    </form>
                 </div>
         </section>
         <!-- /.content -->
@@ -267,7 +268,7 @@
         </div>
 <%--        <button id="submitForms">전송</button>--%>
 <%--        <input type="button" value="전송" id="submitForms">--%>
-        <input type="button" value="전송" onclick="submiBtn()" id="submitForms">
+        <input type="button" value="전송" id="submitForms">
     </div>
     <!-- /.content-wrapper -->
     <!-- Summernote -->
@@ -360,6 +361,7 @@
     $(document).ready(function() {
         // 현재 선택된 셀을 저장하는 변수
         var selectedCell;
+
         // 버튼을 클릭했을 때의 동작을 정의합니다.
         $('#addButtons').on('click', function() {
             // 테이블의 각 셀에 대해 반복합니다.
@@ -385,6 +387,7 @@
                 }
             });
         });
+
         // 모달에서 확인 버튼을 눌렀을 때의 동작
         function confirmSelection() {
             // 모달에서 선택한 라디오 버튼의 값을 가져옴
@@ -402,16 +405,12 @@
 
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "토마토" && selectedCell) {
-                $('#cell1').text('부원장');
-                // $(selectedCell).text('토마토');
-                $('#cell').hide();
                 // idSpan.style.display = 'none';
                 // $(selectedCell).children('.dynamicButton').hide();
             }
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "사과" && selectedCell) {
                 $('#cell2').text('원장');
-                $(selectedCell).text('사과');
             }
             // 모달 닫기
             // 선택한 라디오 버튼의 값을 서버로 전송
@@ -430,6 +429,7 @@
             }
             $('#myModal').modal('hide');
         }
+
         // 모달에 사용자 목록을 불러와서 표시하는 함수
         function loadUserListAndShowModal() {
             // AJAX를 통해 서버에서 사용자 목록을 가져옵니다.
@@ -480,68 +480,76 @@
     });
 </script>
 
-<script>
-    function showDiv() {
-        var selectedValue = document.getElementById("documentType").value
-
-        var writeinDiv = document.getElementById("writein");
-        var writein2Div = document.getElementById("writein2");
-
-        // 모든 div를 초기에 숨김
-        writeinDiv.style.display = "none";
-        writein2Div.style.display = "none";
-
-        // 선택한 값에 따라 해당 div를 보여줌
-        if (selectedValue === "42769") { // 품의서 선택
-            writeinDiv.style.display = "block";
-        } else if (selectedValue === "42768") { // 지출 결의서 선택
-            writein2Div.style.display = "block";
-        }
-    }
-</script>
 
 <%--<script>--%>
-<%--    $(document).ready(function() {--%>
-<%--        $('#submitForms').click(function() {--%>
-<%--            // 각 폼의 데이터를 수집--%>
-<%--            // var data1 = $('#signForm').serializeArray();--%>
-<%--            // var data2 = $('#signLineForm').serializeArray();--%>
-<%--            var data3 = $('#adoptForm').serializeArray();--%>
-<%--            // console.log(data1);--%>
-<%--            // console.log(data2);--%>
-<%--            console.log(data3);--%>
+<%--    function showDiv() {--%>
+<%--        var selectedValue = document.getElementById("documentType").value--%>
 
-<%--            // 필요한 경우, 데이터를 객체로 변환할 수도 있음--%>
-<%--            var formData = {--%>
-<%--                // form1Data: arrayToObject(data1),--%>
-<%--                // form2Data: arrayToObject(data2),--%>
-<%--                form3Data: arrayToObject(data3)--%>
-<%--            };--%>
+<%--        var writeinDiv = document.getElementById("writein");--%>
+<%--        var writein2Div = document.getElementById("writein2");--%>
 
-<%--            // Ajax를 사용하여 서버로 데이터 전송--%>
-<%--            $.ajax({--%>
-<%--                type: 'POST',--%>
-<%--                url: '/eSignDraft/generatedSignPk',--%>
-<%--                contentType: 'application/json',--%>
-<%--                data: JSON.stringify(formData),--%>
-<%--                success: function(response) {--%>
-<%--                    console.log('전송 성공:', response);--%>
-<%--                },--%>
-<%--                error: function(error) {--%>
-<%--                    console.error('전송 실패:', error);--%>
-<%--                }--%>
-<%--            });--%>
-<%--        });--%>
-<%--        // 배열을 객체로 변환하는 함수--%>
-<%--        function arrayToObject(array) {--%>
-<%--            var obj = {};--%>
-<%--            for (var i = 0; i < array.length; i++) {--%>
-<%--                obj[array[i].name] = array[i].value;--%>
-<%--            }--%>
-<%--            return obj;--%>
+<%--        // 모든 div를 초기에 숨김--%>
+<%--        writeinDiv.style.display = "none";--%>
+<%--        writein2Div.style.display = "none";--%>
+
+<%--        // 선택한 값에 따라 해당 div를 보여줌--%>
+<%--        if (selectedValue === "42769") { // 품의서 선택--%>
+<%--            writeinDiv.style.display = "block";--%>
+<%--        } else if (selectedValue === "42768") { // 지출 결의서 선택--%>
+<%--            writein2Div.style.display = "block";--%>
 <%--        }--%>
-<%--    });--%>
+<%--    }--%>
 <%--</script>--%>
+
+<script>
+    $(document).ready(function() {
+        $('#submitForms').click(function() {
+            // 각 폼의 데이터를 수집
+            var data1 = $('#signForm').serializeArray();
+            var data2 = $('#signLineForm').serializeArray();
+            var data3 = $('#adoptForm').serializeArray();
+            console.log(data1);
+            console.log(data2);
+            console.log(data3);
+
+            // 필요한 경우, 데이터를 객체로 변환할 수도 있음
+            // var formData = {
+            //     form1Data: arrayToObject(data1),
+            //     form2Data: arrayToObject(data2),
+            //     form3Data: arrayToObject(data3)
+            // };
+
+            // Ajax를 사용하여 서버로 데이터 전송
+            $.ajax({
+                type: 'POST',
+                url: '/eSignDraft/generatedSignPk',
+                contentType: 'application/json',
+                // data: JSON.stringify(formData),
+                data: JSON.stringify(data3),
+                //     {
+                //    data1 : JSON.stringify(data1),
+                //    data2 : JSON.stringify(data2),
+                //    data3 : JSON.stringify(data3)
+                //
+                // },
+                success: function(response) {
+                    console.log('전송 성공:', response);
+                },
+                error: function(error) {
+                    console.error('전송 실패:', error);
+                }
+            });
+        });
+        // 배열을 객체로 변환하는 함수
+        function arrayToObject(array) {
+            var obj = {};
+            for (var i = 0; i < array.length; i++) {
+                obj[array[i].name] = array[i].value;
+            }
+            return obj;
+        }
+    });
+</script>
 <%--<script>--%>
 <%--    function submitForms() {--%>
 <%--        // 각 폼의 데이터를 가져와서 합치기--%>
