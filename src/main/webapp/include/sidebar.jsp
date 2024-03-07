@@ -164,7 +164,7 @@
                         <li class="nav-item">
                             <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>사원 마이페이지</p>
+                                <p>데스크 마이페이지</p>
                             </a>
                         </li>
                         <%
