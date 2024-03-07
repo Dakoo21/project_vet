@@ -5,6 +5,7 @@ import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.service.work.eSign.eSignDraft_Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class eSignDraft_Controller {
      **********************************************************************************/
     @GetMapping("draftInsertPage")
     public String draftInsertPage(){
-        return "esignInsert2";
+        return "pages/esignbox/esignInsert";
     }
 
     /**********************************************************************************
