@@ -404,6 +404,7 @@
     </script>
 
     <style>
+
         hr {
             border-top: 3px solid black; /* 굵기 조절 */
             width: 98%; /* 가로 길이 조절 */
@@ -555,20 +556,13 @@
                     <div class="col-sm-6">
                         <h1>시설예약현황</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
         <section class="content">
             <%--달력--%>
-            <div id='calendar'>해야할것
-                1. 오늘 날짜 에러 2. 배경색바꾸기,시간표시바꾸기</div>
+            <div id='calendar'></div>
 
 
             <!--여기 -->
@@ -1081,6 +1075,7 @@
         const hiddenUserNm = document.getElementById('hiddenMemberPk').value;
         document.getElementById('memberPk').value = hiddenUserNm;
     }
+
 </script>
 </body>
 </html>

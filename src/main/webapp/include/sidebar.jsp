@@ -491,7 +491,7 @@
                         <li class="nav-item">
                             <a href="/reservespot/dailyReserve" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>일일 에약 현황</p>
+                                <p>시설 예약 현황</p>
                             </a>
                         </li>
                     </ul>

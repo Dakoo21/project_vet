@@ -42,7 +42,7 @@
         SELECT FACILITY_RESERVE_ID
              , FACILITY_NM
              , USER_NM
-             , ANIMAL_NM
+             , NVL(ANIMAL_NM, '') AS ANIMAL_NM
              , FACILITY_RESERVE_DT
              , TO_CHAR(START_TIME + 30/(24*60)*RESERVE_START_TIME  , 'hh24:mi') AS START_TIME
              , TO_CHAR(START_TIME + 30/(24*60)*(RESERVE_END_TIME+1), 'hh24:mi') AS END_TIME
@@ -78,7 +78,7 @@
         SELECT FACILITY_RESERVE_ID
         , FACILITY_NM
         , USER_NM
-        , ANIMAL_NM
+        , NVL(ANIMAL_NM, '') AS ANIMAL_NM
         , FACILITY_RESERVE_DT
         , TO_CHAR(START_TIME + 30/(24*60)*RESERVE_START_TIME  , 'hh24:mi') AS START_TIME
         , TO_CHAR(START_TIME + 30/(24*60)*(RESERVE_END_TIME+1), 'hh24:mi') AS END_TIME
@@ -177,7 +177,7 @@
              , ANIMAL_NM AS animalNm
              , ANIMAL_BDATE AS animalBdate
              , A.MASTERPK as masterPk
-             , MASTER_NM
+             , NVL(MASTER_NM, '') AS MASTER_NM
         FROM ANIMAL_TEST A
                  LEFT OUTER JOIN MASTER_TEST M
                             ON 1=1
