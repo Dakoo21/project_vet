@@ -4,7 +4,6 @@
     <resultMap id="mastereMap" type="java.util.Map">
             <result column="MASTERPK" property="masterPk"/>
             <result column="MASTER_NM" property="master_nm"/>
-            <result column="MASTER_USERNAME" property="master_username"/>
             <result column="MASTER_EMAIL" property="master_email"/>
             <result column="MASTER_PNUMBER" property="master_pnumber"/>
             <result column="MASTER_ADDRESS" property="master_address"/>
@@ -15,7 +14,6 @@
         SELECT
             MASTERPK,
             MASTER_NM,
-            MASTER_USERNAME,
             MASTER_EMAIL,
              MASTER_BDATE,
             MASTER_PNUMBER,
@@ -30,15 +28,14 @@
     </select>
 
     <insert id="masterInsert" parameterType="com.example.vet.model.MasterVO">
-        INSERT INTO master_test(MASTERPK, MASTER_NM, MASTER_GENDER,MASTER_USERNAME,MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE)
-        VALUES(master_pk_seq.nextval, #{master_nm}, #{master_gender}, #{master_username}, #{master_email}, #{master_pnumber}, #{master_address}, #{master_bdate})
+        INSERT INTO master_test(MASTERPK, MASTER_NM, MASTER_GENDER, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE)
+        VALUES(master_pk_seq.nextval, #{master_nm}, #{master_gender}, #{master_email}, #{master_pnumber}, #{master_address}, #{master_bdate})
     </insert>
 
     <update id="masterUpdate" parameterType="com.example.vet.model.TotalCustomerUpdateVO">
         UPDATE MASTER_TEST
         SET
             MASTER_NM = #{master_nm},
-            MASTER_USERNAME = #{master_username},
             MASTER_EMAIL = #{master_email},
             MASTER_PNUMBER = #{master_pnumber},
             MASTER_ADDRESS = #{master_address},
@@ -49,8 +46,7 @@
   </update>
 
     <select id="masterDetail" parameterType="com.example.vet.model.MasterVO" resultType="com.example.vet.model.MasterVO">
-        SELECT MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW,
-               MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
+        SELECT MASTERPK, MASTER_NM, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
         FROM MASTER_TEST
         WHERE
             MASTERPK = #{masterPk}

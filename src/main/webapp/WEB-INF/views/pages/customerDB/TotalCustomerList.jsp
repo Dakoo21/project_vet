@@ -49,7 +49,6 @@
             tableContent += "<thead>";
             tableContent += "<tr>";
             tableContent += "<th>고객명</th>";
-            tableContent += "<th>ID</th>";
             tableContent += "<th>성별</th>";
             tableContent += "<th>생년월일</th>";
             tableContent += "<th>이메일</th>";
@@ -59,7 +58,6 @@
             tableContent += "</thead>";
             tableContent += "<tr>";
             tableContent += "<td> <a href=javascript:customerDataDetail(" + row.masterPk + ')>' + row.master_nm + "</td>";
-            tableContent += "<td>" + row.master_username + "</td>";
             tableContent += "<td>" + row.master_gender + "</td>";
             tableContent += "<td>" + row.master_bdate + "</td>";
             tableContent += "<td>" + row.master_email + "</td>";
@@ -87,7 +85,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>고객리스트</title>
+    <title>고객 조회</title>
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -101,12 +99,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Icons</h1>
+                        <h1>고객 리스트</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
                         </ol>
                     </div>
                 </div>
@@ -141,7 +137,6 @@
                         <thead>
                         <tr>
                             <th>고객명</th>
-                            <th>ID</th>
                             <th>성별</th>
                             <th>생년월일</th>
                             <th>이메일</th>
@@ -154,9 +149,8 @@
                             for (int i =0; i < cList.size(); i++){
                                 Map<String,Object> pmap = cList.get(i);
                         %>
-                        <tr>
-                            <td><a href="javascript:customerDataDetail('<%=pmap.get("masterPk")%>')"><%=pmap.get("master_nm")%></a></td>
-                            <td><%=pmap.get("master_username")%></td>
+                        <tr onclick="customerDataDetail('<%=pmap.get("masterPk")%>')">
+                            <td><%=pmap.get("master_nm")%></td>
                             <td><%=pmap.get("master_gender")%></td>
                             <td><%=pmap.get("master_bdate")%></td>
                             <td><%=pmap.get("master_email")%></td>

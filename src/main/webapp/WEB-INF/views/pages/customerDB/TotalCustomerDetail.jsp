@@ -54,7 +54,6 @@
             type: "POST",
             data: JSON.stringify({
                 master_nm: $("#master_nm").val(),
-                master_username: $("#master_username").val(),
                 master_gender: $("#master_gender").val(),
                 master_bdate: $("#master_bdate").val(),
                 master_email: $("#master_email").val(),
@@ -99,7 +98,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
+                            <li class="breadcrumb-item active">고객 상세정보</li>
                         </ol>
                     </div>
                 </div>
@@ -112,22 +111,18 @@
                         <tr>
                             <th>고객명</th>
                             <td><input class="form-control" type="text" value="<%=masterVO.getMaster_nm()%>" aria-label="readonly input example" readonly></td>
-                            <th>ID</th>
-                            <td><input class="form-control" type="text" value="<%=masterVO.getMaster_username()%>" aria-label="readonly input example" readonly></td>
-                        </tr>
-                        <tr>
                             <th>성별</th>
                             <td><input class="form-control" type="text" value="<%=masterVO.getMaster_gender()%>" aria-label="readonly input example" readonly></td>
-                            <th>생년월일</th>
-                            <td><input class="form-control" type="text" value="<%=masterVO.getMaster_bdate()%>" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
-                            <th>email</th>
-                            <td><input class="form-control" type="text" value="<%=masterVO.getMaster_email()%>" aria-label="readonly input example" readonly></td>
+                            <th>생년월일</th>
+                            <td><input class="form-control" type="text" value="<%=masterVO.getMaster_bdate()%>" aria-label="readonly input example" readonly></td>
                             <th>연락처</th>
                             <td><input class="form-control" type="text" value="<%=masterVO.getMaster_pnumber()%>" aria-label="readonly input example" readonly></td>
                         </tr>
                         <tr>
+                            <th>email</th>
+                            <td><input class="form-control" type="text" value="<%=masterVO.getMaster_email()%>" aria-label="readonly input example" readonly></td>
                             <th>주소</th>
                             <td><input class="form-control" type="text" value="<%=masterVO.getMaster_address()%>" aria-label="readonly input example" readonly></td>
                         </tr>
@@ -167,22 +162,18 @@
                                 <tr>
                                     <th>고객명</th>
                                     <td><input class="form-control" id="master_nm" type="text" value="<%=masterVO.getMaster_nm()%>"></td>
-                                    <th>ID</th>
-                                    <td><input class="form-control" id="master_username"  type="text" value="<%=masterVO.getMaster_username()%>"></td>
-                                </tr>
-                                <tr>
                                     <th>성별</th>
                                     <td><input class="form-control" id="master_gender" type="text" value="<%=masterVO.getMaster_gender()%>"></td>
-                                    <th>생년월일</th>
-                                    <td><input class="form-control" id="master_bdate" type="date" value="<%=masterVO.getMaster_bdate()%>"></td>
                                 </tr>
                                 <tr>
-                                    <th>email</th>
-                                    <td><input class="form-control" id="master_email" type="text" value="<%=masterVO.getMaster_email()%>"></td>
+                                    <th>생년월일</th>
+                                    <td><input class="form-control" id="master_bdate" type="date" value="<%=masterVO.getMaster_bdate()%>"></td>
                                     <th>연락처</th>
                                     <td><input class="form-control" id="master_pnumber" type="text" value="<%=masterVO.getMaster_pnumber()%>"></td>
                                 </tr>
                                 <tr>
+                                    <th>email</th>
+                                    <td><input class="form-control" id="master_email" type="text" value="<%=masterVO.getMaster_email()%>"></td>
                                     <th>주소</th>
                                     <td><input class="form-control" id="master_address" type="text" value="<%=masterVO.getMaster_address()%>"></td>
                                 </tr>

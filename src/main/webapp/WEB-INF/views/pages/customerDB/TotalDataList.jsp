@@ -13,18 +13,27 @@
         }
     }
 
-    function boardSearch() {
-        if($("#gubun").val() === '' || $("#gubun").val() === null ){
+    function boardSearch(btnValue) {
+        if($("#gubun").val()  === 'none' && (btnValue === null || btnValue === 'undefined')){
             alert("분류를 선택해주세요.");
             return;
         }
-        if($("#keyword").val() === '' || $("#keyword").val() === null ){
+        if($("#gubun").val() === '' || $("#gubun").val() === null
+            && (btnValue === null || btnValue === 'undefined')
+        ){
+            alert("분류를 선택해주세요.");
+            return;
+        }
+        if(($("#keyword").val() === '' || $("#keyword").val() === null)
+            && (btnValue === null || btnValue === 'undefined')
+        ){
             alert("검색어를 입력해주세요.");
             return;
         }
         let searchData = {
             gubun: $("#gubun").val(),
             keyword: $("#keyword").val(),
+            buttonKeyword: btnValue
         }
         // AJAX 요청 보내기
         $.ajax({
@@ -33,7 +42,12 @@
             data: searchData,
             contentType: "application/json",
             success: function(data){
-                updateTable(data);
+                if(data.length > 0){
+                    updateTable(data);
+                    btnValue = null
+                }else{
+                    alert("해당하는 데이터가 없습니다.");
+                }
             },
             error: function(xhr, status, error){
             }
@@ -42,20 +56,9 @@
     function updateTable(data) {
         // 받은 데이터를 사용하여 테이블을 업데이트하는 로직을 작성
         let tableContent = "";
-        $('#boardAnimalList > td').remove();
+        $('#boardAnimalList > tr').remove();
         // 예를 들어, 받은 데이터를 사용하여 테이블의 각 행을 구성하는 HTML을 생성
         data.forEach(function(row) {
-            tableContent += '<table class="table table-striped table-bordered table-hover dt-responsive">';
-            tableContent += "<thead>";
-            tableContent += "<tr>";
-            tableContent += "<th>고객명</th>";
-            tableContent += "<th>동물이름</th>";
-            tableContent += "<th>축종</th>";
-            tableContent += "<th>품종</th>";
-            tableContent += "<th>성별</th>";
-            tableContent += "<th>중성화</th>";
-            tableContent += "</tr>";
-            tableContent += "</thead>";
             tableContent += "<tr>";
             tableContent += "<td><a href=/CustomerDB/TotalDataDetail/" + row.animalPk + '>' + row.master_nm + "</td>";
             tableContent += "<td>" + row.animal_nm + "</td>";
@@ -68,6 +71,12 @@
         });
         // 테이블을 업데이트
         $("#boardAnimalList").html(tableContent);
+
+    }
+
+    function TotaldataDetail (animalPk) {
+        console.log("dataDetail 연결")
+        location.href = "/CustomerDB/TotalDataDetail/"+animalPk;
     }
 </script>
 
@@ -76,7 +85,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>통합데이터리스트</title>
+    <title>동물 데이터 조회</title>
     <%@ include file="/include/bootCommon.jsp" %>
 </head>
 
@@ -90,12 +99,10 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>고객-동물 데이터 조회</h1>
+                        <h1>동물 데이터 조회</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Projects</li>
                         </ol>
                     </div>
                 </div>
@@ -128,16 +135,16 @@
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#select-all" data-toggle="tab">전체조회</a>
+                        <a class="nav-link active"  data-toggle="tab" onclick="boardSearch(1)">전체조회</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#select-dog" data-toggle="tab">강아지</a>
+                        <a class="nav-link" data-toggle="tab" onclick="boardSearch(2)">강아지</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#select-cat" data-toggle="tab">고양이</a>
+                        <a class="nav-link" data-toggle="tab" onclick="boardSearch(3)">고양이</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#select-animals" data-toggle="tab">기타동물</a>
+                        <a class="nav-link" data-toggle="tab" onclick="boardSearch(4)">기타동물</a>
                     </li>
                 </ul>
             </div>
@@ -154,7 +161,7 @@
                         <div class="chart tab-pane active" id="select-all"
                              style="position: relative; height: 100%;">
                             <div>
-                                <table id="boardAnimalList" class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>고객명</th>
@@ -165,13 +172,13 @@
                                         <th>중성화</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody  id="boardAnimalList" >
                                         <%
                                             for (int i =0; i<dList.size(); i++){
                                             Map<String,Object> pmap =  dList.get(i);
                                         %>
-                                        <tr >
-                                            <td><a href="/CustomerDB/TotalDataDetail/<%=pmap.get("animalPk")%>"><%=pmap.get("master_nm")%></a></td>
+                                            <tr onclick ="TotaldataDetail('<%=pmap.get("animalPk")%>')">
+                                            <td><%=pmap.get("master_nm")%></td>
                                             <td><%=pmap.get("animal_nm")%></td>
                                             <td><%=pmap.get("animal_species")%></td>
                                             <td><%=pmap.get("animal_breed")%></td>
@@ -193,10 +200,10 @@
             </div>
         </section>
                 <!-- /.card-body -->
-                <div class="col-md-2" >
+                <div class="col-md-2">
                     <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-warning">등록</a>
                 </div>
-            </div>
+        </div>
             <!-- /.content -->
 
         <!-- /.content-wrapper -->
