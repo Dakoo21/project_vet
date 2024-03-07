@@ -38,6 +38,22 @@
                 </when>
             </choose>
         </if>
+        <if test="buttonKeyword != null ">
+            <choose>
+                <when test ='buttonKeyword == "1"'>
+                    AND 1=1
+                </when>
+                <when test ='buttonKeyword == "2"'>
+                    AND A.ANIMAL_SPECIES  LIKE '%강아지%'
+                </when>
+                <when test ='buttonKeyword == "3"'>
+                    AND A.ANIMAL_SPECIES  LIKE '%고양이%'
+                </when>
+                <when test ='buttonKeyword == "4"'>
+                    AND A.ANIMAL_SPECIES NOT IN ('고양이','강아지')
+                </when>
+            </choose>
+        </if>
     order by A.animalPk desc
     </select>
 

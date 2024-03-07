@@ -40,6 +40,7 @@ public class TotalDataController {
     @GetMapping("TotalDataSelectedList")
     @ResponseBody
     public List<Map<String, Object>> dataList(@RequestParam(required = false) Map<String, Object> pmap ) {
+        System.out.println(pmap);
         List<Map<String, Object>> animalVO = totalDataService.dataList(pmap);
         return animalVO;
     }

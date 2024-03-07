@@ -22,8 +22,6 @@
             type: "POST",
             data: JSON.stringify({
                 master_nm: $("#master_nm").val(),
-                master_username: $("#master_username").val(),
-                master_pw: $("#master_pw").val(),
                 master_email: $("#master_email").val(),
                 master_pnumber: $("#master_pnumber").val(),
                 master_address: $("#master_address").val(),
