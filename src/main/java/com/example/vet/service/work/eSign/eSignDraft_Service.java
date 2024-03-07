@@ -52,15 +52,15 @@ public class eSignDraft_Service {
         return draftDetail;
     }
 
-    // pk 추출
+    //pk 추출
     @Transactional
-    public Sign createSign(Sign sign) {
+    public int createSign(Sign sign) {
         // Sign insertedSign = eSignDraft_repository.insertDraft(sign);
         // int generatedSignPk = insertedSign.getSign_pk();
         signMapper.insertSign(sign);
         // log.info("트랜잭션 서비스" + generatedSignPk);
         // eSignDraft_repository.insertDraftLine(generatedSignPk);
-        return sign;
+        return sign.getSIGN_PK();
     }
 
     public int insertAdoptDraft(SignAdopt signAdopt) {
@@ -70,14 +70,15 @@ public class eSignDraft_Service {
 
     }
 
-    @Transactional
-    public SignAdopt createAdoptSign(SignAdopt signAdopt) {
+    // @Transactional
+    public int createAdoptSign(SignAdopt signAdopt) {
         signMapper.insertSignAdopt(signAdopt);
+        log.info(String.valueOf(signAdopt.getADOPT_PK()));
         // SignAdopt insertedAdoptSign = eSignDraft_repository.insertAdoptDraft(signAdopt);
-        // int generatedSignPk = insertedAdoptSign.getAdopt_pk();
+        // signAdopt.getADOPT_PK();
         // log.info("트랜잭션 서비스" + generatedSignPk);
         // eSignDraft_repository.insertDraftLine(generatedSignPk);
-        return signAdopt;
+        return signAdopt.getADOPT_PK();
     }
 
     public int insertSignDoc(Sign sign) {
