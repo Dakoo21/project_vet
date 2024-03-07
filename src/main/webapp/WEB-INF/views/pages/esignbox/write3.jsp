@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <th>입양자 PK</th>
-            <th><input type="text" class="form-control" id="MASTERPK" placeholder="" name="MASTERPK"></th>
+            <th><input type="hidden" class="form-control" id="MASTERPK" placeholder="" name="MASTERPK" value=""></th>
         </tr>
     </table>
     <div class="text-center">
@@ -226,9 +226,8 @@
                 색 : rowData[2],
                 나이 : rowData[3],
                 몸무게 : rowData[4],
-                사진 : rowData[5],
-                중성화 : rowData[6],
-                성별 : rowData[7]
+                중성화 : rowData[5],
+                성별 : rowData[6]
             };
             const modalbtn11 = document.getElementById('modalBtn1');
             var selectedAnimalId = $(this).data("animal-id");
@@ -287,7 +286,6 @@
                     "<td>" + abandonList[i].colorcd + "</td>" +
                     "<td>" + abandonList[i].age + "</td>" +
                     "<td>" + abandonList[i].weight + "</td>" +
-                    "<td>" + abandonList[i].popfile + "</td>" +
                     "<td>" + abandonList[i].neuteral_yesorno + "</td>" +
                     "<td>" + abandonList[i].sex + "</td>" +
                     "</tr>";
@@ -337,8 +335,8 @@
         var selectedAdopterId = $(this).data("adopter-id");
         $("#selectedAdopterDisplay").text(JSON.stringify(selectedRowData, null, 2));
         console.log("Selected Adopter ID:" + selectedAdopterId);
-        $("#masterpk").val(selectedRowData.번호);
-        $("#master_nm").val(selectedRowData.이름);
+        $("#MASTERPK").val(selectedRowData.번호);
+        $("#MASTER_NM").val(selectedRowData.이름);
 
     });
     // 모달창 닫기 버튼 클릭 이벤트

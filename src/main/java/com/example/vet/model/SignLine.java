@@ -16,12 +16,12 @@ public class SignLine {
 
 
     @Builder
-    public SignLine(Integer sign_pk, Integer lv1, Integer lv2, Integer lv3, Integer member_pk, Integer sign_state){
-        this.SIGN_PK = sign_pk;
-        this.LV1 = lv1;
-        this.LV2 = lv2;
-        this.LV3 = lv3;
-        this.MEMBER_PK = member_pk;
-        this.SIGN_STATE = sign_state;
+    public SignLine(Integer SIGN_PK, Integer LV1, Integer LV2, Integer LV3, Integer MEMBER_PK, Integer SIGN_STATE){
+        this.SIGN_PK = SIGN_PK;
+        this.LV1 = LV1;
+        this.LV2 = LV2;
+        this.LV3 = LV3;
+        this.MEMBER_PK = MEMBER_PK;
+        this.SIGN_STATE = SIGN_STATE;
     }
 }

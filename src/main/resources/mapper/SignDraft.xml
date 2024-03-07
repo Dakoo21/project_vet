@@ -14,7 +14,7 @@
         WHERE MEMBER_ROLE = 'ROLE_ADMIN' OR MEMBER_ROLE = 'ROLE_MASTER'
     </select>
     <select id="selectAdopter" resultMap="MasterResultMap">
-        SELECT MASTERPK, MASTER_NM, MASTER_USERNAME, MASTER_PW, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS, MASTER_BDATE, MASTER_GENDER
+        SELECT MASTERPK, MASTER_NM, MASTER_EMAIL, MASTER_PNUMBER, MASTER_ADDRESS
         FROM MASTER_TEST
     </select>
     <select id="selectAbandon" resultMap="MissedAnimalList">

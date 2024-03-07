@@ -108,151 +108,97 @@ public class eSignDraft_Controller {
         model.addAttribute("draftDetail",draftDetail);
         return "pages/esignbox/esignDetail"; // forward라서 webapp아래에서 찾는다
     }
-
+    
     /**********************************************************************************
      작성자 : 최윤정
      작성일자 : 26.02.25
-     기능 : pk 조회
+     기능 : 기안서 등록
      **********************************************************************************/
-    // @GetMapping("submitSelectedValue")
-    // public ResponseEntity<String> submitSelectedValue(SignAdopt signAdopt) {
-    //     // Sign sign = new Sign();
-    //     // sign.setSign_title("Your Title");
-    //     // sign.setSign_content("Your Content");
-    //     // sign.setMember_pk(1);
-    //     // sign.setAdopt_pk(6);
-    //     Sign insertedSign = eSignDraft_service.createSign(sign);
-    //     int generatedSignPk = insertedSign.getSign_pk();
-    //     log.info(String.valueOf(generatedSignPk));
-    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-    //     return ResponseEntity.ok("Sign created with ID: " + generatedSignPk);
-    // }
-    /**********************************************************************************
-     작성자 : 최윤정
-     작성일자 : 26.02.25
-     기능 : pk 조회
-     **********************************************************************************/
-    // @GetMapping("generatedSignPk")
-    // public ResponseEntity<String> submitSelectedValue() {
-    //     Sign sign = new Sign();
-    //     SignAdopt signAdopt = new SignAdopt();
-    //     SignLine signLine = new SignLine();
-    //     log.info(sign.toString());
-    //     log.info(signAdopt.toString());
-    //     log.info(signLine.toString());
-    //     signAdopt.setAdopt_nm("토토");
-    //     signAdopt.setDesertion_no(1);
-    //     signAdopt.setMasterpk(1);
-    //     SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
-    //     int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
-    //     log.info(String.valueOf(generatedAdoptSignPk));
-    //     sign.setAdopt_pk(generatedAdoptSignPk);
-    //     // int result = eSignDraft_service.insertSignDoc(sign);
-    //     sign.setMember_pk(1);
-    //     sign.setAdopt_pk(6);
-    //     Sign insertedSign = eSignDraft_service.createSign(sign);
-    //     int generatedSignPk = insertedSign.getSign_pk();
-    //     signLine.setSign_pk(generatedSignPk);
-    //     signLine.setSign_state(0);
-    //     signLine.setLv1(1);
-    //     signLine.setLv2(0);
-    //     signLine.setLv3(0);
-    //     signLine.setMember_pk(1);
-    //     eSignDraft_service.insertSignLine(signLine);
-    //     // log.info(String.valueOf(result));
-    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-    //     return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
-    // }
-
-
-    // 테스트
-    @GetMapping("testPage")
-    public String testPage(){
-        return "pages/customerDB/TotalDataInsert";
-    }
-
-    // @PostMapping("generatedSignPk")
-    // public ResponseEntity<String> submitSelectedValue(@ModelAttribute SignAdopt signAdopt,
-    //                                                   @ModelAttribute Sign sign,
-    //                                                   @ModelAttribute SignLine signLine) {
-    //     log.info(sign.toString());
-    //     log.info(signAdopt.toString());
-    //     log.info(signLine.toString());
-    //     SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
-    //     int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
-    //     log.info(String.valueOf(generatedAdoptSignPk));
-    //     sign.setAdopt_pk(generatedAdoptSignPk);
-    //     // int result = eSignDraft_service.insertSignDoc(sign);
-    //     Sign insertedSign = eSignDraft_service.createSign(sign);
-    //     int generatedSignPk = insertedSign.getSign_pk();
-    //     signLine.setSign_pk(generatedSignPk);
-    //     eSignDraft_service.insertSignLine(signLine);
-    //     // log.info(String.valueOf(result));
-    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-    //     return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
-    // }
-
-    // @ResponseBody
-    // @PostMapping("generatedSignPk")
-    // public ResponseEntity<String> submitSelectedValue(@ModelAttribute("adoptForm") SignAdopt signAdopt,
-    //                                                    @ModelAttribute("signForm") Sign sign,
-    //                                                    @ModelAttribute("signLineForm") SignLine signLine) {
-    //     log.info(sign.toString());
-    //     log.info(signAdopt.toString());
-    //     log.info(signLine.toString());
-    //     SignAdopt insertedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
-    //     int generatedAdoptSignPk = insertedAdoptSign.getAdopt_pk();
-    //     log.info(String.valueOf(generatedAdoptSignPk));
-    //     sign.setAdopt_pk(generatedAdoptSignPk);
-    //     // int result = eSignDraft_service.insertSignDoc(sign);
-    //     Sign insertedSign = eSignDraft_service.createSign(sign);
-    //     int generatedSignPk = insertedSign.getSign_pk();
-    //     signLine.setSign_pk(generatedSignPk);
-    //     eSignDraft_service.insertSignLine(signLine);
-    //     // log.info(String.valueOf(result));
-    //     // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-    //     return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
-    // }
-
     @PostMapping("generatedSignPk")
     @ResponseBody
-    public ResponseEntity<String> submitSelectedValue(@RequestBody  List<Map<String, String>> formDataList){
-        SignAdopt signAdopt =  mapJsonToSignAdopt(formDataList);
-        log.info(formDataList.toString());
+    public ResponseEntity<String> submitSelectedValue(@RequestBody Map<String, List<Map<String, String>>> formData){
+        List<Map<String, String>> data1 = formData.get("form1Data");
+        List<Map<String, String>> data2 = formData.get("form2Data");
+        List<Map<String, String>> data3 = formData.get("form3Data");
+        Sign sign =  mapJsonToSign(data1);
+        SignLine signLine = mapJsonToSignLine(data2);
+        SignAdopt signAdopt = mapJsonToSignAdopt(data3);
+        log.info(sign.toString());
+        log.info(signLine.toString());
         log.info(signAdopt.toString());
         log.info("generatedSignPk컨트롤러");
-        // log.info(sign.toString());
-        // log.info(signAdopt.getADOPT_NM());
-        // log.info(signAdopt);
-        // log.info(signLine.toString());
         int generatedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
-        // int generatedAdoptSignPk = insertedAdoptSign.getADOPT_PK();
         log.info(String.valueOf(generatedAdoptSign));
-        Sign sign = new Sign();
-        sign.setSIGN_CONTENT("내용");
-        sign.setSIGN_TITLE("제목");
-        sign.setSIGN_TYPE("입양신청서");
-        sign.setSIGN_RESERV_YEAR("5년");
-        sign.setSIGN_DATE("2024-03-01");
-        sign.setMEMBER_PK(1);
         sign.setADOPT_PK(generatedAdoptSign);
-        // int result = eSignDraft_service.insertSignDoc(sign);
         int generatedSignPk = eSignDraft_service.createSign(sign);
-        // int generatedSignPk = insertedSign.getSIGN_PK();
         log.info(String.valueOf(generatedSignPk));
-        SignLine signLine = new SignLine();
-        signLine.setSIGN_STATE(0);
-        signLine.setLV1(1);
-        signLine.setLV2(0);
-        signLine.setLV3(0);
-        signLine.setMEMBER_PK(1);
         signLine.setSIGN_PK(generatedSignPk);
         int result = eSignDraft_service.insertSignLine(signLine);
-        log.info(String.valueOf("signline" + result));
-        // 작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-        // return ResponseEntity.ok("Sign created with ID: " + generatedAdoptSignPk);
+        //작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
         return ResponseEntity.ok("Success");
     }
+
+    // json -> Sign 변환
+    private Sign mapJsonToSign(List<Map<String, String>> formDataList) {
+        Sign.SignBuilder signBuilder = Sign.builder();
+        for (Map<String, String> formData : formDataList) {
+            String name = formData.get("name");
+            String value = formData.get("value");
+            // "name"에 해당하는 필드를 찾아서 값 설정
+            switch (name) {
+                case "SIGN_TITLE":
+                    signBuilder.SIGN_TITLE(value);
+                    break;
+                case "SIGN_CONTENT":
+                    signBuilder.SIGN_CONTENT(value);
+                    break;
+                case "SIGN_RESERV_YEAR":
+                    signBuilder.SIGN_RESERV_YEAR(value);
+                    break;
+                case "SIGN_TYPE":
+                    signBuilder.SIGN_TYPE(value);
+                    break;
+                case "MEMBER_PK":
+                    signBuilder.MEMBER_PK(Integer.valueOf(value));
+                    break;
+            }
+        }
+        Sign sign = new Sign();
+        sign = signBuilder.build();
+        return sign;
+    }
+
+    // json -> SignLine 변환
+    private SignLine mapJsonToSignLine(List<Map<String, String>> formDataList) {
+        SignLine.SignLineBuilder signLineBuilder = SignLine.builder();
+        for (Map<String, String> formData : formDataList) {
+            String name = formData.get("name");
+            String value = formData.get("value");
+            // "name"에 해당하는 필드를 찾아서 값 설정
+            switch (name) {
+                case "LV1":
+                    signLineBuilder.LV1(Integer.valueOf(value));
+                    break;
+                case "LV2":
+                    signLineBuilder.LV2(Integer.valueOf(value));
+                    break;
+                case "LV3":
+                    signLineBuilder.LV3(Integer.valueOf(value));
+                    break;
+                case "MEMBER_PK":
+                    signLineBuilder.MEMBER_PK(Integer.valueOf(value));
+                    break;
+                case "SIGN_STATE":
+                    signLineBuilder.SIGN_STATE(Integer.valueOf(value));
+                    break;
+            }
+        }
+        SignLine signLine = new SignLine();
+        signLine = signLineBuilder.build();
+        return signLine;
+    }
+
+    // json -> SignAdopt 변환
     private SignAdopt mapJsonToSignAdopt(List<Map<String, String>> formDataList) {
         SignAdopt.SignAdoptBuilder signAdoptBuilder = SignAdopt.builder();
         for (Map<String, String> formData : formDataList) {
@@ -296,24 +242,6 @@ public class eSignDraft_Controller {
         SignAdopt signAdopt = new SignAdopt();
         signAdopt = signAdoptBuilder.build();
         return signAdopt;
-    }
-    //AdoptForm
-    @PostMapping("adoptForm")
-    public String submitAdoptForm(SignAdopt signAdopt){
-        log.info(signAdopt.toString());
-        return null;
-    }
-    //signLineForm
-    @RequestMapping("/signLineForm")
-    public String submitSignLineForm(SignAdopt signAdopt){
-        log.info(signAdopt.toString());
-        return null;
-    }
-    //signForm
-    @PostMapping("/signForm")
-    public String submitSignForm(SignAdopt signAdopt){
-        log.info(signAdopt.toString());
-        return null;
     }
 }
 

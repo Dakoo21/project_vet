@@ -17,6 +17,7 @@ public class Sign {
     private Integer ADOPT_PK;
     private String selectedvalue;
 
+    @Builder
     public Sign(Integer SIGN_PK, String SIGN_TITLE, String SIGN_CONTENT, String SIGN_DATE, String SIGN_RESERV_YEAR, String SIGN_TYPE, Integer MEMBER_PK, Integer ADOPT_PK, String selectedvalue) {
         this.SIGN_PK = SIGN_PK;
         this.SIGN_TITLE = SIGN_TITLE;

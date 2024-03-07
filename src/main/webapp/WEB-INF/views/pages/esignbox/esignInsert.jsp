@@ -124,7 +124,7 @@
                                 <th>문서 종류</th>
                                 <td>
                                     <!-- sign_type-->
-                                    <select id="sign_type" name="sign_type" class="write-select" autocomplete="off">
+                                    <select id="SIGN_TYPE" name="SIGN_TYPE" class="write-select" autocomplete="off">
                                         <option value="">선택</option>
                                         <option value="지출결의서">지출 결의서</option>
                                         <option value="품의서">품의서</option>
@@ -139,7 +139,7 @@
                                 <th scope="row">보존 연한</th>
                                 <td>
                                     <!-- sign_reserv_year -->
-                                    <select name="sign_reserv_year" id="sign_reserv_year" class="fl write-select">
+                                    <select name="SIGN_RESERV_YEAR" id="SIGN_RESERV_YEAR" class="fl write-select">
                                         <option value="">보존 연한</option>
                                         <option value="1년">1년</option>
                                         <option value="3년">3년</option>
@@ -152,7 +152,7 @@
                         </table>
                         <div class="after" style="display: flex; align-items: center;">
                             <h4 class="fl mgr_20" style="margin-right: 10px;">결재선 선택 </h4>
-                            <button id="addButtons">결재선 추가</button>
+                            <button type=button id="addButtons">결재선 추가</button>
                         </div>
                         <table class="table table-bordered" id="myTable">
                             <thead>
@@ -231,9 +231,10 @@
                                         </div>
                                         <div id="textarea" style="width: 100%;">
                                             <div class="form-group">
+                                                <input type="hidden" name="MEMBER_PK" id="MEMBER_PK" value="<%=userpk%>">
                                                 <label>제목</label>
                                                 <!-- sign_title -->
-                                                <input type="text" name="sign_title" id="sign_title" class="form-control" placeholder="제목을 입력하세요">
+                                                <input type="text" name="SIGN_TITLE" id="SIGN_TITLE" class="form-control" placeholder="제목을 입력하세요">
                                             </div>
                                             <div class="col-md-12" style="width: 100%">
                                                 <!-- /.card-header -->
@@ -241,7 +242,7 @@
     <%--                                                <textarea id="summernote" name="sign_content">--%>
     <%--                                                </textarea>--%>
                                                     <!-- sign_content -->
-                                                    <input type="text" name="sign_content" id="sign_content">
+                                                    <input type="text" name="SIGN_CONTENT" id="SIGN_CONTENT">
                                                 </div>
                                             </div>
                                             <!-- /.col-->
@@ -260,10 +261,11 @@
         <!-- /.content -->
         <div class="hiddendata">
             <form id="signLineForm" method="post">
-                <input type="hidden" id="lv_1" name="lv_1" value="1">
-                <input type="hidden" id="lv_2" name="lv_2" value="0">
-                <input type="hidden" id="lv_3" name="lv_3" value="0">
-                <input type="hidden" id="sign_state" name="sign_state" value="0">
+                <input type="hidden" name="MEMBER_PK" value="<%=userpk%>">
+                <input type="hidden" id="LV_1" name="LV1" value="1">
+                <input type="hidden" id="LV_2" name="LV2" value="0">
+                <input type="hidden" id="LV_3" name="LV3" value="0">
+                <input type="hidden" id="SIGN_STATE" name="SIGN_STATE" value="0">
             </form>
         </div>
 <%--        <button id="submitForms">전송</button>--%>
@@ -372,6 +374,7 @@
                     var newButton = $('<button>', {
                         text: '버튼',
                         class: 'dynamicButton btn btn-primary',
+                        type: 'button',
                         // 모달을 띄우기 위한 이벤트를 추가합니다.
                         click: function() {
                             // 현재 선택된 셀 저장
@@ -480,27 +483,6 @@
     });
 </script>
 
-
-<%--<script>--%>
-<%--    function showDiv() {--%>
-<%--        var selectedValue = document.getElementById("documentType").value--%>
-
-<%--        var writeinDiv = document.getElementById("writein");--%>
-<%--        var writein2Div = document.getElementById("writein2");--%>
-
-<%--        // 모든 div를 초기에 숨김--%>
-<%--        writeinDiv.style.display = "none";--%>
-<%--        writein2Div.style.display = "none";--%>
-
-<%--        // 선택한 값에 따라 해당 div를 보여줌--%>
-<%--        if (selectedValue === "42769") { // 품의서 선택--%>
-<%--            writeinDiv.style.display = "block";--%>
-<%--        } else if (selectedValue === "42768") { // 지출 결의서 선택--%>
-<%--            writein2Div.style.display = "block";--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
-
 <script>
     $(document).ready(function() {
         $('#submitForms').click(function() {
@@ -513,11 +495,11 @@
             console.log(data3);
 
             // 필요한 경우, 데이터를 객체로 변환할 수도 있음
-            // var formData = {
-            //     form1Data: arrayToObject(data1),
-            //     form2Data: arrayToObject(data2),
-            //     form3Data: arrayToObject(data3)
-            // };
+            var formData = {
+                form1Data: data1,
+                form2Data: data2,
+                form3Data: data3
+            };
 
             // Ajax를 사용하여 서버로 데이터 전송
             $.ajax({
@@ -525,13 +507,7 @@
                 url: '/eSignDraft/generatedSignPk',
                 contentType: 'application/json',
                 // data: JSON.stringify(formData),
-                data: JSON.stringify(data3),
-                //     {
-                //    data1 : JSON.stringify(data1),
-                //    data2 : JSON.stringify(data2),
-                //    data3 : JSON.stringify(data3)
-                //
-                // },
+                data:JSON.stringify(formData),
                 success: function(response) {
                     console.log('전송 성공:', response);
                 },
@@ -550,37 +526,3 @@
         }
     });
 </script>
-<%--<script>--%>
-<%--    function submitForms() {--%>
-<%--        // 각 폼의 데이터를 가져와서 합치기--%>
-<%--        var formData = new FormData();--%>
-<%--        var form1Data = new FormData(document.getElementById('signForm'));--%>
-<%--        var form2Data = new FormData(document.getElementById('adoptForm'));--%>
-<%--        var form3Data = new FormData(document.getElementById('signLineForm'));--%>
-
-<%--        // FormData 합치기--%>
-<%--        for (var pair of form1Data.entries()) {--%>
-<%--            formData.append(pair[0], pair[1]);--%>
-<%--        }--%>
-<%--        for (var pair of form2Data.entries()) {--%>
-<%--            formData.append(pair[0], pair[1]);--%>
-<%--        }--%>
-<%--        for (var pair of form3Data.entries()) {--%>
-<%--            formData.append(pair[0], pair[1]);--%>
-<%--        }--%>
-
-<%--        // 서버로 데이터 전송--%>
-<%--        fetch('/eSignDraft/generatedSignPk', {--%>
-<%--            method: 'POST',--%>
-<%--            body: formData--%>
-<%--        })--%>
-<%--            .then(response => response.json())--%>
-<%--            .then(data => {--%>
-<%--                // 서버 응답에 대한 처리--%>
-<%--                console.log(data);--%>
-<%--            })--%>
-<%--            .catch(error => {--%>
-<%--                console.error('Error:', error);--%>
-<%--            });--%>
-<%--    }--%>
-<%--</script>--%>
