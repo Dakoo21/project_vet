@@ -2,13 +2,20 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.vet.model.Sign" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="com.example.vet.model.SignTotal" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
     int size = 0;
-    List<Sign> docList = null;
-    docList = (List<Sign>)request.getAttribute("docList");
+    List<SignTotal> docList = null;
+    docList = (List<SignTotal>) request.getAttribute("progressList");
 %>
+<script>
+    function signOneDetail (SIGN_PK) {
+        console.log("기안서 디테일")
+        location.href = "/eSignDraft/eSignDetail?SIGN_PK="+SIGN_PK;
+    }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +34,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진행중인 문서</h1>
+                        <h1>진행중인문서</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -62,6 +69,7 @@
                             </div>
                         </div>
                     </h3>
+
                     <div class="card-tools">
                         <ul class="nav nav-pills ml-auto">
                             <li class="nav-item">
@@ -74,16 +82,15 @@
                                 <a class="nav-link" href="#select-scheduled" data-toggle="tab">예정</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#select-inProgress" data-toggle="tab">진행</a>
+                                <a class="nav-link" href="#select-progress" data-toggle="tab">진행</a>
                             </li>
                         </ul>
                     </div>
                 </div><!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" >
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
-                        <div class="chart tab-pane active" id="select-all"
-                             style="position: relative; height: 300px;">
+                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 700px;">
                             <div class ="table">
                                 <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
@@ -92,36 +99,36 @@
                                         <th>문서 제목</th>
                                         <th>결재 기안일</th>
                                         <th>결재 상태</th>
-                                        <th>기안자</th>
                                         <th>문서 구분</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (Sign doc : docList) {
-                                            if ("Pending".equals(doc.getSign_state()) ||
-                                                    "Scheduled".equals(doc.getSign_state()) ||
-                                                    "InProgress".equals(doc.getSign_state())){
-                                            String docNo = doc.getSign_no();
-                                            String docTitle = doc.getSign_title();
+                                        for (SignTotal doc : docList) {
+                                            String docState = null;
+                                            if(doc.getSIGN_STATE()==1){
+                                                docState = "대기";
+                                            }else if(doc.getSIGN_STATE()==2){
+                                                docState = "예정";
+                                            }else if(doc.getSIGN_STATE()==3){
+                                                docState = "진행";
+                                            }
+                                            int docNo = doc.getSIGN_PK();
+                                            String docTitle = doc.getSIGN_TITLE();
                                             // String docContent = doc.getSign_content();
                                             // int signpk = doc.getSign_pk();
-                                            String docDate = doc.getSign_date();
-                                            String docState = doc.getSign_state();
-                                            String docWriter = doc.getSign_writer();
-                                            String docType = doc.getSign_type();
+                                            String docDate = doc.getSIGN_DATE();
 
+                                            String docType = doc.getSIGN_DOCTYPE();
                                     %>
-                                    <tr>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
                                         <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
                                         <td><%=docType%></td>
                                     </tr>
                                     <%
-                                            }
                                         }
                                     %>
                                     </tbody>
@@ -131,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chart tab-pane" id="select-pending" style="position: relative; height: 300px;">
+                        <div class="chart tab-pane" id="select-pending" style="position: relative; height: 700px;">
                             <div class ="table">
                                 <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
@@ -140,33 +147,26 @@
                                         <th>문서 제목</th>
                                         <th>결재 기안일</th>
                                         <th>결재 상태</th>
-                                        <th>기안자</th>
                                         <th>문서 구분</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (Sign doc : docList) {
-                                            if ("Pending".equals(doc.getSign_state())) {
-                                                String docNo = doc.getSign_no();
-                                                String docTitle = doc.getSign_title();
+                                        for (SignTotal doc : docList) {
+                                            if(doc.getSIGN_STATE()==1){
+                                                int docNo = doc.getSIGN_PK();
+                                                String docTitle = doc.getSIGN_TITLE();
                                                 // String docContent = doc.getSign_content();
                                                 // int signpk = doc.getSign_pk();
-                                                String docDate = doc.getSign_date();
-                                                String docState = doc.getSign_state();
-                                                String docWriter = doc.getSign_writer();
-                                                String docType = doc.getSign_type();
+                                                String docDate = doc.getSIGN_DATE();
+                                                String docState = "대기";
+                                                String docType = doc.getSIGN_DOCTYPE();
                                     %>
-                                    <script>
-                                        console.log(title);
-                                        console.log("title");
-                                    </script>
-                                    <tr>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
                                         <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
                                         <td><%=docType%></td>
                                     </tr>
                                     <%
@@ -180,7 +180,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chart tab-pane" id="select-scheduled" style="position: relative; height: 300px;">
+                        <div class="chart tab-pane" id="select-scheduled" style="position: relative; height: 700px;">
                             <div class ="table">
                                 <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
@@ -189,31 +189,26 @@
                                         <th>문서 제목</th>
                                         <th>결재 기안일</th>
                                         <th>결재 상태</th>
-                                        <th>기안자</th>
                                         <th>문서 구분</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (Sign doc : docList) {
-                                            if ("Scheduled".equals(doc.getSign_state())) {
-                                                String docNo = doc.getSign_no();
-                                                String docTitle = doc.getSign_title();
-                                                String docDate = doc.getSign_date();
-                                                String docState = doc.getSign_state();
-                                                String docWriter = doc.getSign_writer();
-                                                String docType = doc.getSign_type();
+                                        for (SignTotal doc : docList) {
+                                            if(doc.getSIGN_STATE()==2){
+                                                int docNo = doc.getSIGN_PK();
+                                                String docTitle = doc.getSIGN_TITLE();
+                                                // String docContent = doc.getSign_content();
+                                                // int signpk = doc.getSign_pk();
+                                                String docDate = doc.getSIGN_DATE();
+                                                String docState = "예정";
+                                                String docType = doc.getSIGN_DOCTYPE();
                                     %>
-                                    <script>
-                                        console.log(title);
-                                        console.log("title");
-                                    </script>
-                                    <tr>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
                                         <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
                                         <td><%=docType%></td>
                                     </tr>
                                     <%
@@ -227,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chart tab-pane" id="select-inProgress" style="position: relative; height: 300px;">
+                        <div class="chart tab-pane" id="select-progress" style="position: relative; height: 700px;">
                             <div class ="table">
                                 <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
@@ -236,31 +231,26 @@
                                         <th>문서 제목</th>
                                         <th>결재 기안일</th>
                                         <th>결재 상태</th>
-                                        <th>기안자</th>
                                         <th>문서 구분</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (Sign doc : docList) {
-                                            if ("InProgress".equals(doc.getSign_state())) {
-                                                String docNo = doc.getSign_no();
-                                                String docTitle = doc.getSign_title();
-                                                String docDate = doc.getSign_date();
-                                                String docState = doc.getSign_state();
-                                                String docWriter = doc.getSign_writer();
-                                                String docType = doc.getSign_type();
+                                        for (SignTotal doc : docList) {
+                                            if(doc.getSIGN_STATE()==3){
+                                                int docNo = doc.getSIGN_PK();
+                                                String docTitle = doc.getSIGN_TITLE();
+                                                // String docContent = doc.getSign_content();
+                                                // int signpk = doc.getSign_pk();
+                                                String docDate = doc.getSIGN_DATE();
+                                                String docState = "진행";
+                                                String docType = doc.getSIGN_DOCTYPE();
                                     %>
-                                    <script>
-                                        console.log(title);
-                                        console.log("title");
-                                    </script>
-                                    <tr>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
                                         <td><%=docState%></td>
-                                        <td><%=docWriter%></td>
                                         <td><%=docType%></td>
                                     </tr>
                                     <%
@@ -269,6 +259,7 @@
                                     %>
                                     </tbody>
                                 </table>
+
                                 <div style="display:flex; justify-content:center;">
                                     <ul class="pagination"></ul>
                                 </div>
@@ -280,6 +271,9 @@
             <!-- /.card -->
         </section>
         <!-- /.content -->
+        <div class="col-3">
+            <button id="btn_insert" class="btn btn-danger" onClick="location.href='/eSignDraft/draftInsertPage'">등록</button>
+        </div>
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->

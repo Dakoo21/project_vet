@@ -1,6 +1,7 @@
 package com.example.vet.service.work.eSign;
 
 import com.example.vet.model.Sign;
+import com.example.vet.model.SignTotal;
 import com.example.vet.repository.work.eSign.eSign_Repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,15 @@ public class eSign_Service {
         this.esRepository = esRepository;
     }
 
-    public List<Sign> Select(int userPK) {
-        List<Sign> docList = new ArrayList<>();
+    public List<SignTotal> Select(int userPK) {
+        List<SignTotal> docList = new ArrayList<>();
         docList = esRepository.Select(userPK);
         return docList;
     }
 
+    public List<SignTotal> selectProgressList(Integer userPK) {
+        List<SignTotal> progressList = new ArrayList<>();
+        progressList = esRepository.selectProgressList(userPK);
+        return progressList;
+    }
 }

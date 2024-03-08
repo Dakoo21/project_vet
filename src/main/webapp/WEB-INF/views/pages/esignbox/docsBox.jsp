@@ -2,15 +2,20 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.vet.model.Sign" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="com.example.vet.model.SignTotal" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
     int size = 0;
-    List<Sign> docList = null;
-    docList = (List<Sign>)request.getAttribute("docList");
-
-
+    List<SignTotal> docList = null;
+    docList = (List<SignTotal>) request.getAttribute("docList");
 %>
+<script>
+    function signOneDetail (SIGN_PK) {
+        console.log("기안서 디테일")
+        location.href = "/eSignDraft/eSignDetail?SIGN_PK="+SIGN_PK;
+    }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,11 +87,10 @@
                         </ul>
                     </div>
                 </div><!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" >
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
-                        <div class="chart tab-pane active" id="select-all"
-                             style="position: relative; height: 300px;">
+                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 700px;">
                             <div class ="table">
                                 <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
@@ -95,172 +99,163 @@
                                         <th>문서 제목</th>
                                         <th>결재 기안일</th>
                                         <th>결재 상태</th>
-                                        <th>기안자</th>
                                         <th>문서 구분</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <%
-                                        // for (Sign doc : docList) {
-                                        //     if ("Rejected".equals(doc.getSign_state()) ||
-                                        //             "Drafted".equals(doc.getSign_state()) ||
-                                        //             "Approval".equals(doc.getSign_state())){
-                                        //         String docNo = doc.getSign_no();
-                                        //         String docTitle = doc.getSign_title();
-                                        //         // String docContent = doc.getSign_content();
-                                        //         // int signpk = doc.getSign_pk();
-                                        //         String docDate = doc.getSign_date();
-                                        //         String docState = doc.getSign_state();
-                                        //         String docWriter = doc.getSign_writer();
-                                        //         String docType = doc.getSign_type();
-                                    %>
-                                    <tr>
-<%--                                        <td><%=docNo%></td>--%>
-<%--                                        <td><%=docTitle%></td>--%>
-<%--                                        <td><%=docDate%></td>--%>
-<%--                                        <td><%=docState%></td>--%>
-<%--                                        <td><%=docWriter%></td>--%>
-<%--                                        <td><%=docType%></td>--%>
-                                    </tr>
-                                    <%
-                                        //     }
-                                        // }
-                                    %>
-                                    </tbody>
-                                </table>
-                                <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart tab-pane" id="select-reject" style="position: relative; height: 300px;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>문서번호</th>
-                                        <th>문서 제목</th>
-                                        <th>결재 기안일</th>
-                                        <th>결재 상태</th>
-                                        <th>기안자</th>
-                                        <th>문서 구분</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        // for (Sign doc : docList) {
-                                        //     if ("Rejected".equals(doc.getSign_state())) {
-                                        //     String docNo = doc.getSign_no();
-                                        //     String docTitle = doc.getSign_title();
-                                        //     // String docContent = doc.getSign_content();
-                                        //     // int signpk = doc.getSign_pk();
-                                        //     String docDate = doc.getSign_date();
-                                        //     String docState = doc.getSign_state();
-                                        //     String docWriter = doc.getSign_writer();
-                                        //     String docType = doc.getSign_type();
-                                    %>
-                                    <tr>
-<%--                                        <td><%=docNo%></td>--%>
-<%--                                        <td><%=docTitle%></td>--%>
-<%--                                        <td><%=docDate%></td>--%>
-<%--                                        <td><%=docState%></td>--%>
-<%--                                        <td><%=docWriter%></td>--%>
-<%--                                        <td><%=docType%></td>--%>
-                                    </tr>
-                                    <%
-                                        //     }
-                                        // }
-                                    %>
-                                    </tbody>
-                                </table>
-                                <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart tab-pane" id="select-compose" style="position: relative; height: 300px;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>문서번호</th>
-                                        <th>문서 제목</th>
-                                        <th>결재 기안일</th>
-                                        <th>결재 상태</th>
-                                        <th>기안자</th>
-                                        <th>문서 구분</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        // for (Sign doc : docList) {
-                                        //     if ("Drafted".equals(doc.getSign_state())) {
-                                        //         String docNo = doc.getSign_no();
-                                        //         String docTitle = doc.getSign_title();
-                                        //         String docDate = doc.getSign_date();
-                                        //         String docState = doc.getSign_state();
-                                        //         String docWriter = doc.getSign_writer();
-                                        //         String docType = doc.getSign_type();
-                                    %>
-                                    <script>
-                                        console.log(title);
-                                        console.log("title");
-                                    </script>
-                                    <tr>
-<%--                                        <td><%=docNo%></td>--%>
-<%--                                        <td><%=docTitle%></td>--%>
-<%--                                        <td><%=docDate%></td>--%>
-<%--                                        <td><%=docState%></td>--%>
-<%--                                        <td><%=docWriter%></td>--%>
-<%--                                        <td><%=docType%></td>--%>
-                                    </tr>
-                                    <%
-                                        //     }
-                                        // }
-                                    %>
-                                    </tbody>
-                                </table>
-                                <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart tab-pane" id="select-approve" style="position: relative; height: 300px;">
-                            <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>문서번호</th>
-                                        <th>문서 제목</th>
-                                        <th>결재 기안일</th>
-                                        <th>결재 상태</th>
-                                        <th>기안자</th>
-                                        <th>문서 구분</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        // for (Sign doc : docList) {
-                                        //     if ("Approval".equals(doc.getSign_state())) {
-                                        //         String docNo = doc.getSign_no();
-                                        //         String docTitle = doc.getSign_title();
-                                        //         String docDate = doc.getSign_date();
-                                        //         String docState = doc.getSign_state();
-                                        //         String docWriter = doc.getSign_writer();
-                                        //         String docType = doc.getSign_type();
+                                        for (SignTotal doc : docList) {
+                                            String docState = null;
+                                            if(doc.getSIGN_STATE()==0){
+                                                docState = "기안";
+                                            }else if(doc.getSIGN_STATE()==3){
+                                                docState = "결재";
+                                            }else if(doc.getSIGN_STATE()==3){
+                                                docState = "반려";
+                                            }
+                                            int docNo = doc.getSIGN_PK();
+                                            String docTitle = doc.getSIGN_TITLE();
+                                            // String docContent = doc.getSign_content();
+                                            // int signpk = doc.getSign_pk();
+                                            String docDate = doc.getSIGN_DATE();
 
+                                            String docType = doc.getSIGN_DOCTYPE();
                                     %>
-                                    <tr>
-<%--                                        <td><%=docNo%></td>--%>
-<%--                                        <td><%=docTitle%></td>--%>
-<%--                                        <td><%=docDate%></td>--%>
-<%--                                        <td><%=docState%></td>--%>
-<%--                                        <td><%=docWriter%></td>--%>
-<%--                                        <td><%=docType%></td>--%>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                        <td><%=docNo%></td>
+                                        <td><%=docTitle%></td>
+                                        <td><%=docDate%></td>
+                                        <td><%=docState%></td>
+                                        <td><%=docType%></td>
                                     </tr>
                                     <%
-                                        //     }
-                                        // }
+                                         }
+                                    %>
+                                    </tbody>
+                                </table>
+                                <div style="display:flex; justify-content:center;">
+                                    <ul class="pagination"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart tab-pane" id="select-reject" style="position: relative; height: 700px;">
+                            <div class ="table">
+                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>문서번호</th>
+                                        <th>문서 제목</th>
+                                        <th>결재 기안일</th>
+                                        <th>결재 상태</th>
+                                        <th>문서 구분</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%
+                                        for (SignTotal doc : docList) {
+                                            if(doc.getSIGN_STATE()==-1){
+                                                int docNo = doc.getSIGN_PK();
+                                                String docTitle = doc.getSIGN_TITLE();
+                                                // String docContent = doc.getSign_content();
+                                                // int signpk = doc.getSign_pk();
+                                                String docDate = doc.getSIGN_DATE();
+                                                String docState = "반려";
+                                                String docType = doc.getSIGN_DOCTYPE();
+                                    %>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                        <td><%=docNo%></td>
+                                        <td><%=docTitle%></td>
+                                        <td><%=docDate%></td>
+                                        <td><%=docState%></td>
+                                        <td><%=docType%></td>
+                                    </tr>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                    </tbody>
+                                </table>
+                                <div style="display:flex; justify-content:center;">
+                                    <ul class="pagination"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart tab-pane" id="select-compose" style="position: relative; height: 700px;">
+                            <div class ="table">
+                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>문서번호</th>
+                                        <th>문서 제목</th>
+                                        <th>결재 기안일</th>
+                                        <th>결재 상태</th>
+                                        <th>문서 구분</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%
+                                        for (SignTotal doc : docList) {
+                                            if(doc.getSIGN_STATE()==0){
+                                                int docNo = doc.getSIGN_PK();
+                                                String docTitle = doc.getSIGN_TITLE();
+                                                // String docContent = doc.getSign_content();
+                                                // int signpk = doc.getSign_pk();
+                                                String docDate = doc.getSIGN_DATE();
+                                                String docState = "기안";
+                                                String docType = doc.getSIGN_DOCTYPE();
+                                    %>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                        <td><%=docNo%></td>
+                                        <td><%=docTitle%></td>
+                                        <td><%=docDate%></td>
+                                        <td><%=docState%></td>
+                                        <td><%=docType%></td>
+                                    </tr>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                    </tbody>
+                                </table>
+                                <div style="display:flex; justify-content:center;">
+                                    <ul class="pagination"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart tab-pane" id="select-approve" style="position: relative; height: 700px;">
+                            <div class ="table">
+                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>문서번호</th>
+                                        <th>문서 제목</th>
+                                        <th>결재 기안일</th>
+                                        <th>결재 상태</th>
+                                        <th>문서 구분</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%
+                                        for (SignTotal doc : docList) {
+                                            if(doc.getSIGN_STATE()==3){
+                                                int docNo = doc.getSIGN_PK();
+                                                String docTitle = doc.getSIGN_TITLE();
+                                                // String docContent = doc.getSign_content();
+                                                // int signpk = doc.getSign_pk();
+                                                String docDate = doc.getSIGN_DATE();
+                                                String docState = "결재";
+                                                String docType = doc.getSIGN_DOCTYPE();
+                                    %>
+                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                        <td><%=docNo%></td>
+                                        <td><%=docTitle%></td>
+                                        <td><%=docDate%></td>
+                                        <td><%=docState%></td>
+                                        <td><%=docType%></td>
+                                    </tr>
+                                    <%
+                                            }
+                                        }
                                     %>
                                     </tbody>
                                 </table>

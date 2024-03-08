@@ -7,25 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SignAdopt {
-    // pk
     private Integer ADOPT_PK;
-    // 입양 동물 이름
     private String ADOPT_NM;
-    // 입양글 pk
     private Integer DESERTION_NO;
-    // 입양동물 생일
     private String ADOPT_BDATE;
-    // 입양동물 축종
     private String ADOPT_SPECIES;
-    // 입양 동물 품종
     private String ADOPT_BREED;
     private String ADOPT_WEIGHT;
     private String ADOPT_SEX;
-    // 중성화 여부
     private String  ADOPT_NEUT;
-    // 주인 pk
     private Integer MASTERPK;
-    // 입양사유
     private String ADOPT_REASON;
 
     @Builder

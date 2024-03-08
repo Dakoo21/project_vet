@@ -9,6 +9,8 @@
     </resultMap>
     <resultMap id="SIGN" type="com.example.vet.model.Sign">
     </resultMap>
+    <resultMap id="SIGNTOTAL" type="com.example.vet.model.SignTotal">
+    </resultMap>
     <select id="selectLine" resultMap="eSignLineResultMap">
         SELECT * FROM USER_TEST5
         WHERE MEMBER_ROLE = 'ROLE_ADMIN' OR MEMBER_ROLE = 'ROLE_MASTER'
@@ -24,8 +26,8 @@
         <selectKey keyProperty="SIGN_PK" resultType="int" order="AFTER">
             SELECT sign_pk_seq.currval AS sign_pk FROM DUAL
         </selectKey>
-            INSERT INTO SIGN2_TEST ("SIGN_PK", "SIGN_TITLE", "SIGN_CONTENT", "MEMBER_PK", "ADOPT_PK")
-                   VALUES (sign_pk_seq.nextval, #{SIGN_TITLE}, #{SIGN_CONTENT}, #{MEMBER_PK}, #{ADOPT_PK})
+            INSERT INTO SIGN2_TEST ("SIGN_PK", "SIGN_TITLE", "SIGN_CONTENT", "MEMBER_PK", "ADOPT_PK", "SIGN_RESERV_YEAR", "SIGN_DOCTYPE", "SIGN_DATE")
+                   VALUES (sign_pk_seq.nextval, #{SIGN_TITLE}, #{SIGN_CONTENT}, #{MEMBER_PK}, #{ADOPT_PK}, #{SIGN_RESERV_YEAR}, #{SIGN_DOCTYPE}, to_char(sysdate, 'YYYY-MM-DD') )
     </insert>
     <insert id="insertAdoptDraft" parameterType="com.example.vet.model.SignAdopt">
         <![CDATA[
@@ -43,33 +45,56 @@
             #{ADOPT_NM}, #{DESERTION_NO}, #{ADOPT_SPECIES}, #{ADOPT_BREED}, #{ADOPT_NEUT}, #{MASTERPK}, #{ADOPT_REASON}, #{ADOPT_BDATE}, #{ADOPT_SEX}, #{ADOPT_WEIGHT})
           ]]>
     </insert>
-<!--    <insert id="insertSignDoc" parameterType="com.example.vet.model.Sign">-->
-<!--        INSERT INTO SIGN2_TEST-->
-<!--        (-->
-<!--            sign_pk,-->
-<!--            sign_title,-->
-<!--            sign_content,-->
-<!--            sign_date,-->
-<!--            sign_reserv_year,-->
-<!--            sign_type,-->
-<!--            member_pk,-->
-<!--            adopt_pk,-->
-<!--             selectedValue-->
-<!--        )-->
-<!--        VALUES-->
-<!--            (-->
-<!--                sign_pk_seq.netval,-->
-<!--                #{sign_title},-->
-<!--                #{sign_content},-->
-<!--                #{sign_date},-->
-<!--                #{sign_reserv_year},-->
-<!--                #{sign_type},-->
-<!--                #{member_pk},-->
-<!--                #{adopt_pk},-->
-<!--                #{selectedValue}-->
-<!--            )-->
-<!--    </insert>-->
+
     <insert id="insertSignLine" parameterType="com.example.vet.model.SignLine">
         INSERT INTO SIGN_LINE2_TEST ("SIGN_PK","MEMBER_PK","SIGN_STATE","LV_1", "LV_2", "LV_3") VALUES (#{SIGN_PK},#{MEMBER_PK}, #{SIGN_STATE}, #{LV1}, #{LV2}, #{LV3})
     </insert>
+    <!-- 기안서 상세조회 -->
+    <select id="selectSignDetail" parameterType="int" resultMap="SIGNTOTAL">
+        SELECT
+            S.SIGN_PK,
+            S.SIGN_TITLE,
+            S.SIGN_CONTENT,
+            S.SIGN_DATE,
+            S.SIGN_RESERV_YEAR,
+            S.SIGN_DOCTYPE,
+            S.MEMBER_PK,
+            S.ADOPT_PK,
+            A.ADOPT_NM,
+            A.ADOPT_BDATE,
+            A.ADOPT_SPECIES,
+            A.ADOPT_BREED,
+            A.ADOPT_WEIGHT,
+            A.ADOPT_SEX,
+            A.ADOPT_NEUT,
+            A.MASTERPK,
+            A.ADOPT_REASON,
+            L.LV_1,
+            L.LV_2,
+            L.LV_3,
+            L.MEMBER_PK,
+            L.SIGN_STATE
+        FROM
+            SIGN2_TEST S
+                JOIN
+            SIGN_ADOPT_TEST A ON S.ADOPT_PK = A.ADOPT_PK
+                JOIN
+            SIGN_LINE2_TEST L ON S.SIGN_PK = L.SIGN_PK
+                INNER JOIN
+            USER_TEST5 U ON U.MEMBER_PK = S.MEMBER_PK
+        WHERE
+            S.SIGN_PK = ${signPk}
+    </select>
+    <select id="selectMasterName" parameterType="int" resultType="String">
+        SELECT
+            MASTER_NM
+        FROM MASTER_TEST
+        where MASTERPK = #{masterPk}
+    </select>
+    <update id="updateLV2" parameterType="int">
+        UPDATE SIGN_LINE2_TEST SET LV_2 = '1', SIGN_STATE = '2' where SIGN_PK = #{signPk}
+    </update>
+    <update id="updateLV3" parameterType="int">
+        UPDATE SIGN_LINE2_TEST SET LV_3 = '1', SIGN_STATE = '3' where SIGN_PK = #{signPk}
+    </update>
 </mapper>

@@ -1,5 +1,10 @@
+<%@ page import="com.example.vet.model.SignTotal" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    SignTotal signTotal = (SignTotal) request.getAttribute("eSignDetail");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +51,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Icons</h1>
+                        <h1>기안서</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -63,7 +68,7 @@
             <div class="card-body">
                 <div class="content_title">
                     <fieldset style="max-width:90%;">
-                        <span>품의서</span>
+                        <span>기안서</span>
                     </fieldset>
                 </div>
                 <table class="table table-bordered">
@@ -75,14 +80,17 @@
                     </tr>
                     <tr>
                         <th scope="row">문서번호</th>
-                        <td>AAA-2102131</td>
+                        <td><%=signTotal.getSIGN_PK()%></td>
                         <th>보존연한</th>
-                        <td>5년</td>
+                        <td><%=signTotal.getSIGN_RESERV_YEAR()%></td>
                     </tr>
                 </table>
                 <div class="after" style="display: flex; align-items: center;">
                     <h4 class="fl mgr_20" style="margin-right: 10px;">결재선</h4>
                 </div>
+                <%
+                    if(role1.equals("ROLE_MASTER")){
+                %>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -102,7 +110,7 @@
                                             <span class="stamp-step-num">부원장</span>
                                         </td>
                                         <td class="team name" scope="row">
-                                            <span class="stamp-step-num">관리자</span>
+                                            <span class="stamp-step-num">원장</span>
                                         </td>
                                         <th></th>
                                         <th></th>
@@ -114,18 +122,28 @@
                                             <img src="/img/img.png">
                                         </td>
                                         <td class="stamp">
+                                            <%
+                                                if(signTotal.getLV_2().equals(1)){
+                                            %>
                                             <div id="modal">
-                                                <button type="button" class="btn btn-block btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#selectForm">
-                                                    결재
-                                                </button>
+                                                <img src="/img/img.png">
                                             </div>
+                                            <%
+                                                }
+                                            %>
                                         </td>
                                         <td class="stamp">
+                                            <% if(role1.equals("ROLE_ADMIN") && signTotal.getLV_2().equals(1)){
+                                            %>
                                             <div id="modal1">
+                                                <img id="approvalImage" src="/img/img.png" style="display: none;">
                                                 <button type="button" class="btn btn-block btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#selectForm">
                                                     결재
                                                 </button>
                                             </div>
+                                            <%
+                                                }
+                                            %>
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -145,26 +163,105 @@
                         </tr>
                     </thead>
                 </table>
+                <%
+                    }
+                %>
+                <%
+                    if(role1.equals("ROLE_ADMIN")){
+                %>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="row" class="gray-background centered-text sign">
+                            <div style="vertical-align: middle;">
+                                결재
+                            </div>
+                        </th>
+                        <th class="white-background">
+                            <table id="결재선" class="table table-bordered">
+                                <thead>
+                                <tr style="height: 20px;">
+                                    <td class="team name" scope="row">
+                                        <span class="stamp-step-num">사원</span>
+                                    </td>
+                                    <td class="team name" scope="row">
+                                        <span class="stamp-step-num">부원장</span>
+                                    </td>
+                                    <td class="team name" scope="row">
+                                        <span class="stamp-step-num">원장</span>
+                                    </td>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="stamp">
+                                        <img src="/img/img.png">
+                                    </td>
+                                    <td class="stamp">
+                                        <%
+                                            if(signTotal.getLV_2().equals(1)){
+                                        %>
+                                        <div id="modal">
+                                            <img src="/img/img.png">
+                                        </div>
+                                        <%
+                                            }
+                                        %>
+                                    </td>
+                                    <td class="stamp">
+                                        <% if(role1.equals("ROLE_ADMIN") && signTotal.getLV_2().equals(1)){
+                                        %>
+                                        <div id="modal1">
+                                            <img id="approvalImage" src="/img/img.png" style="display: none;">
+                                            <button type="button" class="btn btn-block btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#selectForm">
+                                                결재
+                                            </button>
+                                        </div>
+                                        <%
+                                            }
+                                        %>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>김엘모</td>
+                                    <td class="name gt-position-relative">
+                                        <span class="stamp-step-num"></span>대표이사
+                                    </td>
+                                    <td class="name gt-position-relative">
+                                        <span class="stamp-step-num"></span>대표이사
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+                <%
+                    }
+                %>
             </div>
             <div class='book-header'>
 
                 <div class="input-group mb-3">
-                    <span class="board-title">제목</span>
+                    <span class="board-title"><%=signTotal.getSIGN_TITLE()%>></span>
                 </div>
                 <div class="input-group mb-3">
                     <div class="board-content">
-                        내용내용
+                        <%=signTotal.getSIGN_CONTENT()%>
                     </div>
                 </div>
-
+                <%@include file="selectAdoptDraft.jsp"%>
             </div>
         </section>
         <!-- /.content -->
     </div>
-    <%@include file="selectList.jsp"%>
     <!-- /.content-wrapper -->
-    <!--footer-->
-    <%@ include file="/include/footer.jsp"%>
+
 </div>
 <!-- ./wrapper -->
 <%@ include file="/include/bootCommonFoot.jsp"%>
@@ -182,8 +279,8 @@
                 <!-- <form id="f_board" method="get" action="./boardInsert"> -->
                 <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
                     <div class="form-floating mb-3 mt-3">
-                        <input type="radio" value="accept" checked>승인
-                        <input type="radio" value="reject">반려
+                        <input type="radio" name="approvalStatus" value="accept" checked>승인
+                        <input type="radio" name="approvalStatus" value="reject">반려
                     </div>
                 </form>
             </div>
@@ -194,6 +291,76 @@
         </div>
     </div>
 </div>
+<!--footer-->
+<%@ include file="/include/footer.jsp"%>
 </body>
 </html>
 
+<script>
+    // 모달이 닫힐 때 이벤트 처리
+    $('#selectForm').on('hidden.bs.modal', function () {
+        // 라디오 버튼의 선택 값을 가져오기
+        var selectedValue = $('input[name="approvalStatus"]:checked').val();
+
+        // 선택된 값에 따라 동작 수행
+        if (selectedValue === 'accept') {
+            // 기안일 때의 동작
+            // 이미지 표시 및 버튼 숨김
+            $('#approvalButton').hide();
+            $('#approvalImage').show();
+
+            // 비동기 처리 - LV_2 컬럼 값을 1로 업데이트
+            updateLV2Column();
+        } else if (selectedValue === 'reject') {
+            // 반려일 때의 동작
+            // 기안 이미지 숨김 및 버튼 표시
+            $('#approvalButton').show();
+            $('#approvalImage').hide();
+        }
+    });
+
+    // 결재 버튼 클릭 이벤트 처리
+    function boardInsert() {
+        // 선택된 라디오 버튼 값 가져오기
+        var selectedValue = $('input[name="approvalStatus"]:checked').val();
+
+        // 선택된 값에 따라 동작 수행
+        if (selectedValue === 'accept') {
+            // 기안일 때의 동작
+            // 이미지 표시 및 버튼 숨김
+            $('#approvalButton').hide();
+            $('#approvalImage').show();
+
+            // 비동기 처리 - LV_2 컬럼 값을 1로 업데이트
+            updateLV2Column();
+        } else if (selectedValue === 'reject') {
+            // 반려일 때의 동작
+            // 기안 이미지 숨김 및 버튼 표시
+            $('#approvalButton').show();
+            $('#approvalImage').hide();
+        }
+
+        // 모달 닫기
+        $('#selectForm').modal('hide');
+    }
+
+    // LV_2 컬럼 값을 1로 업데이트하는 함수
+    function updateLV2Column() {
+        // AJAX를 사용하여 서버에 업데이트 요청
+        $.ajax({
+            type: 'POST',
+            url: '/eSignDraft/lv2Update', // 실제 업데이트를 수행하는 서버 엔드포인트
+            data: {
+                signPk: <%= signTotal.getSIGN_PK() %>
+            },
+            success: function(response) {
+                console.log('LV_2 업데이트 성공:', response);
+                // 업데이트 성공시 추가적인 작업 수행 가능
+            },
+            error: function(error) {
+                console.error('LV_2 업데이트 실패:', error);
+                // 업데이트 실패시 추가적인 작업 수행 가능
+            }
+        });
+    }
+</script>

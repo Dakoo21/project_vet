@@ -116,7 +116,7 @@ public class eSignDraft_Controller {
      **********************************************************************************/
     @PostMapping("generatedSignPk")
     @ResponseBody
-    public ResponseEntity<String> submitSelectedValue(@RequestBody Map<String, List<Map<String, String>>> formData){
+    public String submitSelectedValue(@RequestBody Map<String, List<Map<String, String>>> formData){
         List<Map<String, String>> data1 = formData.get("form1Data");
         List<Map<String, String>> data2 = formData.get("form2Data");
         List<Map<String, String>> data3 = formData.get("form3Data");
@@ -135,8 +135,48 @@ public class eSignDraft_Controller {
         signLine.setSIGN_PK(generatedSignPk);
         int result = eSignDraft_service.insertSignLine(signLine);
         //작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+        return "pages/esignbox/docsBox";
+    }
+
+    /**********************************************************************************
+     작성자 : 최윤정
+     작성일자 : 26.02.25
+     기능 : 기안서 조회
+     **********************************************************************************/
+    @GetMapping("eSignDetail")
+    public String eSignDetail (Model model,@RequestParam(value="SIGN_PK") int signPk) {
+        // log.info(notice.toString());
+        SignTotal signTotal;
+        signTotal = eSignDraft_service.eSignDetail(signPk);
+        String masterName = eSignDraft_service.masterName(signTotal.getMASTERPK());
+        signTotal.setMASTER_NAME(masterName);
+        // log.info(noticeDetail.toString());
+        log.info("detail select완료" + signTotal.toString());
+        model.addAttribute("eSignDetail", signTotal);
+        return "pages/esignbox/esignDetail";
+    }
+
+    @PostMapping("lv2Update")
+    public ResponseEntity<String> updateLV2(@RequestParam("signPk") Integer signPk) {
+            // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
+            eSignDraft_service.updateLV2(signPk);
         return ResponseEntity.ok("Success");
     }
+
+    @PostMapping("lv3Update")
+    public ResponseEntity<String> updateLV3(@RequestParam("signPk") Integer signPk) {
+        // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
+        eSignDraft_service.updateLV3(signPk);
+        return ResponseEntity.ok("Success");
+    }
+    // @GetMapping("lvUpdate")
+    // public String lvUpdate(@RequestParam("draftPk") int draft_pk, Model model) {
+    //
+    //     List<Sign> draftDetail = eSignDraft_service.selectDetail(draft_pk);
+    //     // model.addAttribute("lineList", lineList);
+    //     model.addAttribute("draftDetail",draftDetail);
+    //     return "pages/esignbox/esignDetail"; // forward라서 webapp아래에서 찾는다
+    // }
 
     // json -> Sign 변환
     private Sign mapJsonToSign(List<Map<String, String>> formDataList) {
@@ -155,8 +195,8 @@ public class eSignDraft_Controller {
                 case "SIGN_RESERV_YEAR":
                     signBuilder.SIGN_RESERV_YEAR(value);
                     break;
-                case "SIGN_TYPE":
-                    signBuilder.SIGN_TYPE(value);
+                case "SIGN_DOCTYPE":
+                    signBuilder.SIGN_DOCTYPE(value);
                     break;
                 case "MEMBER_PK":
                     signBuilder.MEMBER_PK(Integer.valueOf(value));
@@ -239,10 +279,11 @@ public class eSignDraft_Controller {
                     break;
             }
         }
-
         SignAdopt signAdopt = new SignAdopt();
         signAdopt = signAdoptBuilder.build();
         return signAdopt;
     }
+
+
 }
 

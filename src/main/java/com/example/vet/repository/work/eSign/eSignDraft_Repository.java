@@ -81,4 +81,22 @@ public class eSignDraft_Repository {
         int result = sqlSessionTemplate.insert("insertSignLine", signLine);
         return result;
     }
+
+    public SignTotal eSignDetail(int signPk) {
+        SignTotal SignTotal = sqlSessionTemplate.selectOne("selectSignDetail", signPk);
+        return SignTotal;
+    }
+
+    public String masterName(Integer masterPk) {
+        return sqlSessionTemplate.selectOne("selectMasterName", masterPk);
+    }
+
+    public int updateLV2(Integer signPk) {
+        int result = sqlSessionTemplate.update("updateLV2", signPk);
+        return result;
+    }
+    public int updateLV3(Integer signPk) {
+        int result = sqlSessionTemplate.update("updateLV3", signPk);
+        return result;
+    }
 }

@@ -124,12 +124,11 @@
                                 <th>문서 종류</th>
                                 <td>
                                     <!-- sign_type-->
-                                    <select id="SIGN_TYPE" name="SIGN_TYPE" class="write-select" autocomplete="off">
+                                    <select name="SIGN_DOCTYPE" id="SIGN_DOCTYPE" class="fl write-select">
                                         <option value="">선택</option>
-                                        <option value="지출결의서">지출 결의서</option>
                                         <option value="품의서">품의서</option>
+                                        <option value="지출결의서">지출결의서</option>
                                         <option value="입양신청서">입양신청서</option>
-                                        <button class="weakblue" onclick="ApprovalDocument.getSelectApprovalForm();">문서보기</button>
                                     </select>
                                 </td>
                                 <th>작성자</th>
@@ -265,7 +264,7 @@
                 <input type="hidden" id="LV_1" name="LV1" value="1">
                 <input type="hidden" id="LV_2" name="LV2" value="0">
                 <input type="hidden" id="LV_3" name="LV3" value="0">
-                <input type="hidden" id="SIGN_STATE" name="SIGN_STATE" value="0">
+                <input type="hidden" id="SIGN_STATE" name="SIGN_STATE" value="1">
             </form>
         </div>
 <%--        <button id="submitForms">전송</button>--%>
@@ -408,6 +407,7 @@
 
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "토마토" && selectedCell) {
+                $('#cell1').text('부원장');
                 // idSpan.style.display = 'none';
                 // $(selectedCell).children('.dynamicButton').hide();
             }

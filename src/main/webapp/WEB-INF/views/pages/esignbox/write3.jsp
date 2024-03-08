@@ -47,7 +47,6 @@
             <th><input type="text" class="form-control" id="ADOPT_BREED" placeholder="" name="ADOPT_BREED"></th>
         </tr>
         <tr>
-            <th>입양자 PK</th>
             <th><input type="hidden" class="form-control" id="MASTERPK" placeholder="" name="MASTERPK" value=""></th>
         </tr>
     </table>
@@ -112,7 +111,7 @@
                                aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
                     </div>
                     <div class="col-3">
-                        <button id="btn_search" class="btn btn-danger">검색</button>
+                        <button id="btn_search" class="btn btn-danger"></button>
                     </div>
                 </form>
                 <div class="stockList">

@@ -9,6 +9,7 @@
     String username = (String) principalDetails.getUsername();
     Integer userpk = principalDetails.getID();
     String name = principalDetails.getName();
+    String role1 = principalDetails.getRole();
     // Integer userPK = (Integer) request.getAttribute("userPK");
     // String username = (String) request.getAttribute("username");
     String role = (String) request.getAttribute("role");

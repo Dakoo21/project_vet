@@ -91,4 +91,24 @@ public class eSignDraft_Service {
         log.info(String.valueOf(result));
         return result;
     }
+
+    public SignTotal eSignDetail(int signPk) {
+        SignTotal signTotals;
+        signTotals = eSignDraft_repository.eSignDetail(signPk);
+        return signTotals;
+    }
+
+    public String masterName(Integer masterpk) {
+        String masterName = eSignDraft_repository.masterName(masterpk);
+        return masterName;
+    }
+
+    public int updateLV2(Integer signPk) {
+        int result = eSignDraft_repository.updateLV2(signPk);
+        return result;
+    }
+    public int updateLV3(Integer signPk) {
+        int result = eSignDraft_repository.updateLV3(signPk);
+        return result;
+    }
 }
