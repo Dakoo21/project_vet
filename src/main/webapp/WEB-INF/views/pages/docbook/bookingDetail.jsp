@@ -25,7 +25,11 @@
         function openModal() {
             var modal = document.getElementById("reservationModal");
             modal.style.display = "block";
-        }
+
+            // 예약 디테일 모달이 열릴 때 이벤트를 감지하여 Ajax 요청을 보내고 데이터를 input 요소에 설정
+                console.log("예약등록 수정모달 활성화.");
+
+
 
         // Modal 닫기
         function closeModal() {
@@ -46,7 +50,7 @@
                 closeModal();
             }
         }
-
+}
     </script>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -122,38 +126,52 @@
             <div style="text-align: center;">
                 <a id="deleteButton" onclick="deleteBooking(<%=rmap.get("bookingPk")%>)"><button>예약삭제</button></a>
                 <script>
-                    function animalSearch(event) {
-                        event.preventDefault();
-
-                        let searchWord = document.getElementById("searchInput");
-                        if (searchWord) {
-                            $.ajax({
-                                url: 'http://localhost:8000/booking/GetAnimals?animalNm=' + searchWord.value+'&masterNm',
-                                type: 'GET',
-                                success: function (response) {
-                                    console.log('Animals:', response);
-                                    // 받은 데이터를 옵션으로 추가
-                                    var animalSelect = document.getElementById("searchResult");
-                                    // 기존의 옵션을 모두 제거
-                                    animalSelect.innerHTML = "";
-                                    // 받은 데이터를 반복하여 옵션으로 추가
-                                    response.forEach(function (animal) {
-                                        var option = document.createElement("option");
-                                        option.value = animal.animalPk; // 동물의 PK 값을 value로 설정
-                                        option.text = animal.animalNm+'('+animal.masterNm+')'; // 동물의 이름을 텍스트로 설정
-
-                                        animalSelect.appendChild(option);
-                                    });
-                                },
-                                error: function (xhr, status, error) {
-                                    console.error('Error:', error);
-                                }
-                            });
-                        } else {
-                            console.error('Error: searchWord is null');
-                            // 모달 표시
-                            $('#alertModal').modal('show');
+                    function animalSearch() {
+                        const searchAnimalNm = document.getElementById("searchAnimalNm").value;
+                        console.log(searchAnimalNm);
+                        if (searchAnimalNm === "") {
+                            // 클릭 이벤트의 기본 동작 방지
+                            event.preventDefault();
+                            return; // 검색어가 없으면 아무것도 하지 않음
                         }
+                        // 서버에 검색을 수행하기 위해 AJAX 요청 보내기
+                        const xhr = new XMLHttpRequest();
+                        console.log("아작스"+searchAnimalNm);
+                        xhr.open("GET", `/reservespot/animalList?animalNm=`+searchAnimalNm);
+                        console.log("겟하고난뒤"+searchAnimalNm);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                if (xhr.status === 200) {
+                                    console.log(xhr.responseText)
+                                    const response = JSON.parse(xhr.responseText);
+                                    // 검색 결과를 모달에 표시
+                                    displaySearchResults(response);
+                                } else {
+                                    console.error("오류:", xhr.statusText);
+                                }
+                            }
+                        };
+                        xhr.send();
+                        // // 검색어 입력창 초기화
+                        document.getElementById("searchAnimalNm").value = '';
+                        // 클릭 이벤트의 기본 동작 방지
+                        event.preventDefault();
+                    }
+
+                    // 선택바 검색 결과 표시 함수
+                    function displaySearchResults(results) {
+                        var select = document.getElementById('searchResult'); // 선택 바 엘리먼트를 가져옵니다.
+
+                        // 기존 옵션을 모두 제거합니다.
+                        select.innerHTML = '';
+
+                        // JSON 데이터를 반복하여 옵션을 추가합니다.
+                        results.forEach(results => {
+                            var option = document.createElement('option');
+                            option.value = results.ANIMALID; // 옵션의 값 설정
+                            option.text = "(" + results.ANIMALBDATE + ")" + ": " + results.MASTER_NM; // 옵션의 텍스트 설정
+                            select.appendChild(option); // 선택 바에 옵션을 추가합니다.
+                        })
                     }
                     function deleteBooking(bookingPk) {
 
@@ -215,8 +233,8 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                         <span class="input-group-text" id="searchIcon">
-                            <input type="text" class="form-control" id="searchInput" placeholder="동물을 검색하세요..." aria-label="Search" aria-describedby="searchIcon" onkeyup="if (event.keyCode === 13) animalSearch(event)">
-                            <button onclick="animalSearch(event)">검색</button>
+                                  <input type="text" class="form-control" id="searchAnimalNm" placeholder="동물명을 입력후 검색" aria-label="Search" aria-describedby="searchIcon" onkeyup="if (event.keyCode === 13) animalSearch()">
+                            <button id="animalSearchButton" onclick="animalSearch()">검색</button>
                         </span>
                                 </div>
                             </div>
@@ -224,7 +242,8 @@
                         <div class="form-group" style="display: inline-block; width: 240px;">
 
                             <label style="display: inline-block; width: 70px;">환축명</label>
-                            <select class="form-control select2" id = "searchResult" style="display: inline-block; width: 150px;" name="animalPk">
+                            <select  class="form-control select2" id = "searchResult" style="display: inline-block; width: 150px;"  >
+                                <option value="<%=rmap.get("animalName")%>" selected="selected"  ><%=rmap.get("animalName")%></option>
                             </select>
                         </div>
                         <!-- 예약일 -->
@@ -270,14 +289,14 @@
                                 };
                             </script>
                         <div class="form-group" style="display: inline-block; width: 240px;">
-                            <label for="reservationdate" style="display: inline-block; width: 70px;">예약일</label>
-                            <input type="date" id="reservationdate" class="form-control" style="display: inline-block; width: 150px;" name="bookingDate">
+                            <label for="reservationdate" style="display: inline-block; width: 70px;" >예약일</label>
+                            <input type="date" id="reservationdate" value="<%=rmap.get("bookingDate")%>" class="form-control" style="display: inline-block; width: 150px;" name="bookingDate">
                         </div>
                         <!-- 예약시간 -->
                         <div class="form-group" style="display: inline-block; width: 240px;">
                             <label style="display: inline-block; width: 70px;">예약시간</label>
                             <select class="form-control select2" style="display: inline-block; width: 150px;" name="bookingStart" id="start-time" onchange="setEndTime()">
-                                <option selected="selected">선택</option>
+                                <option value="<%=rmap.get("bookingStart")%>" selected="selected"  ><%=rmap.get("bookingStart")%></option>
                                 <option value="10:00">10:00</option>
                                 <option value="10:30">10:30</option>
                                 <option value="11:00">11:00</option>
@@ -336,8 +355,9 @@
                         <!-- 예약구분 -->
                             <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label style="display: inline-block; width: 70px;">진료유형</label>
-                                <select id="bookingTypeSelect" class="form-control select2" style="display: inline-block; width: 150px;" name="bookingType">
-                                    <option value="">선택</option>
+                                <select id="bookingTypeSelect" class="form-control select2" style="display: inline-block; width: 150px;" name="bookingType" >
+
+                                    <option value="<%=rmap.get("bookingType")%>" selected="selected"  ><%=rmap.get("bookingType")%></option>
                                     <option value="진료">진료</option>
                                     <option value="검사">검사</option>
                                 </select>
@@ -346,19 +366,22 @@
                             <div class="form-group" style="display: inline-block; width: 240px;">
                                 <label style="display: inline-block; width: 70px;">담당자</label>
                                 <select id="userPkSelect" class="form-control select2" style="display: inline-block; width: 150px;" name="userPk">
-                                    <option value="">선택</option>
+
+                                    <option value="<%=rmap.get("userNm")%>" selected="selected"  ><%=rmap.get("userNm")%></option>
                                     <option value="9999999">원장</option>
                                     <option value="9999998">부원장</option>
                                 </select>
                             </div>
 
-                            <button id="reservationSaveButton" onclick="submitForm()" disabled>저장</button>
+                            <button id="reservationSaveButton" onclick="submitForm()" >저장</button>
 
                             <script>
                                 // 각 셀렉트 요소 가져오기
                                 var bookingTypeSelect = document.getElementById("bookingTypeSelect");
                                 var userPkSelect = document.getElementById("userPkSelect");
                                 var reservationSaveButton = document.getElementById("reservationSaveButton");
+                                var reservationdate =document.getElementById("reservationdate");
+
 
                                 // 셀렉트 요소 변경 이벤트 리스너 추가
                                 bookingTypeSelect.addEventListener("change", toggleSaveButton);
@@ -366,10 +389,12 @@
 
                                 // 저장 버튼 활성화/비활성화 함수
                                 function toggleSaveButton() {
-                                    if (bookingTypeSelect.value !== "" && userPkSelect.value !== "") {
+                                    if (bookingTypeSelect.value !== "" && userPkSelect.value !== "" && reservationdate.value !== "") {
                                         reservationSaveButton.disabled = false; // 선택된 경우 버튼 활성화
+
                                     } else {
                                         reservationSaveButton.disabled = true; // 선택되지 않은 경우 버튼 비활성화
+
                                     }
                                 }
 

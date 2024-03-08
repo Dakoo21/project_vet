@@ -24,34 +24,67 @@
     </style>
     <script>
         function animalSearch() {
-            let searchWord = document.getElementById("searchInput");
-            if (searchWord) {
-                $.ajax({
-                    url: 'http://localhost:8000/booking/GetAnimals?animalNm=' + searchWord.value,
-                    type: 'GET',
-                    success: function (response) {
-                        console.log('Animals:', response);
-                        // 받은 데이터를 옵션으로 추가
-                        var animalSelect = document.getElementById("animalSelect");
-                        // 기존의 옵션을 모두 제거
-                        animalSelect.innerHTML = "";
-                        // 받은 데이터를 반복하여 옵션으로 추가
-                        response.forEach(function (animal) {
-                            var option = document.createElement("option");
-                            option.value = animal.animalPk; // 동물의 PK 값을 value로 설정
-                            option.text = animal.animalNm+animal.masterNm; // 동물의 이름을 텍스트로 설정
-                            animalSelect.appendChild(option);
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
-            } else {
-                console.error('Error: searchWord is null');
-                // 모달 표시
-                $('#alertModal').modal('show');
+            const searchAnimalNm = document.getElementById("searchAnimalNm").value;
+            console.log(searchAnimalNm);
+            if (searchAnimalNm === "") {
+                return; // 검색어가 없으면 아무것도 하지 않음
             }
+            // 서버에 검색을 수행하기 위해 AJAX 요청 보내기
+            const xhr = new XMLHttpRequest();
+            console.log("아작스"+searchAnimalNm);
+            xhr.open("GET", `/reservespot/animalList?animalNm=`+searchAnimalNm);
+            console.log("겟하고난뒤"+searchAnimalNm);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText)
+                        const response = JSON.parse(xhr.responseText);
+                        // 검색 결과를 모달에 표시
+                        displaySearchResults(response);
+                    } else {
+                        console.error("오류:", xhr.statusText);
+                    }
+                }
+            };
+            xhr.send();
+            // // 검색어 입력창 초기화
+            document.getElementById("searchAnimalNm").value = '';
+        }
+        // 선택바 검색 결과 표시 함수
+        function displaySearchResults(results) {
+            var select = document.getElementById('animalSelect'); // 선택 바 엘리먼트를 가져옵니다.
+
+            // 기존 옵션을 모두 제거합니다.
+            select.innerHTML = '';
+
+            // JSON 데이터를 반복하여 옵션을 추가합니다.
+            results.forEach(results => {
+                var option = document.createElement('option');
+                option.value = results.ANIMALID; // 옵션의 값 설정
+                option.text = "("+results.ANIMALBDATE+")"+ ": "+ results.MASTER_NM; // 옵션의 텍스트 설정
+                select.appendChild(option); // 선택 바에 옵션을 추가합니다.
+            });
+            // const searchResultsList = document.getElementById('searchResults');
+            // // 이전에 표시된 결과를 모두 지우기
+            // searchResultsList.innerHTML = '';
+            // // 결과를 모달에 추가
+            // results.forEach(result => {
+            //     const listItem = document.createElement('li');
+            //     console.log(result);
+            //     console.log(Object.keys(result));
+            //     listItem.textContent = " ("+result.ANIMALBDATE+") " + result.ANIMALNM + " : " + result.MASTER_NM ; // 결과에서 동물 이름과 날짜를 가져와서 li 요소에 표시
+            //     // li 요소에 margin-bottom 스타일 추가
+            //     console.log("리스트아이템"+listItem);
+            //     listItem.style.marginBottom = '7px';
+            //     searchResultsList.appendChild(listItem);
+            //     // 클릭 이벤트 리스너 등록
+            //     listItem.addEventListener('click', function() {
+            //         // 다른 모달에 Nm 내용 추가
+            //         document.getElementById('inputMasterNm').value = result.MASTER_NM;
+            //         document.getElementById('animalNm').value = result.ANIMALNM;
+            //         document.getElementById('animalPk').value = result.ANIMALID;
+            //     });
+            // });
         }
     </script>
 </head>
@@ -82,7 +115,7 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="searchIcon">
-                            <input type="text" class="form-control" id="searchInput" placeholder="동물을 검색하세요..." aria-label="Search" aria-describedby="searchIcon" onkeyup="if (event.keyCode === 13) animalSearch()">
+                            <input type="text" class="form-control" id="searchAnimalNm" placeholder="동물명을 입력후 검색하세요." aria-label="Search" aria-describedby="searchIcon" onkeyup="if (event.keyCode === 13) animalSearch()">
                             <button onclick="animalSearch()">검색</button>
                         </span>
                     </div>

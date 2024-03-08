@@ -176,54 +176,57 @@ public class RestFacilities_Controller {
             }
         }
 
-// "방사선실"이 없으면 맵 추가
-        if (!isRadiologyRoomExist) {
-            Map<String, Object> radiologyRoom = new HashMap<>();
-            radiologyRoom.put("FACILITY_NM", "방사선실");
-            radiologyRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
-            radiologyRoom.put("ANIMAL_NM", "예약없음");
-            radiologyRoom.put("MASTER_NM", "");
-            radiologyRoom.put("START_TIME", "8:00");
-            radiologyRoom.put("END_TIME", "8:00");
-            allList.add(radiologyRoom);
-        }
 
-// "미용실"이 없으면 맵 추가
-        if (!isBeautyRoomExist) {
-            Map<String, Object> beautyRoom = new HashMap<>();
-            beautyRoom.put("FACILITY_NM", "미용실");
-            beautyRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
-            beautyRoom.put("ANIMAL_NM", "예약없음");
-            beautyRoom.put("MASTER_NM", "");
-            beautyRoom.put("START_TIME", "8:00");
-            beautyRoom.put("END_TIME", "8:00");
-            allList.add(beautyRoom);
-        }
 
-// "수술실"이 없으면 맵 추가
+
+
+        // "수술실"이 없으면 맵 추가
         if (!isSurgeryRoomExist) {
             Map<String, Object> surgeryRoom = new HashMap<>();
             surgeryRoom.put("FACILITY_NM", "수술실");
             surgeryRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
             surgeryRoom.put("ANIMAL_NM", "예약없음");
             surgeryRoom.put("MASTER_NM", "");
-            surgeryRoom.put("START_TIME", "8:00");
+            surgeryRoom.put("START_TIME", "10:00");
             surgeryRoom.put("END_TIME", "8:00");
             allList.add(surgeryRoom);
         }
 
-// "면회실"이 없으면 맵 추가
+        // "방사선실"이 없으면 맵 추가
+        if (!isRadiologyRoomExist) {
+            Map<String, Object> radiologyRoom = new HashMap<>();
+            radiologyRoom.put("FACILITY_NM", "방사선실");
+            radiologyRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
+            radiologyRoom.put("ANIMAL_NM", "예약없음");
+            radiologyRoom.put("MASTER_NM", "");
+            radiologyRoom.put("START_TIME", "10:00");
+            radiologyRoom.put("END_TIME", "8:00");
+            allList.add(radiologyRoom);
+        }
+
+        // "면회실"이 없으면 맵 추가
         if (!isVisitingRoomExist) {
             Map<String, Object> visitingRoom = new HashMap<>();
             visitingRoom.put("FACILITY_NM", "면회실");
             visitingRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
             visitingRoom.put("ANIMAL_NM", "예약없음");
             visitingRoom.put("MASTER_NM", "");
-            visitingRoom.put("START_TIME", "8:00");
+            visitingRoom.put("START_TIME", "10:00");
             visitingRoom.put("END_TIME", "8:00");
             allList.add(visitingRoom);
         }
 
+        // "미용실"이 없으면 맵 추가
+        if (!isBeautyRoomExist) {
+            Map<String, Object> beautyRoom = new HashMap<>();
+            beautyRoom.put("FACILITY_NM", "미용실");
+            beautyRoom.put("FACILITY_RESERVE_DT", facilityReserveDt);
+            beautyRoom.put("ANIMAL_NM", "예약없음");
+            beautyRoom.put("MASTER_NM", "");
+            beautyRoom.put("START_TIME", "10:00");
+            beautyRoom.put("END_TIME", "8:00");
+            allList.add(beautyRoom);
+        }
         
         Gson g = new Gson();// 오픈소스(해커뉴스, 유튜브, 날씨 API)API - JSON형식 데이터셋 다양하게 관찰
         String temp = g.toJson(allList);// 파라미터로 받은 List<Map<>>형태를 JSON형식으로 전환해줌,전환해주는 함수 ==to.json
