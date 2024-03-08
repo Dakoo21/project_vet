@@ -46,12 +46,6 @@
                         <div class="col-sm-6">
                             <h1>내 정보</h1>
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active">Icons</li>
-                            </ol>
-                        </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -227,7 +221,7 @@
                                             <div class="form-group row">
                                                 <label for="inputExperience" class="col-sm-2 col-form-label">기타정보:</label>
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control" id="inputExperience" placeholder="컬럼이 맞는지 수정부분 말씀해주시면 수정하겠습니다."></textarea>
+                                                    <textarea class="form-control" id="inputExperience" placeholder="추가 정보를 입력해 주세요"></textarea>
                                                 </div>
                                             </div>
                                     </div>

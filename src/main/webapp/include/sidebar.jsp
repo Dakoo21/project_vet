@@ -123,7 +123,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            공지사항 게시판
+                            공지사항
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -132,7 +132,7 @@
                         <li class="nav-item">
                             <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>전체 조회</p>
+                                <p>공지사항 게시판</p>
                             </a>
                         </li>
                     </ul>
@@ -208,7 +208,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            공지사항 게시판
+                            공지사항
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -217,7 +217,7 @@
                         <li class="nav-item">
                             <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>전체 조회</p>
+                                <p>공지사항 게시판</p>
                             </a>
                         </li>
                     </ul>
@@ -263,9 +263,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="CustomerDB/TotalDataList" class="nav-link">
+                            <a href="/CustomerDB/TotalDataList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>고객-동물 전체 데이터 조회</p>
+                                <p>동물 데이터</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
@@ -279,7 +279,7 @@
                         <li class="nav-item">
                             <a href="/diag/diagList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>진료기록 조회</p>
+                                <p>진료기록</p>
                             </a>
                         </li>
                     </ul>
@@ -298,13 +298,6 @@
                     <ul class="nav nav-treeview">
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/pages/esignbox/esignDetail.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>기안서 조회</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
                             <a href="/eSign/docsBox" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>문서보관함</p>
@@ -315,13 +308,6 @@
                             <a href="/eSign/cancelledDocs" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>취소보관함</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/eSign/progressDocs" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>진행중인 문서</p>
                             </a>
                         </li>
                     </ul>
@@ -401,7 +387,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            공지사항 게시판
+                            공지사항
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -410,7 +396,7 @@
                         <li class="nav-item">
                             <a href="/notice" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>전체 조회</p>
+                                <p>공지사항 게시판</p>
                             </a>
                         </li>
                     </ul>
@@ -456,9 +442,9 @@
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="CustomerDB/TotalDataList" class="nav-link">
+                            <a href="/CustomerDB/TotalDataList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>고객-동물 전체 데이터 조회</p>
+                                <p>동물 데이터</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->
@@ -472,7 +458,7 @@
                         <li class="nav-item">
                                 <a href="/diag/diagList" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>진료기록 조회</p>
+                                <p>진료기록</p>
                             </a>
                         </li>
                     </ul>
@@ -489,13 +475,6 @@
                     </a>
                     <!-- 하위메뉴 시작 -->
                     <ul class="nav nav-treeview">
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/pages/esignbox/esignDetail.jsp" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>기안서 조회</p>
-                            </a>
-                        </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
                             <a href="/eSign/docsBox" class="nav-link">

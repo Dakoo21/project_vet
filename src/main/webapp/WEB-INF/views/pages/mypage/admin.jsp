@@ -348,7 +348,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">사원관리</h3>
                                 <div class="card-tools">
-                                    <a href="employeeList">>더보기</a>
+                                    <a href="employeeList">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
