@@ -5,14 +5,24 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.vet.model.MasterVO" %>
+<%@ page import="com.util.BSPageBar" %>
 
 <%
     List<Map<String,Object>> cList =(List) request.getAttribute("cList");
+    int size = 0;
+    if (cList != null) {
+        size = cList.size();
+    }
+    int numPerPage = 10;
+    int nowPage = 0;
+    if(request.getParameter("nowPage")!=null){
+        nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    }
 %>
 
 <script type="text/javascript">
-    function searchEnter(){
-        if(window.enent.keyCode==13){
+    function searchEnter(event) {
+        if (window.event.keyCode == 13) {
             customerDataSearch();
         }
     }
@@ -53,7 +63,7 @@
             tableContent += "<th>생년월일</th>";
             tableContent += "<th>이메일</th>";
             tableContent += "<th>연락처</th>";
-            tableContent += "<th>주소</th>";
+            tableContent += "<th>지역</th>";
             tableContent += "</tr>";
             tableContent += "</thead>";
             tableContent += "<tr>";
@@ -77,6 +87,10 @@
     const customerDataDetail = (masterPk) =>{
       location.href = "/CustomerDB/TotalCustomerDetail?masterPk="+masterPk;
       //location.href = "/CustomerDB/TotalCustomerDetail/"+masterPk;
+    }
+
+    function totalCustomerDateList(event) {
+        location.href = "/CustomerDB/TotalCustomerList"
     }
 </script>
 
@@ -112,26 +126,25 @@
         <section class="content">
             <!--여기 -->
             <div class = "container">
-                <div class="row">
-                    <div class="search-top-area" style="right: auto">
+                <!-- 검색 상자와 전체조회 버튼 -->
+                <div class="container">
+                    <div class="search-top-area">
                         <div class="search-box">
                             <div class="input-group">
-                                <input type="search" id="keyword" class="form-control form-control-lg" placeholder="고객명을 입력해주세요.">
+                                <input type="search" id="keyword" class="form-control form-control-lg" placeholder="고객명을 입력해주세요." onkeyup="searchEnter()">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-lg btn-default" onClick="customerDataSearch()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
-                                <div class="text-right">
-                                <div id="padding-right50" class="position-absolute top-20 end-20">
-                                <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-warning" >등록</a>
-                                 </div>
-                                </div>
                             </div>
                         </div>
+                        <div class="ml-auto">
+                            <button class="btn btn-lg btn-primary" onclick="totalCustomerDateList()">전체조회</button>
+                        </div>
                     </div>
-                </div>
-                <!-- /.content -->
+
+                    <!-- /.content -->
                 <div>
                     <table id="boardCustomerList" class="table table-striped table-bordered table-hover dt-responsive">
                         <thead>
@@ -141,12 +154,14 @@
                             <th>생년월일</th>
                             <th>이메일</th>
                             <th>연락처</th>
-                            <th>주소</th>
+                            <th>지역</th>
                         </tr>
                         </thead>
                         <tbody>
                         <%
-                            for (int i =0; i < cList.size(); i++){
+                            int rownum = 0;
+                            for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                if(i == size) break;
                                 Map<String,Object> pmap = cList.get(i);
                         %>
                         <tr onclick="customerDataDetail('<%=pmap.get("masterPk")%>')">
@@ -164,8 +179,18 @@
                     </table>
                     <div style="display:flex; justify-content:center;">
                         <ul class="pagination"></ul>
+                        <%
+                            String pagePath = "/CustomerDB/TotalCustomerList";
+                            BSPageBar bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);
+                            out.print(bspb.getPageBar());
+                        %>
                     </div>
                 </div>
+                    <div class="text-right">
+                        <div id="padding-right50" class="position-absolute top-20 end-20">
+                            <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-warning" >등록</a>
+                        </div>
+                    </div>
             </div>
         </section>
         <!-- /.content -->
@@ -214,4 +239,18 @@
     /*    top: 0; !* 부모 요소의 상단에 배치합니다. *!*/
     /*    right: 0; !* 부모 요소의 오른쪽에 배치합니다. *!*/
     /*}*/
+    .search-top-area{
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* 아이템을 동일한 간격으로 정렬합니다. */
+        margin-bottom: 40px;
+    }
+
+    .search-box{
+        display: flex;
+        width: 30%; /* 필요에 따라 너비 조정 */
+        align-items: center;
+        justify-content: center;
+    }
+
 </style>

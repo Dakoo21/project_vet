@@ -26,43 +26,66 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1> 병원안내
-        <small>오시는 길</small>
-      </h1>
+      <h1> 병원안내</h1>
     </section>
 
     <script>
       // 현재 위치를 가져오는 함수
       function getLoc() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function (position) {
-            // 현재 위치 좌표
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                mapOption = {
+                  center: new kakao.maps.LatLng(37.477186, 126.879460), // 지도의 중심좌표
+                  level: 4 // 지도의 확대 레벨
+                };
 
-            // 마커 이미지 생성
-            var markerImage = new kakao.maps.MarkerImage(
-                    'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
-                    new kakao.maps.Size(24, 35),
-                    { offset: new kakao.maps.Point(13, 35) }
-            );
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-            // 현재 위치를 나타내는 마커 생성
-            var markerPosition = new kakao.maps.LatLng(lat, lng);
-            var marker = new kakao.maps.Marker({
-              position: markerPosition,
-              image: markerImage, // 마커 이미지 설정
-            });
+        function setCenter() {
+          // 이동할 위도 경도 위치를 생성합니다
+          var moveLatLon = new kakao.maps.LatLng(37.477186, 126.879460);
 
-            // 마커를 지도에 표시
-            marker.setMap(map);
-
-            // 지도 중심을 현재 위치로 이동
-            map.setCenter(markerPosition);
-          });
-        } else {
-          alert('현재 위치를 가져올 수 없습니다.');
+          // 지도 중심을 이동 시킵니다
+          map.setCenter(moveLatLon);
         }
+
+        function panTo() {
+          // 이동할 위도 경도 위치를 생성합니다
+          var moveLatLon = new kakao.maps.LatLng(37.477186, 126.879460);
+
+          // 지도 중심을 부드럽게 이동시킵니다
+          // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+          map.panTo(moveLatLon);
+        }
+
+        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
+                imageSize = new kakao.maps.Size(64, 69),
+                imageOption = {offset: new kakao.maps.Point(27, 69)};
+
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                markerPosition = new kakao.maps.LatLng(37.477186, 126.879460);
+
+        var marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage
+        });
+
+        // 마커를 지도에 추가
+        marker.setMap(map);
+
+        var content = '<div class="customoverlay">' +
+                '  <a href="https://map.kakao.com/?itemId=145553740" target="_blank">' +
+                '    <span class="title">동물생심</span>' +
+                '  </a>' +
+                '</div>';
+
+        var position = new kakao.maps.LatLng(37.477186, 126.879460);
+
+        var customOverlay = new kakao.maps.CustomOverlay({
+          map: map,
+          position: position,
+          content: content,
+          yAnchor: 1
+        });
       }
     </script>
 
@@ -80,7 +103,7 @@
             <script type="text/javascript">
               var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                       mapOption = {
-                        center: new kakao.maps.LatLng(37.476773, 126.879959), // 지도의 중심좌표
+                        center: new kakao.maps.LatLng(37.477186, 126.879460), // 지도의 중심좌표
                         level: 4 // 지도의 확대 레벨
                       };
 
@@ -92,7 +115,7 @@
 
               // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
               var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                      markerPosition = new kakao.maps.LatLng(37.476773, 126.879959); // 마커가 표시될 위치입니다
+                      markerPosition = new kakao.maps.LatLng(37.477186, 126.879460); // 마커가 표시될 위치입니다
 
               // 마커를 생성합니다
               var marker = new kakao.maps.Marker({
@@ -111,7 +134,7 @@
                       '</div>';
 
               // 커스텀 오버레이가 표시될 위치입니다
-              var position = new kakao.maps.LatLng(37.476773, 126.879959);
+              var position = new kakao.maps.LatLng(37.477186, 126.879460);
 
               // 커스텀 오버레이를 생성합니다
               var customOverlay = new kakao.maps.CustomOverlay({

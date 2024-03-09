@@ -113,16 +113,25 @@ public class EmployeeManagement_Controller {
     }
 
 
-        /**********************************************************************************
-         작성자 : 지장환
-         작성일자 : 29.02.25
-         기능 : 사원 정보 삭제
-         **********************************************************************************/
+    /**********************************************************************************
+     작성자 : 지장환
+     작성일자 : 29.02.25
+     기능 : 사원 정보 삭제
+     **********************************************************************************/
 
-//    @PostMapping("/employeeDelete")
-//    public String employeeDelete (String username) {
-//        int result;
-//        //연결은 안됨 - 연결 해야됨
-//        return null;
-//    }
+    @GetMapping("/employeeDelete")
+    public String employeeDelete (@RequestParam int MEMBER_PK) {
+        log.info(String.valueOf(MEMBER_PK));
+        int result;
+        String path;
+
+        result = employeeManagement_service.employeeDelete(MEMBER_PK);
+        if (result == 1) {
+            path = "redirect:/employeeList";
+        } else {
+
+            path = "error";
+        }
+        return path;
+    }
 }

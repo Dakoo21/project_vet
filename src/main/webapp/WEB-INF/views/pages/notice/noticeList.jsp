@@ -69,23 +69,24 @@
                                     </thead>
                                     <tbody>
                                     <%
+                                        int rownum = 0;
                                         for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
                                             if(i == size) break;
                                             Notice notice = noticeList.get(i);
                                     %>
                                     <tr onclick="noticeOneDetail('<%=notice.getNOTICE_PK()%>')">
                                         <%if(notice.getNOTICE_HIGHLIGHTED().equals(1)){%>
-                                        <td width="10%" style="text-align: center;">✅</td>
+                                        <td width="10%" style="text-align: center;">📌</td>
                                         <%
                                             } else {
                                         %>
-                                        <td width="10%" style="text-align: center;"><%=notice.getNOTICE_PK()%></td>
+                                        <td width="10%" style="text-align: center;"><%=rownum += 1%></td>
                                         <%
                                             }
                                         %>
                                         <td width="40%" style="text-align: center;"><%=notice.getNOTICE_TITLE()%></td>
                                         <td width="20%" style="text-align: center;"><%=notice.getMEMBER_MEMBERNAME()%></td>
-                                        <td width="15%" style="text-align: center;"><%=notice.getNOTICE_TIME()%></td>
+                                        <td width="15% style="text-align: center;"><%=notice.getNOTICE_TIME()%></td>
                                         <td width="15%" style="text-align: center;"><%=notice.getNOTICE_HITS()%></td>
                                     </tr>
                                     <%

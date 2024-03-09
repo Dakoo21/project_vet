@@ -19,9 +19,15 @@ public class EmployeeManagement_Service {
     }
 
 
+
     public List<Map<String, Object>> employeeList(Map<String, Object> employeeMap) {
         List<Map<String, Object>> employList = null;
         employList = employeeManagement_repository.employList(employeeMap);
         return employList;
+    }
+    public int employeeDelete(int MEMBER_PK) {
+        int result;
+        result = employeeManagement_repository.employeeDelete(MEMBER_PK);
+        return result;
     }
 }

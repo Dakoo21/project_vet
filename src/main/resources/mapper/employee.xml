@@ -29,4 +29,8 @@
         </where>
         ORDER BY CASE WHEN MEMBER_ROLE = 'ROLE_USER' THEN 0 ELSE 1 END, MEMBER_PK DESC
     </select>
+
+    <delete id="employeeDelete" parameterType="INTEGER">
+        DELETE FROM USER_TEST5 WHERE MEMBER_PK = #{value}
+    </delete>
 </mapper>

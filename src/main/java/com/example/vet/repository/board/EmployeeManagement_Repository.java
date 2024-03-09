@@ -24,4 +24,10 @@ public class EmployeeManagement_Repository {
         employList = sqlSessionTemplate.selectList("employeeList", employeeMap);
         return employList;
     }
+
+    public int employeeDelete(int MEMBER_PK) {
+        int result;
+        result = sqlSessionTemplate.delete("employeeDelete", MEMBER_PK);
+        return result;
+    }
 }

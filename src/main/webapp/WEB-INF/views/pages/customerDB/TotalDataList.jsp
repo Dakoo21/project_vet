@@ -1,14 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.util.BSPageBar" %>
 
 <%
     List<Map<String,Object>> dList =(List)request.getAttribute("dList");
-    int size = (dList != null) ? dList.size() : 0;
+    int size = 0;
+    if (dList != null) {
+        size = dList.size();
+    }
+    int numPerPage = 10;
+    int nowPage = 0;
+    if(request.getParameter("nowPage")!=null){
+        nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    }
 %>
 <script type="text/javascript">
     function searchEnter(event) {
-        if (event.key === 'Enter') {
+        if (window.event.keyCode == 13) {
             boardSearch();
         }
     }
@@ -78,6 +87,11 @@
         console.log("dataDetail 연결")
         location.href = "/CustomerDB/TotalDataDetail/"+animalPk;
     }
+
+    function totalDateList() {
+        console.log("전체 조회 클릭")
+        location.href = "/CustomerDB/TotalDataList";
+    }
 </script>
 
 <!DOCTYPE html>
@@ -85,7 +99,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>동물 데이터 조회</title>
+    <title>동물 데이터</title>
     <%@ include file="/include/bootCommon.jsp" %>
 </head>
 
@@ -135,9 +149,9 @@
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active"  data-toggle="tab" onclick="boardSearch(1)">전체조회</a>
+                        <a class="nav-link active"  data-toggle="tab" onclick="totalDateList()">전체조회</a>
                     </li>
-                    <li class="nav-item">
+                    <%--<li class="nav-item">
                         <a class="nav-link" data-toggle="tab" onclick="boardSearch(2)">강아지</a>
                     </li>
                     <li class="nav-item">
@@ -145,7 +159,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" onclick="boardSearch(4)">기타동물</a>
-                    </li>
+                    </li>--%>
                 </ul>
             </div>
          </div>
@@ -173,10 +187,12 @@
                                     </tr>
                                     </thead>
                                     <tbody  id="boardAnimalList" >
-                                        <%
-                                            for (int i =0; i<dList.size(); i++){
+                                    <%
+                                        int rownum = 0;
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
                                             Map<String,Object> pmap =  dList.get(i);
-                                        %>
+                                    %>
                                             <tr onclick ="TotaldataDetail('<%=pmap.get("animalPk")%>')">
                                             <td><%=pmap.get("master_nm")%></td>
                                             <td><%=pmap.get("animal_nm")%></td>
@@ -192,17 +208,22 @@
                                 </table>
                                 <div style="display:flex; justify-content:center;">
                                     <ul class="pagination"></ul>
+                                    <%
+                                        String pagePath = "/CustomerDB/TotalDataList";
+                                        BSPageBar bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);
+                                        out.print(bspb.getPageBar());
+                                    %>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /.card-body -->
+                    <div class="col-md-2">
+                        <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-warning">등록</a>
+                    </div>
                 </div>
             </div>
         </section>
-                <!-- /.card-body -->
-                <div class="col-md-2">
-                    <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-warning">등록</a>
-                </div>
         </div>
             <!-- /.content -->
 
