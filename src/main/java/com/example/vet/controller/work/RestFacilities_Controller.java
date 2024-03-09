@@ -188,7 +188,7 @@ public class RestFacilities_Controller {
             surgeryRoom.put("ANIMAL_NM", "예약없음");
             surgeryRoom.put("MASTER_NM", "");
             surgeryRoom.put("START_TIME", "10:00");
-            surgeryRoom.put("END_TIME", "8:00");
+            surgeryRoom.put("END_TIME", "10:00");
             allList.add(surgeryRoom);
         }
 
@@ -200,7 +200,7 @@ public class RestFacilities_Controller {
             radiologyRoom.put("ANIMAL_NM", "예약없음");
             radiologyRoom.put("MASTER_NM", "");
             radiologyRoom.put("START_TIME", "10:00");
-            radiologyRoom.put("END_TIME", "8:00");
+            radiologyRoom.put("END_TIME", "10:00");
             allList.add(radiologyRoom);
         }
 
@@ -212,7 +212,7 @@ public class RestFacilities_Controller {
             visitingRoom.put("ANIMAL_NM", "예약없음");
             visitingRoom.put("MASTER_NM", "");
             visitingRoom.put("START_TIME", "10:00");
-            visitingRoom.put("END_TIME", "8:00");
+            visitingRoom.put("END_TIME", "10:00");
             allList.add(visitingRoom);
         }
 
@@ -224,7 +224,7 @@ public class RestFacilities_Controller {
             beautyRoom.put("ANIMAL_NM", "예약없음");
             beautyRoom.put("MASTER_NM", "");
             beautyRoom.put("START_TIME", "10:00");
-            beautyRoom.put("END_TIME", "8:00");
+            beautyRoom.put("END_TIME", "10:00");
             allList.add(beautyRoom);
         }
         
