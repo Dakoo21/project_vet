@@ -17,6 +17,10 @@
         const dataUpdate = (event) => {
             document.querySelector("#myDetail").submit();
         }
+
+        const dataDelete = (event) => {
+            location.href = "/employeeDelete?MEMBER_PK="+<%=userDetail.get("MEMBER_PK")%>
+        }
     </script>
     <![endif]-->
     <style>
@@ -92,6 +96,7 @@
                                     </div>
                                     <form id="myDetail" action="/employeeUpdate" method="post">
                                         <input type="hidden" id="MEMBER_MEMBERNAME" name="MEMBER_MEMBERNAME" value="<%=userDetail.get("MEMBER_MEMBERNAME")%>">
+                                        <input type="hidden" id="MEMBER_PK" name="MEMBER_PK" value="<%=userDetail.get("MEMBER_PK")%>">
                                         <div class="form-group row">
                                             <label for="inputExperience" class="col-sm-2 col-form-label">직위:</label>
                                             <div class="col-sm-10">
@@ -110,10 +115,10 @@
                                                         } else if (memberRole.equals("ROLE_INFO")) {
                                                             user_role = "데스크";
                                                         } else {
-                                                            user_role = "일반 사용자";
+                                                            user_role = "임시 사용자";
                                                         }
                                                     } else {
-                                                        user_role = "일반 사용자";
+                                                        user_role = "임시 사용자";
                                                     }
                                                 %>
                                                 <%--<span><%=user_role%></span>--%>
@@ -211,13 +216,14 @@
                                     <div class="form-group row">
                                         <label for="inputExperience" class="col-sm-2 col-form-label">기타정보:</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="컬럼이 맞는지 수정부분 말씀해주시면 수정하겠습니다."></textarea>
+                                            <textarea class="form-control" id="inputExperience" placeholder="추가 정보를 입력하세요."></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer" style="text-align: right;">
                                 <button type="button" class="btn btn-primary" onclick="dataUpdate()">수정</button>
+                                <button type="button" class="btn btn-warning" onclick="dataDelete()">삭제</button>
                             </div>
                         </div>
                     </div>

@@ -10,11 +10,7 @@
     if (dList != null && !dList.isEmpty()) {
         rmap = dList.get(0);
     } else {
-        // dList가 비어 있는 경우 처리할 내용 추가 가능
-        // 여기서는 간단히 "dList is empty" 메시지 출력
-        out.println("dList is empty");
     };
-    out.println(rmap.get(""));
 %>
 
 
@@ -23,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>진료 상세</title>
     <%@ include file="/include/bootCommon.jsp"%>
     <script>
         let costSum = 0;
@@ -295,13 +291,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료예약 상세페이지</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
+                        <h1>진료 상세페이지</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

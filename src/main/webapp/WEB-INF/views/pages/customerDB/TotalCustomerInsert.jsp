@@ -12,7 +12,6 @@
             rmap = cList.get(0);
         }
     }
-    System.out.println("페이지");
 %>
 <script>
     function insert(){
@@ -61,13 +60,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Icons</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
+                        <h1>고객 등록</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -97,7 +90,7 @@
                         <tr>
                             <th>email</th>
                             <th><input type="email" class="form-control" id="master_email"></th>
-                            <th>주소</th>
+                            <th>지역</th>
                             <th><input type="text" class="form-control" id="master_address"></th>
                         </tr>
                     </table>
@@ -109,7 +102,7 @@
                             <ul class="terms__list">
                                 <li class="terms__box">
                                     <div class="input__check">
-                                        <input type="checkbox" name="agreement" id="privacyPolicy" value="privacyPolicy" required />
+                                        <input type="checkbox" name="agreement" id="privacyPolicy" value="privacyPolicy" required checked />
                                         <label for="privacyPolicy" class="required">개인정보 수집 및 이용 동의</label>
                                     </div>
                                     <div class="terms_content1">
@@ -123,7 +116,7 @@
                                 </li>
                                 <li class="terms__box">
                                     <div class="input__check">
-                                        <input type="checkbox" name="agreement" id="allowPromotions" value="allowPromotions" />
+                                        <input type="checkbox" name="agreement" id="allowPromotions" value="allowPromotions" checked />
                                         <label for="allowPromotions">프로모션 정보 수신 동의</label>
                                     </div>
                                     <div class="terms_content2">
@@ -136,17 +129,13 @@
                             </ul>
                         </form>
                     </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="customerList()">취소</button>
+                        <button type="button" class="btn btn-success" style="margin-right: 10px;" onclick="insert()">등록</button>
+                    </div>
                 </div>
-
-
             </div>
-
         <!-- /.content -->
-
-        <div class="text-center">
-            <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="customerList()">취소</button>
-            <button type="button" class="btn btn-success" style="margin-right: 10px;" onclick="insert()">등록</button>
-        </div>
         </section>
     </div>
     <%@ include file="/include/footer.jsp"%>
@@ -212,4 +201,9 @@
         padding-top: 50%;
     }
 
+    .form-control{
+        width: 80%; /* 기본 값보다 넓게 조정해보세요 */
+        text-align: center;
+        line-height: 2.5;
+    }
 </style>

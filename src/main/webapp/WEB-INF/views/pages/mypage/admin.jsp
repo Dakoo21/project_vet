@@ -118,7 +118,7 @@
                         title: '<%= rmap.get("bookingType") %> 예약',
                         start: '<%= dateFormat.format(startDate) %>',
                         end: '<%= dateFormat.format(endDate) %>',
-                        url: 'bookingDetail?bookingPK=<%=Integer.parseInt(rmap.get("bookingPk").toString())%>',
+                        url: 'redirect:/bookingDetail?bookingPK=<%=Integer.parseInt(rmap.get("bookingPk").toString())%>',
                         background: '000000',
                     }
                     <% if (i < bList.size() - 1) { %>,<% } %>
