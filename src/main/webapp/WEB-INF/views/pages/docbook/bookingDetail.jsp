@@ -79,7 +79,7 @@
             <!--여기 -->
             <div id="contents_box">
                 <div id="img_area">
-                    <img alt="Avatar" class="table-avatar" src="../../img/dog1.jpeg">
+                    <img alt="Avatar" class="table-avatar" src="/img/logo/logo_4.png" style="height:40%;width:40%;margin-left:200px">
                 </div>
                 <div id="table_area">
                     <table class="table table-borderless">
@@ -216,7 +216,7 @@
         </section>
     </section>
 <!-- /.content-wrapper -->
-
+        <%@ include file="/include/footer.jsp" %>
         <div id="reservationModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
@@ -456,7 +456,7 @@
 
 </script>
 </body>
-<%@ include file="/include/footer.jsp" %>
+
 <%@ include file="/include/bootCommonFoot.jsp" %>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 </html>

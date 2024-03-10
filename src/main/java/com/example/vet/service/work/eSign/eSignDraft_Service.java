@@ -24,6 +24,11 @@ public class eSignDraft_Service {
         this.eSignDraft_repository = eSignDraft_repository;
     }
 
+    public int insertAdoptAnimal(SignAdopt signAdopt) {
+        int result = eSignDraft_repository.insertAdoptAnimal(signAdopt);
+        return result;
+    }
+
     // 결재 라인 조회
     public List<Member> findLine() {
         List<Member> lineList = new ArrayList<>();
@@ -109,6 +114,16 @@ public class eSignDraft_Service {
     }
     public int updateLV3(Integer signPk) {
         int result = eSignDraft_repository.updateLV3(signPk);
+        return result;
+    }
+
+    public int rejectedLV2(Integer signPk) {
+        int result = eSignDraft_repository.rejectedLV2(signPk);
+        return result;
+    }
+
+    public int rejectedLV3(Integer signPk) {
+        int result = eSignDraft_repository.rejectedLV3(signPk);
         return result;
     }
 }

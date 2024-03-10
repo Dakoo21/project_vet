@@ -3,9 +3,11 @@ package com.example.vet.controller;
 import com.example.vet.config.auth.PrincipalDetails;
 import com.example.vet.model.BookingVO;
 import com.example.vet.model.Notice;
+import com.example.vet.model.SignTotal;
 import com.example.vet.service.board.EmployeeManagement_Service;
 import com.example.vet.service.board.Notice_Board_Service;
 import com.example.vet.service.work.Booking_Service;
+import com.example.vet.service.work.eSign.eSign_Service;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +28,14 @@ public class Main_Controller {
     private final Booking_Service bookingService;
     private final Notice_Board_Service notice_board_service;
     private final EmployeeManagement_Service employeeManagement_service;
+    private final eSign_Service eSign_service;
 
     @Autowired
-    public Main_Controller(Booking_Service bookingService, Notice_Board_Service noticeBoardService, EmployeeManagement_Service employeeManagementService) {
+    public Main_Controller(Booking_Service bookingService, Notice_Board_Service noticeBoardService, EmployeeManagement_Service employeeManagementService, eSign_Service eSign_service) {
         this.bookingService = bookingService;
         notice_board_service = noticeBoardService;
         employeeManagement_service = employeeManagementService;
+        this.eSign_service=eSign_service;
     }
 
     /**********************************************************************************
@@ -76,8 +80,14 @@ public class Main_Controller {
         employList = employeeManagement_service.employeeList(employeeMap);
         model.addAttribute("employList", employList);
 
-
-
+        /**********************************************************************************
+         작성자 : 최윤정
+         작성일자 : 06.03.24
+         기능 : 전자결재 호출
+         **********************************************************************************/
+        log.info(employeeMap.toString());
+        List<SignTotal> esignList = eSign_service.selectProgressList();
+        model.addAttribute("esignList", esignList);
 
         String role = "default";
         String path = "";

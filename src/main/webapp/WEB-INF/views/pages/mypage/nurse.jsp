@@ -4,12 +4,14 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.vet.model.Notice" %>
+<%@ page import="com.example.vet.model.SignTotal" %>
 <%
     List<Map<String, Object>> bList = (List)request.getAttribute("bList");
     List<Notice> noticeList = (List<Notice>) request.getAttribute("noticeList");
     int mysize = 0;// 예약 전체 레코드 수
     //xxx.java에서 생성된 자료구조를 jsp에서 사용하려면 forward scope를 사용한다. 그래야 null이 일어나지 않고 받아올 수 있다.
     List<Map<String, Object>> myList = (List)request.getAttribute("myList");
+    List<SignTotal> esignList = (List<SignTotal>) request.getAttribute("esignList");
     if(myList !=null){//null이면 nullpointException발동할 수 있다 500번 에러 방지
         mysize = myList.size();
     }
@@ -195,16 +197,57 @@
                         </div>
                         <div class="card">
                             <div class="card-header border-0">
-                                <h3 class="card-title">시설 예약현황</h3>
+                                <h3 class="card-title">문서보관함</h3>
                                 <div class="card-tools">
-                                    <a href="/reservespot/dailyReserve">더보기</a>
+                                    <a href="/eSign/docsBox">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
-                                <div id="calendarTable">
-                                    <div class="card-body">
-                                        <div id="timeline" style="height: 220px;"></div>
-                                    </div>
+                                <div class ="table">
+                                    <table class="table table-hover dt-responsive">
+                                        <thead>
+                                        <tr>
+                                            <th>문서번호</th>
+                                            <th>문서 제목</th>
+                                            <th>결재 기안일</th>
+                                            <th>결재 상태</th>
+                                            <th>문서 구분</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%
+                                            for(int i=nowPage*5;i<(nowPage*5)+5;i++){
+                                                if(i == size) break;
+                                                SignTotal signTotal = esignList.get(i);
+                                                String docState = null;
+                                                if(signTotal.getSIGN_STATE()==0 || signTotal.getSIGN_STATE()==1 || signTotal.getSIGN_STATE()==2){
+                                                    docState = "기안";
+                                                }else if(signTotal.getSIGN_STATE()==3){
+                                                    docState = "결재";
+                                                }else if(signTotal.getSIGN_STATE()==-1){
+                                                    docState = "반려";
+                                                }
+                                                int docNo = signTotal.getSIGN_PK();
+                                                String docTitle = signTotal.getSIGN_TITLE();
+                                                // String docContent = doc.getSign_content();
+                                                // int signpk = doc.getSign_pk();
+                                                String docDate = signTotal.getSIGN_DATE();
+
+                                                String docType = signTotal.getSIGN_DOCTYPE();
+                                        %>
+                                        <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
+                                            <td><%=docNo%></td>
+                                            <td><%=docTitle%></td>
+                                            <td><%=docDate%></td>
+                                            <td><%=docState%></td>
+                                            <td><%=docType%></td>
+                                        </tr>
+                                        <%
+
+                                            }
+                                        %>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

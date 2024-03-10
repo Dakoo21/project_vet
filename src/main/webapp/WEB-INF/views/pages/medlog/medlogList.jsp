@@ -45,8 +45,8 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 <%@ include file="/include/header.jsp"%>
-<%@ include file="/include/sidebar.jsp"%>
 <div class="wrapper">
+<%@ include file="/include/sidebar.jsp"%>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -206,7 +206,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+    <%@ include file="/include/footer.jsp"%>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -350,6 +350,5 @@
         });
     });
 </script>
-<%@ include file="/include/footer.jsp"%>
 </body>
 </html>

@@ -25,9 +25,9 @@ public class eSign_Service {
         return docList;
     }
 
-    public List<SignTotal> selectProgressList(Integer userPK) {
+    public List<SignTotal> selectProgressList() {
         List<SignTotal> progressList = new ArrayList<>();
-        progressList = esRepository.selectProgressList(userPK);
+        progressList = esRepository.selectProgressList();
         return progressList;
     }
 }

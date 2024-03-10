@@ -42,8 +42,9 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <%@ include file="/include/header.jsp"%>
-<%@ include file="/include/sidebar.jsp"%>
+
 <div class="wrapper">
+    <%@ include file="/include/sidebar.jsp"%>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
@@ -192,6 +193,7 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+<%@ include file="/include/footer.jsp"%>
 <script>
     // 예약 버튼 요소 가져오기
     var reservationButton = document.getElementById("reservationButton");
@@ -233,6 +235,6 @@
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<%@ include file="/include/footer.jsp"%>
+
 </body>
 </html>

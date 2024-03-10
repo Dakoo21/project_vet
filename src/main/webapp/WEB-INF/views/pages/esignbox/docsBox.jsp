@@ -5,10 +5,22 @@
 <%@ page import="com.example.vet.model.SignTotal" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page import="com.util.BSPageBar" %>
 <%
     int size = 0;
     List<SignTotal> docList = null;
     docList = (List<SignTotal>) request.getAttribute("docList");
+    if (docList != null) {
+        size = docList.size();
+    }
+    int numPerPage = 8;
+    int nowPage = 0;
+    if(request.getParameter("nowPage")!=null){
+        nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    }
+    // pagination변수
+    String pagePath = "/eSign/docsBox";
+    BSPageBar bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);
 %>
 <script>
     function signOneDetail (SIGN_PK) {
@@ -36,12 +48,6 @@
                     <div class="col-sm-6">
                         <h1>문서보관함</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -67,6 +73,9 @@
                             <div class="col-3">
                                 <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
                             </div>
+                            <div class="col-6">
+                                <button id="btn_insert" class="btn btn-secondary" onClick="location.href='/eSignDraft/draftInsertPage'">기안서등록</button>
+                            </div>
                         </div>
                     </h3>
 
@@ -90,9 +99,9 @@
                 <div class="card-body" >
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
-                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 700px;">
+                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 500px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -104,24 +113,26 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (SignTotal doc : docList) {
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
+                                            SignTotal signTotal = docList.get(i);
                                             String docState = null;
-                                            if(doc.getSIGN_STATE()==0){
+                                            if(signTotal.getSIGN_STATE()==0 || signTotal.getSIGN_STATE()==1 || signTotal.getSIGN_STATE()==2){
                                                 docState = "기안";
-                                            }else if(doc.getSIGN_STATE()==3){
+                                            }else if(signTotal.getSIGN_STATE()==3){
                                                 docState = "결재";
-                                            }else if(doc.getSIGN_STATE()==3){
+                                            }else if(signTotal.getSIGN_STATE()==-1){
                                                 docState = "반려";
                                             }
-                                            int docNo = doc.getSIGN_PK();
-                                            String docTitle = doc.getSIGN_TITLE();
+                                            int docNo = signTotal.getSIGN_PK();
+                                            String docTitle = signTotal.getSIGN_TITLE();
                                             // String docContent = doc.getSign_content();
                                             // int signpk = doc.getSign_pk();
-                                            String docDate = doc.getSIGN_DATE();
+                                            String docDate = signTotal.getSIGN_DATE();
 
-                                            String docType = doc.getSIGN_DOCTYPE();
+                                            String docType = signTotal.getSIGN_DOCTYPE();
                                     %>
-                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                    <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
@@ -129,18 +140,25 @@
                                         <td><%=docType%></td>
                                     </tr>
                                     <%
+
                                          }
                                     %>
                                     </tbody>
                                 </table>
                                 <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
+                                    <ul class="pagination">
+                                        <%
+                                            pagePath = "/eSign/docsBox";
+                                            bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);
+                                            out.print(bspb.getPageBar());
+                                        %>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="chart tab-pane" id="select-reject" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -152,17 +170,17 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (SignTotal doc : docList) {
-                                            if(doc.getSIGN_STATE()==-1){
-                                                int docNo = doc.getSIGN_PK();
-                                                String docTitle = doc.getSIGN_TITLE();
-                                                // String docContent = doc.getSign_content();
-                                                // int signpk = doc.getSign_pk();
-                                                String docDate = doc.getSIGN_DATE();
-                                                String docState = "반려";
-                                                String docType = doc.getSIGN_DOCTYPE();
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
+                                            SignTotal signTotal = docList.get(i);
+                                                if(signTotal.getSIGN_STATE()==-1){
+                                                    int docNo = signTotal.getSIGN_PK();
+                                                    String docTitle = signTotal.getSIGN_TITLE();
+                                                    String docDate = signTotal.getSIGN_DATE();
+                                                    String docState = "반려";
+                                                    String docType = signTotal.getSIGN_DOCTYPE();
                                     %>
-                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                    <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
@@ -176,13 +194,19 @@
                                     </tbody>
                                 </table>
                                 <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
+                                    <ul class="pagination">
+<%--                                        <%--%>
+<%--                                            pagePath = "/eSign/docsBox";--%>
+<%--                                            bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);--%>
+<%--                                            out.print(bspb.getPageBar());--%>
+<%--                                        %>--%>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="chart tab-pane" id="select-compose" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -194,17 +218,17 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (SignTotal doc : docList) {
-                                            if(doc.getSIGN_STATE()==0){
-                                                int docNo = doc.getSIGN_PK();
-                                                String docTitle = doc.getSIGN_TITLE();
-                                                // String docContent = doc.getSign_content();
-                                                // int signpk = doc.getSign_pk();
-                                                String docDate = doc.getSIGN_DATE();
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
+                                            SignTotal signTotal = docList.get(i);
+                                            if(signTotal.getSIGN_STATE()==0 || signTotal.getSIGN_STATE()==1 || signTotal.getSIGN_STATE()==2){
+                                                int docNo = signTotal.getSIGN_PK();
+                                                String docTitle = signTotal.getSIGN_TITLE();
+                                                String docDate = signTotal.getSIGN_DATE();
                                                 String docState = "기안";
-                                                String docType = doc.getSIGN_DOCTYPE();
+                                                String docType = signTotal.getSIGN_DOCTYPE();
                                     %>
-                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                    <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
@@ -218,13 +242,19 @@
                                     </tbody>
                                 </table>
                                 <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
+                                    <ul class="pagination">
+<%--                                        <%--%>
+<%--                                            pagePath = "/eSign/docsBox";--%>
+<%--                                            bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);--%>
+<%--                                            out.print(bspb.getPageBar());--%>
+<%--                                        %>--%>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="chart tab-pane" id="select-approve" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -236,17 +266,17 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (SignTotal doc : docList) {
-                                            if(doc.getSIGN_STATE()==3){
-                                                int docNo = doc.getSIGN_PK();
-                                                String docTitle = doc.getSIGN_TITLE();
-                                                // String docContent = doc.getSign_content();
-                                                // int signpk = doc.getSign_pk();
-                                                String docDate = doc.getSIGN_DATE();
+                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                            if(i == size) break;
+                                            SignTotal signTotal = docList.get(i);
+                                            if(signTotal.getSIGN_STATE()==3){
+                                                int docNo = signTotal.getSIGN_PK();
+                                                String docTitle = signTotal.getSIGN_TITLE();
+                                                String docDate = signTotal.getSIGN_DATE();
                                                 String docState = "결재";
-                                                String docType = doc.getSIGN_DOCTYPE();
+                                                String docType = signTotal.getSIGN_DOCTYPE();
                                     %>
-                                    <tr onclick="signOneDetail('<%=doc.getSIGN_PK()%>')">
+                                    <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
                                         <td><%=docTitle%></td>
                                         <td><%=docDate%></td>
@@ -259,9 +289,14 @@
                                     %>
                                     </tbody>
                                 </table>
-
                                 <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination"></ul>
+                                    <ul class="pagination">
+<%--                                        <%--%>
+<%--                                            pagePath = "/eSign/docsBox";--%>
+<%--                                            bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);--%>
+<%--                                            out.print(bspb.getPageBar());--%>
+<%--                                        %>--%>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -271,9 +306,10 @@
             <!-- /.card -->
         </section>
         <!-- /.content -->
-        <div class="col-3">
-            <button id="btn_insert" class="btn btn-danger" onClick="location.href='/eSignDraft/draftInsertPage'">등록</button>
-        </div>
+        <section class="content-footer">
+
+        </section>
+
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->

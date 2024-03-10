@@ -44,7 +44,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="/login"><b>동물</b>생심</a>
+        <img src="/img/logo/logo_text1.png" alt="AdminLTE Logo" style="height: 70%; width:70%;">
     </div>
     <!-- /.login-logo -->
     <div class="card">

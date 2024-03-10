@@ -351,6 +351,7 @@
             </form>
         </section>
     </div>
+    <%@ include file="/include/footer.jsp"%>
 </div>
 <!-- /.container-fluid -->
 <!-- Main content -->
@@ -383,7 +384,7 @@
 <!-- /.content -->
 <!-- /.content-wrapper -->
 <!--footer-->
-<%@ include file="/include/footer.jsp"%>
+
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <script>
 

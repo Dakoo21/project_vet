@@ -95,28 +95,12 @@
                     <div class="col-sm-6">
                         <h1>기안서 작성</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
         <section class="content">
                 <div class="card-body">
-                    <div class="content_title">
-                        <fieldset style="max-width:90%;">
-                            <span class="detail_select">
-                                <a href="">기안하기</a>
-                            </span>
-                            <span class="detail_select">
-                                <a href="">임시저장</a>
-                            </span>
-                        </fieldset>
-                    </div>
                     <!-- signForm 시작 -->
                     <form id="signForm" method="post">
                         <table class="table table-bordered">
@@ -235,13 +219,17 @@
                                                 <!-- sign_title -->
                                                 <input type="text" name="SIGN_TITLE" id="SIGN_TITLE" class="form-control" placeholder="제목을 입력하세요">
                                             </div>
+                                            <div class="form-group">
+                                                <label>내용</label>
+                                                <!-- sign_title -->
+                                                <input type="text" name="SIGN_CONTENT" id="SIGN_CONTENT" class="form-control" placeholder="내용을 입력하세요">
+                                            </div>
                                             <div class="col-md-12" style="width: 100%">
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
     <%--                                                <textarea id="summernote" name="sign_content">--%>
     <%--                                                </textarea>--%>
                                                     <!-- sign_content -->
-                                                    <input type="text" name="SIGN_CONTENT" id="SIGN_CONTENT">
                                                 </div>
                                             </div>
                                             <!-- /.col-->
@@ -269,7 +257,7 @@
         </div>
 <%--        <button id="submitForms">전송</button>--%>
 <%--        <input type="button" value="전송" id="submitForms">--%>
-        <input type="button" value="전송" id="submitForms">
+        <button type="submit" id="submitForms">기안하기</button>
     </div>
     <!-- /.content-wrapper -->
     <!-- Summernote -->
@@ -424,6 +412,7 @@
                     data: { selectedValue: selectedValue },  // 전송할 데이터
                     success: function(response) {
                         console.log('전송 성공:', response);
+
                     },
                     error: function(error) {
                         console.error('전송 실패:', error);
@@ -482,7 +471,6 @@
         }
     });
 </script>
-
 <script>
     $(document).ready(function() {
         $('#submitForms').click(function() {
@@ -510,6 +498,7 @@
                 data:JSON.stringify(formData),
                 success: function(response) {
                     console.log('전송 성공:', response);
+                    window.location.href = '/eSign/docsBox';
                 },
                 error: function(error) {
                     console.error('전송 실패:', error);

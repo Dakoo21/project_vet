@@ -1,5 +1,6 @@
 package com.example.vet.controller.work.eSign;
 
+import com.example.vet.config.auth.PrincipalDetails;
 import com.example.vet.model.*;
 import com.example.vet.model.adopt.MissedAnimal;
 import com.example.vet.service.work.eSign.eSignDraft_Service;
@@ -7,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -134,8 +137,10 @@ public class eSignDraft_Controller {
         log.info(String.valueOf(generatedSignPk));
         signLine.setSIGN_PK(generatedSignPk);
         int result = eSignDraft_service.insertSignLine(signLine);
+        int adoptResult = eSignDraft_service.insertAdoptAnimal(signAdopt);
+        log.info("adoptResult" + adoptResult);
         //작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
-        return "pages/esignbox/docsBox";
+        return "docsBox";
     }
 
     /**********************************************************************************
@@ -158,25 +163,36 @@ public class eSignDraft_Controller {
 
     @PostMapping("lv2Update")
     public ResponseEntity<String> updateLV2(@RequestParam("signPk") Integer signPk) {
-            // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
-            eSignDraft_service.updateLV2(signPk);
+        log.info("lv2 update");
+        // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
+        int result = eSignDraft_service.updateLV2(signPk);
+        log.info("lv2 업데이트 " + result);
         return ResponseEntity.ok("Success");
     }
 
     @PostMapping("lv3Update")
     public ResponseEntity<String> updateLV3(@RequestParam("signPk") Integer signPk) {
+        log.info("lv3 update");
         // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
         eSignDraft_service.updateLV3(signPk);
         return ResponseEntity.ok("Success");
     }
-    // @GetMapping("lvUpdate")
-    // public String lvUpdate(@RequestParam("draftPk") int draft_pk, Model model) {
-    //
-    //     List<Sign> draftDetail = eSignDraft_service.selectDetail(draft_pk);
-    //     // model.addAttribute("lineList", lineList);
-    //     model.addAttribute("draftDetail",draftDetail);
-    //     return "pages/esignbox/esignDetail"; // forward라서 webapp아래에서 찾는다
-    // }
+
+    @PostMapping("lv2RejectedUpdate")
+    public ResponseEntity<String> rejectedLV2(@RequestParam("signPk") Integer signPk) {
+        log.info("lv2 rejectUpdate");
+        // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
+        eSignDraft_service.rejectedLV2(signPk);
+        return ResponseEntity.ok("Success");
+    }
+
+    @PostMapping("lv3RejectedUpdate")
+    public ResponseEntity<String> rejectedLV3(@RequestParam("signPk") Integer signPk) {
+        log.info("lv3 rejectUpdate");
+        // signPk를 이용하여 LV_2를 1로 업데이트하는 서비스 메소드 호출
+        eSignDraft_service.rejectedLV3(signPk);
+        return ResponseEntity.ok("Success");
+    }
 
     // json -> Sign 변환
     private Sign mapJsonToSign(List<Map<String, String>> formDataList) {
