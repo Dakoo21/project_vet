@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vet.paymentMapper">
+
+    <select id="paymentList2" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            a.BOOKING_PK AS BOOKING_PK,
+            a.BOOKING_DATE AS BOOKING_DATE,
+            b.ANIMAL_NM AS ANIMAL_NM,
+            d.MASTER_NM AS MASTER_NM,
+            d.MASTER_PNUMBER AS MASTER_PNUMBER,
+            e.DIAG_PRICE AS DIAG_PRICE,
+            e.DIAG_PK AS DIAG_PK,
+            c.COMMON_CODE_NM AS COMMON_CODE_NM
+        FROM BOOKING_TEST a
+        LEFT OUTER JOIN ANIMAL_TEST b ON a.ANIMALPK = b.ANIMALPK
+        LEFT OUTER JOIN MASTER_TEST d ON b.MASTERPK = d.MASTERPK
+        LEFT OUTER JOIN COMMON_CODE_TEST c ON a.COMMON_CODE_PK = c.COMMON_CODE_PK
+        LEFT OUTER JOIN DIAG_TEST e ON a.BOOKING_PK = e.BOOKING_PK
+        <where>
+            <if test="BOOKING_PK != null">
+                AND a.BOOKING_PK = #{BOOKING_PK}
+            </if>
+            <if test="gubun!=null">
+                <choose>
+                    <when test="gubun.equals('ANIMAL_NM')">
+                        AND b.ANIMAL_NM LIKE '%' || #{keyword} || '%'
+                    </when>
+                    <when test='gubun.equals("MASTER_NM")'>
+                        AND d.MASTER_NM LIKE '%'||#{keyword}||'%'
+                    </when>
+                    <when test='gubun.equals("COMMON_CODE_NM")'>
+                        AND COMMON_CODE_NM = '미수납'
+                    </when>
+                    <when test='gubun.equals("COMMON_CODE_NM1")'>
+                    AND COMMON_CODE_NM = '수납완료'
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY e.DIAG_PK DESC
+    </select>
+
+</mapper>
