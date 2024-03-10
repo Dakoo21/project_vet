@@ -2,6 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@include file="/include/common/bootstrap_common.jsp"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <form id="adoptForm" method="post" >
     <table class="table table-borderless">
@@ -20,7 +24,7 @@
         </tr>
         <tr>
             <th>체중</th>
-            <th><input type="text" class="form-control" id="ADOPT_WEIGHT" name="ADOPT_WEIGHT" placeholder=></th>
+            <th><input type="text" class="form-control" id="ADOPT_WEIGHT" name="ADOPT_WEIGHT" placeholder="KG"></th>
         </tr>
         <tr>
             <th>성별</th>
@@ -31,29 +35,34 @@
             <th><input type="text" class="form-control" id="ADOPT_NEUT" name="ADOPT_NEUT"></th>
         </tr>
         <tr>
-            <th>신청자</th>
-            <th><input type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM"></th>
+            <div class="row">
+                <div class="col-3">
+                    <th>신청자</th>
+                    <th><input style="width:300px; margin-right: 5px;" type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM"></th>
+                </div>
+                <div class="col-3">
+                    <th><button type="button" id="modalBtn2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm2">입양자 선택</button></th>
+                </div>
+            </div>
         </tr>
         <tr>
-            <th>입양신청서</th>
-            <th><input type="text" class="form-control" id="DESERTION_NO" placeholder="" name="DESERTION_NO"></th>
+            <th>유기번호</th>
+            <th><input style="width:300px; margin-right: 5px;" type="text" class="form-control" id="DESERTION_NO" placeholder="" name="DESERTION_NO"></th>
+            <th><button type="button" id="modalBtn1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm1">유기번호 조회</button></th>
+
         </tr>
         <tr>
             <th>이유</th>
             <th><input type="text" class="form-control" id="ADOPT_REASON" placeholder="" name="ADOPT_REASON"></th>
         </tr>
         <tr>
-            <th>breed</th>
+            <th>품종</th>
             <th><input type="text" class="form-control" id="ADOPT_BREED" placeholder="" name="ADOPT_BREED"></th>
         </tr>
         <tr>
             <th><input type="hidden" class="form-control" id="MASTERPK" placeholder="" name="MASTERPK" value=""></th>
         </tr>
     </table>
-    <div class="text-center">
-        <button type="submit" class="btn btn-danger" style="margin-right: 10px;">취소</button>
-        <button type="submit" class="btn btn-primary">등록</button>
-    </div>
 </form>
 <style>
     table {
@@ -77,26 +86,11 @@
 <div id="contentwrite">
     <div id="modal">
     </div>
-    <div>
-        <form>
-            <p>선택된 유기번호: <span id=""></span></p>
-            <table style="border-collapse: collapse; width: 50%;">
-                <tr>
-                    <th>유기동물</th>
-                    <td><input type="button" id="modalBtn1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm1"></td>
-                </tr>
-                <tr>
-                    <th>신청자</th>
-                    <td><input type="button" id="modalBtn2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm2">검색</td>
-                </tr>
-            </table>
-        </form>
-    </div>
 </div>
 <!--modal start-->
 <div class="modal" id="selectForm1">
     <div class="modal-dialog modal-dialog-centered modal-xl" id="dynamicModalSize">
-        <div class="modal-content">
+        <div class="modal-content" style="width:1000px">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">유기동물 조회</h4>
@@ -104,16 +98,6 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <!-- <form id="f_board" method="get" action="./boardInsert"> -->
-                <form id="f_board1" method="post" enctype="multipart/form-data" action="./boardInsert">
-                    <div class="col-6">
-                        <input type="text" id="keyword" class="form-control" placeholder="검색어를 입력하세요"
-                               aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
-                    </div>
-                    <div class="col-3">
-                        <button id="btn_search" class="btn btn-danger"></button>
-                    </div>
-                </form>
                 <div class="stockList">
                     <table class="table table-striped table-valign-middle" id="animalTable">
                         <thead>
@@ -123,8 +107,9 @@
                             <td>색</td>
                             <td>나이(출생연도)</td>
                             <td>몸무게</td>
-                            <td>사진</td>
                             <td>중성화</td>
+                            <td>성별</td>
+                            <td>사진</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -134,13 +119,13 @@
                             </td>
                         </tr>
                         </tbody>
+                        <tfoot>
+
+                        </tfoot>
                     </table>
+                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="선택">
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
-            <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
         </div>
     </div>
 </div>
@@ -156,15 +141,6 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <!-- <form id="f_board" method="get" action="./boardInsert"> -->
-                <form id="f_board" method="post" enctype="multipart/form-data" action="./boardInsert">
-                    <div class="col-6">
-                        <input type="text" id="keyword1" class="form-control" placeholder="검색어를 입력하세요"
-                               aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
-                    </div>
-                    <div class="col-3">
-                        <button id="btn_search1" class="btn btn-danger">검색</button>
-                    </div>
-                </form>
                 <div class="stockList">
                     <table class="table table-striped table-valign-middle" id="adopterTable">
                         <thead>
@@ -179,22 +155,40 @@
                         <tbody>
                         <tr>
                             <td>
-
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                    <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="선택">
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <input type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="boardInsert()"  value="선택">
-            <input type="button" class="btn btn-danger" data-bs-dismiss="modal" value="닫기">
-        </div>
     </div>
     <%--</div>--%>
 </body>
+<!-- 모달(Modal) 창 추가 -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">이미지 미리보기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="previewImage" src="" alt="동물 사진" style="max-width: 100%; max-height: 80vh;">
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    // 이미지를 팝업 창에서 열기 위한 함수
+    function openImagePopup(imageUrl) {
+        // 팝업 창을 열고 이미지를 표시하는 코드
+        var popup = window.open('', '_blank');
+        popup.document.write('<html><head><title>이미지 팝업</title></head><body style="text-align: center;"><img src="' + imageUrl + '" alt="동물 사진" style="max-width: 100%; max-height: 100%;"></body></html>');
+    }
+
     // 유기동물 조회 모달
     // 검색 버튼 클릭 시 모달창 열고 데이터 조회
     $(document).ready(function() {
@@ -215,7 +209,9 @@
                 }
             });
         });
-        $("#animalTable tbody").on("click", "tr", function(){
+
+        $("#animalTable tbody").on("click", "tr", function(event){
+            event.stopPropagation();
             var rowData = $(this).find("td").map(function(){
                 return $(this).text();
             }).get();
@@ -226,23 +222,19 @@
                 나이 : rowData[3],
                 몸무게 : rowData[4],
                 중성화 : rowData[5],
-                성별 : rowData[6]
+                성별 : rowData[6],
+                사진 : rowData[7]
             };
             const modalbtn11 = document.getElementById('modalBtn1');
             var selectedAnimalId = $(this).data("animal-id");
-            // $("#modalBtn1").text(selectedRowData.row[0]);
-            // $("#selectedAnimalIdDisplay").text(selectedRowData);
             var inputString = selectedRowData.품종명;
 
-            // 정규식 패턴을 사용하여 "[개]"와 "믹스견"을 추출
             var regexPattern = /\[([^\]]+)\]\s*([^]+)/;
             var matches = inputString.match(regexPattern);
 
             if (matches) {
-                // matches 배열의 두 번째 요소부터가 찾아낸 패턴 그룹에 해당
-                var species = matches[1];  // "[개]" 안의 내용
-                var breed = matches[2];    // "믹스견" 부분
-
+                var species = matches[1];
+                var breed = matches[2];
                 console.log("종류: " + species);
                 console.log("품종: " + breed);
             } else {
@@ -259,26 +251,25 @@
             $("#DESERTION_NO").val(selectedRowData.유기번호);
             $("#ADOPT_SEX").val(selectedRowData.성별);
 
-            // $("#modal").hide();
-            // $('#modalBtn1').text('abandonList[i].kindcd');
-            modalbtn11.type = 'text';
-            modalbtn11.value = 'zzz';
+            $("#modal").hide();
         });
-        // 모달창 닫기 버튼 클릭 이벤트
+
         $(".close").click(function(){
-            // 모달창을 닫으면서 선택한 값을 전달하는 로직을 추가
             $("#modal").hide();
         })
+
         function displayAnimalList(abandonList){
             var tableBody = $("#animalTable tbody")
             tableBody.empty();
             for (var i=0; i<abandonList.length; i++) {
-                console.log(abandonList[i]);
+                var imageUrl = abandonList[i].popfile;
+
+                // 이미지 URL이 존재하면 이미지를 팝업 창에서 열기, 아니면 '사진 없음' 문자열 출력
+                var imageCellContent = imageUrl
+                    ? '<a href="#" onclick="openImagePopup(\'' + imageUrl + '\')"><img src="' + imageUrl + '" alt="동물 사진" style="max-width: 100px;"></a>'
+                    : '사진 없음';
+
                 console.log(abandonList[i].kindcd);
-                // String kindCd = mList.getKindcd();
-                // String colorCd = mList.getColorcd();
-                // String age = mList.getAge();
-                // String weight = mList.getWeight();
                 var row = "<tr data-animal-id='" + abandonList[i].kindcd + "'>" +
                     "<td>" + abandonList[i].desertion_no + "</td>" +
                     "<td>" + abandonList[i].kindcd + "</td>" +
@@ -287,12 +278,12 @@
                     "<td>" + abandonList[i].weight + "</td>" +
                     "<td>" + abandonList[i].neuteral_yesorno + "</td>" +
                     "<td>" + abandonList[i].sex + "</td>" +
+                    "<td>" + imageCellContent + "</td>" +
                     "</tr>";
                 tableBody.append(row);
             }
-            // JSON 데이터를 JavaScript 객체로 파싱
+
             var parsedData = JSON.parse(JSON.stringify(abandonList));
-            // 각 키와 값을 분리하여 출력
             for (var key in parsedData) {
                 var value = parsedData[key];
                 console.log("키: " + key + ", 값: " + value);

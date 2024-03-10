@@ -62,7 +62,7 @@ public class eSign_Controller {
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         Integer userPK = principalDetails.getID();
         Sign esign = null;
-        List<SignTotal> progressList = esService.selectProgressList(userPK);
+        List<SignTotal> progressList = esService.selectProgressList();
         model.addAttribute("progressList", progressList);
         return "pages/esignbox/progressDocs";
     }

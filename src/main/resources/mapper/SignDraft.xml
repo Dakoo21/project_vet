@@ -45,7 +45,6 @@
             #{ADOPT_NM}, #{DESERTION_NO}, #{ADOPT_SPECIES}, #{ADOPT_BREED}, #{ADOPT_NEUT}, #{MASTERPK}, #{ADOPT_REASON}, #{ADOPT_BDATE}, #{ADOPT_SEX}, #{ADOPT_WEIGHT})
           ]]>
     </insert>
-
     <insert id="insertSignLine" parameterType="com.example.vet.model.SignLine">
         INSERT INTO SIGN_LINE2_TEST ("SIGN_PK","MEMBER_PK","SIGN_STATE","LV_1", "LV_2", "LV_3") VALUES (#{SIGN_PK},#{MEMBER_PK}, #{SIGN_STATE}, #{LV1}, #{LV2}, #{LV3})
     </insert>
@@ -97,4 +96,35 @@
     <update id="updateLV3" parameterType="int">
         UPDATE SIGN_LINE2_TEST SET LV_3 = '1', SIGN_STATE = '3' where SIGN_PK = #{signPk}
     </update>
+    <update id="rejectedLV2" parameterType="int">
+        UPDATE SIGN_LINE2_TEST SET LV_2 = '-1', SIGN_STATE = '-1' where SIGN_PK = #{signPk}
+    </update>
+    <update id="rejectedLV3" parameterType="int">
+        UPDATE SIGN_LINE2_TEST SET LV_3 = '-1', SIGN_STATE = '-1' where SIGN_PK = #{signPk}
+    </update>
+    <insert id="adoptInsert" parameterType="com.example.vet.model.SignTotal">
+        INSERT INTO animal_test(
+            ANIMALPK,
+            ANIMAL_NM,
+            ANIMAL_BDATE,
+            ANIMAL_SPECIES,
+            ANIMAL_BREED,
+            ANIMAL_WEIGHT,
+            ANIMAL_SEX,
+            ANIMAL_NEUT,
+            MASTERPK
+        )
+        VALUES(
+                  ANIMAL_PK_SEQ.NEXTVAL,
+                  #{ADOPT_NM},
+                  #{ADOPT_BDATE},
+                  #{ADOPT_SPECIES},
+                  #{ADOPT_BREED},
+                  #{ADOPT_WEIGHT},
+                  #{ADOPT_SEX},
+                  #{ADOPT_NEUT},
+                  #{MASTERPK}
+              )
+    </insert>
+
 </mapper>

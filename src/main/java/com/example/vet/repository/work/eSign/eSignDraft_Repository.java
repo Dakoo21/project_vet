@@ -99,4 +99,23 @@ public class eSignDraft_Repository {
         int result = sqlSessionTemplate.update("updateLV3", signPk);
         return result;
     }
+    public List<SignTotal> Select(int userPK) {
+        List<SignTotal> docList = sqlSessionTemplate.selectList("selectSignDetails", userPK);
+        return docList;
+    }
+
+    public int rejectedLV2(Integer signPk) {
+        int result = sqlSessionTemplate.update("rejectedLV2", signPk);
+        return result;
+    }
+
+    public int rejectedLV3(Integer signPk) {
+        int result = sqlSessionTemplate.update("rejectedLV3", signPk);
+        return result;
+    }
+
+    public int insertAdoptAnimal(SignAdopt signAdopt) {
+        int result = sqlSessionTemplate.insert("adoptInsert", signAdopt );
+        return result;
+    }
 }

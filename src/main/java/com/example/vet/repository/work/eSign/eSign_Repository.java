@@ -22,8 +22,8 @@ public class eSign_Repository {
         return docList;
     }
 
-    public List<SignTotal> selectProgressList(Integer userPK) {
-        List<SignTotal> progressList = sqlSessionTemplate.selectList("selectProgressList", userPK);
+    public List<SignTotal> selectProgressList() {
+        List<SignTotal> progressList = sqlSessionTemplate.selectList("selectProgressList");
         return progressList;
     }
 }

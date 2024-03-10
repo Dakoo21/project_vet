@@ -113,11 +113,11 @@
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->
-
+    <%@ include file="/include/footer.jsp"%>
 </div>
 
 <!-- ./wrapper -->
-<%@ include file="/include/footer.jsp"%>
+
 <%@ include file="/include/bootCommonFoot.jsp"%>
 </body>
 </html>

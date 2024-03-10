@@ -4,17 +4,24 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.vet.model.Notice" %>
+<%@ page import="com.example.vet.model.SignTotal" %>
 <%
     List<Map<String, Object>> bList = (List)request.getAttribute("bList");
     List<Notice> noticeList = (List<Notice>) request.getAttribute("noticeList");
     List<Map<String, Object>> employList = (List) request.getAttribute("employList");
+    // 전자결재
+    List<SignTotal> esignList = (List<SignTotal>) request.getAttribute("esignList");
     int size = 0;
     int size1 = 0;
+    int size2 = 0;
     if (noticeList != null) {
         size = noticeList.size();
     }
     if (employList != null) {
         size1 = employList.size();
+    }
+    if (esignList != null) {
+        size2 = employList.size();
     }
     int numPerPage = 3;
     int nowPage = 0;
@@ -201,81 +208,50 @@
                         <!--영역2-->
                         <div class="card">
                             <div class="card-header border-0">
-                                <h3 class="card-title">전자결재</h3>
+                                <h3 class="card-title">진행중인 문서함</h3>
                                 <div class="card-tools">
-                                    <a href="javascript:void(0);">더보기</a>
+                                    <a href="/eSign/progressDocs">더보기</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-striped table-valign-middle">
-                                    <thead>
-                                    <tr>
-                                        <th>제목</th>
-                                        <th>기안일</th>
-                                        <th>구분</th>
-                                        <th>상태</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            제모과과고가ㅗ가곽
-                                        </td>
-                                        <td>2024.02.02</td>
-                                        <td>
-                                            기안서
-                                        </td>
-                                        <td>
-                                            진행
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            제모과과고가ㅗ가곽
-                                        </td>
-                                        <td>2024.02.02</td>
-                                        <td>
-                                            기안서
-                                        </td>
-                                        <td>
-                                            진행
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            제모과과고가ㅗ가곽
-                                        </td>
-                                        <td>2024.02.02</td>
-                                        <td>
-                                            기안서
-                                        </td>
-                                        <td>
-                                            진행
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <%--                                            <img src="dist/img/default-150x150.png" alt="Product 1"--%>
-                                            <%--                                                 class="img-circle img-size-32 mr-2">--%>
-                                            <%--    이미지--%>
-                                            제모과과고가ㅗ가곽
-                                        </td>
-                                        <td>2024.02.02</td>
-                                        <td>
-                                            기안서
-                                        </td>
-                                        <td>
-                                            진행
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class ="table">
+                                    <table class="table table-hover dt-responsive">
+                                        <thead>
+                                        <tr>
+                                            <th>문서번호</th>
+                                            <th>문서 제목</th>
+                                            <th>결재 기안일</th>
+                                            <th>결재 상태</th>
+                                            <th>문서 구분</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%
+                                            for(int i=nowPage*8;i<(nowPage*8)+8;i++){
+                                                if(i == size) break;
+                                                SignTotal signTotal = esignList.get(i);
+                                                String docState = null;
+                                                if(signTotal.getSIGN_STATE()==3){
+                                                    docState = "진행";
+                                                    int docNo = signTotal.getSIGN_PK();
+                                                    String docTitle = signTotal.getSIGN_TITLE();
+                                                    String docDate = signTotal.getSIGN_DATE();
+                                                    String docType = signTotal.getSIGN_DOCTYPE();
+                                        %>
+                                        <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
+                                            <td><%=docNo%></td>
+                                            <td><%=docTitle%></td>
+                                            <td><%=docDate%></td>
+                                            <td><%=docState%></td>
+                                            <td><%=docType%></td>
+                                        </tr>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card -->
