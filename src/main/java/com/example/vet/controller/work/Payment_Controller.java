@@ -45,15 +45,9 @@ public class Payment_Controller {
 
         // 결제 서비스를 통해 데이터를 삽입하고 결과를 받음
         int result = paymentService.paymentInsert(pmap);
+        logger.info(String.valueOf(result));
 
-        // 결과에 따라 다음 경로 결정
-        if (result == 1) {
-            // 삽입 성공 시 paymentList로 리다이렉트
-            return "redirect:/paymentList";
-        } else {
-            // 삽입 실패 시 에러 페이지로 리다이렉트
-            return "redirect:/paymentError.jsp";
-        }
+        return "redirect:/payment2/paymentList2";
     }
 
     @PostMapping("/paymentCash")
@@ -66,11 +60,22 @@ public class Payment_Controller {
         // 결과에 따라 다음 경로 결정
         if (result == 1) {
             // 삽입 성공 시 paymentList로 리다이렉트
-            return "redirect:/payment/paymentList";
+            return "redirect:/payment2/paymentList2";
         } else {
             // 삽입 실패 시 에러 페이지로 리다이렉트
             return "redirect:/paymentError.jsp";
         }
+    }
+
+    @PostMapping("paymentUpdate")
+    public String paymentUpdate(@RequestParam Map<String, Object> pmap) {
+        logger.info("paymentUpdate입니다");
+
+        // 결제 서비스를 통해 데이터를 삽입하고 결과를 받음
+        int result2 = paymentService.paymentUpdate(pmap);
+        logger.info(String.valueOf(result2));
+
+        return "redirect:/payment/paymentList";
     }
 
 }

@@ -41,4 +41,11 @@ public class Payment_Repository {
         logger.info("paymentRepository getPaymentInfo입니다");
         return sqlSessionTemplate.selectOne("getPaymentInfo", diagPk);
     }
+
+    public int paymentUpdate(Map<String, Object> pmap) {
+        logger.info("paymentUpdate입니다");
+        int result2 = 0;
+        result2 = sqlSessionTemplate.update("paymentUpdate", pmap);
+        return result2;
+    }
 }

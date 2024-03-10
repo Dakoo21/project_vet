@@ -279,7 +279,7 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                            <a href="/diag/diagList" class="nav-link">
+                            <a href="/payment2/paymentList2" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록</p>
                             </a>
@@ -458,7 +458,7 @@
                         </li>
                         <!-- 하위메뉴 시작 -->
                         <li class="nav-item">
-                                <a href="/diag/diagList" class="nav-link">
+                                <a href="/payment2/paymentList2" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>진료기록</p>
                             </a>

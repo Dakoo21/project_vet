@@ -24,4 +24,10 @@ public class Payment_Repository2 {
         paymentList = sqlSessionTemplate.selectList("paymentList2", payment);
         return paymentList;
     }
+
+/*    public List<Map<String, Object>> paymentPage(Map<String, Object> pmap) {
+        log.info("paymentPage 레포지토리");
+        List<Map<String, Object>> list = sqlSessionTemplate.selectList("paymentList", pmap);
+        return list;
+    }*/
 }

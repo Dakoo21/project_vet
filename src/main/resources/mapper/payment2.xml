@@ -50,4 +50,28 @@
         ORDER BY e.DIAG_PK DESC
     </select>
 
+
+
+<select id="paymentPage" parameterType="map"  resultType = "map">
+    SELECT
+    PAYMENT.PAYMENT_PK AS payment_pk,
+    PAYMENT.MERCHANT_UID AS merchant_uid,
+    PAYMENT.PG_PROVIDER AS pg_provider,
+    PAYMENT.PAID_AT AS paid_at,
+    PAYMENT.STATUS AS status,
+    PAYMENT.PG_TID AS pg_tid,
+    PAYMENT.BUYER_NAME AS buyer_name,
+    PAYMENT.BUYER_TEL AS buyer_tel,
+    PAYMENT.PAID_AMOUNT AS paid_amount,
+    PAYMENT.IMP_UID AS imp_uid,
+    PAYMENT.NAME AS name
+    FROM
+    PAYMENT_TEST PAYMENT
+    <where>
+        <if test="payment_pk!=null">AND PAYMENT.PAYMENT_PK=#{payment_pk}</if>
+    </where>
+    ORDER BY
+    PAYMENT.PAYMENT_PK DESC
+</select>
+
 </mapper>

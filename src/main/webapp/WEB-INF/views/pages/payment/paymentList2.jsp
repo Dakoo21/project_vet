@@ -53,8 +53,9 @@
           location.href = "/payment2/DIAGDetail?BOOKING_PK=" + BOOKING_PK;
         }
 
-        const paymentDetail = () => {
+        const paymentDetail = (BOOKING_PK) => {
           console.log("결제 상세 페이지 요청")
+            location.href = "/payment2/paymentPage?BOOKING_PK=" + BOOKING_PK;
         }
     </script>
 </head>
@@ -133,16 +134,16 @@
                                             if(i == size) break;
                                             Map<String, Object> pMap = paymentList.get(i);
                                     %>
-                                    <tr onclick="DIAGDetail('<%=pMap.get("BOOKING_PK")%>')">
-                                        <td><%=pMap.get("DIAG_PK")%></td>
-                                        <td><%=pMap.get("ANIMAL_NM")%></td>
-                                        <td><%=pMap.get("MASTER_NM")%></td>
-                                        <td><%=pMap.get("DIAG_PRICE")%></td>
+                                    <tr>
+                                        <td onclick="DIAGDetail('<%=pMap.get("BOOKING_PK")%>')"><%=pMap.get("DIAG_PK")%></td>
+                                        <td onclick="DIAGDetail('<%=pMap.get("BOOKING_PK")%>')"><%=pMap.get("ANIMAL_NM")%></td>
+                                        <td onclick="DIAGDetail('<%=pMap.get("BOOKING_PK")%>')"><%=pMap.get("MASTER_NM")%></td>
+                                        <td onclick="DIAGDetail('<%=pMap.get("BOOKING_PK")%>')"><%=pMap.get("DIAG_PRICE")%></td>
                                         <%
                                             if ("미수납".equals(pMap.get("COMMON_CODE_NM"))) {
                                         %>
                                         <td>
-                                            <a class="btn btn-info btn-sm" onclick="paymentDetail()">
+                                            <a class="btn btn-info btn-sm" onclick="paymentDetail('<%=pMap.get("BOOKING_PK")%>')">
                                                 미수납
                                             </a>
                                         </td>

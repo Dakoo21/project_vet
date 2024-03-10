@@ -42,4 +42,15 @@ public class Payment_Controller2 {
         log.info(diagDetail.toString());
         return "pages/customerDB/MedicalChart2";
     }
+    @GetMapping("paymentPage")
+    public String paymentPage(Model model, @RequestParam Map<String, Object> pmap) {
+        List<Map<String, Object>> pList = null;
+        log.info("paymentPage 컨트롤러");
+        pList = payment_service2.paymentList(pmap);
+        log.info(pList.toString());
+        model.addAttribute("pList", pList);
+        return "pages/payment/paymentList";
+    }
+
+
 }

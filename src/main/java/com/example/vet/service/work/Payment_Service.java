@@ -46,5 +46,9 @@ public class Payment_Service {
     }
 
 
-
+    public int paymentUpdate(Map<String, Object> pmap) {
+        int result2 = 0;
+        result2 = paymentRepository.paymentUpdate(pmap);
+        return result2;
+    }
 }

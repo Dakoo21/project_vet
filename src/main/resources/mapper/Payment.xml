@@ -41,5 +41,11 @@
         PAYMENT.PAYMENT_PK DESC
     </select>
 
+    <update id="paymentUpdate"  parameterType="map">
+        UPDATE BOOKING_TEST
+        SET COMMON_CODE_PK = 126
+        WHERE BOOKING_PK = #{BOOKING_PK}
+    </update>
+
 </mapper>
 
