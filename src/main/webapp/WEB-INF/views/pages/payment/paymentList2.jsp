@@ -48,9 +48,9 @@
             location.href = "/payment2/paymentList2?gubun=COMMON_CODE_NM1&keyword=수납완료";
         }
 
-        const DIAGDetail = (DIAG_PK) => {
+        const DIAGDetail = (BOOKING_PK) => {
           console.log("진료 기록 조회 요청");
-          location.href = "/diag/diagDetail?diagPk=" +DIAG_PK;
+          location.href = "/payment2/DIAGDetail?BOOKING_PK=" + BOOKING_PK;
         }
 
         const paymentDetail = () => {
@@ -133,7 +133,7 @@
                                             if(i == size) break;
                                             Map<String, Object> pMap = paymentList.get(i);
                                     %>
-                                    <tr onclick="DIAGDetail('<%=pMap.get("DIAG_PK")%>')">
+                                    <tr onclick="DIAGDetail('<%=pMap.get("BOOKING_PK")%>')">
                                         <td><%=pMap.get("DIAG_PK")%></td>
                                         <td><%=pMap.get("ANIMAL_NM")%></td>
                                         <td><%=pMap.get("MASTER_NM")%></td>

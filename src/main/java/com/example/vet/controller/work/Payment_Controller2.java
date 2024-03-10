@@ -31,4 +31,15 @@ public class Payment_Controller2 {
         model.addAttribute("paymentList", paymentList);
         return "pages/payment/paymentList2";
     }
+
+    @GetMapping("DIAGDetail")
+    public String diagDetail (Model model, @RequestParam Map<String, Object> DIAGMap) {
+        log.info("진료 기록 상세 조회");
+        log.info(DIAGMap.toString());
+        List<Map<String, Object>> diagDetail;
+        diagDetail = payment_service2.paymentList(DIAGMap);
+        model.addAttribute("diagDetail", diagDetail);
+        log.info(diagDetail.toString());
+        return "pages/customerDB/MedicalChart2";
+    }
 }
