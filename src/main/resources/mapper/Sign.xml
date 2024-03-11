@@ -77,5 +77,7 @@
             SIGN_LINE2_TEST L ON S.SIGN_PK = L.SIGN_PK
                 INNER JOIN
             USER_TEST5 U ON U.MEMBER_PK = S.MEMBER_PK
+
+        ORDER BY SIGN_PK DESC
     </select>
 </mapper>

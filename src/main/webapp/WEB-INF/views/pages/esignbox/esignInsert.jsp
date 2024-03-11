@@ -172,7 +172,7 @@
                                         </tr>
                                         <tr>
                                             <td class="name gt-position-relative">
-                                                <span class="stamp-step-num"><%=username%></span>
+                                                <span class="stamp-step-num">정다은</span>
                                             </td>
                                             <td class="cell">
                                                 <div class="after" style="display: flex; align-items: center;">
