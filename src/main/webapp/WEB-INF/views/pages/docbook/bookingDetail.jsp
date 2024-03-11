@@ -4,7 +4,7 @@
          pageEncoding="UTF-8"%>
 <%
     List<Map<String, Object>> bList = (List)request.getAttribute("nList");
-    Map<String,Object> rmap;
+    Map<String,Object> rmap = bList.get(0);
     if(bList.size()==1){
         rmap = bList.get(0);
     }
@@ -64,12 +64,6 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>진료예약 상세페이지</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Icons</li>
-                        </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -228,6 +222,7 @@
                     <div class="card-body">
                         <form id="reservationForm" action="bookingUpdate" method="POST">
                             <input type="hidden" name="bookingPk" value="<%=rmap.get("bookingPk")%>">
+                            <input type="hidden" name="animalPk" value="<%=rmap.get("animalPk")%>">
                         <!-- 보호자명 -->
 
                             <div class="input-group mb-3">
@@ -367,7 +362,7 @@
                                 <label style="display: inline-block; width: 70px;">담당자</label>
                                 <select id="userPkSelect" class="form-control select2" style="display: inline-block; width: 150px;" name="userPk">
 
-                                    <option value="<%=rmap.get("userNm")%>" selected="selected"  ><%=rmap.get("userNm")%></option>
+                                    <option value="<%=rmap.get("userPK")%>" selected="selected"  ><%=rmap.get("userNm")%></option>
                                     <option value="9999999">원장</option>
                                     <option value="9999998">부원장</option>
                                 </select>

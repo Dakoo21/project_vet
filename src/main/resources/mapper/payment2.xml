@@ -47,7 +47,7 @@
                 </choose>
             </if>
         </where>
-        ORDER BY e.DIAG_PK DESC
+        ORDER BY e.BOOKING_PK DESC
     </select>
 
 
