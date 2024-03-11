@@ -33,7 +33,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료 기록 조회</h1>
+                        <h1 class="noto-sans">진료 기록 조회</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

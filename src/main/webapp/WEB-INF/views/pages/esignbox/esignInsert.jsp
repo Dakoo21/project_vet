@@ -93,7 +93,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>기안서 작성</h1>
+                        <h1 class="noto-sans">기안서 작성</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -116,10 +116,10 @@
                                     </select>
                                 </td>
                                 <th>작성자</th>
-                                <td><%=username%></td>
+                                <td>정다은</td>
                             </tr>
                             <tr>
-                                <th scope="row">보존 연한</th>
+                                <th scope="row">보존 연한 </th>
                                 <td>
                                     <!-- sign_reserv_year -->
                                     <select name="SIGN_RESERV_YEAR" id="SIGN_RESERV_YEAR" class="fl write-select">
@@ -257,7 +257,7 @@
         </div>
 <%--        <button id="submitForms">전송</button>--%>
 <%--        <input type="button" value="전송" id="submitForms">--%>
-        <button type="submit" id="submitForms">기안하기</button>
+        <button type="submit" class="btn btn-warning" id="submitForms" style="margin-left: 27px; margin-bottom: 20px;">기안하기</button>
     </div>
     <!-- /.content-wrapper -->
     <!-- Summernote -->
@@ -395,13 +395,13 @@
 
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "토마토" && selectedCell) {
-                $('#cell1').text('부원장');
+                $('#cell2').text('원장');
                 // idSpan.style.display = 'none';
                 // $(selectedCell).children('.dynamicButton').hide();
             }
             // 선택한 라디오 버튼의 값이 "토마토"인 경우 1행 1열에 "관리자" 텍스트 추가
             if (selectedValue === "사과" && selectedCell) {
-                $('#cell2').text('원장');
+                $('#cell1').text('부원장');
             }
             // 모달 닫기
             // 선택한 라디오 버튼의 값을 서버로 전송

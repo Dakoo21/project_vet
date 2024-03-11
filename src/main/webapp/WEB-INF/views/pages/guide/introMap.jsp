@@ -17,6 +17,7 @@
   </style>
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6ac54905ef797d47f8532567996ab799"></script>
+  <%@ include file="/include/bootCommon.jsp"%>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -26,7 +27,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1> 병원안내</h1>
+      <h1 class="noto-sans"> 병원안내</h1>
     </section>
 
     <script>

@@ -60,13 +60,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>고객 등록</h1>
+                        <h1 class="noto-sans">고객 등록</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
         <!-- Main content -->
-        <section class="content">
+        <section class="content" style="height: 700px;">
             <div class="mb-3 row">
             <div id="contents_box">
                 <div id="table_area" >
@@ -129,7 +129,7 @@
                             </ul>
                         </form>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" style="margin-top: 50px">
                         <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="customerList()">취소</button>
                         <button type="button" class="btn btn-success" style="margin-right: 10px;" onclick="insert()">등록</button>
                     </div>
@@ -157,10 +157,6 @@
 
         padding: 0;
         box-sizing: border-box;
-    }
-
-    .text-center{
-        margin-top: 180px;
     }
 
     .form-control{

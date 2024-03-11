@@ -13,7 +13,7 @@
     if (docList != null) {
         size = docList.size();
     }
-    int numPerPage = 8;
+    int numPerPage = 10;
     int nowPage = 0;
     if(request.getParameter("nowPage")!=null){
         nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -44,7 +44,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진행중인문서</h1>
+                        <h1 class="noto-sans">진행중인문서</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -73,7 +73,6 @@
                             </div>
                         </div>
                     </h3>
-
                     <div class="card-tools">
                         <ul class="nav nav-pills ml-auto">
                             <li class="nav-item">
@@ -94,9 +93,9 @@
                 <div class="card-body" >
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
-                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 500px;">
+                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -113,25 +112,25 @@
                                             SignTotal signTotal = docList.get(i);
                                             String docState = null;
                                             if(signTotal.getSIGN_STATE() != -1 && signTotal.getSIGN_STATE() != 0){
-                                            if(signTotal.getSIGN_STATE()==1){
-                                                if(role1.equals("ROLE_MASTER")){
-                                                    docState = "대기";
-                                                }else if(role1.equals("ROLE_ADMIN")){
-                                                    docState = "예정";
+                                                if(signTotal.getSIGN_STATE()==1){
+                                                    if(role1.equals("ROLE_MASTER")){
+                                                        docState = "대기";
+                                                    }else if(role1.equals("ROLE_ADMIN")){
+                                                        docState = "예정";
+                                                    }
+                                                }else if(signTotal.getSIGN_STATE()==2){
+                                                    if(role1.equals("ROLE_MASTER")){
+                                                        docState = "진행";
+                                                    }else if(role1.equals("ROLE_ADMIN")){
+                                                        docState = "대기";
+                                                    }
+                                                }else if(signTotal.getSIGN_STATE()==3){
+                                                    docState = "결재완료";
                                                 }
-                                            }else if(signTotal.getSIGN_STATE()==2){
-                                                if(role1.equals("ROLE_MASTER")){
-                                                    docState = "진행";
-                                                }else if(role1.equals("ROLE_ADMIN")){
-                                                    docState = "대기";
-                                                }
-                                            }else if(signTotal.getSIGN_STATE()==3){
-                                                docState = "결재완료";
-                                            }
-                                            int docNo = signTotal.getSIGN_PK();
-                                            String docTitle = signTotal.getSIGN_TITLE();
-                                            String docDate = signTotal.getSIGN_DATE();
-                                            String docType = signTotal.getSIGN_DOCTYPE();
+                                                int docNo = signTotal.getSIGN_PK();
+                                                String docTitle = signTotal.getSIGN_TITLE();
+                                                String docDate = signTotal.getSIGN_DATE();
+                                                String docType = signTotal.getSIGN_DOCTYPE();
                                     %>
                                     <tr onclick="signOneDetail('<%=signTotal.getSIGN_PK()%>')">
                                         <td><%=docNo%></td>
@@ -159,7 +158,7 @@
                         </div>
                         <div class="chart tab-pane" id="select-pending" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -231,7 +230,7 @@
                         </div>
                         <div class="chart tab-pane" id="select-scheduled" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>
@@ -299,7 +298,7 @@
                         </div>
                         <div class="chart tab-pane" id="select-progress" style="position: relative; height: 700px;">
                             <div class ="table">
-                                <table class="table table-striped table-bordered table-hover dt-responsive">
+                                <table class="table table-hover dt-responsive">
                                     <thead>
                                     <tr>
                                         <th>문서번호</th>

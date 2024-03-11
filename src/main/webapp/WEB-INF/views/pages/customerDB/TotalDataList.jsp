@@ -102,7 +102,6 @@
     <title>동물 데이터</title>
     <%@ include file="/include/bootCommon.jsp" %>
 </head>
-
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <%@ include file="/include/sidebar.jsp" %>
@@ -113,7 +112,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>동물 데이터 조회</h1>
+                        <h1 class="noto-sans">동물 데이터 조회</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -128,22 +127,23 @@
                     <h3 class="card-title">
             <!-- 검색기 시작 -->
                         <div class="row">
-                          <div class="col-3">
-                               <select id="gubun" name="gubun" class="form-control" aria-label="분류선택">
-                                   <option value="none">분류선택</option>
+                            <div class="col-3">
+                                <select id="gubun" name="gubun" class="form-control" aria-label="분류선택">
+                                    <option value="none">분류선택</option>
                                     <option value="master_nm">고객명</option>
                                     <option value="animal_nm">반려동물명</option>
-                              </select>
-                          </div>
+                                </select>
+                            </div>
                             <div class="spacer"></div>
-                           <div class="col-5">
+                            <div class="col-5">
                                  <input type="text" id="keyword"  class="form-control" placeholder="검색어를 입력하세요"
                                     aria-label="검색어를 입력하세요" aria-describedby="btn_search" onkeyup="searchEnter()"/>
-                           </div>
-                       <div class="col-3">
-                          <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
-                      </div>
-                   </div>
+                            </div>
+                        <div class="col-3">
+                            <button id="btn_search" class="btn btn-danger" onClick="boardSearch()">검색</button>
+                        </div>
+
+                    </div>
                  </h3>
             <!--카테고리 버튼-->
             <div class="card-tools">
@@ -166,14 +166,13 @@
       </div>
    </section>
         <!-- Main content -->
-        <section class="content">
+        <section class="content" style="height:500px">
             <!-- Default box -->
-            <div class="card">
                 <div class="card-body">
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
                         <div class="chart tab-pane active" id="select-all"
-                             style="position: relative; height: 100%;">
+                             style="position: relative;">
                             <div>
                                 <table class="table table-striped table-bordered table-hover dt-responsive">
                                     <thead>
@@ -214,19 +213,18 @@
                                         out.print(bspb.getPageBar());
                                     %>
                                 </div>
+                                <div class="col-3">
+                                    <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-secondary">동물등록</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
-                    <div class="col-md-2">
-                        <a href="/CustomerDB/TotalDataInsertPage" type="button" class="btn btn-warning">등록</a>
-                    </div>
                 </div>
-            </div>
         </section>
         </div>
             <!-- /.content -->
-
+    <%@ include file="/include/footer.jsp"%>
         <!-- /.content-wrapper -->
     </div>
     <!-- Control Sidebar -->
@@ -256,7 +254,7 @@
 <%--    });--%>
 <%--</script>--%>
 
-<%@ include file="/include/footer.jsp"%>
+
 </body>
 </html>
 <style>

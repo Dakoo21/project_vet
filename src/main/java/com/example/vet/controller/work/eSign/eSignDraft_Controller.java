@@ -61,10 +61,7 @@ public class eSignDraft_Controller {
     @ResponseBody
     @GetMapping("selectLine") // 요청 URL을 정확하게 지정
     public List<Member> selectLine(Model model) { // 파라미터 명을 JSP 파일에서 보낸 데이터와 일치시킴
-        log.info("결재선 조회");
         List<Member> lineList = eSignDraft_service.findLine();
-        // model.addAttribute("lineList", lineList);
-        log.info(lineList.toString());
         return lineList;
     }
 
@@ -107,7 +104,6 @@ public class eSignDraft_Controller {
     public String draftDetail(@RequestParam("draftPk") int draft_pk, Model model) {
         log.info("기안서 상세페이지 조회");
         List<Sign> draftDetail = eSignDraft_service.selectDetail(draft_pk);
-        // model.addAttribute("lineList", lineList);
         model.addAttribute("draftDetail",draftDetail);
         return "pages/esignbox/esignDetail"; // forward라서 webapp아래에서 찾는다
     }
@@ -126,20 +122,12 @@ public class eSignDraft_Controller {
         Sign sign =  mapJsonToSign(data1);
         SignLine signLine = mapJsonToSignLine(data2);
         SignAdopt signAdopt = mapJsonToSignAdopt(data3);
-        log.info(sign.toString());
-        log.info(signLine.toString());
-        log.info(signAdopt.toString());
-        log.info("generatedSignPk컨트롤러");
         int generatedAdoptSign = eSignDraft_service.createAdoptSign(signAdopt);
-        log.info(String.valueOf(generatedAdoptSign));
         sign.setADOPT_PK(generatedAdoptSign);
         int generatedSignPk = eSignDraft_service.createSign(sign);
-        log.info(String.valueOf(generatedSignPk));
         signLine.setSIGN_PK(generatedSignPk);
-        int result = eSignDraft_service.insertSignLine(signLine);
-        int adoptResult = eSignDraft_service.insertAdoptAnimal(signAdopt);
-        log.info("adoptResult" + adoptResult);
-        //작업 결과에 따라 응답을 반환 (예: 성공 시 "Success", 실패 시 "Failure")
+        eSignDraft_service.insertSignLine(signLine);
+        eSignDraft_service.insertAdoptAnimal(signAdopt);
         return "docsBox";
     }
 
@@ -150,12 +138,10 @@ public class eSignDraft_Controller {
      **********************************************************************************/
     @GetMapping("eSignDetail")
     public String eSignDetail (Model model,@RequestParam(value="SIGN_PK") int signPk) {
-        // log.info(notice.toString());
         SignTotal signTotal;
         signTotal = eSignDraft_service.eSignDetail(signPk);
         String masterName = eSignDraft_service.masterName(signTotal.getMASTERPK());
         signTotal.setMASTER_NAME(masterName);
-        // log.info(noticeDetail.toString());
         log.info("detail select완료" + signTotal.toString());
         model.addAttribute("eSignDetail", signTotal);
         return "pages/esignbox/esignDetail";

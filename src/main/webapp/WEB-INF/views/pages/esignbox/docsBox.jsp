@@ -13,7 +13,7 @@
     if (docList != null) {
         size = docList.size();
     }
-    int numPerPage = 8;
+    int numPerPage = 10;
     int nowPage = 0;
     if(request.getParameter("nowPage")!=null){
         nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -46,7 +46,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>문서보관함</h1>
+                        <h1 class="noto-sans">문서보관함</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -99,7 +99,7 @@
                 <div class="card-body" >
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
-                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 500px;">
+                        <div class="chart tab-pane active" id="select-all" style="position: relative; height: 700px;">
                             <div class ="table">
                                 <table class="table table-hover dt-responsive">
                                     <thead>

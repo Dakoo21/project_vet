@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료 상세</h1>
+                        <h1 class="noto-sans">진료 상세</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -34,7 +34,7 @@
             <!--여기 -->
             <div id="contents_box">
                 <div id="img_area">
-                    <img alt="Avatar" class="table-avatar" src="../../img/dog1.jpeg">
+                    <img alt="Avatar" class="table-avatar" src="/img/logo/logo_2.png">
                 </div>
                 <div id="table_area">
                     <table class="table table-borderless">

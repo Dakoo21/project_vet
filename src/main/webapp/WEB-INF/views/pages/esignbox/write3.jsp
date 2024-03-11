@@ -7,8 +7,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<form id="adoptForm" method="post" >
-    <table class="table table-borderless">
+<form id="adoptForm" method="post">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>동물이름</th>
@@ -35,21 +35,14 @@
             <th><input type="text" class="form-control" id="ADOPT_NEUT" name="ADOPT_NEUT"></th>
         </tr>
         <tr>
-            <div class="row">
-                <div class="col-3">
-                    <th>신청자</th>
-                    <th><input style="width:300px; margin-right: 5px;" type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM"></th>
-                </div>
-                <div class="col-3">
-                    <th><button type="button" id="modalBtn2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm2">입양자 선택</button></th>
-                </div>
-            </div>
+            <th>신청자</th>
+            <th><input type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM"></th>
+            <th><button type="button" id="modalBtn2" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#selectForm2">입양자 선택</button></th>
         </tr>
         <tr>
             <th>유기번호</th>
-            <th><input style="width:300px; margin-right: 5px;" type="text" class="form-control" id="DESERTION_NO" placeholder="" name="DESERTION_NO"></th>
-            <th><button type="button" id="modalBtn1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#selectForm1">유기번호 조회</button></th>
-
+            <th><input type="text" class="form-control" id="DESERTION_NO" placeholder="" name="DESERTION_NO"></th>
+            <th><button type="button" id="modalBtn1" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#selectForm1">유기번호 조회</button></th>
         </tr>
         <tr>
             <th>이유</th>
@@ -58,8 +51,6 @@
         <tr>
             <th>품종</th>
             <th><input type="text" class="form-control" id="ADOPT_BREED" placeholder="" name="ADOPT_BREED"></th>
-        </tr>
-        <tr>
             <th><input type="hidden" class="form-control" id="MASTERPK" placeholder="" name="MASTERPK" value=""></th>
         </tr>
     </table>
@@ -149,7 +140,6 @@
                             <td>전화번호</td>
                             <td>이메일</td>
                             <td>주소</td>
-                            <td>번호</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -319,8 +309,7 @@
             이름 : rowData[0],
             전화번호 : rowData[1],
             이메일 : rowData[2],
-            주소 : rowData[3],
-            번호 : rowData[4]
+            주소 : rowData[3]
         };
         var selectedAdopterId = $(this).data("adopter-id");
         $("#selectedAdopterDisplay").text(JSON.stringify(selectedRowData, null, 2));
@@ -344,7 +333,6 @@
                 "<td>" + data[i].master_pnumber + "</td>" +
                 "<td>" + data[i].master_email + "</td>" +
                 "<td>" + data[i].master_address + "</td>" +
-                "<td>" + data[i].masterPk + "</td>" +
                 "</tr>";
             tableBody.append(row);
         }

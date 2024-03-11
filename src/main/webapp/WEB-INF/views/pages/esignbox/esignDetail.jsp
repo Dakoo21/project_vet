@@ -51,7 +51,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>기안서</h1>
+                        <h1 class="noto-sans">기안서</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -60,17 +60,12 @@
         <section class="content">
             <!--여기 -->
             <div class="card-body">
-                <div class="content_title">
-                    <fieldset style="max-width:90%;">
-                        <span>기안서</span>
-                    </fieldset>
-                </div>
                 <table class="table table-bordered">
                     <tr>
                         <th>문서 종류</th>
                         <td>지출결의서</td>
                         <th>작성자</th>
-                        <td>김엘모</td>
+                        <td>정다은</td>
                     </tr>
                     <tr>
                         <th scope="row">문서번호</th>
@@ -79,9 +74,6 @@
                         <td><%=signTotal.getSIGN_RESERV_YEAR()%></td>
                     </tr>
                 </table>
-                <div class="after" style="display: flex; align-items: center;">
-                    <h4 class="fl mgr_20" style="margin-right: 10px;">결재선</h4>
-                </div>
                 <!-- 부원장으로 로그인 했을 떄 -->
                 <%
                     if(role1.equals("ROLE_MASTER")){
@@ -91,8 +83,7 @@
                         <tr>
                             <th scope="row" class="gray-background centered-text sign">
                                 <div style="vertical-align: middle;">
-                                    결재
-
+                                    결재선
                                 </div>
                             </th>
                             <th class="white-background">
@@ -178,12 +169,12 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>김엘모</td>
+                                        <td>정다은</td>
                                         <td class="name gt-position-relative">
-                                            <span class="stamp-step-num"></span>토마토
+                                            <span class="stamp-step-num"></span>이지연
                                         </td>
                                         <td class="name gt-position-relative">
-                                            <span class="stamp-step-num"></span>키위
+                                            <span class="stamp-step-num"></span>이유리
                                         </td>
                                     </tr>
                                     </tbody>
@@ -204,7 +195,7 @@
                     <tr>
                         <th scope="row" class="gray-background centered-text sign">
                             <div style="vertical-align: middle;">
-                                결재
+                                결재선
                             </div>
                         </th>
                         <th class="white-background">
@@ -287,12 +278,14 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>김엘모</td>
                                     <td class="name gt-position-relative">
-                                        <span class="stamp-step-num"></span>대표이사
+                                        <span class="stamp-step-num">정다은</span>
                                     </td>
                                     <td class="name gt-position-relative">
-                                        <span class="stamp-step-num"></span>대표이사
+                                        <span class="stamp-step-num">이지연</span>
+                                    </td>
+                                    <td class="name gt-position-relative">
+                                        <span class="stamp-step-num">이유리</span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -309,12 +302,12 @@
                 <div class="form-group">
                     <label>제목</label>
                     <!-- sign_title -->
-                    <input type="text" class="form-control" value="<%=signTotal.getSIGN_TITLE()%>">
+                    <input type="text" class="form-control" value="<%=signTotal.getSIGN_TITLE()%>" readonly>
                 </div>
                 <div class="form-group">
                     <label>내용</label>
                     <!-- sign_title -->
-                    <input type="text" class="form-control" value="<%=signTotal.getSIGN_CONTENT()%>">
+                    <input type="text" class="form-control" value="<%=signTotal.getSIGN_CONTENT()%>" readonly>
                 </div>
                 <%@include file="selectAdoptDraft.jsp"%>
             </div>

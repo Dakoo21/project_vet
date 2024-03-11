@@ -72,7 +72,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>사원 정보</h1>
+                        <h1 class="noto-sans">사원 정보</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -86,7 +86,7 @@
                         <!-- 검색기 시작 -->
                         <div class="row">
                             <div class="col-3">
-                                <select id="gubun" class="form-select" aria-label="분류선택">
+                                <select id="gubun" class="form-select" aria-label="분류선택" style="margin-right: 90px">
                                     <option value="none">분류선택</option>
                                     <option value="MEMBER_MEMBERNAME">사원 이름</option>
                                     <option value="MEMBER_EMAIL">사원 이메일</option>

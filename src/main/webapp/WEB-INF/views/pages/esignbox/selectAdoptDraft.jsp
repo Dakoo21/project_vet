@@ -17,43 +17,43 @@
     </head>
     <body>
         <div id="content">
-            <table class="table table-borderless">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>신청자</th>
-                    <th><input type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM" value="<%=signTotal.getMASTER_NAME()%>"></th>
+                    <th><input type="text" class="form-control" id="MASTER_NM" placeholder="" name="MASTER_NM" value="<%=signTotal.getMASTER_NAME()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>동물이름</th>
-                    <th><input type="text" class="form-control" id="ADOPT_NM" name="ADOPT_NM" value="<%=signTotal.getADOPT_NM()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_NM" name="ADOPT_NM" value="<%=signTotal.getADOPT_NM()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>생년월일</th>
-                    <th><input type="text" class="form-control" id="ADOPT_BDATE" name="ADOPT_BDATE" value="<%=signTotal.getADOPT_BDATE()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_BDATE" name="ADOPT_BDATE" value="<%=signTotal.getADOPT_BDATE()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>축종</th>
-                    <th><input type="text" class="form-control" id="ADOPT_SPECIES" name="ADOPT_SPECIES" value="<%=signTotal.getADOPT_SPECIES()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_SPECIES" name="ADOPT_SPECIES" value="<%=signTotal.getADOPT_SPECIES()%>" readonly></th>
                 </tr>
                 <tr>
-                    <th>품종d</th>
-                    <th><input type="text" class="form-control" id="ADOPT_BREED" placeholder="" name="ADOPT_BREED" value="<%=signTotal.getADOPT_BREED()%>"></th>
+                    <th>품종</th>
+                    <th><input type="text" class="form-control" id="ADOPT_BREED" placeholder="" name="ADOPT_BREED" value="<%=signTotal.getADOPT_BREED()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>체중</th>
-                    <th><input type="text" class="form-control" id="ADOPT_WEIGHT" name="ADOPT_WEIGHT" value="<%=signTotal.getADOPT_WEIGHT()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_WEIGHT" name="ADOPT_WEIGHT" value="<%=signTotal.getADOPT_WEIGHT()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>성별</th>
-                    <th><input type="text" class="form-control" id="ADOPT_SEX" name="ADOPT_SEX" value="<%=signTotal.getADOPT_SEX()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_SEX" name="ADOPT_SEX" value="<%=signTotal.getADOPT_SEX()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>중성화</th>
-                    <th><input type="text" class="form-control" id="ADOPT_NEUT" name="ADOPT_NEUT" value="<%=signTotal.getADOPT_NEUT()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_NEUT" name="ADOPT_NEUT" value="<%=signTotal.getADOPT_NEUT()%>" readonly></th>
                 </tr>
                 <tr>
                     <th>이유</th>
-                    <th><input type="text" class="form-control" id="ADOPT_REASON" placeholder="" name="ADOPT_REASON" value="<%=signTotal.getADOPT_REASON()%>"></th>
+                    <th><input type="text" class="form-control" id="ADOPT_REASON" placeholder="" name="ADOPT_REASON" value="<%=signTotal.getADOPT_REASON()%>" readonly></th>
                 </tr>
             </table>
         </div>
