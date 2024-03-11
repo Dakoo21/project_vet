@@ -368,7 +368,7 @@
                                 </select>
                             </div>
 
-                            <button id="reservationSaveButton" onclick="submitForm()" >저장</button>
+                            <button id="reservationSaveButton" onclick="submitForm()" >저장 </button>
 
                             <script>
                                 // 각 셀렉트 요소 가져오기
