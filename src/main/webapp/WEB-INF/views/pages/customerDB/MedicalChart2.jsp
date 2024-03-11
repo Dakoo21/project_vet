@@ -302,9 +302,9 @@
             <form id="diagForm1" action="http://localhost:8000/diag/diagUpdate" method="POST">
                 <div id="contents_box">
                     <div id="img_area">
-                        <img alt="Avatar" class="table-avatar" src="../../img/dog1.jpeg">
+                        <img alt="Avatar" class="table-avatar" src="/img/logo/logo_2.png" style="height:50%; width:50%; margin-left:100px; margin-bottom: 500px">
                     </div>
-                    <a id="table_area">
+                    <a id="table_area" style="margin-bottom: 500px">
                         <table class="table table-borderless">
                             <tr>
                                 <th>고객명</th>
@@ -342,164 +342,13 @@
                             <th>몸무게</th>
                             <td><input class="form-control" type="text" value="<%=rmap.get("ANIMAL_WEIGHT")%>" aria-label="readonly input example" readonly></td>
                         </tr>
+                        <tr>
+                            <th>진료비</th>
+                            <td><input class="form-control" type="text" value="<%=rmap.get("DIAG_PRICE")%>" aria-label="readonly input example" readonly></td>
+                        </tr>
+
                     </table>
-                    <input type="hidden" id="bookingPk" name="bookingPk" value="<%=rmap.get("BOOKING_PK")%>">
-
-
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
-                            </svg>진료 형태
-                        </p>
-                        <div class="medical-checkbox-area">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox21" onclick="toggleCheckbox(20)">
-                                <label class="form-check-label" for="inlineCheckbox21">초진</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox22" onclick="toggleCheckbox(21)">
-                                <label class="form-check-label" for="inlineCheckbox22">재진</label>
-                            </div>
-
-                        </div>
-                        <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
-                            </svg>서비스
-                        </p>
-                        <div class="medical-checkbox-area">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" onclick="toggleCheckbox(0)">
-                                <label class="form-check-label" for="inlineCheckbox1">항생제</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" onclick="toggleCheckbox(1)">
-                                <label class="form-check-label" for="inlineCheckbox2">주사</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" onclick="toggleCheckbox(2)">
-                                <label class="form-check-label" for="inlineCheckbox3">예방접종</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" onclick="toggleCheckbox(3)">
-                                <label class="form-check-label" for="inlineCheckbox4">혈액검사</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" onclick="toggleCheckbox(4)">
-                                <label class="form-check-label" for="inlineCheckbox5">건강검진</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox6" onclick="toggleCheckbox(5)">
-                                <label class="form-check-label" for="inlineCheckbox6">X-Ray</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox7" onclick="toggleCheckbox(6)">
-                                <label class="form-check-label" for="inlineCheckbox7">중성화</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox8" onclick="toggleCheckbox(7)">
-                                <label class="form-check-label" for="inlineCheckbox8">수술</label>
-                            </div>
-                        </div>
-                        <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
-                            </svg>내과
-                        </p>
-                        <div class="medical-checkbox-area">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox9" onclick="toggleCheckbox(8)">
-                                <label class="form-check-label" for="inlineCheckbox9">소화계</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox10" onclick="toggleCheckbox(9)">
-                                <label class="form-check-label" for="inlineCheckbox10">순환계</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox11" onclick="toggleCheckbox(10)">
-                                <label class="form-check-label" for="inlineCheckbox11">호흡기</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox12" onclick="toggleCheckbox(11)">
-                                <label class="form-check-label" for="inlineCheckbox12">신경계</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox13" onclick="toggleCheckbox(12)">
-                                <label class="form-check-label" for="inlineCheckbox13">내분비계</label>
-                            </div>
-
-                        </div>
-                        <hr style="width:100%;height:1px;border:none;background-color:dimgrey;">
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
-                            </svg>외과
-                        </p>
-                        <div class="medical-checkbox-area">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox14" onclick="toggleCheckbox(13)">
-                                <label class="form-check-label" for="inlineCheckbox14">안과</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox15" onclick="toggleCheckbox(14)">
-                                <label class="form-check-label" for="inlineCheckbox15">피부과</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox16" onclick="toggleCheckbox(15)">
-                                <label class="form-check-label" for="inlineCheckbox16">정형외과</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox17" onclick="toggleCheckbox(16)">
-                                <label class="form-check-label" for="inlineCheckbox17">신경외과</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox18" onclick="toggleCheckbox(17)">
-                                <label class="form-check-label" for="inlineCheckbox18">복강외과</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox19" onclick="toggleCheckbox(18)">
-                                <label class="form-check-label" for="inlineCheckbox19">흉부외과</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox20" onclick="toggleCheckbox(19)">
-                                <label class="form-check-label" for="inlineCheckbox20">치과</label>
-                            </div>
-                        </div>
-                        <hr style="width:100%;height:1px;border:none;background-color:dimgrey;"/>
-
-                        <table>
-                            <thead>
-                            <th>의사소견</th>
-                            </thead>
-                            <tbody>
-                            <tr>
-
-                            </td>
-                                <td>
-                                    <textarea id="textboxForPrescription" name="diagPrescription" placeholder="특기사항을 입력하세요..." style="width: 500px; height: 150px;"></textarea>
-                                </td>
-                            </tr>
-                            <input type="hidden" name="diagPk" value="<%=rmap.get("diagPk")%>"/>
-
-                            <tr>
-                                <td class="project-actions text-right">
-                                    <a id="costSumDisplay"></a>
-                                    <input type="hidden" id ="diagPrice" name = "diagPrice">
-                                    <a class="btn btn-info btn-sm" onclick="openModal()">
-                                        <i class="fas fa-pencil-alt">저장</i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                            </tr>
-                            </tbody>
-
-                        </table>
-                                <!-- 서비스 종류 -->
-
+                    <input type="hidden" id="bookingPk" name="bookingPk" value="<%=rmap.get("BOOKING_PK")%>"/>
                     </a>
                 </div>
             </form>

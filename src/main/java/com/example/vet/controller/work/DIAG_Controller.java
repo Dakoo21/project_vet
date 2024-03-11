@@ -59,7 +59,7 @@ public class DIAG_Controller {
 
         logger.info(rmap.toString());
         diagService.Update(rmap);
-        return "redirect:diagList";
+        return "redirect:payment2/paymentList2";
     };
     @PostMapping("/diagInsert")
     public String Insert(@RequestParam Map<String, Object> rmap) {

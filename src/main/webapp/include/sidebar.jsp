@@ -305,13 +305,6 @@
                                 <p>문서보관함</p>
                             </a>
                         </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/eSign/cancelledDocs" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>취소보관함</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <!-- 메뉴 끝-->
@@ -482,13 +475,6 @@
                             <a href="/eSign/docsBox" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>문서보관함</p>
-                            </a>
-                        </li>
-                        <!-- 하위메뉴 시작 -->
-                        <li class="nav-item">
-                            <a href="/eSign/cancelledDocs" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>취소보관함</p>
                             </a>
                         </li>
                         <!-- 하위메뉴 시작 -->

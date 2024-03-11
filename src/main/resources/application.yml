@@ -41,14 +41,14 @@ spring:
       client:
         registration:
           google:
-            client-id: aaaaa
-            client-secret: aaaaa
+            client-id: 418980080301-18fso1be1dfoaic55uc2cnv4qtp4de9p.apps.googleusercontent.com
+            client-secret: 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
             scope:
               - email
               - profile
           kakao:
-            client-id: aaaaaa
-            client-secret: aaaaaa
+            client-id: 69a789e40bfd8e05ca3bb3d644c078ea
+            client-secret: bbyPbGuPfzhuU7HKpfMo3je1pejC8zFt
             scope:
               - account_email
               - profile_nickname
@@ -57,8 +57,8 @@ spring:
             client-name: Kakao
             client-authentication-method: client_secret_post
           naver:
-            client-id: aaaaaaa
-            client-secret: aaaaaa
+            client-id: pzEPbvLHytAgCG8jLz7b
+            client-secret: tka4WuOWtZ
             scope:
               - name
               - email

@@ -432,11 +432,11 @@
                         </p>
                         <div class="medical-checkbox-area">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox21" onclick="toggleCheckbox(20)">
+                                <input class="form-check-input" type="radio" name="diag" id="inlineCheckbox21" onclick="toggleCheckbox(20)" checked>
                                 <label class="form-check-label" for="inlineCheckbox21">초진</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox22" onclick="toggleCheckbox(21)">
+                                <input class="form-check-input" type="radio" name="diag" id="inlineCheckbox22" onclick="toggleCheckbox(21)">
                                 <label class="form-check-label" for="inlineCheckbox22">재진</label>
                             </div>
 
@@ -602,33 +602,9 @@
             </div>
         </div>
             <!-- /.modal-content -->
-        <div id="diagSelectedAllModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeDiagSelectedAllModal()">&times;</span>
-                <!-- 예약 양식 -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">초진과 재진 중 하나만 선택 가능합니다.</h3>
-                    </div>
 
-                </div>
-                <!-- /.card -->
-            </div>
-        </div>
         <!-- /.modal-content -->
-        <div id="diagSelecteNotModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeDiagSelecteNotModal()">&times;</span>
-                <!-- 예약 양식 -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">진료 형태를 선택해 주세요.</h3>
-                    </div>
 
-                </div>
-                <!-- /.card -->
-            </div>
-        </div>
         <!-- /.modal-content -->
 
     <!-- ./wrapper -->
