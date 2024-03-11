@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
@@ -17,9 +18,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link
+            type="text/css"
+            media="screen"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+    />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>진료 상세</title>
+    <style typeof="text/css">
+        #contents_box{
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        #contents_box > #img_area{
+            width: 50%;
+            height: 50%;
+        }
+        #contents_box > #table_area{
+            width: 50%;
+            height: 50%;
+        }
+        #contents_box > #img_area > img{
+            width: 400px;
+        }
+
+        .medical-checkbox-area{
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn btn-primary{
+            display: inline-block;
+            margin-top: 30px;
+        }
+        .modal {
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px; /* 모달이 화면 상단에서 100px 내려와 있도록 설정 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* 모달 외의 영역이 어둡게 보이도록 설정 */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* 모달의 너비를 조정 */
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @font-face {
+            font-family: 'Nanum Gothic';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/nanumgothic/v23/PN_3Rfi-oW3hYwmKDpxS7F_z-7rJxHVIsPV5MbNO2rV2_va-Nv6p.0.woff2) format('woff2');
+            unicode-range: U+f9ca-fa0b, U+ff03-ff05, U+ff07, U+ff0a-ff0b, U+ff0d-ff19, U+ff1b, U+ff1d, U+ff20-ff5b, U+ff5d, U+ffe0-ffe3, U+ffe5-ffe6;
+        }
+        .nanum-gothic-Regular{ font-family: "NanumGothic", sans-serif;}
+
+    </style>
     <%@ include file="/include/bootCommon.jsp"%>
     <script>
         let costSum = 0;
@@ -291,7 +370,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료 상세페이지</h1>
+                        <h1 class="noto-sans">진료 상세페이지</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -302,7 +381,7 @@
             <form id="diagForm1" action="http://localhost:8000/diag/diagUpdate" method="POST">
                 <div id="contents_box">
                     <div id="img_area">
-                        <img alt="Avatar" class="table-avatar" src="../../img/dog1.jpeg">
+                        <img alt="Avatar" class="table-avatar" src="/img/logo/logo_2.png" style="height:50%; width:50%; margin-left:100px; margin-bottom: 500px">
                     </div>
                     <a id="table_area">
                         <table class="table table-borderless">
@@ -565,68 +644,3 @@
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 </html>
 
-<style typeof="text/css">
-
-
-    #contents_box{
-        display: flex;
-        width: 100%;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #contents_box > #img_area{
-        width: 50%;
-        height: 50%;
-    }
-    #contents_box > #table_area{
-        width: 50%;
-        height: 50%;
-    }
-    #contents_box > #img_area > img{
-        width: 400px;
-    }
-
-    .medical-checkbox-area{
-        display: flex;
-        gap: 20px;
-    }
-
-    .btn btn-primary{
-        display: inline-block;
-        margin-top: 30px;
-    }
-    .modal {
-        position: fixed;
-        z-index: 1;
-        padding-top: 100px; /* 모달이 화면 상단에서 100px 내려와 있도록 설정 */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4); /* 모달 외의 영역이 어둡게 보이도록 설정 */
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%; /* 모달의 너비를 조정 */
-    }
-
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-</style>

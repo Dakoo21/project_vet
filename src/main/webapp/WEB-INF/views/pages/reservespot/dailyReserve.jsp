@@ -554,7 +554,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>시설예약현황</h1>
+                        <h1 class="noto-sans">시설예약현황</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

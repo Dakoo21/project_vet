@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+     <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -101,6 +101,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>고객 조회</title>
     <%@ include file="/include/bootCommon.jsp"%>
+
+    <style typeof="text/css">
+        .noto-sans{
+                           font-family: "Noto Sans KR", sans-serif;
+                           font-optical-sizing: auto;
+                           font-weight: 500;
+                           font-style: normal;
+                       }
+        .search-top-area{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+
+        #padding-right50{
+            padding-right: 50px;
+        }
+
+        .search-box{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #padding-right50 .btn {
+            width: 70px; /* 원하는 가로 크기로 설정하세요 */
+        }
+        /*.search-top-area {*/
+        /*    position: relative; !* 부모 요소를 상대적 위치로 설정합니다. *!*/
+        /*}*/
+
+        /*.search-top-area .text-right {*/
+        /*    position: absolute; !* 등록 버튼을 절대적 위치로 설정합니다. *!*/
+        /*    top: 0; !* 부모 요소의 상단에 배치합니다. *!*/
+        /*    right: 0; !* 부모 요소의 오른쪽에 배치합니다. *!*/
+        /*}*/
+        .search-top-area{
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 아이템을 동일한 간격으로 정렬합니다. */
+            margin-bottom: 40px;
+        }
+
+        .search-box{
+            display: flex;
+            width: 30%; /* 필요에 따라 너비 조정 */
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -113,7 +166,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>고객 리스트</h1>
+                        <h1 class="noto-sans">고객 리스트</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -186,9 +239,9 @@
                         %>
                     </div>
                 </div>
-                    <div class="text-right">
+                    <div class="text-right" style="margin-bottom:150px">
                         <div id="padding-right50" class="position-absolute top-20 end-20">
-                            <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-warning" >등록</a>
+                            <a href="/CustomerDB/TotalCustomerInsertPage" type="button" class="btn btn-secondary" >등록</a>
                         </div>
                     </div>
             </div>
@@ -209,48 +262,6 @@
 </html>
 
 <style typeof="text/css">
-    .search-top-area{
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        margin-bottom: 40px;
-    }
 
-    #padding-right50{
-        padding-right: 50px;
-    }
-
-    .search-box{
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #padding-right50 .btn {
-        width: 70px; /* 원하는 가로 크기로 설정하세요 */
-    }
-    /*.search-top-area {*/
-    /*    position: relative; !* 부모 요소를 상대적 위치로 설정합니다. *!*/
-    /*}*/
-
-    /*.search-top-area .text-right {*/
-    /*    position: absolute; !* 등록 버튼을 절대적 위치로 설정합니다. *!*/
-    /*    top: 0; !* 부모 요소의 상단에 배치합니다. *!*/
-    /*    right: 0; !* 부모 요소의 오른쪽에 배치합니다. *!*/
-    /*}*/
-    .search-top-area{
-        display: flex;
-        align-items: center;
-        justify-content: space-between; /* 아이템을 동일한 간격으로 정렬합니다. */
-        margin-bottom: 40px;
-    }
-
-    .search-box{
-        display: flex;
-        width: 30%; /* 필요에 따라 너비 조정 */
-        align-items: center;
-        justify-content: center;
-    }
 
 </style>

@@ -99,7 +99,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>진료조회</h1>
+                        <h1 class="noto-sans">진료조회</h1>
                     </div>
                     <div id='calendar'></div>
                 </div>

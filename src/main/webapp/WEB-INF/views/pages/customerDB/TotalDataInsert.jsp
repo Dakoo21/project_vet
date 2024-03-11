@@ -54,7 +54,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>동물 데이터 등록</h1>
+                        <h1 class="noto-sans">동물 데이터 등록</h1>
                     </div>
 
                 </div>

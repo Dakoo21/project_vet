@@ -20,7 +20,6 @@ import java.util.List;
 @Slf4j
 public class eSign_Controller {
 
-
     private final eSign_Service esService;
     public eSign_Controller(eSign_Service esService) {
         this.esService = esService;
@@ -54,8 +53,8 @@ public class eSign_Controller {
         model.addAttribute("docList", docList);
         return "pages/esignbox/cancelledDocs";
     }
-    // 진행중인 문서함
 
+    // 진행중인 문서함
     @GetMapping("progressDocs")
     public String progressDocsList(Member member, Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -66,7 +65,6 @@ public class eSign_Controller {
         model.addAttribute("progressList", progressList);
         return "pages/esignbox/progressDocs";
     }
-
 }
 
 

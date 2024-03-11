@@ -63,16 +63,16 @@
     <%@ include file="/include/bootCommon.jsp"%>
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" >
     <%@ include file="/include/sidebar.jsp"%>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height: 800px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>동물 정보 상세</h1>
+                        <h1 class="noto-sans">동물 정보 상세</h1>
                     </div>
                     <div class="col-sm-6 text-right">
                         <div style="margin-left: auto;">
@@ -142,7 +142,7 @@
                         }
                     %>
                 </div>
-                <div class="text-center">
+                <div class="text-center" style="margin-top:50px;margin-bottom: 200px">
                     <a href="http://localhost:8000/CustomerDB/TotalDataList" type="button" class="btn btn-primary" style="margin-right: 10px;">뒤로가기</a>
                     <a href="http://localhost:8000/booking/bookingRegister" type="button" class="btn btn-success">진료등록</a>
                 </div>
@@ -152,9 +152,10 @@
     </div>
     <!-- /.content-wrapper -->
     <!--footer-->
+    <%@ include file="/include/footer.jsp"%>
 </div>
 <!-- ./wrapper -->
-<%@ include file="/include/footer.jsp"%>
+
 <%@ include file="/include/bootCommonFoot.jsp"%>
 <%--<%@ include file="/include/bootCommonFoot1.jsp"%>--%>
 
