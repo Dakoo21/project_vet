@@ -45,7 +45,7 @@
             <th><button type="button" id="modalBtn1" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#selectForm1">유기번호 조회</button></th>
         </tr>
         <tr>
-            <th>이유</th>
+            <th>입양 사유</th>
             <th><input type="text" class="form-control" id="ADOPT_REASON" placeholder="" name="ADOPT_REASON"></th>
         </tr>
         <tr>
@@ -309,7 +309,8 @@
             이름 : rowData[0],
             전화번호 : rowData[1],
             이메일 : rowData[2],
-            주소 : rowData[3]
+            주소 : rowData[3],
+            번호 : rowData[4]
         };
         var selectedAdopterId = $(this).data("adopter-id");
         $("#selectedAdopterDisplay").text(JSON.stringify(selectedRowData, null, 2));
@@ -333,6 +334,7 @@
                 "<td>" + data[i].master_pnumber + "</td>" +
                 "<td>" + data[i].master_email + "</td>" +
                 "<td>" + data[i].master_address + "</td>" +
+                "<td>" + data[i].masterPk + "</td>" +
                 "</tr>";
             tableBody.append(row);
         }

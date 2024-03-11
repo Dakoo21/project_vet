@@ -107,11 +107,11 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for(int i=nowPage*numPerPage;i<(nowPage*numPerPage)+numPerPage;i++){
+                                        for(int i=0;i<docList.size();i++){
                                             if(i == size) break;
                                             SignTotal signTotal = docList.get(i);
                                             String docState = null;
-                                            if(signTotal.getSIGN_STATE() != -1 && signTotal.getSIGN_STATE() != 0){
+                                            if(signTotal.getSIGN_STATE() != -1 && signTotal.getSIGN_STATE() != 0 && signTotal.getSIGN_STATE() != 3){
                                                 if(signTotal.getSIGN_STATE()==1){
                                                     if(role1.equals("ROLE_MASTER")){
                                                         docState = "대기";
@@ -146,13 +146,13 @@
                                     </tbody>
                                 </table>
                                 <div style="display:flex; justify-content:center;">
-                                    <ul class="pagination">
-                                        <%
-                                            String pagePath = "/eSign/progressDocs";
-                                            BSPageBar bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);
-                                            out.print(bspb.getPageBar());
-                                        %>
-                                    </ul>
+<%--                                    <ul class="pagination">--%>
+<%--                                        <%--%>
+<%--                                            String pagePath = "/eSign/progressDocs";--%>
+<%--                                            BSPageBar bspb = new BSPageBar(numPerPage,  size, nowPage, pagePath);--%>
+<%--                                            out.print(bspb.getPageBar());--%>
+<%--                                        %>--%>
+<%--                                    </ul>--%>
                                 </div>
                             </div>
                         </div>
